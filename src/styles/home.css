@@ -214,3 +214,99 @@
   color: #ff6600;
 }
 
+/* ==========================================
+     MOBILE SCREENS (Below 480px)
+========================================== */
+@media (max-width: 480px) {
+
+  .home-page {
+    padding: 12px;
+    padding-bottom: 80px;
+  }
+
+  /* --- Search Bar --- */
+  .search-bar {
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .search-bar input {
+    padding: 10px;
+    font-size: 0.9rem;
+    height: 36px;
+  }
+  .search-bar button {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+
+  /* --- Categories --- */
+  .categories-section {
+    grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+    gap: 10px;
+  }
+  .category-card {
+    padding: 15px 5px;
+    width: 60px;
+    height: 45px;
+  }
+  .category-icon {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+  .category-card span {
+    font-size: 0.7rem;
+  }
+
+  /* --- Section Titles --- */
+  .featured-section h2,
+  .ads-section h2,
+  .recommended-section h2 {
+    font-size: 1.2rem;
+    margin-top: 30px;
+    margin-bottom: 10px;
+  }
+
+  /* --- Featured Restaurants Scroll --- */
+  .featured-card {
+    width: 240px;
+  }
+  .featured-card img {
+    height: 140px;
+  }
+  .featured-info h3 {
+    font-size: 0.9rem;
+  }
+  .featured-info {
+    padding: 10px;
+    gap: 5px;
+  }
+  .featured-bottom .price-distance,
+  .featured-bottom .rating {
+    font-size: 0.75rem;
+  }
+
+  /* --- Ads Slider --- */
+  .ads-slider {
+    max-width: 100%;
+  }
+  .ads-slider img {
+    height: 150px;
+  }
+
+  /* --- Recommended Restaurants --- */
+  .recommended-card img {
+    height: 150px;
+  }
+  .recommended-info {
+    padding: 10px;
+    gap: 6px;
+  }
+  .recommended-info h3 {
+    font-size: 0.9rem;
+  }
+  .recommended-bottom .price-distance,
+  .recommended-bottom .rating {
+    font-size: 0.75rem;
+  }
+}
+
