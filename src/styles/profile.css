@@ -1,0 +1,13 @@
+.profile-page {
+  padding: 20px;
+}
+
+.profile-page h2 {
+  color: #e60000;
+  margin-bottom: 15px;
+}
+
+.profile-page p {
+  font-size: 15px;
+  color: #555;
+}

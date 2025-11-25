@@ -1,0 +1,184 @@
+/* --- General --- */
+.discover-page {
+  font-family: 'Montserrat', sans-serif;
+  padding: 20px;
+  background: #f9f9f9;
+}
+
+/* --- Search Bar --- */
+.discover-search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 95%;
+  height: 40px;
+  margin-bottom: 20px;
+  
+  background: #fff;
+  padding: 10px 8px;
+  border-radius: 6px;
+}
+.discover-search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: transparent;
+}
+.emoji-icon {
+  font-size: 1.4rem;
+}
+
+/* --- Filters --- */
+.filters-scroll {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+.filters-scroll::-webkit-scrollbar {
+  display: none;
+}
+.filter-chip {
+  padding: 8px 15px;
+  background: #fff;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.horizontal-rule{
+  width: 100%;
+  margin: 0 auto;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+/* --- Horizontal Scroll Section --- */
+.horizontal-scroll {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+.horizontal-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* --- Trending Cards --- */
+.trend-card {
+  flex: 0 0 auto;
+  width: 300px;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.trend-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.trend-info {
+  padding: 10px;
+}
+.trend-info h3 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+.trend-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+/* --- Categories Grid --- */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+.category-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.category-item:hover {
+  transform: scale(1.05);
+}
+.category-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.category-icon:hover {
+  transform: scale(1.2);
+  opacity: 0.8;
+}
+.category-item span {
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* --- New on Droppa --- */
+.new-card {
+  flex: 0 0 auto;
+  width: 220px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.new-card:hover {
+  transform: translateY(-5px);
+}
+.new-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: #ff6600;
+  color: #fff;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: 12px;
+  font-weight: 600;
+}
+.new-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+}
+.new-info {
+  padding: 10px;
+}
+.new-info h3 {
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+.new-info .distance {
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 5px;
+}
+.new-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}

@@ -1,0 +1,21 @@
+.restaurant-page {
+  padding: 20px;
+}
+
+.restaurant-page h2 {
+  color: #e60000;
+  margin-bottom: 15px;
+}
+
+.food-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.food-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+}
