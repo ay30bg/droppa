@@ -21,7 +21,6 @@ const featuredRestaurants = [
     orders: 1200,
     price: 650,
     street: "Ogo Oluwa",
-    distance: "2.1 km",
     time: "25-30 min",
   },
   {
@@ -32,7 +31,6 @@ const featuredRestaurants = [
     orders: 800,
     price: 550,
     street: "Okefia",
-    distance: "3 km",
     time: "20-25 min",
   },
   {
@@ -44,7 +42,6 @@ const featuredRestaurants = [
     orders: 1500,
     price: 700,
     street: "Igbona",
-    distance: "1.8 km",
     time: "15-20 min",
   },
   {
@@ -55,7 +52,6 @@ const featuredRestaurants = [
     orders: 1100,
     price: 600,
     street: "Estate",
-    distance: "2.5 km",
     time: "20-25 min",
   },
 ];
@@ -111,7 +107,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street} </h3>
                 <div className="featured-info-row">
                   <p>
-                    From {res.price} NGN | {res.distance} • {res.time}
+                    From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
@@ -134,7 +130,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street} </h3>
                 <div className="featured-info-row">
                   <p>
-                    From {res.price} NGN | {res.distance} • {res.time}
+                    From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
@@ -157,7 +153,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street}</h3>
                 <div className="info-row">
                   <p>
-                    From {res.price} NGN | {res.distance} • {res.time}
+                    From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
@@ -169,3 +165,4 @@ export default function Home() {
     </div>
   );
 }
+
