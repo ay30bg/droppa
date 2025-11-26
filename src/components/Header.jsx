@@ -22,8 +22,8 @@ export default function Header() {
     <header className="droppa-header">
       {/* Location Picker */}
       <div className="location-picker" onClick={toggleLocationDropdown}>
-        <FiMapPin size={18} />
-        <span>{location}</span>
+        <FiMapPin className="map-pin" size={18} />
+        <span className="address">{location}</span>
         <FiChevronDown size={16} className={`arrow ${showLocationDropdown ? "open" : ""}`} />
         {showLocationDropdown && (
           <div className="location-dropdown">
