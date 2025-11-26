@@ -25,7 +25,7 @@
 }
 
 .nav-item .icon {
-  font-size: 20px;
+  font-size: 25px;
   margin-bottom: 2px;
 }
 
@@ -36,6 +36,7 @@
 .nav-item:hover {
   color: #e60000;
 }
+
 
 
 
