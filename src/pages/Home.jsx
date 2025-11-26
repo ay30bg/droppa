@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { FiTruck } from "react-icons/fi";
 import "../styles/home.css";
 
 const quickFilters = [
@@ -107,7 +108,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street} </h3>
                 <div className="featured-info-row">
                   <p>
-                    From {res.price} NGN | {res.time}
+                     <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
@@ -130,7 +131,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street} </h3>
                 <div className="featured-info-row">
                   <p>
-                    From {res.price} NGN | {res.time}
+                     <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
@@ -153,7 +154,7 @@ export default function Home() {
                 <h3>{res.name} - {res.street}</h3>
                 <div className="info-row">
                   <p>
-                    From {res.price} NGN | {res.time}
+                    <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
                   </p>
                   <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
                 </div>
