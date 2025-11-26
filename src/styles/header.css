@@ -19,13 +19,19 @@
   gap: 5px;
   font-weight: 600;
   cursor: pointer;
-  color: #ff6600;
+  /* color: #ff6600; */
   user-select: none;
+}
+.map-pin{
+  color: #ff6600;
+}
+.address{
+  margin-top: 2px;
 }
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.2s;
-  color: 000;
+  margin-top: 4px;
 }
 .arrow.open {
   transform: rotate(180deg);
@@ -109,5 +115,3 @@
     font-size: 0.9rem;
   }
 }
-
-
