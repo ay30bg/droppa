@@ -8,7 +8,8 @@
 /* Page container */
 .home-page {
   padding: 18px;
-  background: #fafafa;
+  background: #f5f5f5;
+  margin-bottom: 30px;
 }
 
 /* ======= SECTIONS ======= */
@@ -185,3 +186,4 @@
   font-weight: 600;
   color: #000;
 }
+
