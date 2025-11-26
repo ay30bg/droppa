@@ -25,6 +25,7 @@
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.2s;
+  color: 000;
 }
 .arrow.open {
   transform: rotate(180deg);
@@ -108,4 +109,5 @@
     font-size: 0.9rem;
   }
 }
+
 
