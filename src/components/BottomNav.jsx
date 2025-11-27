@@ -7,19 +7,19 @@ export default function BottomNav() {
   return (
     <nav className="bottom-nav">
       <NavLink to="/" end className="nav-item">
-        <FiHome size={20} className="icon" />
+        <FiHome size={25} className="icon" />
         <span className="label">Home</span>
       </NavLink>
-      <NavLink to="/track" className="nav-item">
-        <FiMapPin size={20} className="icon" />
-        <span className="label">Discover</span>
+      <NavLink to="/restaurant" className="nav-item">
+        <FiMapPin size={25} className="icon" />
+        <span className="label">Restaurants</span>
       </NavLink>
       <NavLink to="/orders" className="nav-item">
-        <FiBox size={20} className="icon" />
+        <FiBox size={25} className="icon" />
         <span className="label">Orders</span>
       </NavLink>
       <NavLink to="/profile" className="nav-item">
-        <FiUser size={20} className="icon" />
+        <FiUser size={25} className="icon" />
         <span className="label">Account</span>
       </NavLink>
     </nav>
