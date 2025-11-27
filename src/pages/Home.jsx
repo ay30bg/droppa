@@ -26,8 +26,8 @@ const featuredRestaurants = [
   },
   {
     id: 2,
-    name: "Fast Bite",
-    image: "https://via.placeholder.com/300x150",
+    name: "Item 7 Go",
+    image: "https://item7.vercel.app/assets/Item7-gupESEli.png",
     rating: 4.5,
     orders: 800,
     price: 550,
@@ -166,4 +166,5 @@ export default function Home() {
     </div>
   );
 }
+
 
