@@ -54,9 +54,11 @@
 
 .horizontal-rule{
   width: 100%;
-  margin: 0 auto;
-  border-top: 1px solid #eee;
-  margin: 20px 0;
+  background-color: #eee;
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 10px;
 }
 
 /* --- Horizontal Scroll Section --- */
@@ -184,4 +186,5 @@
   font-size: 0.85rem;
   color: #666;
 }
+
 
