@@ -58,7 +58,6 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 10px;
 }
 
 /* --- Horizontal Scroll Section --- */
@@ -186,5 +185,6 @@
   font-size: 0.85rem;
   color: #666;
 }
+
 
 
