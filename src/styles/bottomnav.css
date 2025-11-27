@@ -30,12 +30,13 @@
 }
 
 .nav-item.active {
-  color: #2ECC71;
+  color: #1ABC9C;
 }
 
 .nav-item:hover {
-  color: #e60000;
+  color: #1ABC9C;
 }
+
 
 
 
