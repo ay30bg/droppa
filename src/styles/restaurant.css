@@ -55,7 +55,7 @@
 .horizontal-rule{
   width: 100%;
   background-color: #eee;
-  margin-top: -5px;
+  margin-top: -7px;
   position: absolute;
   left: 0;
   right: 0;
@@ -186,6 +186,7 @@
   font-size: 0.85rem;
   color: #666;
 }
+
 
 
 
