@@ -30,12 +30,13 @@
 }
 
 .nav-item.active {
-  color: #e60000; /* Red active color */
+  color: #2ECC71;
 }
 
 .nav-item:hover {
   color: #e60000;
 }
+
 
 
 
