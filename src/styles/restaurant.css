@@ -3,6 +3,7 @@
   font-family: 'Montserrat', sans-serif;
   padding: 20px;
   background: #fafafa;
+  margin-bottom: 50px;
 }
 
 /* --- Search Bar --- */
@@ -183,3 +184,4 @@
   font-size: 0.85rem;
   color: #666;
 }
+
