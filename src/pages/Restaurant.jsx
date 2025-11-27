@@ -83,7 +83,7 @@ export default function Discover() {
         ))}
       </div>
 
-      <hr className="horizontal-rule" />
+      {/* <hr className="horizontal-rule" /> */}
 
       {/* Recommended */}
             <section className="section-wrapper">
@@ -108,3 +108,4 @@ export default function Discover() {
     </div>
   );
 }
+
