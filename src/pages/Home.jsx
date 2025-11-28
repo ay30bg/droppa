@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiTruck } from "react-icons/fi";
-import image1 from "../assets/chicken republic.jpeg",
+import image1 from "../assets/chicken republic.jpeg";
 import "../styles/home.css";
 
 const quickFilters = [
@@ -167,6 +167,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
