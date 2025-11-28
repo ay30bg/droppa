@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FiTruck } from "react-icons/fi";
+import image1 from "../assets/chicken republic.jpeg",
 import "../styles/home.css";
 
 const quickFilters = [
@@ -17,7 +18,7 @@ const featuredRestaurants = [
     id: 1,
     name: "Chicken Republic",
     image:
-      "https://tse3.mm.bing.net/th/id/OIP.cu-OykdV59cvbG-DZ7Gi7QHaD3?pid=Api&P=0&h=220",
+      image1,
     rating: 4.8,
     orders: 1200,
     price: 650,
@@ -166,5 +167,6 @@ export default function Home() {
     </div>
   );
 }
+
 
 
