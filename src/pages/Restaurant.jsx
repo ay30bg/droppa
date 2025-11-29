@@ -96,28 +96,24 @@ export default function Discover() {
         ))}
       </div>
 
-      {/* Recommended */}
+      {/* All Restaurants */}
       <section className="section-wrapper">
         <h2 className="section-title">All Restaurants</h2>
-
         <div className="recommended-list">
           {featuredRestaurants.map((res) => {
             const timeText = getRestaurantTimeDisplay(res.time);
-
             return (
               <div key={res.id} className="recommended-card">
                 <img src={res.image} alt={res.name} className="recommended-img" />
-
                 <div className="recommended-info-under">
                   <h3>
                     {res.name} - {res.street}
                   </h3>
-
                   <div className="info-row">
                     <p className={timeText === "Closed" ? "closed" : ""}>
-                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {timeText}
+                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN |{" "}
+                      {timeText}
                     </p>
-
                     <p>
                       ⭐ {res.rating.toFixed(1)}({res.orders})
                     </p>
