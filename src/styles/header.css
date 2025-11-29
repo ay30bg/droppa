@@ -133,6 +133,16 @@
   z-index: 999;
 }
 
+/* Hide scrollbar */
+.filters-dropdown-under {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.filters-dropdown-under::-webkit-scrollbar {
+  display: none !important;  /* Chrome, Safari, Opera */
+}
+
 /* Individual Filter Items */
 .filter-item {
   flex: 0 0 auto; /* prevent shrinking */
@@ -168,6 +178,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
