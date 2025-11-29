@@ -49,7 +49,7 @@ const featuredRestaurants = [
   },
   {
     id: 4,
-    name: "Foodie Spot",
+    name: "Yakoyo",
     image: "https://via.placeholder.com/300x150",
     rating: 4.7,
     orders: 1100,
