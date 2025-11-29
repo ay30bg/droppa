@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #014F50;
+  background-color: #014F50 !important;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -131,15 +131,6 @@
   white-space: nowrap;
   scroll-behavior: smooth;
   z-index: 999;
-}
-
-/* Scrollbar Styling */
-.filters-dropdown-under::-webkit-scrollbar {
-  height: 6px;
-}
-.filters-dropdown-under::-webkit-scrollbar-thumb {
-  background-color: #ccc;
-  border-radius: 3px;
 }
 
 /* Individual Filter Items */
@@ -177,7 +168,6 @@
     font-size: 0.9rem;
   }
 }
-
 
 
 
