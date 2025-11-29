@@ -16,7 +16,7 @@ const quickFilters = [
 const featuredRestaurants = [
   {
     id: 1,
-    name: "Chicken",
+    name: "Chicken Republic",
     image:
       image1,
     rating: 4.8,
@@ -167,6 +167,7 @@ export default function Home() {
     </div>
   );
 }
+
 
 
 
