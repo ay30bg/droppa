@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FiMapPin, FiFilter, FiChevronDown } from "react-icons/fi";
+import { FiMapPin, FiChevronDown } from "react-icons/fi";
+import { LuSettings2 } from "react-icons/lu";
 import "../styles/header.css";
 
 export default function Header() {
@@ -60,7 +61,7 @@ export default function Header() {
         {/* Filter Button */}
         <div className="header-right">
           <button className="filter-btn" onClick={toggleFilters}>
-            <FiFilter size={20} /> Filters
+            <LuSettings2 size={20} /> Filters
           </button>
         </div>
       </header>
@@ -78,3 +79,4 @@ export default function Header() {
     </>
   );
 }
+
