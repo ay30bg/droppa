@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { FiHome, FiMapPin, FiShoppingBag, FiUser,  } from "react-icons/fi";
+import { FiHome, FiShoppingBag, FiUser,  } from "react-icons/fi";
+import { RiRestaurantLine } from "react-icons/ri";
 import "../styles/bottomnav.css";
 
 export default function BottomNav() {
@@ -11,7 +12,7 @@ export default function BottomNav() {
         <span className="label">Home</span>
       </NavLink>
       <NavLink to="/restaurant" className="nav-item">
-        <FiMapPin size={25} className="icon" />
+        <RiRestaurantLine size={25} className="icon" />
         <span className="label">Restaurants</span>
       </NavLink>
       <NavLink to="/orders" className="nav-item">
@@ -25,4 +26,5 @@ export default function BottomNav() {
     </nav>
   );
 }
+
 
