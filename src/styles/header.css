@@ -126,7 +126,6 @@
 
 /* --- Filters Dropdown Under Header --- */
 .filters-dropdown-under {
-  position: relative; /* or absolute if you want it over content */
   display: flex;
   gap: 10px;
   overflow-x: auto;
@@ -182,6 +181,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
