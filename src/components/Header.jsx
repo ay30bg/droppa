@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FiMapPin, FiChevronDown } from "react-icons/fi";
+import { MapPin } from "lucide-react";
+import { FiChevronDown } from "react-icons/fi";
 import { LuSettings2 } from "react-icons/lu";
 import "../styles/header.css";
 
@@ -36,8 +37,17 @@ export default function Header() {
       <header className="droppa-header">
         {/* Location Picker */}
         <div className="location-picker" onClick={toggleLocationDropdown}>
-          <FiMapPin className="map-pin" size={18} />
+          <span className="map-pin-wrapper">
+            <MapPin
+              size={20}
+              color="#eee"
+              fill="#014F50" // FILLED EFFECT
+              strokeWidth={1.5}
+            />
+          </span>
+
           <span className="address">{location}</span>
+
           <FiChevronDown
             size={16}
             className={`arrow ${showLocationDropdown ? "open" : ""}`}
@@ -79,4 +89,3 @@ export default function Header() {
     </>
   );
 }
-
