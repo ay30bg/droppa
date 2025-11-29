@@ -41,17 +41,20 @@ export default function Header() {
         <button className="filter-btn" onClick={toggleFilters}>
           <FiFilter size={20} /> Filters
         </button>
-        {showFilters && (
-          <div className="filters-dropdown">
-            {filters.map((filter) => (
-              <div key={filter} className="filter-item">
-                {filter}
-              </div>
-            ))}
-          </div>
-        )}
       </div>
+
+      {/* Filters Dropdown Under Header */}
+      {showFilters && (
+        <div className="filters-dropdown-under">
+          {filters.map((filter) => (
+            <div key={filter} className="filter-item">
+              {filter}
+            </div>
+          ))}
+        </div>
+      )}
     </header>
   );
 }
+
 
