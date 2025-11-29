@@ -27,18 +27,8 @@ const featuredRestaurants = [
     street: "Ogo Oluwa",
     time: "25-30 min",
   },
-  {
+    {
     id: 2,
-    name: "Item 7 Go",
-    image: "https://item7.vercel.app/assets/Item7-gupESEli.png",
-    rating: 4.5,
-    orders: 800,
-    price: 550,
-    street: "Okefia",
-    time: "20-25 min",
-  },
-  {
-    id: 3,
     name: "The Place",
     image:
       "https://tse1.mm.bing.net/th/id/OIP.Ra2X_Mf5GWF2a6Ry1OY9vwHaFj?pid=Api&P=0&h=220",
@@ -47,6 +37,16 @@ const featuredRestaurants = [
     price: 700,
     street: "Igbona",
     time: "15-20 min",
+  },
+   {
+    id: 3,
+    name: "Chicken Republic",
+    image: image1,
+    rating: 4.5,
+    orders: 800,
+    price: 550,
+    street: "Igbona",
+    time: "20-25 min",
   },
   {
     id: 4,
@@ -203,3 +203,4 @@ export default function Home() {
     </div>
   );
 }
+
