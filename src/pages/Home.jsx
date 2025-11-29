@@ -114,7 +114,6 @@ export default function Home() {
         <div className="featured-scroll">
           {featuredRestaurants.map((res) => {
             const timeText = getRestaurantTimeDisplay(res.time);
-
             return (
               <div key={res.id} className="featured-card">
                 <img src={res.image} alt={res.name} className="featured-img" />
@@ -146,7 +145,6 @@ export default function Home() {
         <div className="featured-scroll">
           {featuredRestaurants.map((res) => {
             const timeText = getRestaurantTimeDisplay(res.time);
-
             return (
               <div key={res.id} className="featured-card">
                 <img src={res.image} alt={res.name} className="featured-img" />
@@ -178,7 +176,6 @@ export default function Home() {
         <div className="recommended-list">
           {featuredRestaurants.map((res) => {
             const timeText = getRestaurantTimeDisplay(res.time);
-
             return (
               <div key={res.id} className="recommended-card">
                 <img src={res.image} alt={res.name} className="recommended-img" />
