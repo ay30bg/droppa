@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiTruck } from "react-icons/fi";
 import image1 from "../assets/chicken republic.jpeg";
+import image2 from "../assets/yakoyo.jpg"
 import "../styles/home.css";
 
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
@@ -49,8 +50,8 @@ const featuredRestaurants = [
   },
   {
     id: 4,
-    name: "Foodie Spot",
-    image: "https://via.placeholder.com/300x150",
+    name: "Yakoyo",
+    image: image2,
     rating: 4.7,
     orders: 1100,
     price: 600,
