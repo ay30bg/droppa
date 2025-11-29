@@ -12,6 +12,18 @@ const filterOptions = [
   "Free Delivery",
 ];
 
+// TIME DISPLAY LOGIC (12am – 8am CLOSED)
+function getRestaurantTimeDisplay(time) {
+  const now = new Date();
+  const hour = now.getHours(); // 0–23
+
+  if (hour >= 0 && hour < 8) {
+    return "Closed";
+  }
+
+  return time;
+}
+
 const featuredRestaurants = [
   {
     id: 1,
@@ -57,7 +69,6 @@ const featuredRestaurants = [
   },
 ];
 
-
 export default function Discover() {
   const [search, setSearch] = useState("");
 
@@ -65,7 +76,9 @@ export default function Discover() {
     <div className="discover-page">
       {/* Search Bar */}
       <div className="discover-search">
-        <span className="emoji-icon"><FiSearch /></span>
+        <span className="emoji-icon">
+          <FiSearch />
+        </span>
         <input
           type="text"
           placeholder="Search restaurants or meals..."
@@ -83,28 +96,38 @@ export default function Discover() {
         ))}
       </div>
 
-      {/* <hr className="horizontal-rule" /> */}
-
       {/* Recommended */}
-            <section className="section-wrapper">
-              <h2 className="section-title">All Restaurants</h2>
-              <div className="recommended-list">
-                {featuredRestaurants.map((res) => (
-                  <div key={res.id} className="recommended-card">
-                    <img src={res.image} alt={res.name} className="recommended-img" />
-                    <div className="recommended-info-under">
-                      <h3>{res.name} - {res.street}</h3>
-                      <div className="info-row">
-                        <p>
-                          <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
-                        </p>
-                        <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
-                      </div>
-                    </div>
+      <section className="section-wrapper">
+        <h2 className="section-title">All Restaurants</h2>
+
+        <div className="recommended-list">
+          {featuredRestaurants.map((res) => {
+            const timeText = getRestaurantTimeDisplay(res.time);
+
+            return (
+              <div key={res.id} className="recommended-card">
+                <img src={res.image} alt={res.name} className="recommended-img" />
+
+                <div className="recommended-info-under">
+                  <h3>
+                    {res.name} - {res.street}
+                  </h3>
+
+                  <div className="info-row">
+                    <p className={timeText === "Closed" ? "closed" : ""}>
+                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {timeText}
+                    </p>
+
+                    <p>
+                      ⭐ {res.rating.toFixed(1)}({res.orders})
+                    </p>
                   </div>
-                ))}
+                </div>
               </div>
-            </section>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
