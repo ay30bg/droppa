@@ -13,12 +13,23 @@ const quickFilters = [
   "Grill",
 ];
 
+// TIME DISPLAY LOGIC (12am – 8am CLOSED)
+function getRestaurantTimeDisplay(time) {
+  const now = new Date();
+  const hour = now.getHours(); // 0–23
+
+  if (hour >= 0 && hour < 8) {
+    return "Closed";
+  }
+
+  return time;
+}
+
 const featuredRestaurants = [
   {
     id: 1,
     name: "Chicken Republic",
-    image:
-      image1,
+    image: image1,
     rating: 4.8,
     orders: 1200,
     price: 650,
@@ -97,48 +108,65 @@ export default function Home() {
         </div>
       </section>
 
-
       {/* Featured Restaurants */}
       <section className="section-wrapper">
         <h2 className="section-title">Featured</h2>
         <div className="featured-scroll">
-          {featuredRestaurants.map((res) => (
-            <div key={res.id} className="featured-card">
-              <img src={res.image} alt={res.name} className="featured-img" />
-              <div className="featured-info-under">
-                <h3>{res.name} - {res.street} </h3>
-                <div className="featured-info-row">
-                  <p>
-                     <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
-                  </p>
-                  <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
+          {featuredRestaurants.map((res) => {
+            const timeText = getRestaurantTimeDisplay(res.time);
+
+            return (
+              <div key={res.id} className="featured-card">
+                <img src={res.image} alt={res.name} className="featured-img" />
+                <div className="featured-info-under">
+                  <h3>
+                    {res.name} - {res.street}
+                  </h3>
+                  <div className="featured-info-row">
+                    <p className={timeText === "Closed" ? "closed" : ""}>
+                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN |{" "}
+                      {timeText}
+                    </p>
+                    <p>
+                      ⭐ {res.rating.toFixed(1)}({res.orders})
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
       <div className="divider"></div>
 
-      {/* Featured Restaurants */}
+      {/* Popular */}
       <section className="section-wrapper">
         <h2 className="section-title">Popular</h2>
         <div className="featured-scroll">
-          {featuredRestaurants.map((res) => (
-            <div key={res.id} className="featured-card">
-              <img src={res.image} alt={res.name} className="featured-img" />
-              <div className="featured-info-under">
-                <h3>{res.name} - {res.street} </h3>
-                <div className="featured-info-row">
-                  <p>
-                     <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
-                  </p>
-                  <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
+          {featuredRestaurants.map((res) => {
+            const timeText = getRestaurantTimeDisplay(res.time);
+
+            return (
+              <div key={res.id} className="featured-card">
+                <img src={res.image} alt={res.name} className="featured-img" />
+                <div className="featured-info-under">
+                  <h3>
+                    {res.name} - {res.street}
+                  </h3>
+                  <div className="featured-info-row">
+                    <p className={timeText === "Closed" ? "closed" : ""}>
+                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN |{" "}
+                      {timeText}
+                    </p>
+                    <p>
+                      ⭐ {res.rating.toFixed(1)}({res.orders})
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -148,28 +176,31 @@ export default function Home() {
       <section className="section-wrapper">
         <h2 className="section-title">Recommended</h2>
         <div className="recommended-list">
-          {featuredRestaurants.map((res) => (
-            <div key={res.id} className="recommended-card">
-              <img src={res.image} alt={res.name} className="recommended-img" />
-              <div className="recommended-info-under">
-                <h3>{res.name} - {res.street}</h3>
-                <div className="info-row">
-                  <p>
-                    <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {res.time}
-                  </p>
-                  <p>⭐ {res.rating.toFixed(1)}({res.orders})</p>
+          {featuredRestaurants.map((res) => {
+            const timeText = getRestaurantTimeDisplay(res.time);
+
+            return (
+              <div key={res.id} className="recommended-card">
+                <img src={res.image} alt={res.name} className="recommended-img" />
+                <div className="recommended-info-under">
+                  <h3>
+                    {res.name} - {res.street}
+                  </h3>
+                  <div className="info-row">
+                    <p className={timeText === "Closed" ? "closed" : ""}>
+                      <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN |{" "}
+                      {timeText}
+                    </p>
+                    <p>
+                      ⭐ {res.rating.toFixed(1)}({res.orders})
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
     </div>
   );
 }
-
-
-
-
-
-
