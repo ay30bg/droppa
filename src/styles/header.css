@@ -105,6 +105,42 @@
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
+.filters-dropdown {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding: 10px;
+  margin-top: 5px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+.filters-dropdown::-webkit-scrollbar {
+  height: 6px;
+}
+
+.filters-dropdown::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 3px;
+}
+
+.filter-item {
+  flex: 0 0 auto; /* Prevent shrinking */
+  padding: 8px 12px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filter-item:hover {
+  background-color: #e60078; /* Highlight on hover */
+  color: #fff;
+}
+
 /* --- Responsive --- */
 @media (max-width: 768px) {
   .logo {
@@ -114,4 +150,5 @@
     font-size: 0.9rem;
   }
 }
+
 
