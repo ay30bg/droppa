@@ -28,12 +28,23 @@ const featuredRestaurants = [
   },
   {
     id: 2,
-    name: "Fast Bite",
-    image: "https://via.placeholder.com/300x150",
+    name: "The Place",
+    image:
+      "https://tse1.mm.bing.net/th/id/OIP.Ra2X_Mf5GWF2a6Ry1OY9vwHaFj?pid=Api&P=0&h=220",
+    rating: 4.9,
+    orders: 1500,
+    price: 700,
+    street: "Igbona",
+    time: "15-20 min",
+  },
+  {
+    id: 3,
+    name: "Chicken Republic",
+    image: image1,
     rating: 4.5,
     orders: 800,
     price: 550,
-    street: "Okefia",
+    street: "Igbona",
     time: "20-25 min",
   },
   {
