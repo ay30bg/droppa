@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/restaurant.css";
 import image1 from "../assets/chicken republic.jpeg";
+import
 import { FiSearch, FiTruck } from "react-icons/fi";
 
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
@@ -50,7 +51,7 @@ const featuredRestaurants = [
   {
     id: 4,
     name: "Yakoyo",
-    image: "https://via.placeholder.com/300x150",
+    image: image2,
     rating: 4.7,
     orders: 1100,
     price: 600,
