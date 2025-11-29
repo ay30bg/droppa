@@ -48,17 +48,6 @@ const featuredRestaurants = [
     time: "20-25 min",
   },
   {
-    id: 3,
-    name: "The Place",
-    image:
-      "https://tse1.mm.bing.net/th/id/OIP.Ra2X_Mf5GWF2a6Ry1OY9vwHaFj?pid=Api&P=0&h=220",
-    rating: 4.9,
-    orders: 1500,
-    price: 700,
-    street: "Igbona",
-    time: "15-20 min",
-  },
-  {
     id: 4,
     name: "Foodie Spot",
     image: "https://via.placeholder.com/300x150",
