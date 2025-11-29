@@ -75,7 +75,7 @@
 }
 
 .featured-card {
-  width: 260px;
+  width: 300px;
   flex-shrink: 0;
   transition: transform .2s ease;
 }
@@ -182,6 +182,7 @@
   font-weight: 600;
   color: #000;
 }
+
 
 
 
