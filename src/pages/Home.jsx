@@ -3,16 +3,6 @@ import { FiTruck } from "react-icons/fi";
 import image1 from "../assets/chicken republic.jpeg";
 import "../styles/home.css";
 
-const quickFilters = [
-  "Fast Food",
-  "Rice Meals",
-  "Drinks",
-  "Snacks",
-  "Desserts",
-  "Vegan",
-  "Grill",
-];
-
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
 function getRestaurantTimeDisplay(time) {
   const now = new Date();
@@ -108,15 +98,6 @@ export default function Home() {
 
   return (
     <div className="home-page">
-      {/* Quick Filters */}
-      <div className="quick-filters">
-        {quickFilters.map((filter, idx) => (
-          <button key={idx} className="filter-btn">
-            {filter}
-          </button>
-        ))}
-      </div>
-
       {/* Promotions */}
       <section className="section-wrapper">
         <div className="ads-slider">
