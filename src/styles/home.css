@@ -127,6 +127,7 @@
   width: 100%;
   max-width: 420px;
   /* adjust for desktop */
+  margin-top: -5px;
   height: 100px;
   margin: 0 auto;
   border-radius: 5px;
@@ -189,6 +190,7 @@
   font-weight: 600;
   color: #000;
 }
+
 
 
 
