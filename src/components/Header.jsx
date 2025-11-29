@@ -1,22 +1,22 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
-import { CartContext } from "../context/CartContext";
-import { FiMapPin, FiUser, FiShoppingCart, FiChevronDown } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiMapPin, FiFilter, FiChevronDown } from "react-icons/fi";
 import "../styles/header.css";
 
 export default function Header() {
-  const { cart } = useContext(CartContext);
   const [location, setLocation] = useState("Lagos");
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
 
   const locations = ["Lagos", "Abuja", "Port Harcourt", "Kano"];
+  const filters = ["Fast Delivery", "Rating 4.5+", "Near Me", "Promos", "Discounts", "Top Rated", "New", "Popular"];
 
   const toggleLocationDropdown = () => setShowLocationDropdown(!showLocationDropdown);
-
   const selectLocation = (loc) => {
     setLocation(loc);
     setShowLocationDropdown(false);
   };
+
+  const toggleFilters = () => setShowFilters(!showFilters);
 
   return (
     <header className="droppa-header">
@@ -28,11 +28,7 @@ export default function Header() {
         {showLocationDropdown && (
           <div className="location-dropdown">
             {locations.map((loc) => (
-              <div
-                key={loc}
-                className="location-item"
-                onClick={() => selectLocation(loc)}
-              >
+              <div key={loc} className="location-item" onClick={() => selectLocation(loc)}>
                 {loc}
               </div>
             ))}
@@ -40,15 +36,20 @@ export default function Header() {
         )}
       </div>
 
-      {/* Profile & Cart */}
+      {/* Filter Button */}
       <div className="header-right">
-        <Link to="/profile" className="profile-btn">
-          <FiUser size={20} />
-        </Link>
-        <Link to="/cart" className="cart-btn">
-          <FiShoppingCart size={20} />
-          {cart.length > 0 && <span className="cart-count">{cart.length}</span>}
-        </Link>
+        <button className="filter-btn" onClick={toggleFilters}>
+          <FiFilter size={20} /> Filters
+        </button>
+        {showFilters && (
+          <div className="filters-dropdown">
+            {filters.map((filter) => (
+              <div key={filter} className="filter-item">
+                {filter}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </header>
   );
