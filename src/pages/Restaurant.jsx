@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../styles/restaurant.css";
+import image1 from "../assets/chicken republic.jpeg";
 import { FiSearch, FiTruck } from "react-icons/fi";
 
 const filterOptions = [
@@ -29,7 +30,7 @@ const featuredRestaurants = [
     id: 1,
     name: "Chicken Republic",
     image:
-      "https://tse3.mm.bing.net/th/id/OIP.cu-OykdV59cvbG-DZ7Gi7QHaD3?pid=Api&P=0&h=220",
+      image1,
     rating: 4.8,
     orders: 1200,
     price: 650,
@@ -127,4 +128,5 @@ export default function Discover() {
     </div>
   );
 }
+
 
