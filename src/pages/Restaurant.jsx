@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles/restaurant.css";
 import image1 from "../assets/chicken republic.jpeg";
-import
+import image2 from "../assets/yakoyo.jpg"
 import { FiSearch, FiTruck } from "react-icons/fi";
 
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
@@ -109,3 +109,4 @@ export default function Discover() {
     </div>
   );
 }
+s
