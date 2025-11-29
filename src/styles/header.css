@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background: #014F50;
+  background-color: #014F50;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -177,6 +177,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
