@@ -75,7 +75,7 @@ const ads = [
   { id: 3, image: "https://via.placeholder.com/400x180?text=Ad+3", link: "#" },
 ];
 
-// Utility to shuffle an array (Fisher-Yates)
+// Fisher-Yates shuffle
 function shuffleArray(array) {
   const arr = [...array];
   for (let i = arr.length - 1; i > 0; i--) {
@@ -87,17 +87,19 @@ function shuffleArray(array) {
 
 export default function Home() {
   const [currentAd, setCurrentAd] = useState(0);
+  const [featuredRandom, setFeaturedRandom] = useState([]);
 
   useEffect(() => {
+    // Shuffle Featured once per session
+    setFeaturedRandom(shuffleArray(featuredRestaurants));
+
+    // Ads slider interval
     const interval = setInterval(
       () => setCurrentAd((prev) => (prev + 1) % ads.length),
       3500
     );
     return () => clearInterval(interval);
   }, []);
-
-  // Featured restaurants in random order
-  const featuredRandom = shuffleArray(featuredRestaurants);
 
   // Popular restaurants sorted by number of orders (descending)
   const popularRestaurants = [...featuredRestaurants].sort(
@@ -124,7 +126,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Restaurants (Random Order) */}
+      {/* Featured Restaurants (Random Once Per Session) */}
       <section className="section-wrapper">
         <h2 className="section-title">Featured</h2>
         <div className="featured-scroll">
@@ -186,7 +188,7 @@ export default function Home() {
 
       <div className="divider"></div>
 
-      {/* Recommended (Still by Rating Descending) */}
+      {/* Recommended (by rating) */}
       <section className="section-wrapper">
         <h2 className="section-title">Recommended</h2>
         <div className="recommended-list">
