@@ -3,16 +3,6 @@ import "../styles/restaurant.css";
 import image1 from "../assets/chicken republic.jpeg";
 import { FiSearch, FiTruck } from "react-icons/fi";
 
-const filterOptions = [
-  "Fast Delivery",
-  "Rating 4.5+",
-  "Near Me",
-  "Promos",
-  "Popular",
-  "New",
-  "Free Delivery",
-];
-
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
 function getRestaurantTimeDisplay(time) {
   const now = new Date();
@@ -29,8 +19,7 @@ const featuredRestaurants = [
   {
     id: 1,
     name: "Chicken Republic",
-    image:
-      image1,
+    image: image1,
     rating: 4.8,
     orders: 1200,
     price: 650,
@@ -88,15 +77,6 @@ export default function Discover() {
         />
       </div>
 
-      {/* Filters */}
-      <div className="filters-scroll">
-        {filterOptions.map((filter, index) => (
-          <div key={index} className="filter-chip">
-            {filter}
-          </div>
-        ))}
-      </div>
-
       {/* All Restaurants */}
       <section className="section-wrapper">
         <h2 className="section-title">All Restaurants</h2>
@@ -116,7 +96,7 @@ export default function Discover() {
                       {timeText}
                     </p>
                     <p>
-                      ⭐ {res.rating.toFixed(1)}({res.orders})
+                      ⭐ {res.rating.toFixed(1)} ({res.orders})
                     </p>
                   </div>
                 </div>
@@ -128,5 +108,3 @@ export default function Discover() {
     </div>
   );
 }
-
-
