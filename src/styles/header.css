@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 20px;
-  background: #fafafa;
+  background: #f5f5f5;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -110,7 +110,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background: #ff6600;
+  background: #014F50;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -118,10 +118,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
-}
-.filter-btn:hover {
-  background: #e65500;
-  transform: scale(1.05);
 }
 
 /* --- Filters Dropdown Under Header --- */
@@ -181,6 +177,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
