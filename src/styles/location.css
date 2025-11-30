@@ -1,59 +1,118 @@
+/* --------------------
+   FULL PAGE OVERLAY
+----------------------- */
 .location-page {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background: #fff;
-  z-index: 2000;
-  padding: 20px;
-  animation: slideUp 0.25s ease;
+  inset: 0;
+  background: #ffffff;
+  z-index: 3000;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.25s ease;
 }
 
-@keyframes slideUp {
-  from { transform: translateY(40px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
+/* --------------------
+   TOP HEADER
+----------------------- */
 .location-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid #f1f1f1;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.location-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222;
 }
 
 .close-btn {
   cursor: pointer;
+  color: #333;
+  transition: 0.2s;
+}
+
+.close-btn:hover {
+  opacity: 0.6;
+}
+
+/* --------------------
+   SEARCH BAR
+----------------------- */
+.location-search {
+  padding: 16px 20px;
 }
 
 .location-search input {
   width: 100%;
-  padding: 12px 15px;
-  margin-top: 20px;
-  border-radius: 8px;
+  padding: 14px 16px;
+  border-radius: 10px;
   border: 1px solid #ddd;
   font-size: 15px;
+  background: #fafafa;
+  outline: none;
+  transition: 0.2s;
 }
 
+.location-search input:focus {
+  border-color: #014F50;
+  background: #fff;
+}
+
+/* --------------------
+   SUGGESTIONS LIST
+----------------------- */
 .suggestions-list {
-  margin-top: 15px;
+  padding: 0 20px;
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 5px;
 }
 
 .suggestion-item {
-  padding: 12px;
-  border-bottom: 1px solid #f2f2f2;
+  padding: 14px 0;
+  border-bottom: 1px solid #f1f1f1;
   cursor: pointer;
+  font-size: 15px;
+  color: #333;
+  transition: 0.15s;
 }
 
 .suggestion-item:hover {
-  background: #f9f9f9;
+  padding-left: 6px;
+  color: #014F50;
 }
 
+/* --------------------
+ USE CURRENT LOCATION BTN
+----------------------- */
 .use-location {
-  margin-top: 25px;
-  padding: 12px;
+  padding: 15px;
   text-align: center;
   background: #014F50;
-  color: #fff;
-  border-radius: 6px;
+  color: #ffffff;
+  font-size: 15px;
+  margin: 15px 20px 25px;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0px 4px 12px rgba(1, 79, 80, 0.15);
+  transition: 0.2s;
+}
+
+.use-location:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
 }
