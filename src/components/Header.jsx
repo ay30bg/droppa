@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MapPin } from "lucide-react";
 import { FiChevronDown } from "react-icons/fi";
 import { LuSettings2 } from "react-icons/lu";
-import LocationPage from "./LocationPage"; // NEW PAGE
+import Location from "../pages/Locations"; // NEW PAGE
 import "../styles/header.css";
 
 export default function Header() {
@@ -58,7 +58,7 @@ export default function Header() {
 
       {/* Location Page Modal */}
       {showLocationPage && (
-        <LocationPage
+        <Location
           setLocation={setLocation}
           closePage={closeLocationPage}
         />
@@ -66,3 +66,4 @@ export default function Header() {
     </>
   );
 }
+
