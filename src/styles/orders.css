@@ -50,7 +50,7 @@
   opacity: 0.9;
 }
 
-empty-state p {
+.empty-state p {
   color: #555;
   margin: 6px 10px;
   font-size: 14px;
@@ -81,6 +81,7 @@ empty-state p {
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
