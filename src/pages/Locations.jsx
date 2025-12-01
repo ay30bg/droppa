@@ -68,7 +68,7 @@ export default function LocationPage({ setLocation, closePage }) {
         className="use-location"
         onClick={() => handleSelect("Using current location...")}
       >
-       <FaLocationArrow className="arrow-icon" size={18}/>  Use Current Location
+       <FaLocationArrow className="arrow-icon" size={16}/>  Use Current Location
       </div>
     </div>
   );
