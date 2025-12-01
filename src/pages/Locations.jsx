@@ -1,60 +1,72 @@
 import React, { useState } from "react";
-import { FiX } from "react-icons/fi";
+import { FiX, FiSearch } from "react-icons/fi";
+import { MapPin } from "lucide-react";
 import "../styles/location.css";
 
 export default function LocationPage({ setLocation, closePage }) {
   const [search, setSearch] = useState("");
 
+  // Dummy suggestions (Google style)
   const suggestions = [
-    "123 Herbert Macaulay Way",
     "Lekki Phase 1",
     "Victoria Island",
     "Ikeja GRA",
-    "Yaba, Lagos",
+    "Yaba - Herbert Macaulay",
+    "Surulere - Adeniran Ogunsanya",
   ];
+
+  const filtered = suggestions.filter((item) =>
+    item.toLowerCase().includes(search.toLowerCase())
+  );
 
   const handleSelect = (address) => {
     setLocation(address);
     closePage();
   };
 
-  const filtered = suggestions.filter((item) =>
-    item.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
     <div className="location-page">
-      {/* --- TOP HEADER --- */}
+      {/* Page Header */}
       <div className="location-header">
         <h3>Delivery Address</h3>
         <FiX size={24} onClick={closePage} className="close-btn" />
       </div>
 
-      {/* --- SEARCH BAR --- */}
+      {/* Search bar */}
       <div className="location-search">
-        <input
-          type="text"
-          placeholder="Search for your address..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+        <div className="search-wrapper">
+          <FiSearch className="search-icon" size={18} />
+          <input
+            type="text"
+            placeholder="Search for your address"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+          {search.length > 0 && (
+            <FiX
+              size={16}
+              className="clear-icon"
+              onClick={() => setSearch("")}
+            />
+          )}
+        </div>
       </div>
 
-      {/* --- SUGGESTIONS --- */}
+      {/* Suggestions */}
       <div className="suggestions-list">
         {filtered.map((item) => (
-          <div
-            key={item}
-            className="suggestion-item"
-            onClick={() => handleSelect(item)}
-          >
-            {item}
+          <div key={item} className="suggestion-item" onClick={() => handleSelect(item)}>
+            <MapPin size={18} className="suggestion-icon" />
+            <div className="suggestion-text">{item}</div>
           </div>
         ))}
       </div>
 
-      {/* --- USE CURRENT LOCATION --- */}
-      <div className="use-location" onClick={() => handleSelect("Using current location...")}>
+      {/* Use Current Location */}
+      <div
+        className="use-location"
+        onClick={() => handleSelect("Using current location...")}
+      >
         📍 Use Current Location
       </div>
     </div>
