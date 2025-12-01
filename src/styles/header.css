@@ -24,8 +24,13 @@
 .map-pin{
   color: #ff6600;
 }
-.address{
+.address {
   margin-top: -2px;
+  max-width: 140px;    
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 .arrow {
   font-size: 0.7rem;
@@ -178,6 +183,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
