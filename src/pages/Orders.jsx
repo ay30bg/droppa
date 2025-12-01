@@ -26,7 +26,7 @@ export default function OrderPage() {
           className={`order-tab ${activeTab === "history" ? "active" : ""}`}
           onClick={() => setActiveTab("history")}
         >
-           Order
+           History
         </div>
       </div>
 
@@ -74,6 +74,7 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
 
 
