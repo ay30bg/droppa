@@ -1,35 +1,30 @@
-/* --------------------
-   FULL PAGE OVERLAY
------------------------ */
+/* Full Screen Page */
 .location-page {
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: #fff;
   z-index: 3000;
-  padding: 0;
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.25s ease;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+@keyframes fadeIn { 
+  from { opacity: 0; } 
+  to { opacity: 1; } 
 }
 
-/* --------------------
-   TOP HEADER
------------------------ */
+/* Header */
 .location-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   padding: 18px 20px;
-  border-bottom: 1px solid #f1f1f1;
-  background: #ffffff;
+  border-bottom: 1px solid #eee;
   position: sticky;
   top: 0;
-  z-index: 20;
+  background: #fff;
+  z-index: 10;
 }
 
 .location-header h3 {
@@ -41,78 +36,98 @@
 .close-btn {
   cursor: pointer;
   color: #333;
-  transition: 0.2s;
 }
 
-.close-btn:hover {
-  opacity: 0.6;
-}
-
-/* --------------------
-   SEARCH BAR
------------------------ */
+/* Search Section */
 .location-search {
-  padding: 16px 20px;
+  padding: 15px 20px 5px;
 }
 
-.location-search input {
-  width: 90%;
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-  font-size: 15px;
+.search-wrapper {
+  position: relative;
+}
+
+.search-wrapper input {
+  width: 100%;
+  padding: 13px 40px;
+  border-radius: 12px;
+  border: 1px solid #e1e1e1;
   background: #fafafa;
-  outline: none;
+  font-size: 15px;
   transition: 0.2s;
 }
 
-.location-search input:focus {
-  border-color: #014F50;
+.search-wrapper input:focus {
   background: #fff;
+  border-color: #014F50;
 }
 
-/* --------------------
-   SUGGESTIONS LIST
------------------------ */
+/* Search icons */
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+.clear-icon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #999;
+}
+
+/* Suggestions List (Google Autocomplete Style) */
 .suggestions-list {
   padding: 0 20px;
   flex: 1;
   overflow-y: auto;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 .suggestion-item {
+  display: flex;
+  align-items: center;
   padding: 14px 0;
-  border-bottom: 1px solid #f1f1f1;
+  border-bottom: 1px solid #f2f2f2;
   cursor: pointer;
-  font-size: 15px;
-  color: #333;
-  transition: 0.15s;
+  transition: 0.2s;
 }
 
 .suggestion-item:hover {
+  background: #f8f8f8;
   padding-left: 6px;
+}
+
+/* Suggestion icon & text */
+.suggestion-icon {
+  margin-right: 12px;
   color: #014F50;
 }
 
-/* --------------------
- USE CURRENT LOCATION BTN
------------------------ */
+.suggestion-text {
+  font-size: 15px;
+  color: #333;
+}
+
+/* Current Location Button */
 .use-location {
+  margin: 20px;
+  background: #014F50;
   padding: 15px;
   text-align: center;
-  background: #014F50;
-  color: #ffffff;
-  font-size: 15px;
-  margin: 15px 20px 25px;
+  color: white;
   border-radius: 10px;
-  cursor: pointer;
+  font-size: 15px;
   font-weight: 500;
-  box-shadow: 0px 4px 12px rgba(1, 79, 80, 0.15);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(1, 79, 80, 0.15);
   transition: 0.2s;
 }
 
 .use-location:hover {
   opacity: 0.9;
-  transform: translateY(-1px);
 }
