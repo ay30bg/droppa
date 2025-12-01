@@ -59,7 +59,7 @@ function EmptyTrack() {
       <img src="https://i.imgur.com/Qh6cAcH.png" alt="Track Empty" />
       <h2>No Active Orders</h2>
       <p>When you place an order, you’ll be able to track it in real-time.</p>
-      <button>Start an Order</button>
+      <button>Order Now</button>
     </div>
   );
 }
@@ -70,9 +70,10 @@ function EmptyHistory() {
       <img src="https://i.imgur.com/7YgM8fx.png" alt="Order History" />
       <h2>No Order History</h2>
       <p>You haven't ordered anything yet. Let’s fix that!</p>
-      <button>Order Something</button>
+      <button>Order Now</button>
     </div>
   );
 }
+
 
 
