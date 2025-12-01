@@ -8,6 +8,7 @@
 .order-tabs {
   display: flex;
   background: #DDDDDD;
+  margin-top: 10px;
   border: 1px solid #eee;
   border-radius: 6px;
   padding: 6px;
@@ -83,6 +84,7 @@
   margin-top: 30px;
   margin-bottom: 20px;
 }
+
 
 
 
