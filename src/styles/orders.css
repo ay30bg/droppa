@@ -52,7 +52,7 @@
 
 .empty-state p {
   color: #555;
-  margin-top: 6px;
+  margin: 6px 10px;
   font-size: 14px;
   max-width: 300px;
 }
@@ -82,6 +82,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
