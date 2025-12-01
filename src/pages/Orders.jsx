@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { FiShoppingCart, FiTruck, FiClock } from "react-icons/fi";
 import "../styles/orders.css";
 
 export default function OrderPage() {
@@ -13,21 +12,21 @@ export default function OrderPage() {
           className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
           onClick={() => setActiveTab("cart")}
         >
-          <FiShoppingCart /> My Cart
+          My Cart
         </div>
 
         <div
           className={`order-tab ${activeTab === "track" ? "active" : ""}`}
           onClick={() => setActiveTab("track")}
         >
-          <FiTruck /> Track Order
+           Track Order
         </div>
 
         <div
           className={`order-tab ${activeTab === "history" ? "active" : ""}`}
           onClick={() => setActiveTab("history")}
         >
-          <FiClock /> Order History
+           Order
         </div>
       </div>
 
@@ -75,4 +74,5 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
