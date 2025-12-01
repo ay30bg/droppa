@@ -35,7 +35,7 @@ export default function OrderPage() {
         </div>
       </div>
 
-      <div className="order-divider"><div/>
+      
 
       {/* Content */}
       <div className="order-content">
@@ -78,6 +78,7 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
 
 
