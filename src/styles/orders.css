@@ -66,6 +66,8 @@
   margin-top: 20px;
   padding: 12px 20px;
   border: none;
+  width: 80px;
+  height: 40px;
   border-radius: 8px;
   background: #014f50;
   color: white;
@@ -77,5 +79,6 @@
 .empty-state button:hover {
   background: #013b3c;
 }
+
 
 
