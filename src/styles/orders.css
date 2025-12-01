@@ -40,9 +40,11 @@
 }
 
 /* EMPTY STATE */
-.empty-state {
+  .empty-state {
   text-align: center;
-  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers children horizontally */
 }
 
 .empty-state img {
@@ -80,6 +82,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
