@@ -88,14 +88,11 @@
 }
 
 .empty-icon {
-  opacity: 0.5;
-  margin-bottom: 15px;
-  stroke-width: 1.2;  /* makes lines softer */
-  width: 120px;
-  height: 120px;
-  color: #505d62;     /* soft gray tone (matches your design) */
+  width: 150px;
+  height: 150px;
+  margin-bottom: 20px;
+  fill: #e60078; /* optional */
 }
-
 
 
 
