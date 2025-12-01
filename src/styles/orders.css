@@ -67,8 +67,8 @@
   padding: 12px 20px;
   border: none;
   width: 200px;
-  height: 60px;
-  border-radius: 8px;
+  height: 55px;
+  border-radius: 6px;
   background: #014f50;
   color: white;
   font-weight: 500;
@@ -79,6 +79,7 @@
 .empty-state button:hover {
   background: #013b3c;
 }
+
 
 
 
