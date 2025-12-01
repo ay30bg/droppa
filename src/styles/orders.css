@@ -53,14 +53,15 @@
 .empty-state p {
   color: #555;
   margin-top: 6px;
-  font-size: 12px;
+  font-size: 14px;
+  max-width: 175px;
 }
 
 .empty-state button {
   margin-top: 20px;
   padding: 12px 20px;
   border: none;
-  width: 300px;
+  width: 350px;
   height: 45px;
   border-radius: 6px;
   background: #014f50;
@@ -81,6 +82,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
