@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FiShoppingCart, FiTruck, FiClock } from "react-icons/fi";
-import "../styles/order.css";
+import "../styles/orders.css";
 
 export default function OrderPage() {
   const [activeTab, setActiveTab] = useState("cart");
@@ -75,3 +75,4 @@ function EmptyHistory() {
     </div>
   );
 }
+
