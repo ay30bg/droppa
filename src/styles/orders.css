@@ -71,7 +71,7 @@
   border-radius: 6px;
   background: #014f50;
   color: white;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 500;
   cursor: pointer;
   transition: 0.3s;
@@ -80,6 +80,7 @@
 .empty-state button:hover {
   background: #013b3c;
 }
+
 
 
 
