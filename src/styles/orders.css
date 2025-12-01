@@ -42,7 +42,8 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 4px;
+  margin-top: 5px;
+  border: 2px solid #eee;
 }
 
 .order-content {
@@ -93,6 +94,7 @@
   margin-top: 40px;
   margin-bottom: 20px;
 }
+
 
 
 
