@@ -126,7 +126,7 @@
 .ads-slider {
   width: 100%;
   max-width: 420px;
-  margin-top: -15px;
+  margin-top: 150px;
   height: 100px;
   margin: 0 auto;
   border-radius: 5px;
@@ -189,6 +189,7 @@
   font-weight: 600;
   color: #000;
 }
+
 
 
 
