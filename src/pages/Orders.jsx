@@ -50,7 +50,7 @@ export default function OrderPage() {
 function EmptyCart() {
   return (
     <div className="empty-state">
-      <CartIcon className="empty-icon" width={300} height={300} />
+      <CartIcon className="empty-icon" />
       <h2>Your cart is empty</h2>
       <p>Add some meals and enjoy delicious food delivered fast.</p>
       <button>Browse Restaurants</button>
@@ -61,7 +61,7 @@ function EmptyCart() {
 function EmptyTrack() {
   return (
     <div className="empty-state">
-      <TrackIcon className="empty-icon" width={300} height={300} />
+      <TrackIcon className="empty-icon" />
       <h2>No Active Orders</h2>
       <p>When you place an order, you’ll be able to track it in real-time.</p>
       <button>Order Now</button>
@@ -72,12 +72,13 @@ function EmptyTrack() {
 function EmptyHistory() {
   return (
     <div className="empty-state">
-      <HistoryIcon className="empty-icon" width={300} height={300} />
+      <HistoryIcon className="empty-icon" />
       <h2>No Order History</h2>
       <p>You haven't ordered anything yet. Let’s fix that!</p>
       <button>Order Now</button>
     </div>
   );
 }
+
 
 
