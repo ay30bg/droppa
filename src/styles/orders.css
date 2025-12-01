@@ -7,7 +7,8 @@
 
 .order-tabs {
   display: flex;
-  background: #f3f5f6;
+  background: #D0C6C6;
+  border: 1px solid #eee;
   border-radius: 12px;
   padding: 6px;
   overflow: hidden;
@@ -76,3 +77,4 @@
 .empty-state button:hover {
   background: #013b3c;
 }
+
