@@ -100,7 +100,7 @@ export default function Home() {
   return (
     <div className="home-page">
       {/* Promotions */}
-      <section className="section-wrapper">
+      <section className="section-wrapper ads-section">
         <div className="ads-slider">
           <a href={ads[currentAd].link}>
             <img src={ads[currentAd].image} alt={`Ad ${currentAd + 1}`} />
@@ -203,4 +203,5 @@ export default function Home() {
     </div>
   );
 }
+
 
