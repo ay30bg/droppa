@@ -11,33 +11,36 @@ export default function OrderPage() {
 
   return (
     <div className="order-page">
-      {/* Tabs */}
-      <div className="order-tabs">
-        <div
-          className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
-          onClick={() => setActiveTab("cart")}
-        >
-          My Cart
+      
+      {/* Sticky Tabs */}
+      <div className="order-tabs-wrapper">
+        <div className="order-tabs">
+          <div
+            className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
+            onClick={() => setActiveTab("cart")}
+          >
+            My Cart
+          </div>
+
+          <div
+            className={`order-tab ${activeTab === "track" ? "active" : ""}`}
+            onClick={() => setActiveTab("track")}
+          >
+            Track Order
+          </div>
+
+          <div
+            className={`order-tab ${activeTab === "history" ? "active" : ""}`}
+            onClick={() => setActiveTab("history")}
+          >
+            History
+          </div>
         </div>
 
-        <div
-          className={`order-tab ${activeTab === "track" ? "active" : ""}`}
-          onClick={() => setActiveTab("track")}
-        >
-          Track Order
-        </div>
-
-        <div
-          className={`order-tab ${activeTab === "history" ? "active" : ""}`}
-          onClick={() => setActiveTab("history")}
-        >
-          History
-        </div>
+        <div className="order-divider"></div>
       </div>
 
-      <div className="order-divider"></div>
-
-      {/* Content */}
+      {/* Scrollable Content */}
       <div className="order-content">
         {activeTab === "cart" && <EmptyCart />}
         {activeTab === "track" && <EmptyTrack />}
@@ -78,11 +81,3 @@ function EmptyHistory() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
