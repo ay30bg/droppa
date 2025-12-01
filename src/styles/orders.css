@@ -59,6 +59,9 @@
 
 .empty-state button {
   margin-top: 20px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding: 12px 20px;
   border: none;
   width: 350px;
@@ -73,15 +76,12 @@
   transition: 0.3s;
 }
 
-.empty-state button:hover {
-  background: #013b3c;
-}
-
 .empty-icon {
   width: 200px;
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
