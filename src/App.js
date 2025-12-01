@@ -15,7 +15,7 @@ import "./styles/global.css";
 
 function AppWrapper() {
   const location = useLocation();
-  const hideHeaderPaths = ["/locations"];
+  const hideHeaderPaths = ["/locations","/orders"];
 
   return (
     <>
