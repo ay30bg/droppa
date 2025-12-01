@@ -50,16 +50,10 @@
   opacity: 0.9;
 }
 
-.empty-state h2 {
-  margin-top: 20px;
-  font-size: 20px;
-  font-weight: 600;
-}
-
 .empty-state p {
   color: #555;
   margin-top: 6px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .empty-state button {
@@ -87,6 +81,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
