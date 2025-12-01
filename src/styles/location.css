@@ -51,8 +51,8 @@
 .search-wrapper input {
   width: 75%;
   padding: 13px 40px;
-  border-radius: 12px;
-  border: 1px solid #e1e1e1;
+  border-radius: 6px;
+  border: 2px solid #eee;
   background: #fafafa;
   font-size: 15px;
   transition: 0.2s;
