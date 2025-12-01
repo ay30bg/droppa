@@ -28,6 +28,7 @@
 }
 .emoji-icon {
   font-size: 1.4rem;
+  color: #777;
 }
 
 /* --- Filters --- */
@@ -185,6 +186,7 @@
   font-size: 0.85rem;
   color: #666;
 }
+
 
 
 
