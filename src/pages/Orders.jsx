@@ -51,7 +51,7 @@ function EmptyCart() {
   return (
     <div className="empty-state">
       <CartIcon className="empty-icon" />
-      <p>Add some meals and enjoy delicious food delivered fast.</p>
+      <p>Add some meals and enjoy fast delivery.</p>
       <button>Browse Restaurants</button>
     </div>
   );
@@ -61,7 +61,7 @@ function EmptyTrack() {
   return (
     <div className="empty-state">
       <TrackIcon className="empty-icon" />
-      <p>When you place an order, you’ll be able to track it in real-time.</p>
+      <p>Place an order and track it in real time.</p>
       <button>Order Now</button>
     </div>
   );
@@ -76,6 +76,7 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
 
 
