@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FiX, FiSearch } from "react-icons/fi";
+import { FaLocationArrow } from "react-icons/fa6";
 import { MapPin } from "lucide-react";
 import "../styles/location.css";
 
@@ -67,7 +68,7 @@ export default function LocationPage({ setLocation, closePage }) {
         className="use-location"
         onClick={() => handleSelect("Using current location...")}
       >
-        📍 Use Current Location
+       <FaLocationArrow className="arrow-icon" size={18}/>  Use Current Location
       </div>
     </div>
   );
