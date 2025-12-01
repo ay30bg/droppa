@@ -54,7 +54,6 @@
   color: #555;
   margin: 6px 10px;
   font-size: 14px;
-  max-width: 300px;
 }
 
 .empty-state button {
@@ -81,6 +80,7 @@
   height: 200px;
   margin-bottom: 20px;
 }
+
 
 
 
