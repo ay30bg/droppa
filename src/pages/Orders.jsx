@@ -35,6 +35,8 @@ export default function OrderPage() {
         </div>
       </div>
 
+      <div className="order-divider"><div/>
+
       {/* Content */}
       <div className="order-content">
         {activeTab === "cart" && <EmptyCart />}
@@ -76,6 +78,7 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
 
 
