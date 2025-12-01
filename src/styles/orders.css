@@ -82,6 +82,11 @@
   background: #013b3c;
 }
 
+.empty-state svg {
+  margin-bottom: 15px;
+  opacity: 0.9;
+}
+
 
 
 
