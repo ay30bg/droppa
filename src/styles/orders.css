@@ -26,7 +26,7 @@
 /* Tabs container */
 .order-tabs {
   display: flex;
-  overflow: hidden;
+  gap: 6px; /* space between tabs */
 }
 
 /* Individual tabs */
@@ -108,3 +108,4 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
