@@ -52,15 +52,11 @@
   width: 77%;
   padding: 13px 40px;
   border-radius: 6px;
+  height: 25px;
   border: 2px solid #eee;
   background: #fff;
   font-size: 15px;
   transition: 0.2s;
-}
-
-.search-wrapper input:focus {
-  background: #fff;
-  border-color: #014F50;
 }
 
 /* Search icons */
