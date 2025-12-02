@@ -77,7 +77,7 @@
 }
 
 .empty-state p {
-  color: #555;
+  color: #ddd;
   margin: 6px 10px;
   font-size: 14px;
 }
@@ -107,6 +107,7 @@
   margin-top: 40px;
   margin-bottom: 20px;
 }
+
 
 
 
