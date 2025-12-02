@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
 /* Full-screen container */
 .welcome-page {
   height: 100vh;
@@ -21,7 +27,7 @@
 .welcome-logo {
   font-size: 22px;
   font-weight: 700;
-  color: #ff6b00;
+  color: #014f50;
 }
 
 .explore-btn {
@@ -29,7 +35,7 @@
   border: none;
   font-size: 15px;
   font-weight: 600;
-  color: #ff6b00;
+  color: #014f50;
   cursor: pointer;
 }
 
@@ -79,7 +85,7 @@
 .welcome-btn {
   width: 100%;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -91,7 +97,7 @@
 }
 
 .welcome-btn.primary {
-  background: #ff6b00;
+  background: #014f50;
   color: white;
 }
 
@@ -103,6 +109,6 @@
 
 .login-link {
   font-weight: 600;
-  color: #ff6b00;
+  color: #014f50;
   cursor: pointer;
 }
