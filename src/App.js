@@ -11,12 +11,13 @@ import Profile from "./pages/Profile.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Orders from "./pages/Orders.jsx";
 import Locations from "./pages/Locations.jsx";
+import Welcome from "./pages/WelcomePage.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import "./styles/global.css";
 
 function AppWrapper() {
   const location = useLocation();
-  const hideHeaderPaths = ["/locations", "/orders", "/profile"];
+  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome"];
 
   return (
     <>
@@ -30,6 +31,7 @@ function AppWrapper() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
+        <Route path="/welcome" element={<WelcomePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <BottomNav />
