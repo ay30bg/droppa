@@ -67,10 +67,6 @@
   transition: 0.2s ease;
 }
 
-.profile-item:hover {
-  background: #f1f1f1;
-}
-
 /* Logout Button */
 .logout-btn {
   width: 100%;
@@ -88,6 +84,7 @@
   cursor: pointer;
   transition: 0.25s ease;
 }
+
 
 
 
