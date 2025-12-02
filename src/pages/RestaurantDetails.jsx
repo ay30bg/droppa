@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FiTruck } from "react-icons/fi";
+import { FiTruck, FiStar } from "react-icons/fi";
 import image1 from "../assets/chicken republic.jpeg";
 import image2 from "../assets/yakoyo.jpg";
-import "../styles/restaurantdetails.css";
+import "../styles/RestaurantDetails.css";
 
 // Restaurants data
 const featuredRestaurants = [
@@ -34,7 +34,6 @@ const restaurantMenus = {
   ],
 };
 
-// Time display logic
 function getRestaurantTimeDisplay(time) {
   const hour = new Date().getHours();
   return hour >= 0 && hour < 8 ? "Closed" : time;
@@ -44,20 +43,15 @@ export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // ✅ All Hooks at the top
   const [cart, setCart] = useState([]);
 
-  // Find restaurant after hooks
   const restaurant = featuredRestaurants.find((res) => res.id === parseInt(id));
-
-  // Early return if restaurant not found
   if (!restaurant) return <p>Restaurant not found!</p>;
 
-  // Safe to use restaurant data now
   const menu = restaurantMenus[id] || [];
   const timeText = getRestaurantTimeDisplay(restaurant.time);
+  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
-  // Handlers
   const addToCart = (item) => setCart([...cart, item]);
   const removeFromCart = (index) => {
     const newCart = [...cart];
@@ -65,54 +59,61 @@ export default function RestaurantDetails() {
     setCart(newCart);
   };
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-
   return (
-    <div className="restaurant-details-page">
-      {/* Back Button */}
-      <button onClick={() => navigate(-1)}>⬅ Back</button>
+    <div className="restaurant-details-container">
+      {/* Header */}
+      <div className="restaurant-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>⬅ Back</button>
+        <h1>{restaurant.name}</h1>
+      </div>
 
-      {/* Restaurant Info */}
-      <img src={restaurant.image} alt={restaurant.name} className="restaurant-image" />
-      <h1>{restaurant.name}</h1>
-      <p>Location: {restaurant.street}</p>
-      <p>Rating: ⭐ {restaurant.rating} ({restaurant.orders} orders)</p>
-      <p>
-        <FiTruck style={{ marginRight: "4px" }} />
-        Delivery: From {restaurant.price} NGN | {timeText}
-      </p>
-      <p className={timeText === "Closed" ? "closed" : ""}>
-        Status: {timeText === "Closed" ? "Closed" : "Open"}
-      </p>
+      {/* Banner Image */}
+      <img src={restaurant.image} alt={restaurant.name} className="restaurant-banner" />
 
-      <hr />
+      {/* Info Cards */}
+      <div className="info-cards">
+        <div className="info-card">
+          <FiStar className="icon" /> {restaurant.rating} ({restaurant.orders} reviews)
+        </div>
+        <div className="info-card">
+          <FiTruck className="icon" /> From {restaurant.price} NGN | {timeText}
+        </div>
+        <div className={`info-card ${timeText === "Closed" ? "closed" : ""}`}>
+          {timeText === "Closed" ? "Closed" : "Open"}
+        </div>
+      </div>
 
       {/* Menu */}
-      <h2>Menu</h2>
-      {menu.map((item) => (
-        <div key={item.id} className="menu-item">
-          <span>{item.name}</span>
-          <span>
-            {item.price} NGN
-            <button onClick={() => addToCart(item)}>Add</button>
-          </span>
-        </div>
-      ))}
+      <div className="menu-section">
+        <h2>Menu</h2>
+        {menu.map((item) => (
+          <div key={item.id} className="menu-card">
+            <span>{item.name}</span>
+            <div className="menu-actions">
+              <span>{item.price} NGN</span>
+              <button onClick={() => addToCart(item)}>Add</button>
+            </div>
+          </div>
+        ))}
+      </div>
 
-      {/* Cart */}
+      {/* Sticky Cart */}
       {cart.length > 0 && (
-        <div className="cart">
-          <h3>Cart</h3>
-          {cart.map((item, index) => (
-            <div key={index} className="cart-item">
+        <div className="cart-section">
+          <h3>Cart ({cart.length} items)</h3>
+          {cart.map((item, idx) => (
+            <div key={idx} className="cart-item">
               <span>{item.name}</span>
-              <span>
-                {item.price} NGN
-                <button onClick={() => removeFromCart(index)}>Remove</button>
-              </span>
+              <div className="cart-actions">
+                <span>{item.price} NGN</span>
+                <button onClick={() => removeFromCart(idx)}>Remove</button>
+              </div>
             </div>
           ))}
-          <p className="cart-total">Total: {totalPrice} NGN</p>
+          <div className="cart-total">
+            <span>Total:</span>
+            <span>{totalPrice} NGN</span>
+          </div>
           <button className="place-order-btn">Place Order</button>
         </div>
       )}
