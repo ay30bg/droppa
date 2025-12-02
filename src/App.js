@@ -17,24 +17,34 @@ import "./styles/global.css";
 
 function AppWrapper() {
   const location = useLocation();
+
+  // Hide Header on these pages
   const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome"];
+
+  // Hide BottomNav on these pages
+  const hideBottomNavPaths = ["/welcome"];
 
   return (
     <>
+      {/* Conditional Header */}
       {!hideHeaderPaths.includes(location.pathname) && <Header />}
+
+      {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/restaurant" element={<Restaurant />} />
-         <Route path="/details/:id" element={<RestaurantDetails />} />
+        <Route path="/details/:id" element={<RestaurantDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <BottomNav />
+
+      {/* Conditional Bottom Navigation */}
+      {!hideBottomNavPaths.includes(location.pathname) && <BottomNav />}
     </>
   );
 }
