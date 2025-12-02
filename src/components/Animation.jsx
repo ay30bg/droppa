@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "lottie-react";
-import animationData from "../assets/animation.json"; // path to your JSON
+import animationData from import animationData from "https://assets10.lottiefiles.com/packages/lf20_puciaact.json";
 
 export default function Animation() {
   return (
