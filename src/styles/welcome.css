@@ -7,7 +7,6 @@
   flex-direction: column;
   justify-content: space-between; /* Push middle content to center, CTA to bottom */
   background: #f5f5f5;
-  margin-bottom: 60px;
   box-sizing: border-box;
 }
 
@@ -74,6 +73,7 @@
 .welcome-bottom {
   width: 100%;
   text-align: center;
+  margin-bottom: 60px;
 }
 
 .welcome-btn {
