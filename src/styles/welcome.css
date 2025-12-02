@@ -1,10 +1,13 @@
+/* Full-screen container */
 .welcome-page {
   height: 100vh;
   width: 100%;
   padding: 25px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* Push middle content to center, CTA to bottom */
   background: #ffffff;
+  box-sizing: border-box;
 }
 
 /* HEADER */
@@ -13,7 +16,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .welcome-logo {
@@ -29,12 +31,10 @@
   font-weight: 600;
   color: #ff6b00;
   cursor: pointer;
-  padding: 5px 10px;
 }
 
 /* MIDDLE CONTENT */
 .welcome-content {
-  flex: 1; /* pushes CTA to bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,8 +42,9 @@
 }
 
 .welcome-illustration img {
-  width: 75%;
-  max-width: 320px;
+  max-width: 60%;
+  max-height: 40vh;
+  object-fit: contain;
   animation: float 3s ease-in-out infinite;
 }
 
@@ -72,13 +73,12 @@
 .welcome-bottom {
   width: 100%;
   text-align: center;
-  margin-bottom: 25px;
 }
 
 .welcome-btn {
   width: 100%;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -90,7 +90,7 @@
 }
 
 .welcome-btn.primary {
-  background: #014f50;
+  background: #ff6b00;
   color: white;
 }
 
@@ -102,6 +102,6 @@
 
 .login-link {
   font-weight: 600;
-  color: #014f50;
+  color: #ff6b00;
   cursor: pointer;
 }
