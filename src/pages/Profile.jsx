@@ -15,7 +15,7 @@ export default function ProfilePage() {
 
       {/* Content */}
       <div className="profile-section">
-        <h3 className="section-title">Account</h3>
+        <h3 className="profile-section-title">Account</h3>
 
         <div className="profile-item">
           <span>Personal Information</span>
@@ -34,7 +34,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="profile-section">
-        <h3 className="section-title">Preferences</h3>
+        <h3 className="profile-section-title">Preferences</h3>
 
         <div className="profile-item">
           <span>Notifications</span>
@@ -48,7 +48,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="profile-section">
-        <h3 className="section-title">Support</h3>
+        <h3 className="profile-section-title">Support</h3>
 
         <div className="profile-item">
           <span>Help Center</span>
@@ -69,3 +69,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
