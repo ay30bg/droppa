@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/welcome.css";
 import { FiArrowRight } from "react-icons/fi";
+import foodGif from "../assets/Restaurant.gif"; // your GIF file
 
 export default function WelcomePage() {
   return (
@@ -20,10 +21,7 @@ export default function WelcomePage() {
       {/* Middle Content */}
       <div className="welcome-content">
         <div className="welcome-illustration">
-          <img
-            src="https://cdn.jsdelivr.net/gh/akabab/small-assets/food-delivery-illustration.png"
-            alt="Food Illustration"
-          />
+          <img src={foodGif} alt="Food Animation" style={{ width: "100%", maxWidth: 400 }} />
         </div>
         <h1 className="welcome-title">Delicious Food, Fast Delivery</h1>
         <p className="welcome-subtitle">
