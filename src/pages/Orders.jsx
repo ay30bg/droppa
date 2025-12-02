@@ -14,7 +14,7 @@ export default function OrderPage() {
       
       {/* Sticky Tabs */}
       <div className="order-tabs-wrapper">
-        <h2 clasName="order-header">Your Orders<h2/>
+        <h2 className="order-header">Your Orders</h2>
         <div className="order-tabs">
           <div
             className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
@@ -81,5 +81,6 @@ function EmptyHistory() {
     </div>
   );
 }
+
 
 
