@@ -1,92 +1,48 @@
 import React from "react";
-import "../styles/profile.css";
-import { FiChevronRight, FiLogOut } from "react-icons/fi";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import Header from "./components/Header.jsx";
+import BottomNav from "./components/BottomNav.jsx";
+import Home from "./pages/Home.jsx";
+import Cart from "./pages/Cart.jsx";
+import TrackOrder from "./pages/TrackOrder.jsx";
+import Restaurant from "./pages/Restaurant.jsx";
+import RestaurantDetails from "./pages/RestaurantDetails.jsx"
+import Profile from "./pages/Profile.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import Orders from "./pages/Orders.jsx";
+import Locations from "./pages/Locations.jsx";
+import { CartProvider } from "./context/CartContext.js";
+import "./styles/global.css";
 
-export default function ProfilePage() {
-  // You can replace this with the logged-in user info
-  const user = {
-    name: "John Doe",
-    email: "john.doe@example.com",
-    id: 12345, // or use UUID / username
-  };
-
-  // Extract initials
-  const initials = user.name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase();
+function AppWrapper() {
+  const location = useLocation();
+  const hideHeaderPaths = ["/locations", "/orders", "/profile"];
 
   return (
-    <div className="profile-page">
-      {/* Header */}
-      <div className="profile-header">
+    <>
+      {!hideHeaderPaths.includes(location.pathname) && <Header />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/track" element={<TrackOrder />} />
+        <Route path="/restaurant" element={<Restaurant />} />
+         <Route path="/details/:id" element={<RestaurantDetails />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/locations" element={<Locations />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <BottomNav />
+    </>
+  );
+}
 
-        {/* Animated Blob Avatar */}
-        <div
-          className="blob-avatar"
-          style={{ "--seed": user.id % 50 }}
-        >
-          <span className="avatar-text">{initials}</span>
-        </div>
-
-        <h2 className="profile-name">{user.name}</h2>
-        <p className="profile-email">{user.email}</p>
-      </div>
-
-      {/* Content */}
-      <div className="profile-section">
-        <h3 className="section-title">Account</h3>
-
-        <div className="profile-item">
-          <span>Personal Information</span>
-          <FiChevronRight />
-        </div>
-
-        <div className="profile-item">
-          <span>Saved Addresses</span>
-          <FiChevronRight />
-        </div>
-
-        <div className="profile-item">
-          <span>Payment Methods</span>
-          <FiChevronRight />
-        </div>
-      </div>
-
-      <div className="profile-section">
-        <h3 className="section-title">Preferences</h3>
-
-        <div className="profile-item">
-          <span>Notifications</span>
-          <FiChevronRight />
-        </div>
-
-        <div className="profile-item">
-          <span>Privacy & Security</span>
-          <FiChevronRight />
-        </div>
-      </div>
-
-      <div className="profile-section">
-        <h3 className="section-title">Support</h3>
-
-        <div className="profile-item">
-          <span>Help Center</span>
-          <FiChevronRight />
-        </div>
-
-        <div className="profile-item">
-          <span>About Us</span>
-          <FiChevronRight />
-        </div>
-      </div>
-
-      {/* Logout */}
-      <button className="logout-btn">
-        <FiLogOut />
-        Logout
-      </button>
-    </div>
+export default function App() {
+  return (
+    <CartProvider>
+      <Router>
+        <AppWrapper />
+      </Router>
+    </CartProvider>
   );
 }
