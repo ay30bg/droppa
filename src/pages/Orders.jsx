@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/orders.css";
 
 // Import your downloaded SVGs as React components
@@ -14,7 +15,6 @@ export default function OrderPage() {
       
       {/* Sticky Tabs */}
       <div className="order-tabs-wrapper">
-        
         <div className="order-tabs">
           <div
             className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
@@ -37,7 +37,6 @@ export default function OrderPage() {
             History
           </div>
         </div>
-
       </div>
 
       {/* Scrollable Content */}
@@ -53,35 +52,43 @@ export default function OrderPage() {
 /* ---------------- EMPTY STATES ---------------- */
 
 function EmptyCart() {
+  const navigate = useNavigate();
+
   return (
     <div className="empty-state">
       <CartIcon className="empty-icon" />
       <p>Add some meals and enjoy fast delivery.</p>
-      <button>Browse Restaurants</button>
+      <button onClick={() => navigate("/restaurants")}>
+        Browse Restaurants
+      </button>
     </div>
   );
 }
 
 function EmptyTrack() {
+  const navigate = useNavigate();
+
   return (
     <div className="empty-state">
       <TrackIcon className="empty-icon" />
       <p>Place an order and track it in real time.</p>
-      <button>Order Now</button>
+      <button onClick={() => navigate("/restaurants")}>
+        Order Now
+      </button>
     </div>
   );
 }
 
 function EmptyHistory() {
+  const navigate = useNavigate();
+
   return (
     <div className="empty-state">
       <HistoryIcon className="empty-icon" />
       <p>You haven't ordered anything yet. Let’s fix that!</p>
-      <button>Order Now</button>
+      <button onClick={() => navigate("/restaurants")}>
+        Order Now
+      </button>
     </div>
   );
 }
-
-
-
-
