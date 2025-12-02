@@ -43,13 +43,21 @@ function getRestaurantTimeDisplay(time) {
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const restaurant = featuredRestaurants.find((res) => res.id === parseInt(id));
 
-  if (!restaurant) return <p>Restaurant not found!</p>;
-
-  const menu = restaurantMenus[id] || [];
+  // ✅ All Hooks at the top
   const [cart, setCart] = useState([]);
 
+  // Find restaurant after hooks
+  const restaurant = featuredRestaurants.find((res) => res.id === parseInt(id));
+
+  // Early return if restaurant not found
+  if (!restaurant) return <p>Restaurant not found!</p>;
+
+  // Safe to use restaurant data now
+  const menu = restaurantMenus[id] || [];
+  const timeText = getRestaurantTimeDisplay(restaurant.time);
+
+  // Handlers
   const addToCart = (item) => setCart([...cart, item]);
   const removeFromCart = (index) => {
     const newCart = [...cart];
@@ -58,7 +66,6 @@ export default function RestaurantDetails() {
   };
 
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-  const timeText = getRestaurantTimeDisplay(restaurant.time);
 
   return (
     <div className="restaurant-details-page">
