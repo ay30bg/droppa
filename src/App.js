@@ -6,7 +6,7 @@ import Home from "./pages/Home.jsx";
 import Cart from "./pages/Cart.jsx";
 import TrackOrder from "./pages/TrackOrder.jsx";
 import Restaurant from "./pages/Restaurant.jsx";
-import RestaurantDetails from "./pages/RestaurantDetails.jsx"
+import RestaurantDetails from "./pages/RestaurantDetails.jsx";
 import Profile from "./pages/Profile.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Orders from "./pages/Orders.jsx";
