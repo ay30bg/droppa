@@ -58,7 +58,7 @@ function EmptyCart() {
     <div className="empty-state">
       <CartIcon className="empty-icon" />
       <p>Add some meals and enjoy fast delivery.</p>
-      <button onClick={() => navigate("/restaurants")}>
+      <button onClick={() => navigate("/restaurant")}>
         Browse Restaurants
       </button>
     </div>
@@ -72,7 +72,7 @@ function EmptyTrack() {
     <div className="empty-state">
       <TrackIcon className="empty-icon" />
       <p>Place an order and track it in real time.</p>
-      <button onClick={() => navigate("/restaurants")}>
+      <button onClick={() => navigate("/restaurant")}>
         Order Now
       </button>
     </div>
@@ -86,9 +86,10 @@ function EmptyHistory() {
     <div className="empty-state">
       <HistoryIcon className="empty-icon" />
       <p>You haven't ordered anything yet. Let’s fix that!</p>
-      <button onClick={() => navigate("/restaurants")}>
+      <button onClick={() => navigate("/restaurant")}>
         Order Now
       </button>
     </div>
   );
 }
+
