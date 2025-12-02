@@ -37,7 +37,6 @@ export default function OrderPage() {
           </div>
         </div>
 
-        <div className="order-divider"></div>
       </div>
 
       {/* Scrollable Content */}
@@ -81,3 +80,4 @@ function EmptyHistory() {
     </div>
   );
 }
+
