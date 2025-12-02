@@ -1,15 +1,40 @@
 .welcome-page {
   height: 100vh;
   width: 100%;
-  padding: 30px;
+  padding: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   background: #ffffff;
   text-align: center;
 }
 
+/* HEADER */
+.welcome-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.welcome-logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ff6b00;
+}
+
+.explore-btn {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ff6b00;
+  cursor: pointer;
+  padding: 5px 10px;
+}
+
+/* Illustration */
 .welcome-illustration img {
   width: 75%;
   max-width: 320px;
@@ -22,8 +47,9 @@
   100% { transform: translateY(0); }
 }
 
+/* Title & Subtitle */
 .welcome-title {
-  font-size: 28px;
+  font-size: 26px;
   font-weight: 700;
   margin-top: 20px;
   color: #333;
@@ -31,21 +57,15 @@
 
 .welcome-subtitle {
   font-size: 15px;
-  margin-top: 10px;
+  margin-top: 8px;
   color: #555;
   width: 85%;
   line-height: 1.5;
 }
 
-.welcome-buttons {
-  margin-top: 35px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
+/* Main CTA */
 .welcome-btn {
+  margin-top: 30px;
   width: 100%;
   padding: 15px;
   border-radius: 10px;
@@ -54,18 +74,25 @@
   font-weight: 600;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   gap: 8px;
 }
 
 .welcome-btn.primary {
   background: #ff6b00;
-  color: #fff;
+  color: white;
 }
 
-.welcome-btn.outline {
-  border: 2px solid #ff6b00;
-  background: transparent;
+/* Login Text */
+.welcome-login-text {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-link {
+  font-weight: 600;
   color: #ff6b00;
+  cursor: pointer;
 }
