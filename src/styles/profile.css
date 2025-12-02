@@ -44,7 +44,7 @@
   margin-top: 30px;
 }
 
-.section-title {
+.profile-section-title {
   font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
@@ -84,6 +84,7 @@
   cursor: pointer;
   transition: 0.25s ease;
 }
+
 
 
 
