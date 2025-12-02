@@ -4,9 +4,7 @@
   padding: 25px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   background: #ffffff;
-  text-align: center;
 }
 
 /* HEADER */
@@ -15,7 +13,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .welcome-logo {
@@ -34,7 +32,15 @@
   padding: 5px 10px;
 }
 
-/* Illustration */
+/* MIDDLE CONTENT */
+.welcome-content {
+  flex: 1; /* pushes CTA to bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .welcome-illustration img {
   width: 75%;
   max-width: 320px;
@@ -47,7 +53,6 @@
   100% { transform: translateY(0); }
 }
 
-/* Title & Subtitle */
 .welcome-title {
   font-size: 26px;
   font-weight: 700;
@@ -63,12 +68,17 @@
   line-height: 1.5;
 }
 
-/* Main CTA */
+/* BOTTOM SECTION */
+.welcome-bottom {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 .welcome-btn {
-  margin-top: 30px;
   width: 100%;
   padding: 15px;
-  border-radius: 10px;
+  border-radius: 5px;
   border: none;
   font-size: 16px;
   font-weight: 600;
@@ -80,19 +90,18 @@
 }
 
 .welcome-btn.primary {
-  background: #ff6b00;
+  background: #014f50;
   color: white;
 }
 
-/* Login Text */
 .welcome-login-text {
-  margin-top: 15px;
+  margin-top: 12px;
   font-size: 14px;
   color: #555;
 }
 
 .login-link {
   font-weight: 600;
-  color: #ff6b00;
+  color: #014f50;
   cursor: pointer;
 }
