@@ -26,7 +26,7 @@ function AppWrapper() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/track" element={<TrackOrder />} />
         <Route path="/restaurant" element={<Restaurant />} />
-        <Route path="/details/:id" element={<RestaurantDetails />}
+        <Route path="/details/:id" element={<RestaurantDetails />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
