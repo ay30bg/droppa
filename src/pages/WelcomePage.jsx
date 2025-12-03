@@ -1,33 +1,19 @@
 import React from "react";
 import "../styles/welcome.css";
 import { FiArrowRight } from "react-icons/fi";
-import foodGif from "../assets/Restaurant.gif"; // your GIF file
+import foodImage from "../assets/foodPicture.jpeg"; 
 
 export default function WelcomePage() {
   return (
     <div className="welcome-page">
 
-      {/* Top Header */}
-      <div className="welcome-header">
-        <div className="welcome-logo">Droppa</div>
-        <button
-          className="explore-btn"
-          onClick={() => (window.location.href = "/home")}
-        >
-          Explore Now
-        </button>
+      {/* Top Image */}
+      <div className="welcome-image-container">
+        <img src={foodImage} alt="Food" className="welcome-image" />
       </div>
 
-      {/* Middle Content */}
-      <div className="welcome-content">
-        <div className="welcome-illustration">
-          <img src={foodGif} alt="Food Animation" style={{ width: "100%", maxWidth: 400 }} />
-        </div>
-        <h1 className="welcome-title">Delicious Food, Fast Delivery</h1>
-        <p className="welcome-subtitle">
-          Order meals from your favorite restaurants near you.
-        </p>
-      </div>
+      {/* Droppa Logo */}
+      <div className="welcome-logo">Droppa</div>
 
       {/* Bottom CTA */}
       <div className="welcome-bottom">
@@ -37,6 +23,7 @@ export default function WelcomePage() {
         >
           Get Started <FiArrowRight />
         </button>
+
         <p className="welcome-login-text">
           Already have an account?{" "}
           <span
@@ -47,6 +34,7 @@ export default function WelcomePage() {
           </span>
         </p>
       </div>
+
     </div>
   );
 }
