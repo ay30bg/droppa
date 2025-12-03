@@ -14,7 +14,6 @@
   height: 100vh;
   background: #ffffff;
   overflow: hidden;
-  font-family: 'Inter', sans-serif;
 }
 
 /* TOP IMAGE */
@@ -60,7 +59,7 @@
 /* CTA AREA */
 .welcome-bottom {
   margin-top: auto;
-  margin-bottom: 36px;
+  margin-bottom: 20px;
   width: 100%;
   display: flex;
   flex-direction: column;
