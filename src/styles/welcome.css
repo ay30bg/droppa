@@ -4,19 +4,23 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
+/* MAIN CONTAINER */
 .welcome-page {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  background: #fff;
+  font-family: "Inter", sans-serif;
 }
 
-/* Image Section */
+/* TOP IMAGE */
 .welcome-image-container {
   width: 100%;
-  height: 50vh; 
+  height: 50vh;
   overflow: hidden;
 }
 
@@ -24,45 +28,73 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
-/* Logo */
+/* LOGO */
 .welcome-logo {
-  font-size: 25px;
-  font-weight: bold;
-  margin-top: 20px;
+  font-size: 34px;
+  font-weight: 700;
   color: #014f50;
+  margin-top: 18px;
 }
 
-/* Bottom CTA section */
+/* HEADLINE */
+.welcome-page h4 {
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #222;
+}
+
+/* SUBTEXT */
+.welcome-page p {
+  font-size: 15px;
+  color: #555;
+  margin-top: 4px;
+  padding: 0 20px;
+}
+
+/* CTA SECTION */
 .welcome-bottom {
   margin-top: auto;
   margin-bottom: 40px;
-  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* BUTTON */
 .welcome-btn.primary {
   background-color: #014f50;
   color: white;
-  padding: 14px 20px;
+  padding: 15px 22px;
   width: 85%;
-  font-size: 18px;
-  border-radius: 10px;
+  font-size: 17px;
+  border-radius: 12px;
   border: none;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  transition: 0.25s ease;
 }
 
+.welcome-btn.primary:hover {
+  opacity: 0.9;
+}
+
+/* LOGIN TEXT */
 .welcome-login-text {
   margin-top: 14px;
   color: #555;
+  font-size: 14px;
 }
 
 .login-link {
   color: #014f50;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
 }
