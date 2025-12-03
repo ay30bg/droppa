@@ -14,7 +14,8 @@ export default function WelcomePage() {
 
       {/* Droppa Logo */}
       <div className="welcome-logo">Droppa</div>
-
+      <h4>Delicious Food, Fast Delivery</h4>
+<p>Order meals from your favorite restaurants near you</p>
       {/* Bottom CTA */}
       <div className="welcome-bottom">
         <button
