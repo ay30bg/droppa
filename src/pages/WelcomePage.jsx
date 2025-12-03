@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/welcome.css";
 import { FiArrowRight } from "react-icons/fi";
-import foodImage from "../assets/foodPicture.jpeg"; 
+import foodImage from "../assets/foodPicture.jpeg";
 
 export default function WelcomePage() {
   return (
@@ -12,10 +12,17 @@ export default function WelcomePage() {
         <img src={foodImage} alt="Food" className="welcome-image" />
       </div>
 
-      {/* Droppa Logo */}
-      <div className="welcome-logo">Droppa</div>
-      <h4>Delicious Food, Fast Delivery</h4>
-<p>Order meals from your favorite restaurants near you</p>
+      {/* Text Section */}
+      <div className="welcome-text-group">
+        <div className="welcome-logo">Droppa</div>
+
+        <h4>Delicious Food, Fast Delivery</h4>
+
+        <p className="welcome-subtext">
+          Order meals from your favorite restaurants near you
+        </p>
+      </div>
+
       {/* Bottom CTA */}
       <div className="welcome-bottom">
         <button
