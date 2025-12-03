@@ -21,50 +21,46 @@
 .welcome-image-container {
   width: 100%;
   height: 48vh;
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
 }
 
 .welcome-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
   transform: scale(1.02);
 }
 
 /* LOGO */
 .welcome-logo {
-  font-size: 36px;
+  font-size: 26px;       /* ↓ Reduced */
   font-weight: 800;
   color: #014f50;
-  margin-top: 22px;
-  letter-spacing: -1px;
+  margin-top: 20px;
+  letter-spacing: -0.5px;
 }
 
 /* HEADLINE */
 .welcome-page h4 {
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 16px;       /* ↓ Reduced */
+  font-weight: 600;
   color: #111;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 /* SUBTEXT */
 .welcome-subtext {
-  font-size: 15px;
+  font-size: 13px;       /* ↓ Reduced */
   color: #555;
   margin-top: 4px;
-  padding: 0 22px;
-  line-height: 1.5;
+  padding: 0 20px;
+  line-height: 1.4;
 }
 
 /* CTA AREA */
 .welcome-bottom {
   margin-top: auto;
-  margin-bottom: 44px;
+  margin-bottom: 36px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -73,42 +69,38 @@
 
 /* BUTTON */
 .welcome-btn.primary {
-  width: 88%;
-  padding: 16px 0;
+  width: 85%;
+  padding: 12px 0;       /* ↓ Reduced */
   background-color: #014f50;
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  font-size: 17px;
+  color: white;
+  border-radius: 12px;
+  font-size: 14px;       /* ↓ Reduced */
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  border: none;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(1, 79, 80, 0.25);
-  transition: all 0.25s ease;
+  box-shadow: 0 6px 18px rgba(1, 79, 80, 0.25);
+  transition: 0.25s ease;
 }
 
 .welcome-btn.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 26px rgba(1, 79, 80, 0.32);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(1, 79, 80, 0.32);
 }
 
 /* LOGIN AREA */
 .welcome-login-text {
-  margin-top: 18px;
-  color: #777;
-  font-size: 14px;
+  margin-top: 12px;
+  color: #666;
+  font-size: 12px;       /* ↓ Reduced */
 }
 
 .login-link {
   color: #014f50;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
-}
-
-.login-link:hover {
-  opacity: 0.7;
+  font-size: 12px;       /* ↓ Reduced */
 }
