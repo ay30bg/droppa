@@ -16,7 +16,7 @@
 /* Image Section */
 .welcome-image-container {
   width: 100%;
-  height: 60vh; /* Takes half of the screen */
+  height: 50vh; 
   overflow: hidden;
 }
 
@@ -28,7 +28,7 @@
 
 /* Logo */
 .welcome-logo {
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
   margin-top: 20px;
   color: #014f50;
@@ -44,6 +44,7 @@
 .welcome-btn.primary {
   background-color: #014f50;
   color: white;
+  width: 350px;
   padding: 14px 22px;
   width: 85%;
   font-size: 18px;
