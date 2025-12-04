@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/welcome.css";
+import welcomeImage from "../assets/welcomeImage.png"
 import { FiArrowRight } from "react-icons/fi";
 
 export default function WelcomePage() {
@@ -9,7 +10,7 @@ export default function WelcomePage() {
       {/* Background Illustration */}
       <div className="welcome-hero">
         <img
-          src="/assets/food-delivery-hero.png"
+          src={welcomeImage}
           alt="Food Delivery"
           className="welcome-hero-img"
         />
