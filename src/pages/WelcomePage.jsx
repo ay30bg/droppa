@@ -1,48 +1,31 @@
 import React from "react";
 import "../styles/welcome.css";
 import { FiArrowRight } from "react-icons/fi";
-import foodImage from "../assets/foodPicture.jpeg";
 
 export default function WelcomePage() {
   return (
-    <div className="welcome-page">
+    <div className="welcome-container">
 
-      {/* Top Image */}
-      <div className="welcome-image-container">
-        <img src={foodImage} alt="Food" className="welcome-image" />
+      {/* Background Illustration */}
+      <div className="welcome-hero">
+        <img
+          src="/assets/food-delivery-hero.png"
+          alt="Food Delivery"
+          className="welcome-hero-img"
+        />
       </div>
 
-      {/* Text Section */}
-      <div className="welcome-text-group">
-        <div className="welcome-logo">Droppa</div>
-
-        <h4>Delicious Food, Fast Delivery</h4>
-
-        <p className="welcome-subtext">
-          Order meals from your favorite restaurants near you
+      {/* Content */}
+      <div className="welcome-content">
+        <h1 className="welcome-title">Fast Delivery to Your Doorstep</h1>
+        <p className="welcome-subtitle">
+          Get meals, groceries, and essentials delivered in minutes.  
         </p>
-      </div>
 
-      {/* Bottom CTA */}
-      <div className="welcome-bottom">
-        <button
-          className="welcome-btn primary"
-          onClick={() => (window.location.href = "/register")}
-        >
-          Get Started <FiArrowRight />
+        <button className="welcome-btn">
+          Get Started <FiArrowRight className="arrow" />
         </button>
-
-        <p className="welcome-login-text">
-          Already have an account?{" "}
-          <span
-            className="login-link"
-            onClick={() => (window.location.href = "/login")}
-          >
-            Log in
-          </span>
-        </p>
       </div>
-
     </div>
   );
 }
