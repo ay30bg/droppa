@@ -14,11 +14,57 @@
   align-items: center;
 }
 
+
 .welcome-hero {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 40px;
+}
+
+/* Top Header */
+.welcome-top-header {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.welcome-logo {
+  font-size: 22px;
+  font-weight: 800;
+  color: #014f50;
+}
+
+.welcome-explore-btn {
+  background: transparent;
+  border: 2px solid #014f50;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #014f50;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.welcome-explore-btn:hover {
+  background: #014f50;
+  color: #fff;
+}
+
+/* Login text below button */
+.welcome-login {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.welcome-login span {
+  color: #014f50;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .welcome-hero-img {
