@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/welcome.css";
-import welcomeImage from "../assets/welcomeImage.png"
+import welcomeImage from "../assets/welcomeImage.jpeg"
 import { FiArrowRight } from "react-icons/fi";
 
 export default function WelcomePage() {
