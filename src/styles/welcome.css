@@ -25,11 +25,11 @@
 /* Top Header */
 .welcome-top-header {
   width: 100%;
-  padding: 20px;
-  margin: 0px 20px;
+  padding: 28px 24px; /* More premium spacing */
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-sizing: border-box; /* ensures padding behaves correctly */
 }
 
 .welcome-logo {
