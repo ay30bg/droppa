@@ -47,19 +47,23 @@
 
 .welcome-btn {
   margin-top: 25px;
+  width: 100%;
+  max-width: 320px; /* prevents excessive stretching on large screens */
   background: #014f50;
   border: none;
   color: #fff;
-  width: 85%;
-  padding: 14px 28px;
-  border-radius: 10px;
+  padding: 16px 0;
+  border-radius: 12px;
   font-size: 16px;
   font-weight: 600;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   transition: 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .welcome-btn:hover {
