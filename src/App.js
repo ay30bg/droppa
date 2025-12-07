@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound.jsx";
 import Orders from "./pages/Orders.jsx";
 import Locations from "./pages/Locations.jsx";
 import WelcomePage from "./pages/WelcomePage.jsx";
+import Login from "./pages/Login.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import "./styles/global.css";
 
@@ -39,6 +40,7 @@ function AppWrapper() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
