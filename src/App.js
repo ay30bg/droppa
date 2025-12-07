@@ -13,6 +13,7 @@ import Orders from "./pages/Orders.jsx";
 import Locations from "./pages/Locations.jsx";
 import WelcomePage from "./pages/WelcomePage.jsx";
 import Login from "./pages/Login.jsx";
+import GetStarted from "./pages/GetStarted.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import "./styles/global.css";
 
@@ -20,10 +21,10 @@ function AppWrapper() {
   const location = useLocation();
 
   // Hide Header on these pages
-  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login"];
+  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login", "/get-started"];
 
   // Hide BottomNav on these pages
-  const hideBottomNavPaths = ["/welcome", "/login"];
+  const hideBottomNavPaths = ["/welcome", "/login", "/get-started"];
 
   return (
     <>
@@ -41,6 +42,7 @@ function AppWrapper() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/get-started" element={<GetStarted />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
