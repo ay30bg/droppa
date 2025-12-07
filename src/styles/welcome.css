@@ -117,3 +117,10 @@
 .arrow {
   font-size: 18px;
 }
+
+.login-link {
+  color: #014f50;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
