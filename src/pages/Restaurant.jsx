@@ -44,6 +44,7 @@ export default function Discover() {
         </span>
         <input
           type="text"
+          className="discover-input"
           placeholder="Search restaurants or meals..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -87,3 +88,4 @@ export default function Discover() {
     </div>
   );
 }
+
