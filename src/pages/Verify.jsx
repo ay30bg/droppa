@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/verify.css";
 
 export default function VerifyPage() {
   const location = useLocation();
   const phone = location.state?.phone || "";
+  const navigate = useNavigate();
 
-  const [otp, setOtp] = useState(["", "", "", "", "", ""]);
+  const [otp, setOtp] = useState(["", "", "", ""]); // 4 boxes
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(60);
   const [resendEnabled, setResendEnabled] = useState(false);
@@ -17,24 +18,19 @@ export default function VerifyPage() {
       setResendEnabled(true);
       return;
     }
-    const interval = setInterval(() => {
-      setTimer((prev) => prev - 1);
-    }, 1000);
+    const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
     return () => clearInterval(interval);
   }, [timer]);
 
   const handleChange = (e, index) => {
-    const value = e.target.value.replace(/\D/, ""); // only digits
+    const value = e.target.value.replace(/\D/, "");
     if (!value) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Move focus to next box
-    if (index < 5) {
-      inputsRef.current[index + 1].focus();
-    }
+    if (index < 3) inputsRef.current[index + 1].focus();
   };
 
   const handleKeyDown = (e, index) => {
@@ -42,37 +38,39 @@ export default function VerifyPage() {
       const newOtp = [...otp];
       newOtp[index] = "";
       setOtp(newOtp);
-      if (index > 0) {
-        inputsRef.current[index - 1].focus();
-      }
+      if (index > 0) inputsRef.current[index - 1].focus();
     }
   };
 
   const handleVerify = () => {
     const otpCode = otp.join("");
-    if (otpCode.length < 6) {
-      alert("Please enter the complete 6-digit OTP");
+    if (otpCode.length < 4) {
+      alert("Please enter the complete OTP");
       return;
     }
     alert(`OTP ${otpCode} verified!`);
-    // TODO: Add real verification logic
+    // Navigate to home/dashboard
+    // navigate("/home");
   };
 
   const handleResend = () => {
     setTimer(60);
     setResendEnabled(false);
-    setOtp(["", "", "", "", "", ""]);
+    setOtp(["", "", "", ""]);
     inputsRef.current[0].focus();
     alert(`OTP resent to ${phone}`);
   };
 
   return (
-    <div className="verify-container">
-      <h1 className="verify-title">Verify Your Phone</h1>
-      <p className="verify-subtitle">
-        Enter the 6-digit code sent to <strong>{phone}</strong>
+    <div className="lp-container"> {/* Login-style container */}
+
+      {/* Greeting */}
+      <h1 className="lp-greeting">Verify Your Phone</h1>
+      <p className="lp-subtext">
+        Enter the 4-digit code sent to <strong>{phone}</strong>
       </p>
 
+      {/* OTP boxes */}
       <div className="otp-container">
         {otp.map((value, index) => (
           <input
@@ -88,10 +86,12 @@ export default function VerifyPage() {
         ))}
       </div>
 
-      <button className="verify-btn" onClick={handleVerify}>
+      {/* Verify button */}
+      <button className="lp-btn" onClick={handleVerify}>
         Verify
       </button>
 
+      {/* Resend OTP */}
       <div className="verify-resend">
         {resendEnabled ? (
           <button className="resend-btn" onClick={handleResend}>
