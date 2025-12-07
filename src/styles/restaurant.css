@@ -19,7 +19,7 @@
   padding: 10px 8px;
   border-radius: 6px;
 }
-.discover-search input {
+.discover-input {
   flex: 1;
   border: none;
   outline: none;
@@ -186,6 +186,7 @@
   font-size: 0.85rem;
   color: #666;
 }
+
 
 
 
