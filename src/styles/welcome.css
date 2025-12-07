@@ -90,14 +90,14 @@
 
 /* Main Button */
 .welcome-btn {
-  margin-top: 18px; /* reduced */
+  margin-top: 25px; /* reduced */
   width: 100%;
   max-width: 300px;
   background: #014f50;
   border: none;
   color: #fff;
   padding: 14px 0; /* reduced */
-  border-radius: 10px;
+  border-radius: 5px;
   font-size: 15px; /* reduced */
   font-weight: 600;
   display: flex;
@@ -108,10 +108,6 @@
   transition: 0.3s ease;
   margin-left: auto;
   margin-right: auto;
-}
-
-.welcome-btn:hover {
-  background: #013b3c;
 }
 
 .arrow {
