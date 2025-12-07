@@ -7,7 +7,7 @@ export default function LoginPage() {
     <div className="login-container">
       
       {/* Greeting */}
-      <h1 className="login-greeting">Welcome Back 👋</h1>
+      <h1 className="login-greeting">Welcome Back </h1>
       <p className="login-subtext">Enter your phone number to continue</p>
 
       {/* Phone Input */}
