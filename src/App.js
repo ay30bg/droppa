@@ -23,7 +23,7 @@ function AppWrapper() {
   const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login"];
 
   // Hide BottomNav on these pages
-  const hideBottomNavPaths = ["/welcome"];
+  const hideBottomNavPaths = ["/welcome", "/login"];
 
   return (
     <>
