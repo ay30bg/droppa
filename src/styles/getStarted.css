@@ -3,6 +3,8 @@
 * {
   font-family: 'Plus Jakarta Sans', sans-serif;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .get-started-container {
@@ -11,7 +13,7 @@
   background: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* center vertically */
+  justify-content: center; /* vertically center content */
   padding: 32px 24px;
   text-align: center;
 }
@@ -28,17 +30,46 @@
 .get-started-subtext {
   font-size: 16px;
   color: #555;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   line-height: 1.5;
 }
 
-/* Button */
+/* Form */
+.get-started-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Input labels */
+.input-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #014f50;
+  text-align: left;
+}
+
+/* Input fields */
+.input-field {
+  padding: 14px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-field:focus {
+  border-color: #014f50;
+}
+
+/* Get Started Button */
 .get-started-btn {
   width: 100%;
   padding: 16px 0;
   background: #014f50;
   border: none;
-  color: white;
+  color: #fff;
   border-radius: 12px;
   font-size: 17px;
   font-weight: 600;
@@ -47,6 +78,7 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
+  margin-top: 10px;
   transition: 0.3s ease;
 }
 
@@ -54,19 +86,22 @@
   background: #013b3c;
 }
 
-/* Login link */
-.get-started-login {
-  margin-top: 20px;
-  font-size: 15px;
-  color: #555;
+/* Arrow icon in button */
+.arrow {
+  font-size: 18px;
 }
 
-.get-started-login span {
+/* Policy disclaimer */
+.policy-text {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #555;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.policy-text span {
   color: #014f50;
   font-weight: 600;
   cursor: pointer;
-}
-
-.arrow {
-  font-size: 18px;
 }
