@@ -8,24 +8,32 @@
   height: 100vh;
   width: 100%;
   background: #ffffff;
-  overflow: hidden;
+  overflow: hidden; /* No scrolling */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+
+.welcome-hero {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
 /* Top Header */
 .welcome-top-header {
   width: 100%;
-  padding: 18px 20px; /* reduced */
+  padding: 28px 24px; /* More premium spacing */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-sizing: border-box;
+  box-sizing: border-box; /* ensures padding behaves correctly */
 }
 
 .welcome-logo {
-  font-size: 20px; /* slightly reduced */
+  font-size: 22px;
   font-weight: 800;
   color: #014f50;
 }
@@ -33,18 +41,24 @@
 .welcome-explore-btn {
   background: transparent;
   border: 2px solid #014f50;
-  padding: 6px 14px; /* smaller */
+  padding: 8px 16px;
   border-radius: 8px;
-  font-size: 13px; /* smaller */
+  font-size: 14px;
   font-weight: 600;
   color: #014f50;
   cursor: pointer;
   transition: 0.3s;
 }
 
+.welcome-explore-btn:hover {
+  background: #014f50;
+  color: #fff;
+}
+
+/* Login text below button */
 .welcome-login {
-  margin-top: 12px; /* reduced */
-  font-size: 13px;
+  margin-top: 18px;
+  font-size: 14px;
   color: #555;
 }
 
@@ -54,62 +68,56 @@
   cursor: pointer;
 }
 
-/* Hero Image */
-.welcome-hero {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 10px; /* reduced */
-}
-
 .welcome-hero-img {
-  width: 70%; /* smaller to reduce height */
-  max-width: 330px;
-  margin: 6px 0; /* reduced */
+  margin: 10px 0;
+  width: 80%;
+  max-width: 380px;
   object-fit: contain;
 }
 
-/* Content */
 .welcome-content {
   text-align: center;
-  padding: 10px; /* reduced */
-  margin-top: 5px;
+  padding: 20px;
+  margin-top: 10px;
 }
 
 .welcome-title {
-  font-size: 24px; /* reduced */
+  font-size: 28px;
   font-weight: 800;
   color: #014f50;
 }
 
 .welcome-subtitle {
-  margin-top: 6px; /* reduced */
-  font-size: 14px;
+  margin-top: 10px;
+  font-size: 15px;
   color: #555;
 }
 
-/* Main Button */
 .welcome-btn {
-  margin-top: auto;
+  margin-top: 25px;
   width: 100%;
-  max-width: 300px;
+  max-width: 320px; /* prevents excessive stretching on large screens */
   background: #014f50;
   border: none;
   color: #fff;
-  padding: 14px 0; /* reduced */
-  border-radius: 5px;
-  font-size: 15px; /* reduced */
+  padding: 16px 0;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 600;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   cursor: pointer;
   transition: 0.3s ease;
   margin-left: auto;
   margin-right: auto;
 }
 
+.welcome-btn:hover {
+  background: #013b3c;
+}
+
 .arrow {
-  font-size: 16px; /* reduced */
+  font-size: 18px;
 }
