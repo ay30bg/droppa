@@ -13,7 +13,7 @@ import Orders from "./pages/Orders.jsx";
 import Locations from "./pages/Locations.jsx";
 import WelcomePage from "./pages/WelcomePage.jsx";
 import Login from "./pages/Login.jsx";
-import Verity from "./pages/Verify.jsx";
+import Verify from "./pages/Verify.jsx";
 import GetStarted from "./pages/GetStarted.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import "./styles/global.css";
