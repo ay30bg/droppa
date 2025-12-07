@@ -90,7 +90,7 @@
 
 /* Main Button */
 .welcome-btn {
-  margin-top: 25px; /* reduced */
+  margin-top: auto;
   width: 100%;
   max-width: 300px;
   background: #014f50;
