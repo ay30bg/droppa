@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"; // import Link
 import "../styles/welcome.css";
 import welcomeImage from "../assets/welcomeImage.jpeg";
 import { FiArrowRight } from "react-icons/fi";
@@ -34,7 +35,8 @@ export default function WelcomePage() {
         </button>
 
         <p className="welcome-login">
-          Already have an account? <span>Log in</span>
+          Already have an account?{" "}
+          <Link to="/login" className="login-link">Log in</Link>
         </p>
       </div>
     </div>
