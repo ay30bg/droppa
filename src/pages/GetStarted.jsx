@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/getstarted.css";
+import "../styles/getStarted.css";
 import { FiArrowRight } from "react-icons/fi";
 
 export default function GetStarted() {
