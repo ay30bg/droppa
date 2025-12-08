@@ -1,88 +1,69 @@
-// import React, { useState } from "react";
-// import "../styles/getStarted.css";
-// import { FiArrowRight } from "react-icons/fi";
+import React, { useState } from "react";
+import "../styles/getstarted.css";
 
-// export default function GetStartedPage() {
-//   const [name, setName] = useState("");
-//   const [phone, setPhone] = useState("");
-//   const [email, setEmail] = useState("");
-//   const [birthday, setBirthday] = useState("");
-//   const [referral, setReferral] = useState("");
+export default function GetStarted() {
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     // Handle signup logic here
-//     console.log({ name, phone, email, birthday, referral });
-//   };
+  return (
+    <div className="gs-container">
+      <h1 className="gs-title">Create Your Account</h1>
+      <p className="gs-subtitle">Let's get you started with Droppa</p>
 
-//   return (
-//     <div className="get-started-container">
-      
-//       {/* Header */}
-//       <h1 className="get-started-title">Create Your Account</h1>
-//       <p className="get-started-subtext">
-//         Get started with fast deliveries and exclusive offers.
-//       </p>
+      {/* Full Name */}
+      <div className="gs-input-group">
+        <label className="gs-label">Full Name</label>
+        <input
+          type="text"
+          className="gs-input"
+          placeholder="Enter your full name"
+        />
+      </div>
 
-//       {/* Sign Up Form */}
-//       <form className="get-started-form" onSubmit={handleSubmit}>
-//         <label className="input-label">Full Name</label>
-//         <input
-//           type="text"
-//           className="input-field"
-//           placeholder="John Doe"
-//           value={name}
-//           onChange={(e) => setName(e.target.value)}
-//           required
-//         />
+      {/* Email */}
+      <div className="gs-input-group">
+        <label className="gs-label">Email Address</label>
+        <input
+          type="email"
+          className="gs-input"
+          placeholder="example@mail.com"
+        />
+      </div>
 
-//         <label className="input-label">Phone Number</label>
-//         <input
-//           type="tel"
-//           className="input-field"
-//           placeholder="08123456789"
-//           value={phone}
-//           onChange={(e) => setPhone(e.target.value)}
-//           required
-//         />
+      {/* Phone Number */}
+      <div className="gs-input-group">
+        <label className="gs-label">Phone Number</label>
+        <input
+          type="tel"
+          className="gs-input"
+          placeholder="080..."
+        />
+      </div>
 
-//         <label className="input-label">Email (optional)</label>
-//         <input
-//           type="email"
-//           className="input-field"
-//           placeholder="example@mail.com"
-//           value={email}
-//           onChange={(e) => setEmail(e.target.value)}
-//         />
+      {/* Birthday */}
+      <div className="gs-input-group">
+        <label className="gs-label">Birthday</label>
+        <input
+          type="date"
+          className="gs-input"
+        />
+      </div>
 
-//         <label className="input-label">Birthday</label>
-//         <input
-//           type="date"
-//           className="input-field"
-//           value={birthday}
-//           onChange={(e) => setBirthday(e.target.value)}
-//           required
-//         />
+      {/* Referral Code */}
+      <div className="gs-input-group">
+        <label className="gs-label">Referral Code (Optional)</label>
+        <input
+          type="text"
+          className="gs-input"
+          placeholder="Enter code"
+        />
+      </div>
 
-//         <label className="input-label">Referral Code (optional)</label>
-//         <input
-//           type="text"
-//           className="input-field"
-//           placeholder="Enter code"
-//           value={referral}
-//           onChange={(e) => setReferral(e.target.value)}
-//         />
+      {/* Signup Button */}
+      <button className="gs-btn">Sign Up</button>
 
-//         <button type="submit" className="get-started-btn">
-//           Get Started <FiArrowRight className="arrow" />
-//         </button>
-//       </form>
-
-//       {/* Policy Disclaimer */}
-//       <p className="policy-text">
-//         By creating an account, you agree to Droppa’s <span>Terms of Service</span> and <span>Privacy Policy</span>.
-//       </p>
-
-//     </div>
-//   );
-// }
+      {/* Terms */}
+      <p className="gs-terms">
+        By signing up, you agree with Droppa’s policy.
+      </p>
+    </div>
+  );
+}
