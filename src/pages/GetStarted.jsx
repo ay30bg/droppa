@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../styles/getstarted.css";
+import "../styles/getStarted.css";
 
 export default function GetStarted() {
 
