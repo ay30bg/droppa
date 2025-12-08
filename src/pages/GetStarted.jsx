@@ -1,47 +1,49 @@
-import React, { useState } from "react";
-import "../styles/getStarted.css";
+import React from "react";
+import "../styles/getstarted.css";
+import { FiArrowRight } from "react-icons/fi";
 
 export default function GetStarted() {
-
   return (
     <div className="gs-container">
-      <h1 className="gs-title">Create Your Account</h1>
-      <p className="gs-subtitle">Let's get you started with Droppa</p>
+
+      {/* Greeting */}
+      <h1 className="gs-greeting">Create Account</h1>
+      <p className="gs-subtext">Fill your details to get started</p>
 
       {/* Full Name */}
       <div className="gs-input-group">
         <label className="gs-label">Full Name</label>
-        <input
+        <input 
           type="text"
           className="gs-input"
-          placeholder="Enter your full name"
+          placeholder="Enter your name"
         />
       </div>
 
       {/* Email */}
       <div className="gs-input-group">
         <label className="gs-label">Email Address</label>
-        <input
+        <input 
           type="email"
           className="gs-input"
           placeholder="example@mail.com"
         />
       </div>
 
-      {/* Phone Number */}
+      {/* Phone */}
       <div className="gs-input-group">
         <label className="gs-label">Phone Number</label>
-        <input
+        <input 
           type="tel"
           className="gs-input"
-          placeholder="080..."
+          placeholder="08123456789"
         />
       </div>
 
       {/* Birthday */}
       <div className="gs-input-group">
         <label className="gs-label">Birthday</label>
-        <input
+        <input 
           type="date"
           className="gs-input"
         />
@@ -50,19 +52,20 @@ export default function GetStarted() {
       {/* Referral Code */}
       <div className="gs-input-group">
         <label className="gs-label">Referral Code (Optional)</label>
-        <input
+        <input 
           type="text"
           className="gs-input"
-          placeholder="Enter code"
+          placeholder="Enter referral code"
         />
       </div>
 
-      {/* Signup Button */}
-      <button className="gs-btn">Sign Up</button>
+      {/* Button */}
+      <button className="gs-btn">
+        Sign Up <FiArrowRight className="gs-arrow" />
+      </button>
 
-      {/* Terms */}
-      <p className="gs-terms">
-        By signing up, you agree with Droppa’s policy.
+      <p className="gs-policy">
+        By signing up, you agree with Droppa’s Term of use.
       </p>
     </div>
   );
