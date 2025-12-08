@@ -79,6 +79,7 @@ export default function VerifyPage() {
             type="text"
             maxLength={1}
             value={value}
+            placeholder="-"
             onChange={(e) => handleChange(e, index)}
             onKeyDown={(e) => handleKeyDown(e, index)}
             className="otp-input"
