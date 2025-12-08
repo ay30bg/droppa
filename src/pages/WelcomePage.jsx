@@ -30,9 +30,12 @@ export default function WelcomePage() {
           Get meals, groceries, and essentials delivered in minutes.
         </p>
 
-        <button className="welcome-btn">
-          Get Started <FiArrowRight className="arrow" />
-        </button>
+        {/* Navigate to /get-started */}
+        <Link to="/get-started" className="welcome-btn-link">
+          <button className="welcome-btn">
+            Get Started <FiArrowRight className="arrow" />
+          </button>
+        </Link>
 
         <p className="welcome-login">
           Already have an account?{" "}
