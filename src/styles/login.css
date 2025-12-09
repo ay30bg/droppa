@@ -99,3 +99,21 @@
   font-weight: 700;
   cursor: pointer;
 }
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 3px solid #ffffff60;
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin: 0;
+  padding: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
