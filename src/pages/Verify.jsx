@@ -7,13 +7,13 @@ export default function VerifyPage() {
   const phone = location.state?.phone || "";
   const navigate = useNavigate();
 
-  const [otp, setOtp] = useState(["", "", "", "", ""]); // 5 boxes
+  const [otp, setOtp] = useState(["", "", "", "", ""]); // 5 OTP boxes
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(60);
   const [resendEnabled, setResendEnabled] = useState(false);
-  const [loading, setLoading] = useState(false); // NEW
+  const [loading, setLoading] = useState(false);
 
-  // Countdown
+  // Countdown timer
   useEffect(() => {
     if (timer === 0) {
       setResendEnabled(true);
@@ -23,17 +23,20 @@ export default function VerifyPage() {
     return () => clearInterval(interval);
   }, [timer]);
 
+  // Handle OTP input change
   const handleChange = (e, index) => {
-    const value = e.target.value.replace(/\D/, "");
+    const value = e.target.value.replace(/\D/, ""); // only digits
     if (!value) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
+    // Focus next input
     if (index < 4) inputsRef.current[index + 1].focus();
   };
 
+  // Handle Backspace navigation
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
@@ -41,8 +44,14 @@ export default function VerifyPage() {
       setOtp(newOtp);
       if (index > 0) inputsRef.current[index - 1].focus();
     }
+
+    // Prevent letters (optional extra safeguard)
+    if (e.key.length === 1 && /\D/.test(e.key)) {
+      e.preventDefault();
+    }
   };
 
+  // Verify OTP
   const handleVerify = () => {
     const otpCode = otp.join("");
     if (otpCode.length < 5) {
@@ -52,14 +61,14 @@ export default function VerifyPage() {
 
     setLoading(true);
 
-    // Simulate OTP verification API
+    // Simulate verification API call
     setTimeout(() => {
       setLoading(false);
-      // Navigate to home page
-      navigate("/");
+      navigate("/"); // Navigate to home page
     }, 1500);
   };
 
+  // Resend OTP
   const handleResend = () => {
     setTimer(60);
     setResendEnabled(false);
@@ -75,13 +84,15 @@ export default function VerifyPage() {
         Enter the 5-digit code sent to <strong>{phone}</strong>
       </p>
 
-      {/* OTP boxes */}
+      {/* OTP Input Boxes */}
       <div className="otp-container">
         {otp.map((value, index) => (
           <input
             key={index}
             ref={(el) => (inputsRef.current[index] = el)}
-            type="text"
+            type="tel"                // numeric keypad
+            inputMode="numeric"       // mobile-friendly
+            pattern="[0-9]*"          // restrict digits
             maxLength={1}
             value={value}
             placeholder="-"
@@ -92,11 +103,12 @@ export default function VerifyPage() {
         ))}
       </div>
 
+      {/* Verify Button */}
       <button className="lp-btn" onClick={handleVerify} disabled={loading}>
         {loading ? <div className="loader"></div> : "Verify"}
       </button>
 
-      {/* Resend */}
+      {/* Resend OTP */}
       <div className="verify-resend">
         {resendEnabled ? (
           <button className="resend-btn" onClick={handleResend}>
