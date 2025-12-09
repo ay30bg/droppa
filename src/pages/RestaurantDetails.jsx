@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { FiTruck, FiStar } from "react-icons/fi";
-import image1 from "../assets/chicken republic.jpeg";
-import image2 from "../assets/yakoyo.jpg";
 import "../styles/restaurantdetails.css";
-
-// Restaurants & menu data (same as before)...
+import { featuredRestaurants, restaurantMenus, getRestaurantTimeDisplay } from "../data/restaurants";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [cart, setCart] = useState([]);
-  const [flyingItem, setFlyingItem] = useState(null); // For animation
+  const [flyingItem, setFlyingItem] = useState(null);
 
   const restaurant = featuredRestaurants.find((res) => res.id === parseInt(id));
   if (!restaurant) return <p>Restaurant not found!</p>;
@@ -21,11 +18,9 @@ export default function RestaurantDetails() {
   const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
 
   const addToCart = (item, event) => {
-    // Start flying animation
     const rect = event.target.getBoundingClientRect();
     setFlyingItem({
       name: item.name,
-      price: item.price,
       startX: rect.left,
       startY: rect.top,
     });
@@ -33,7 +28,7 @@ export default function RestaurantDetails() {
     setTimeout(() => {
       setCart((prev) => [...prev, item]);
       setFlyingItem(null);
-    }, 500); // Match animation duration
+    }, 500);
   };
 
   const removeFromCart = (index) => {
@@ -81,7 +76,7 @@ export default function RestaurantDetails() {
         ))}
       </div>
 
-      {/* Flying item */}
+      {/* Flying item animation */}
       {flyingItem && (
         <div
           className="flying-item"
