@@ -5,6 +5,8 @@ import { FiArrowRight } from "react-icons/fi";
 
 export default function GetStarted() {
   const navigate = useNavigate();
+
+  // Form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -23,27 +25,19 @@ export default function GetStarted() {
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 1899 }, (_, i) => currentYear - i);
 
+  // Handle Sign Up button
   const handleSignUp = () => {
-    // Basic validation
     if (!fullName || !email || phone.length !== 11 || !day || !month || !year) {
       alert("Please fill all required fields correctly.");
       return;
     }
 
-    const birthday = `${year}-${months.indexOf(month) + 1}-${day}`;
-    const payload = {
-      fullName,
-      email,
-      phone,
-      birthday,
-      referralCode
-    };
-
     setLoading(true);
 
-    // Simulate API call
+    // Simulate API call or backend signup
     setTimeout(() => {
       setLoading(false);
+
       // Navigate to OTP page for signup
       navigate("/verify", { state: { phone, mode: "signup" } });
     }, 1500);
@@ -57,7 +51,7 @@ export default function GetStarted() {
       {/* Full Name */}
       <div className="gs-input-group">
         <label className="gs-label">Full Name</label>
-        <input 
+        <input
           type="text"
           className="gs-input"
           placeholder="Enter your name"
@@ -69,7 +63,7 @@ export default function GetStarted() {
       {/* Email */}
       <div className="gs-input-group">
         <label className="gs-label">Email Address</label>
-        <input 
+        <input
           type="email"
           className="gs-input"
           placeholder="example@mail.com"
@@ -81,7 +75,7 @@ export default function GetStarted() {
       {/* Phone */}
       <div className="gs-input-group">
         <label className="gs-label">Phone Number</label>
-        <input 
+        <input
           type="tel"
           className="gs-input"
           placeholder="08123456789"
@@ -96,15 +90,15 @@ export default function GetStarted() {
         <div className="birthday-dropdowns">
           <select className="gs-select" value={day} onChange={(e) => setDay(e.target.value)}>
             <option value="">Day</option>
-            {days.map(d => <option key={d} value={d}>{d}</option>)}
+            {days.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>
           <select className="gs-select" value={month} onChange={(e) => setMonth(e.target.value)}>
             <option value="">Month</option>
-            {months.map(m => <option key={m} value={m}>{m}</option>)}
+            {months.map((m) => <option key={m} value={m}>{m}</option>)}
           </select>
           <select className="gs-select" value={year} onChange={(e) => setYear(e.target.value)}>
             <option value="">Year</option>
-            {years.map(y => <option key={y} value={y}>{y}</option>)}
+            {years.map((y) => <option key={y} value={y}>{y}</option>)}
           </select>
         </div>
       </div>
