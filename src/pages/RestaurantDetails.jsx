@@ -5,7 +5,7 @@ import {
   featuredRestaurants,
   restaurantMenus,
   getRestaurantTimeDisplay,
-} from "../data/restaurant";
+} from "../data/restaurants.js";
 import "../styles/restaurantdetails.css";
 
 export default function RestaurantDetails() {
