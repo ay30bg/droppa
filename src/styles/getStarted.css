@@ -60,6 +60,35 @@
   border-color: #014f50;
 }
 
+.birthday-dropdowns {
+  display: flex;
+  gap: 10px;
+}
+
+.gs-select {
+  flex: 1;
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  appearance: none;          /* Remove default arrow in most browsers */
+  -webkit-appearance: none;  /* Remove default arrow in Safari */
+  -moz-appearance: none;     /* Remove default arrow in Firefox */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 140 140' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='70,105 35,50 105,50' fill='%23666'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+/* Optional: add hover/focus styling */
+.gs-select:focus {
+  border-color: #014f50;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(1, 79, 80, 0.2);
+}
+
 /* Button */
 .gs-btn {
   width: 100%;
@@ -77,19 +106,6 @@
   gap: 8px;
   transition: 0.3s ease;
   margin-top: 10px;
-}
-
-.birthday-dropdowns {
-  display: flex;
-  gap: 10px;
-}
-
-.gs-select {
-  flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
 }
 
 .gs-btn:hover {
