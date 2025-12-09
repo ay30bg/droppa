@@ -7,12 +7,12 @@ export default function VerifyPage() {
   const phone = location.state?.phone || "";
   const navigate = useNavigate();
 
-  const [otp, setOtp] = useState(["", "", "", ""]); // 4 boxes
+  const [otp, setOtp] = useState(["", "", "", "", ""]); // 5 boxes
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(60);
   const [resendEnabled, setResendEnabled] = useState(false);
 
-  // Countdown timer
+  // Countdown
   useEffect(() => {
     if (timer === 0) {
       setResendEnabled(true);
@@ -30,7 +30,7 @@ export default function VerifyPage() {
     newOtp[index] = value;
     setOtp(newOtp);
 
-    if (index < 3) inputsRef.current[index + 1].focus();
+    if (index < 4) inputsRef.current[index + 1].focus();
   };
 
   const handleKeyDown = (e, index) => {
@@ -44,30 +44,27 @@ export default function VerifyPage() {
 
   const handleVerify = () => {
     const otpCode = otp.join("");
-    if (otpCode.length < 4) {
+    if (otpCode.length < 5) {
       alert("Please enter the complete OTP");
       return;
     }
     alert(`OTP ${otpCode} verified!`);
-    // Navigate to home/dashboard
-    // navigate("/home");
   };
 
   const handleResend = () => {
     setTimer(60);
     setResendEnabled(false);
-    setOtp(["", "", "", ""]);
+    setOtp(["", "", "", "", ""]);
     inputsRef.current[0].focus();
     alert(`OTP resent to ${phone}`);
   };
 
   return (
-    <div className="lp-container"> {/* Login-style container */}
+    <div className="lp-container">
 
-      {/* Greeting */}
       <h1 className="lp-greeting">Verify Your Phone</h1>
       <p className="lp-subtext">
-        Enter the 4-digit code sent to <strong>{phone}</strong>
+        Enter the 5-digit code sent to <strong>{phone}</strong>
       </p>
 
       {/* OTP boxes */}
@@ -75,7 +72,7 @@ export default function VerifyPage() {
         {otp.map((value, index) => (
           <input
             key={index}
-            ref={(el) => (inputsRef.current[index] = el)} 
+            ref={(el) => (inputsRef.current[index] = el)}
             type="text"
             maxLength={1}
             value={value}
@@ -87,12 +84,9 @@ export default function VerifyPage() {
         ))}
       </div>
 
-      {/* Verify button */}
-      <button className="lp-btn" onClick={handleVerify}>
-        Verify
-      </button>
+      <button className="lp-btn" onClick={handleVerify}>Verify</button>
 
-      {/* Resend OTP */}
+      {/* Resend */}
       <div className="verify-resend">
         {resendEnabled ? (
           <button className="resend-btn" onClick={handleResend}>
@@ -102,6 +96,7 @@ export default function VerifyPage() {
           <p>Resend OTP in {timer}s</p>
         )}
       </div>
+
     </div>
   );
 }
