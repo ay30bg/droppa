@@ -5,9 +5,10 @@ import "../styles/verify.css";
 export default function VerifyPage() {
   const location = useLocation();
   const phone = location.state?.phone || "";
+  const mode = location.state?.mode || "login"; // "login" or "signup"
   const navigate = useNavigate();
 
-  const [otp, setOtp] = useState(["", "", "", "", ""]); // 5 OTP boxes
+  const [otp, setOtp] = useState(["", "", "", "", ""]); // 5-digit OTP
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(60);
   const [resendEnabled, setResendEnabled] = useState(false);
@@ -23,20 +24,19 @@ export default function VerifyPage() {
     return () => clearInterval(interval);
   }, [timer]);
 
-  // Handle OTP input change
+  // OTP input change
   const handleChange = (e, index) => {
-    const value = e.target.value.replace(/\D/, ""); // only digits
+    const value = e.target.value.replace(/\D/, ""); // numbers only
     if (!value) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
 
-    // Focus next input
     if (index < 4) inputsRef.current[index + 1].focus();
   };
 
-  // Handle Backspace navigation
+  // Handle Backspace
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
@@ -45,7 +45,7 @@ export default function VerifyPage() {
       if (index > 0) inputsRef.current[index - 1].focus();
     }
 
-    // Prevent letters (optional extra safeguard)
+    // Block non-numeric keys
     if (e.key.length === 1 && /\D/.test(e.key)) {
       e.preventDefault();
     }
@@ -61,10 +61,17 @@ export default function VerifyPage() {
 
     setLoading(true);
 
-    // Simulate verification API call
+    // Simulate API verification
     setTimeout(() => {
       setLoading(false);
-      navigate("/"); // Navigate to home page
+
+      if (mode === "signup") {
+        // Signup complete → navigate to home/dashboard
+        navigate("/");
+      } else {
+        // Login complete → navigate to home/dashboard
+        navigate("/");
+      }
     }, 1500);
   };
 
@@ -79,9 +86,11 @@ export default function VerifyPage() {
 
   return (
     <div className="lp-container">
-      <h1 className="lp-greeting">Verify Your Phone</h1>
+      <h1 className="lp-greeting">
+        {mode === "signup" ? "Verify Your Phone to Sign Up" : "Verify Your Phone"}
+      </h1>
       <p className="lp-subtext">
-        Enter the 5-digit code sent to <strong>{phone}</strong>
+        Enter the 5-digit code sent to <strong>{phone}</strong> to {mode === "signup" ? "create your account" : "log in"}.
       </p>
 
       {/* OTP Input Boxes */}
@@ -90,9 +99,9 @@ export default function VerifyPage() {
           <input
             key={index}
             ref={(el) => (inputsRef.current[index] = el)}
-            type="tel"                // numeric keypad
-            inputMode="numeric"       // mobile-friendly
-            pattern="[0-9]*"          // restrict digits
+            type="tel"
+            inputMode="numeric"
+            pattern="[0-9]*"
             maxLength={1}
             value={value}
             placeholder="-"
