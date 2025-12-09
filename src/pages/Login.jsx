@@ -1,33 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 import { FiArrowRight } from "react-icons/fi";
 
 export default function LoginPage() {
   const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);          // NEW
-  const [error, setError] = useState("");                 // NEW
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Fake database of registered users (Replace with real API)
   const registeredPhones = ["08123456789", "09034951446"];
 
-  const handleContinue = () => {
+  const handleCheckPhone = () => {
     setError("");
 
-    if (!phone) {
-      setError("Please enter your phone number");
-      return;
-    }
-
-    if (phone.length !== 11) {
-      setError("Phone number must be 11 digits");
-      return;
-    }
+    if (phone.length !== 11) return;
 
     setLoading(true);
-
-    // Simulate API check
     setTimeout(() => {
       if (registeredPhones.includes(phone)) {
         navigate("/verify", { state: { phone } });
@@ -35,8 +24,15 @@ export default function LoginPage() {
         setError("Phone number is not registered");
       }
       setLoading(false);
-    }, 1200);
+    }, 1000);
   };
+
+  // 🔥 Auto-trigger when phone becomes 11 digits
+  useEffect(() => {
+    if (phone.length === 11) {
+      handleCheckPhone();
+    }
+  }, [phone]);
 
   return (
     <div className="lp-container">
@@ -54,13 +50,11 @@ export default function LoginPage() {
         />
       </div>
 
-      {/* Error message */}
       {error && <p className="lp-error">{error}</p>}
 
-      {/* Button */}
       <button
         className="lp-btn"
-        onClick={handleContinue}
+        onClick={handleCheckPhone}
         disabled={loading}
       >
         {loading ? (
