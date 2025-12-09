@@ -10,7 +10,7 @@ export default function LoginPage() {
   const navigate = useNavigate();
 
   // Fake registered emails (replace with real API)
-  const registeredEmails = ["user1@example.com", "user2@example.com"];
+  const registeredEmails = ["user1@example.com", "yekeenolalekan123@gmail.com"];
 
   // Simple email validation
   const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
