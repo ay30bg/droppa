@@ -1,14 +1,16 @@
- import React, { useState } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { FiChevronLeft, FiStar, FiClock, FiTruck } from "react-icons/fi";
+import { FiStar, FiTruck } from "react-icons/fi";
+import {
+  featuredRestaurants,
+  restaurantMenus,
+  getRestaurantTimeDisplay,
+} from "../data/restaurant";
 import "../styles/restaurantdetails.css";
-import { featuredRestaurants, restaurantMenus } from "../data/restaurants";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [cart, setCart] = useState([]);
-  const [activeTab, setActiveTab] = useState("menu");
 
   const restaurant = featuredRestaurants.find(
     (res) => res.id === parseInt(id)
@@ -17,110 +19,62 @@ export default function RestaurantDetails() {
   if (!restaurant) return <p>Restaurant not found</p>;
 
   const menu = restaurantMenus[id] || [];
+  const timeText = getRestaurantTimeDisplay(restaurant.time);
+
+  const [cart, setCart] = useState([]);
 
   const addToCart = (item) => setCart([...cart, item]);
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price, 0);
-
   return (
-    <div className="rd-container">
+    <div className="restaurant-page">
 
       {/* Header */}
-      <div className="rd-header">
-        <button className="rd-back" onClick={() => navigate(-1)}>
-          <FiChevronLeft size={22} />
-        </button>
-      </div>
-
-      {/* Hero Image */}
-      <div className="rd-hero">
-        <img src={restaurant.image} alt="" />
-        <div className="rd-hero-overlay"></div>
-        <div className="rd-hero-info">
-          <h1>{restaurant.name}</h1>
-          <div className="rd-tags-row">
-            <span><FiStar /> {restaurant.rating}</span>
-            <span>{restaurant.street}</span>
-            <span><FiClock /> {restaurant.time}</span>
-            <span><FiTruck /> From {restaurant.price} NGN</span>
+      <div className="restaurant-header">
+        <button className="back-btn" onClick={() => navigate(-1)}>←</button>
+        <div>
+          <h2>{restaurant.name}</h2>
+          <div className="restaurant-sub">
+            <span>⭐ {restaurant.rating}</span>
+            <span>• {restaurant.orders} reviews</span>
+            <span>• {restaurant.street}</span>
+            <span>• {timeText}</span>
           </div>
         </div>
       </div>
 
-      {/* Tab Bar */}
-      <div className="rd-tabs">
-        <button 
-          className={activeTab === "menu" ? "active" : ""}
-          onClick={() => setActiveTab("menu")}
-        >
-          Menu
-        </button>
-
-        <button 
-          className={activeTab === "about" ? "active" : ""}
-          onClick={() => setActiveTab("about")}
-        >
-          About
-        </button>
-
-        <button 
-          className={activeTab === "reviews" ? "active" : ""}
-          onClick={() => setActiveTab("reviews")}
-        >
-          Reviews
-        </button>
+      {/* INFO CARDS */}
+      <div className="restaurant-info-row">
+        <div className="info-pill">
+          <FiStar /> {restaurant.rating}
+        </div>
+        <div className="info-pill">
+          <FiTruck /> From ₦{restaurant.price}
+        </div>
+        <div className={`info-pill ${timeText === "Closed" ? "closed" : ""}`}>
+          {timeText}
+        </div>
       </div>
 
-      {/* MENU SECTION */}
-      {activeTab === "menu" && (
-        <div className="rd-menu-list">
-          {menu.map((item) => (
-            <div key={item.id} className="rd-menu-card">
-              
-              <div className="rd-menu-info">
-                <h3>{item.name}</h3>
-                <p className="rd-menu-price">{item.price} NGN</p>
-                <button 
-                  className="rd-add-btn"
-                  onClick={() => addToCart(item)}
-                >
-                  Add
-                </button>
-              </div>
+      {/* MENU */}
+      <h3 className="menu-title">Menu</h3>
 
-              <div className="rd-menu-img"></div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ABOUT SECTION */}
-      {activeTab === "about" && (
-        <div className="rd-about">
-          <h3>About {restaurant.name}</h3>
-          <p>
-            Great meals delivered fresh. Healthy options available. Fast delivery 
-            around {restaurant.street}. Rated {restaurant.rating} stars.
-          </p>
-        </div>
-      )}
-
-      {/* REVIEWS SECTION */}
-      {activeTab === "reviews" && (
-        <div className="rd-reviews">
-          <p>No reviews yet</p>
-        </div>
-      )}
-
-      {/* Bottom Cart */}
-      {cart.length > 0 && (
-        <div className="rd-cart-bar">
-          <div>
-            {cart.length} item(s) • {totalPrice} NGN
+      {menu.map((item) => (
+        <div key={item.id} className="menu-card">
+          <div className="menu-text">
+            <h4 className="menu-name">{item.name}</h4>
+            <p className="menu-desc">
+              • Well prepared meal  
+              • Customer favourite  
+              • Available every day
+            </p>
+            <p className="menu-price">₦{item.price}</p>
           </div>
-          <button className="rd-cart-btn">View Cart</button>
+
+          <button className="menu-add-btn" onClick={() => addToCart(item)}>
+            Add
+          </button>
         </div>
-      )}
+      ))}
     </div>
   );
 }
