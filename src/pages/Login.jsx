@@ -12,13 +12,12 @@ export default function LoginPage() {
       alert("Please enter your phone number");
       return;
     }
-    // Navigate to verify page
     navigate("/verify", { state: { phone } });
   };
 
   return (
     <div className="lp-container">
-      
+
       {/* Greeting */}
       <h1 className="lp-greeting">Welcome Back</h1>
       <p className="lp-subtext">Enter your phone number to continue</p>
@@ -26,7 +25,7 @@ export default function LoginPage() {
       {/* Phone Input */}
       <div className="lp-input-group">
         <label className="lp-label">Phone Number</label>
-        <input 
+        <input
           type="tel"
           className="lp-input"
           placeholder="e.g. 08123456789"
@@ -35,10 +34,16 @@ export default function LoginPage() {
         />
       </div>
 
-      {/* Button */}
+      {/* Continue Button */}
       <button className="lp-btn" onClick={handleContinue}>
         Continue <FiArrowRight className="lp-arrow" />
       </button>
+
+      {/* Bottom Signup Link */}
+      <p className="lp-bottom-text">
+        Don’t have an account?{" "}
+        <span onClick={() => navigate("/get-started")}>Sign up</span>
+      </p>
 
     </div>
   );
