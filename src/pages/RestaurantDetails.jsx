@@ -1,5 +1,5 @@
 // src/pages/RestaurantDetails.jsx
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { featuredRestaurants, restaurantMenus, getRestaurantTimeDisplay } from "../data/restaurants.js";
 import "../styles/restaurantdetails.css";
@@ -9,7 +9,7 @@ export default function RestaurantDetails() {
   const navigate = useNavigate();
   const restaurantId = parseInt(id);
 
-  // ---------- ALL HOOKS AT TOP ----------
+  // ---------- Hooks ----------
   const [cart, setCart] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
   const [searchText, setSearchText] = useState("");
@@ -31,6 +31,13 @@ export default function RestaurantDetails() {
     const unique = new Set(menuSections.map((m) => m.category));
     return [...unique];
   }, [menuSections]);
+
+  // Initialize active category once
+  useEffect(() => {
+    if (categories.length > 0 && !activeCategory) {
+      setActiveCategory(categories[0]);
+    }
+  }, [categories, activeCategory]);
 
   const filteredItems = useMemo(() => {
     if (!menuSections) return [];
@@ -65,10 +72,14 @@ export default function RestaurantDetails() {
     <div className="restaurant-details">
       {/* Header */}
       <div className="rd-header">
-        <button className="rd-back-btn" onClick={() => navigate(-1)}>←</button>
+        <button className="rd-back-btn" onClick={() => navigate(-1)}>
+          ←
+        </button>
         <div className="rd-header-info">
           <h1>{restaurant.name}</h1>
-          <div className="rd-meta">{restaurant.rating} ⭐ • {restaurant.time} mins • {restaurant.street}</div>
+          <div className="rd-meta">
+            {restaurant.rating} ⭐ • {restaurant.time} mins • {restaurant.street}
+          </div>
         </div>
         <button
           className={`rd-fav ${favourite ? "active" : ""}`}
@@ -115,7 +126,9 @@ export default function RestaurantDetails() {
             </button>
           </div>
         ))}
-        {filteredItems.length === 0 && <div className="rd-empty">No items found</div>}
+        {filteredItems.length === 0 && (
+          <div className="rd-empty">No items found</div>
+        )}
       </div>
 
       {/* Sticky Cart */}
