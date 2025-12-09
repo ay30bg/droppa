@@ -5,55 +5,44 @@ import { FiArrowRight } from "react-icons/fi";
 
 export default function LoginPage() {
   const [phone, setPhone] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);          // NEW
+  const [error, setError] = useState("");                 // NEW
   const navigate = useNavigate();
 
-  // Mock API to simulate registered numbers
-  const checkPhoneExists = async (phoneNumber) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const registered = ["08123456789", "09034951446"]; // demo numbers
-        resolve(registered.includes(phoneNumber));
-      }, 1200);
-    });
-  };
+  // Fake database of registered users (Replace with real API)
+  const registeredPhones = ["08123456789", "09034951446"];
 
-  const handleContinue = async () => {
-    setErrorMsg("");
+  const handleContinue = () => {
+    setError("");
 
-    // Validate phone
+    if (!phone) {
+      setError("Please enter your phone number");
+      return;
+    }
+
     if (phone.length !== 11) {
-      setErrorMsg("Phone number must be 11 digits.");
+      setError("Phone number must be 11 digits");
       return;
     }
 
     setLoading(true);
 
-    const exists = await checkPhoneExists(phone);
-
-    setLoading(false);
-
-    if (!exists) {
-      setErrorMsg("This phone number is not registered.");
-      return;
-    }
-
-    // Navigate to OTP
-    navigate("/verify", { state: { phone } });
+    // Simulate API check
+    setTimeout(() => {
+      if (registeredPhones.includes(phone)) {
+        navigate("/verify", { state: { phone } });
+      } else {
+        setError("Phone number is not registered");
+      }
+      setLoading(false);
+    }, 1200);
   };
 
   return (
     <div className="lp-container">
-
-      {/* Greeting */}
       <h1 className="lp-greeting">Welcome Back</h1>
       <p className="lp-subtext">Enter your phone number to continue</p>
 
-      {/* Error message */}
-      {errorMsg && <p className="lp-error">{errorMsg}</p>}
-
-      {/* Phone Input */}
       <div className="lp-input-group">
         <label className="lp-label">Phone Number</label>
         <input
@@ -61,18 +50,21 @@ export default function LoginPage() {
           className="lp-input"
           placeholder="e.g. 08123456789"
           value={phone}
-          onChange={(e) => {
-            setPhone(e.target.value);
-            setErrorMsg("");
-          }}
-          maxLength={11}
+          onChange={(e) => setPhone(e.target.value)}
         />
       </div>
 
-      {/* Continue Button */}
-      <button className="lp-btn" onClick={handleContinue} disabled={loading}>
+      {/* Error message */}
+      {error && <p className="lp-error">{error}</p>}
+
+      {/* Button */}
+      <button
+        className="lp-btn"
+        onClick={handleContinue}
+        disabled={loading}
+      >
         {loading ? (
-          <div className="lp-spinner"></div>
+          <div className="loader"></div>
         ) : (
           <>
             Continue <FiArrowRight className="lp-arrow" />
@@ -80,7 +72,6 @@ export default function LoginPage() {
         )}
       </button>
 
-      {/* Bottom Signup Link */}
       <p className="lp-bottom-text">
         Don’t have an account?{" "}
         <span onClick={() => navigate("/get-started")}>Get Started</span>
