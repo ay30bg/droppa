@@ -27,6 +27,7 @@ export default function GetStarted() {
 
   // Handle Sign Up button
   const handleSignUp = () => {
+    // Validate required fields (referral code is optional)
     if (!fullName || !email || phone.length !== 11 || !day || !month || !year) {
       alert("Please fill all required fields correctly.");
       return;
@@ -34,7 +35,7 @@ export default function GetStarted() {
 
     setLoading(true);
 
-    // Simulate API call or backend signup
+    // Simulate API call
     setTimeout(() => {
       setLoading(false);
 
@@ -103,7 +104,7 @@ export default function GetStarted() {
         </div>
       </div>
 
-      {/* Referral Code */}
+      {/* Referral Code (Optional) */}
       <div className="gs-input-group">
         <label className="gs-label">Referral Code (Optional)</label>
         <input
@@ -117,7 +118,7 @@ export default function GetStarted() {
 
       {/* Sign Up Button */}
       <button className="gs-btn" onClick={handleSignUp} disabled={loading}>
-        {loading ? <div className="loader"></div> : <>Sign Up <FiArrowRight className="gs-arrow" /></>}
+        {loading ? <div className="loader"></div> : <>Get Started <FiArrowRight className="gs-arrow" /></>}
       </button>
 
       <p className="gs-policy">
