@@ -9,8 +9,48 @@ export default function RestaurantDetails() {
   const navigate = useNavigate();
   const restaurantId = parseInt(id);
 
-  // ----- Find restaurant first (all hooks below) -----
-  const restaurant = featuredRestaurants.find((r) => r.id === restaurantId);
+  // ---------- ALL HOOKS AT TOP ----------
+  const [cart, setCart] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [searchText, setSearchText] = useState("");
+  const [favourite, setFavourite] = useState(false);
+
+  // ---------- Derived values ----------
+  const restaurant = useMemo(
+    () => featuredRestaurants.find((r) => r.id === restaurantId),
+    [restaurantId]
+  );
+
+  const menuSections = useMemo(
+    () => (restaurant ? restaurantMenus[restaurantId] || [] : []),
+    [restaurant, restaurantId]
+  );
+
+  const categories = useMemo(() => {
+    if (!menuSections) return [];
+    const unique = new Set(menuSections.map((m) => m.category));
+    return [...unique];
+  }, [menuSections]);
+
+  const filteredItems = useMemo(() => {
+    if (!menuSections) return [];
+    let items = menuSections
+      .filter((s) => (activeCategory ? s.category === activeCategory : true))
+      .flatMap((s) => s.items);
+    if (searchText) {
+      const q = searchText.toLowerCase();
+      items = items.filter(
+        (i) =>
+          i.name.toLowerCase().includes(q) ||
+          (i.details && i.details.toLowerCase().includes(q))
+      );
+    }
+    return items;
+  }, [menuSections, activeCategory, searchText]);
+
+  const cartTotal = cart.reduce((sum, it) => sum + it.price, 0);
+
+  // ---------- Early return if restaurant not found ----------
   if (!restaurant) {
     return (
       <div style={{ padding: 20 }}>
@@ -20,53 +60,9 @@ export default function RestaurantDetails() {
     );
   }
 
-  // ---------- Hooks ----------
-  const [cart, setCart] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [searchText, setSearchText] = useState("");
-  const [isClosed, setIsClosed] = useState(false);
-  const [favourite, setFavourite] = useState(false);
-
-  const menuSections = restaurantMenus[restaurantId] || [];
-
-  const categories = useMemo(() => {
-    const unique = new Set(menuSections.map((m) => m.category));
-    return [...unique];
-  }, [menuSections]);
-
-  // Initialize active category
-  if (!activeCategory && categories.length > 0) {
-    setActiveCategory(categories[0]);
-  }
-
-  const toggleFavourite = () => setFavourite((f) => !f);
-
-  const filteredItems = useMemo(() => {
-    let items = menuSections
-      .filter((s) => activeCategory ? s.category === activeCategory : true)
-      .flatMap((s) => s.items);
-    if (searchText) {
-      const q = searchText.toLowerCase();
-      items = items.filter((i) => i.name.toLowerCase().includes(q) || (i.details && i.details.toLowerCase().includes(q)));
-    }
-    return items;
-  }, [menuSections, activeCategory, searchText]);
-
-  const addToCart = (item) => {
-    if (isClosed) return;
-    setCart((prev) => [...prev, item]);
-  };
-
-  const cartTotal = cart.reduce((sum, it) => sum + it.price, 0);
-
-  // Simple open/closed logic based on time
-  const deliveryTimeText = getRestaurantTimeDisplay(restaurant.time);
-  const closed = deliveryTimeText === "Closed";
-  if (closed !== isClosed) setIsClosed(closed);
-
+  // ---------- JSX ----------
   return (
     <div className="restaurant-details">
-
       {/* Header */}
       <div className="rd-header">
         <button className="rd-back-btn" onClick={() => navigate(-1)}>←</button>
@@ -74,10 +70,15 @@ export default function RestaurantDetails() {
           <h1>{restaurant.name}</h1>
           <div className="rd-meta">{restaurant.rating} ⭐ • {restaurant.time} mins • {restaurant.street}</div>
         </div>
-        <button className={`rd-fav ${favourite ? "active" : ""}`} onClick={toggleFavourite}>❤️</button>
+        <button
+          className={`rd-fav ${favourite ? "active" : ""}`}
+          onClick={() => setFavourite((f) => !f)}
+        >
+          ❤️
+        </button>
       </div>
 
-      {/* Categories */}
+      {/* Categories & Search */}
       <div className="rd-categories">
         {categories.map((cat) => (
           <button
@@ -106,8 +107,11 @@ export default function RestaurantDetails() {
               {item.details && <p className="rd-menu-sub">{item.details}</p>}
               <span className="rd-menu-price">₦{item.price.toLocaleString()}</span>
             </div>
-            <button className="rd-add-btn" onClick={() => addToCart(item)} disabled={isClosed}>
-              {isClosed ? "Closed" : "Add"}
+            <button
+              className="rd-add-btn"
+              onClick={() => setCart((prev) => [...prev, item])}
+            >
+              Add
             </button>
           </div>
         ))}
