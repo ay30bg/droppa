@@ -5,23 +5,27 @@ import {
   featuredRestaurants,
   restaurantMenus,
   getRestaurantTimeDisplay,
-} from "../data/restaurants.js";
+} from "../data/restaurant";
 import "../styles/restaurantdetails.css";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  // All hooks MUST come before any conditional return
+  const [cart, setCart] = useState([]);
+
   const restaurant = featuredRestaurants.find(
     (res) => res.id === parseInt(id)
   );
 
-  if (!restaurant) return <p>Restaurant not found</p>;
+  // After hooks → You can now safely return conditionally
+  if (!restaurant) {
+    return <p>Restaurant not found</p>;
+  }
 
   const menu = restaurantMenus[id] || [];
   const timeText = getRestaurantTimeDisplay(restaurant.time);
-
-  const [cart, setCart] = useState([]);
 
   const addToCart = (item) => setCart([...cart, item]);
 
