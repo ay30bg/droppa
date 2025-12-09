@@ -100,15 +100,31 @@
   cursor: pointer;
 }
 
-.spinner {
+/* Error message */
+.lp-error {
+  color: #d9534f;
+  background: #ffe5e5;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  border-left: 3px solid #d9534f;
+}
+
+/* Disable button */
+.lp-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Spinner */
+.lp-spinner {
   width: 22px;
   height: 22px;
-  border: 3px solid #ffffff60;
-  border-top-color: white;
+  border: 3px solid rgba(255,255,255,0.4);
+  border-top-color: #ffffff;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
-  margin: 0;
-  padding: 0;
 }
 
 @keyframes spin {
@@ -116,4 +132,3 @@
     transform: rotate(360deg);
   }
 }
-
