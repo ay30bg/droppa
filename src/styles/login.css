@@ -86,3 +86,18 @@
   font-size: 18px;
 }
 
+/* Bottom text */
+.lp-bottom-text {
+  margin-top: auto; /* pushes it to bottom */
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  padding-bottom: 20px;
+}
+
+.lp-bottom-text span {
+  color: #014f50;
+  font-weight: 700;
+  cursor: pointer;
+}
+
