@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import restaurants from "../data/restaurants.js";
-import "../styles/restaurantDetails.css";
+import "../styles/restaurantdetails.css";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
