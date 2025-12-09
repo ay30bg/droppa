@@ -11,6 +11,7 @@ export default function VerifyPage() {
   const inputsRef = useRef([]);
   const [timer, setTimer] = useState(60);
   const [resendEnabled, setResendEnabled] = useState(false);
+  const [loading, setLoading] = useState(false); // NEW
 
   // Countdown
   useEffect(() => {
@@ -48,7 +49,15 @@ export default function VerifyPage() {
       alert("Please enter the complete OTP");
       return;
     }
-    alert(`OTP ${otpCode} verified!`);
+
+    setLoading(true);
+
+    // Simulate OTP verification API
+    setTimeout(() => {
+      setLoading(false);
+      // Navigate to home page
+      navigate("/");
+    }, 1500);
   };
 
   const handleResend = () => {
@@ -61,7 +70,6 @@ export default function VerifyPage() {
 
   return (
     <div className="lp-container">
-
       <h1 className="lp-greeting">Verify Your Phone</h1>
       <p className="lp-subtext">
         Enter the 5-digit code sent to <strong>{phone}</strong>
@@ -84,7 +92,9 @@ export default function VerifyPage() {
         ))}
       </div>
 
-      <button className="lp-btn" onClick={handleVerify}>Verify</button>
+      <button className="lp-btn" onClick={handleVerify} disabled={loading}>
+        {loading ? <div className="loader"></div> : "Verify"}
+      </button>
 
       {/* Resend */}
       <div className="verify-resend">
@@ -96,7 +106,6 @@ export default function VerifyPage() {
           <p>Resend OTP in {timer}s</p>
         )}
       </div>
-
     </div>
   );
 }
