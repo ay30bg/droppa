@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import { FiArrowRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi"; 
 
 export default function LoginPage() {
   const [phone, setPhone] = useState("");
