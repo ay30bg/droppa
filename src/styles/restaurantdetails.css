@@ -1,6 +1,4 @@
-/* restaurantdetails.css */
-
-/* Base styles */
+/* Base container */
 .restaurant-details-container {
   max-width: 800px;
   margin: 0 auto;
@@ -8,6 +6,7 @@
   font-family: 'Plus Jakarta Sans', sans-serif;
   color: #333;
   position: relative;
+  background: #fdfdfd;
 }
 
 /* Header */
@@ -107,11 +106,12 @@
   background: #ffffff;
   margin-bottom: 12px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .menu-card:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .menu-actions {
@@ -134,7 +134,7 @@
   background: #013d3e;
 }
 
-/* Cart Section */
+/* Sticky Cart */
 .cart-section {
   position: sticky;
   bottom: 0;
