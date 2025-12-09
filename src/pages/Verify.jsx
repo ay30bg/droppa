@@ -4,7 +4,7 @@ import "../styles/verify.css";
 
 export default function VerifyPage() {
   const location = useLocation();
-  const phone = location.state?.phone || "";
+  const email = location.state?.email || ""; // Use email instead of phone
   const mode = location.state?.mode || "login"; // "login" or "signup"
   const navigate = useNavigate();
 
@@ -36,7 +36,7 @@ export default function VerifyPage() {
     if (index < 4) inputsRef.current[index + 1].focus();
   };
 
-  // Handle Backspace
+  // Handle Backspace and block non-numeric keys
   const handleKeyDown = (e, index) => {
     if (e.key === "Backspace") {
       const newOtp = [...otp];
@@ -45,7 +45,6 @@ export default function VerifyPage() {
       if (index > 0) inputsRef.current[index - 1].focus();
     }
 
-    // Block non-numeric keys
     if (e.key.length === 1 && /\D/.test(e.key)) {
       e.preventDefault();
     }
@@ -64,14 +63,8 @@ export default function VerifyPage() {
     // Simulate API verification
     setTimeout(() => {
       setLoading(false);
-
-      if (mode === "signup") {
-        // Signup complete → navigate to home/dashboard
-        navigate("/");
-      } else {
-        // Login complete → navigate to home/dashboard
-        navigate("/");
-      }
+      // Navigate to home/dashboard after verification
+      navigate("/");
     }, 1500);
   };
 
@@ -81,16 +74,17 @@ export default function VerifyPage() {
     setResendEnabled(false);
     setOtp(["", "", "", "", ""]);
     inputsRef.current[0].focus();
-    alert(`OTP resent to ${phone}`);
+    alert(`OTP resent to ${email}`);
   };
 
   return (
     <div className="lp-container">
       <h1 className="lp-greeting">
-        {mode === "signup" ? "Verify Your Phone to Sign Up" : "Verify Your Phone"}
+        {mode === "signup" ? "Verify Your Email to Sign Up" : "Verify Your Email"}
       </h1>
       <p className="lp-subtext">
-        Enter the 5-digit code sent to <strong>{phone}</strong> to {mode === "signup" ? "create your account" : "log in"}.
+        Enter the 5-digit code sent to <strong>{email}</strong> to{" "}
+        {mode === "signup" ? "create your account" : "log in"}.
       </p>
 
       {/* OTP Input Boxes */}
