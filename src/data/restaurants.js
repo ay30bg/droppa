@@ -11,21 +11,21 @@ export const featuredRestaurants = [
 
 export const restaurantMenus = {
   1: [
-    { id: 1, name: "Chicken Burger", price: 1500 },
-    { id: 2, name: "Fried Chicken (2pcs)", price: 1200 },
-    { id: 3, name: "Chicken Wrap", price: 1000 },
+    { id: 1, name: "Chicken Burger", price: 1500, description: "Juicy chicken patty with fresh lettuce, tomato, and mayo." },
+    { id: 2, name: "Fried Chicken (2pcs)", price: 1200, description: "Crispy fried chicken served with your choice of sauce." },
+    { id: 3, name: "Chicken Wrap", price: 1000, description: "Grilled chicken wrapped in a soft tortilla with veggies." },
   ],
   2: [
-    { id: 1, name: "Beef Steak", price: 2500 },
-    { id: 2, name: "Veggie Salad", price: 1200 },
+    { id: 1, name: "Beef Steak", price: 2500, description: "Tender beef steak cooked to perfection with mushroom sauce." },
+    { id: 2, name: "Veggie Salad", price: 1200, description: "Fresh mixed greens with cherry tomatoes, cucumbers, and vinaigrette." },
   ],
   3: [
-    { id: 1, name: "Chicken Nuggets", price: 900 },
-    { id: 2, name: "Fries", price: 500 },
+    { id: 1, name: "Chicken Nuggets", price: 900, description: "Golden fried chicken nuggets, perfect for snacking." },
+    { id: 2, name: "Fries", price: 500, description: "Crispy potato fries lightly salted for the perfect crunch." },
   ],
   4: [
-    { id: 1, name: "Grilled Fish", price: 2000 },
-    { id: 2, name: "Plantain Chips", price: 600 },
+    { id: 1, name: "Grilled Fish", price: 2000, description: "Freshly grilled fish with a hint of lemon and spices." },
+    { id: 2, name: "Plantain Chips", price: 600, description: "Thinly sliced plantains fried until golden and crispy." },
   ],
 };
 
