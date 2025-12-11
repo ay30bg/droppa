@@ -20,19 +20,32 @@ import "./styles/global.css";
 
 function AppWrapper() {
   const location = useLocation();
+  const path = location.pathname;
 
-  // Hide Header on these pages
-  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login", "/get-started", "/verify", "/details"];
+  // Hide Header on specific pages
+  const hideHeader =
+    path.startsWith("/details/") || // hide on ALL restaurant detail dynamic pages
+    [
+      "/locations",
+      "/orders",
+      "/profile",
+      "/welcome",
+      "/login",
+      "/get-started",
+      "/verify",
+    ].includes(path);
 
-  // Hide BottomNav on these pages
-  const hideBottomNavPaths = ["/welcome", "/login", "/get-started", "/verify", "/details"];
+  // Hide BottomNav on specific pages
+  const hideBottomNav =
+    path.startsWith("/details/") || // hide bottom nav on details page
+    ["/welcome", "/login", "/get-started", "/verify"].includes(path);
 
   return (
     <>
       {/* Conditional Header */}
-      {!hideHeaderPaths.includes(location.pathname) && <Header />}
+      {!hideHeader && <Header />}
 
-      {/* Routes */}
+      {/* App Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
@@ -50,7 +63,7 @@ function AppWrapper() {
       </Routes>
 
       {/* Conditional Bottom Navigation */}
-      {!hideBottomNavPaths.includes(location.pathname) && <BottomNav />}
+      {!hideBottomNav && <BottomNav />}
     </>
   );
 }
