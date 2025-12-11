@@ -5,7 +5,7 @@ import {
   restaurantMenus,
   getRestaurantTimeDisplay,
 } from "../data/restaurants";
-import "../styles/restaurantDetails.css";
+import "../styles/restaurantdetails.css";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
