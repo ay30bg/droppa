@@ -14,42 +14,31 @@ export default function RestaurantDetails() {
   const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
   const menu = restaurantMenus[id] || [];
 
-  const [loading, setLoading] = useState(true);
+  const [shrunk, setShrunk] = useState(false);
   const [search, setSearch] = useState("");
-  const [favorites, setFavorites] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
-  const [activeTab, setActiveTab] = useState("All");
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [shrunkHeader, setShrunkHeader] = useState(false);
 
-  const pageRef = useRef();
+  const scrollRef = useRef();
 
-  // Simulate loading
-  useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 700);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Shrink header on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (pageRef.current.scrollTop > 50) setShrunkHeader(true);
-      else setShrunkHeader(false);
+      setShrunk(scrollRef.current.scrollTop > 30);
     };
-    pageRef.current.addEventListener("scroll", handleScroll);
-    return () => pageRef.current?.removeEventListener("scroll", handleScroll);
+    scrollRef.current.addEventListener("scroll", handleScroll);
+    return () => scrollRef.current?.removeEventListener("scroll", handleScroll);
   }, []);
 
-  if (!restaurant) return <div>Restaurant Not Found</div>;
+  if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  // Filter menu by search & tab
   const filteredMenu = menu.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  // Cart operations
+  const categories = ["All", "Popular", "Recommended"];
+
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
@@ -62,7 +51,7 @@ export default function RestaurantDetails() {
     });
   };
 
-  const updateQty = (id, type) => {
+  const changeQty = (id, type) => {
     setCart((prev) =>
       prev
         .map((p) =>
@@ -76,163 +65,91 @@ export default function RestaurantDetails() {
 
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
-  const categories = ["All", "Popular", "Recommended"];
-
   return (
-    <div className="restaurant-page" ref={pageRef}>
-      {/* FLOATING HEADER */}
-      <div className={`top-nav ${shrunkHeader ? "shrunk" : ""}`}>
-        <button onClick={() => navigate(-1)} className="back-btn">
-          ←
-        </button>
-        <h3>{restaurant.name}</h3>
-        <span
-          className={`fav ${favorites ? "active" : ""}`}
-          onClick={() => setFavorites(!favorites)}
-        >
-          ❤️
-        </span>
+    <div className="cd-page" ref={scrollRef}>
+      {/* ─────────────────── HEADER ─────────────────── */}
+      <div className={`cd-header ${shrunk ? "shrunk" : ""}`}>
+        <button onClick={() => navigate(-1)} className="cd-back">←</button>
+        <span className="cd-title">{restaurant.name}</span>
       </div>
 
-      {/* RESTAURANT INFO */}
-      <div className="rest-header">
-        <div className="rest-name">{restaurant.name}</div>
-        <div className="rest-info">
-          <span className="rest-tag">⭐ {restaurant.rating}</span>
-          <span className="rest-tag">{restaurant.street}</span>
-          <span className="rest-tag">{isClosed ? "Closed" : restaurant.time}</span>
-          <span className="rest-tag">₦{restaurant.price} avg</span>
+      {/* ─────────────────── RESTAURANT INFO ─────────────────── */}
+      <div className="cd-rest-info">
+        <h2>{restaurant.name}</h2>
+
+        <div className="cd-sub-info">
+          <span>⭐ {restaurant.rating}</span>
+          <span>•</span>
+          <span>{restaurant.time}</span>
+          <span>•</span>
+          <span>₦{restaurant.price} avg price</span>
         </div>
 
-        {/* DELIVERY BAR */}
-        <div className="delivery-bar">
-          <span>🚚 Delivery: ₦200</span>
-          <span>⏱ {restaurant.time}</span>
+        <div className="cd-delivery-box">
+          <span>🚚 Delivery Fee: ₦200</span>
         </div>
       </div>
 
-      {/* SEARCH */}
-      <div className="search-box">
+      {/* ─────────────────── SEARCH ─────────────────── */}
+      <div className="cd-search">
         <input
           type="text"
-          placeholder="Search menu..."
+          placeholder="Search menu"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      {/* CATEGORY SCROLL */}
-      <div className="category-scroll">
+      {/* ─────────────────── CATEGORIES ─────────────────── */}
+      <div className="cd-categories">
         {categories.map((cat) => (
           <button
             key={cat}
-            className={activeTab === cat ? "active" : ""}
-            onClick={() => setActiveTab(cat)}
+            className={activeCategory === cat ? "active" : ""}
+            onClick={() => setActiveCategory(cat)}
           >
             {cat}
           </button>
         ))}
       </div>
 
-      {/* MENU SECTION */}
-      <div className="section-title">Menu</div>
+      {/* ─────────────────── MENU LIST ─────────────────── */}
+      <div className="cd-menu-section">
+        {filteredMenu.map((item) => {
+          const inCart = cart.find((c) => c.id === item.id);
 
-      {loading ? (
-        <div className="skeleton-wrapper">
-          {[1, 2, 3, 4].map((i) => (
-            <div className="skeleton" key={i}></div>
-          ))}
-        </div>
-      ) : (
-        <div className="menu-list">
-          {filteredMenu.map((item) => {
-            const inCart = cart.find((c) => c.id === item.id);
-            return (
-              <div className="menu-card" key={item.id}>
-                <div className="left">
-                  <h4>{item.name}</h4>
-                  <p>₦{item.price}</p>
-                </div>
-
-                {/* INLINE ADD / QTY */}
-                {inCart ? (
-                  <div className="qty-box">
-                    <button
-                      className="qty-btn"
-                      onClick={() => updateQty(item.id, "dec")}
-                    >
-                      −
-                    </button>
-                    <span className="qty-count">{inCart.qty}</span>
-                    <button
-                      className="qty-btn"
-                      onClick={() => updateQty(item.id, "inc")}
-                    >
-                      +
-                    </button>
-                  </div>
-                ) : (
-                  <button
-                    className="add-inline"
-                    onClick={() => addToCart(item)}
-                  >
-                    Add
-                  </button>
-                )}
+          return (
+            <div className="cd-menu-item" key={item.id}>
+              <div className="cd-item-info">
+                <h4>{item.name}</h4>
+                <p className="cd-price">₦{item.price}</p>
               </div>
-            );
-          })}
-        </div>
-      )}
 
-      {/* ITEM MODAL */}
-      {selectedItem && (
-        <div
-          className="modal-overlay"
-          onClick={() => setSelectedItem(null)}
-        >
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <h2>{selectedItem.name}</h2>
-            <p>₦{selectedItem.price}</p>
-
-            <div className="addons">
-              <h4>Add-ons</h4>
-              <label>
-                <input type="checkbox" /> Extra Chicken + ₦300
-              </label>
-              <label>
-                <input type="checkbox" /> Cheese + ₦150
-              </label>
-              <label>
-                <input type="checkbox" /> Sauce + ₦100
-              </label>
+              {/* quantity box */}
+              {inCart ? (
+                <div className="cd-qty-box">
+                  <button onClick={() => changeQty(item.id, "dec")}>−</button>
+                  <span>{inCart.qty}</span>
+                  <button onClick={() => changeQty(item.id, "inc")}>+</button>
+                </div>
+              ) : (
+                <button
+                  className="cd-add-btn"
+                  onClick={() => addToCart(item)}
+                >
+                  Add
+                </button>
+              )}
             </div>
+          );
+        })}
+      </div>
 
-            <div className="notes-box">
-              <textarea placeholder="Add a note..." />
-            </div>
-
-            <button
-              className="confirm-btn"
-              onClick={() => {
-                addToCart(selectedItem);
-                setSelectedItem(null);
-              }}
-            >
-              Add to Cart
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* STICKY CART */}
+      {/* ─────────────────── STICKY CART BAR ─────────────────── */}
       {cart.length > 0 && (
-        <div
-          className="sticky-cart"
-          onClick={() => alert("Proceed to checkout")}
-        >
-          <span>{cart.reduce((acc, i) => acc + i.qty, 0)} items</span>
-          <span>₦{total}</span>
+        <div className="cd-cart-bar" onClick={() => alert("Checkout coming…")}>
+          <div>{cart.reduce((acc, it) => acc + it.qty, 0)} item(s)</div>
+          <div className="cd-cart-total">₦{total}</div>
         </div>
       )}
     </div>
