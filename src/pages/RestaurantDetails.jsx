@@ -86,13 +86,11 @@ export default function RestaurantDetails() {
 
       {/* ──────────── RESTAURANT INFO ──────────── */}
       <div className="cd-rest-info">
-        <h2>{restaurant.name}</h2>
-
         <div className="cd-sub-info">
           <span>⭐ {restaurant.rating}</span>
-          <span>•</span>
+          <span>|</span>
           <span>{restaurant.time}</span>
-          <span>•</span>
+          <span>|</span>
           <span>₦{restaurant.price} avg price</span>
         </div>
 
