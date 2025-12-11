@@ -37,7 +37,7 @@ export default function RestaurantDetails() {
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  const categories = ["All", "Popular", "Recommended"]; // you can expand later
+  const categories = ["All", "Popular", "Recommended"]; // expand later if needed
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -118,7 +118,6 @@ export default function RestaurantDetails() {
 
       {/* ──────────── MENU LIST ──────────── */}
       <div className="cd-menu-section">
-
         {loading ? (
           <>
             <div className="cd-skeleton-card"></div>
@@ -142,18 +141,17 @@ export default function RestaurantDetails() {
                 <div className="cd-menu-item" key={item.id}>
                   <div className="cd-item-info">
                     <h4>{item.name}</h4>
+                    {item.description && (
+                      <p className="cd-subtext">{item.description}</p>
+                    )}
                     <p className="cd-price">₦{item.price}</p>
                   </div>
 
                   {inCart ? (
                     <div className="cd-qty-box">
-                      <button onClick={() => changeQty(item.id, "dec")}>
-                        −
-                      </button>
+                      <button onClick={() => changeQty(item.id, "dec")}>−</button>
                       <span>{inCart.qty}</span>
-                      <button onClick={() => changeQty(item.id, "inc")}>
-                        +
-                      </button>
+                      <button onClick={() => changeQty(item.id, "inc")}>+</button>
                     </div>
                   ) : (
                     <button
