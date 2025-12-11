@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   featuredRestaurants,
   restaurantMenus,
   getRestaurantTimeDisplay,
 } from "../data/restaurants";
-
-import "../styles/restaurantdetails.css"; // create this
+import "../styles/restaurantdetails.css";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -21,18 +20,36 @@ export default function RestaurantDetails() {
   const [cart, setCart] = useState([]);
   const [activeTab, setActiveTab] = useState("All");
   const [selectedItem, setSelectedItem] = useState(null);
+  const [shrunkHeader, setShrunkHeader] = useState(false);
 
-  // Simulate loading delay
+  const pageRef = useRef();
+
+  // Simulate loading
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 800);
+    const timer = setTimeout(() => setLoading(false), 700);
     return () => clearTimeout(timer);
   }, []);
 
-  // Filter menu using search
+  // Shrink header on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (pageRef.current.scrollTop > 50) setShrunkHeader(true);
+      else setShrunkHeader(false);
+    };
+    pageRef.current.addEventListener("scroll", handleScroll);
+    return () => pageRef.current?.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  if (!restaurant) return <div>Restaurant Not Found</div>;
+
+  const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
+
+  // Filter menu by search & tab
   const filteredMenu = menu.filter((item) =>
     item.name.toLowerCase().includes(search.toLowerCase())
   );
 
+  // Cart operations
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
@@ -59,18 +76,16 @@ export default function RestaurantDetails() {
 
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
-  if (!restaurant) return <div>Restaurant Not Found</div>;
-
-  const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
+  const categories = ["All", "Popular", "Recommended"];
 
   return (
-    <div className="restaurant-page">
-      {/* Back Button */}
-      <div className="top-nav">
-        <button onClick={() => navigate(-1)} className="back-btn">←</button>
+    <div className="restaurant-page" ref={pageRef}>
+      {/* FLOATING HEADER */}
+      <div className={`top-nav ${shrunkHeader ? "shrunk" : ""}`}>
+        <button onClick={() => navigate(-1)} className="back-btn">
+          ←
+        </button>
         <h3>{restaurant.name}</h3>
-
-        {/* Favourite */}
         <span
           className={`fav ${favorites ? "active" : ""}`}
           onClick={() => setFavorites(!favorites)}
@@ -79,25 +94,24 @@ export default function RestaurantDetails() {
         </span>
       </div>
 
-      {/* Hero Image */}
-      <div className="hero">
-        <img src={restaurant.image} alt="" />
-        {isClosed && <span className="closed-badge">Closed</span>}
-      </div>
+      {/* RESTAURANT INFO */}
+      <div className="rest-header">
+        <div className="rest-name">{restaurant.name}</div>
+        <div className="rest-info">
+          <span className="rest-tag">⭐ {restaurant.rating}</span>
+          <span className="rest-tag">{restaurant.street}</span>
+          <span className="rest-tag">{isClosed ? "Closed" : restaurant.time}</span>
+          <span className="rest-tag">₦{restaurant.price} avg</span>
+        </div>
 
-      {/* Restaurant Info */}
-      <div className="rest-info">
-        <h2>{restaurant.name}</h2>
-        <div className="details">
-          <span>⭐ {restaurant.rating}</span>
-          <span>•</span>
-          <span>{restaurant.street}</span>
-          <span>•</span>
-          <span>{isClosed ? "Closed" : restaurant.time}</span>
+        {/* DELIVERY BAR */}
+        <div className="delivery-bar">
+          <span>🚚 Delivery: ₦200</span>
+          <span>⏱ {restaurant.time}</span>
         </div>
       </div>
 
-      {/* Search */}
+      {/* SEARCH */}
       <div className="search-box">
         <input
           type="text"
@@ -107,20 +121,22 @@ export default function RestaurantDetails() {
         />
       </div>
 
-      {/* Tabs */}
-      <div className="tabs">
-        {["All", "Popular", "Recommended"].map((tab) => (
+      {/* CATEGORY SCROLL */}
+      <div className="category-scroll">
+        {categories.map((cat) => (
           <button
-            key={tab}
-            className={activeTab === tab ? "active" : ""}
-            onClick={() => setActiveTab(tab)}
+            key={cat}
+            className={activeTab === cat ? "active" : ""}
+            onClick={() => setActiveTab(cat)}
           >
-            {tab}
+            {cat}
           </button>
         ))}
       </div>
 
-      {/* Loading Skeleton */}
+      {/* MENU SECTION */}
+      <div className="section-title">Menu</div>
+
       {loading ? (
         <div className="skeleton-wrapper">
           {[1, 2, 3, 4].map((i) => (
@@ -129,31 +145,71 @@ export default function RestaurantDetails() {
         </div>
       ) : (
         <div className="menu-list">
-          {filteredMenu.map((item) => (
-            <div className="menu-item" key={item.id} onClick={() => setSelectedItem(item)}>
-              <div>
-                <h4>{item.name}</h4>
-                <p>₦{item.price}</p>
+          {filteredMenu.map((item) => {
+            const inCart = cart.find((c) => c.id === item.id);
+            return (
+              <div className="menu-card" key={item.id}>
+                <div className="left">
+                  <h4>{item.name}</h4>
+                  <p>₦{item.price}</p>
+                </div>
+
+                {/* INLINE ADD / QTY */}
+                {inCart ? (
+                  <div className="qty-box">
+                    <button
+                      className="qty-btn"
+                      onClick={() => updateQty(item.id, "dec")}
+                    >
+                      −
+                    </button>
+                    <span className="qty-count">{inCart.qty}</span>
+                    <button
+                      className="qty-btn"
+                      onClick={() => updateQty(item.id, "inc")}
+                    >
+                      +
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="add-inline"
+                    onClick={() => addToCart(item)}
+                  >
+                    Add
+                  </button>
+                )}
               </div>
-              <button className="add-btn">+</button>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
-      {/* Item Modal */}
+      {/* ITEM MODAL */}
       {selectedItem && (
-        <div className="modal-overlay" onClick={() => setSelectedItem(null)}>
+        <div
+          className="modal-overlay"
+          onClick={() => setSelectedItem(null)}
+        >
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>{selectedItem.name}</h2>
             <p>₦{selectedItem.price}</p>
 
-            {/* Add-ons */}
             <div className="addons">
               <h4>Add-ons</h4>
-              <label><input type="checkbox" /> Extra Chicken + ₦300</label>
-              <label><input type="checkbox" /> Cheese + ₦150</label>
-              <label><input type="checkbox" /> Sauce + ₦100</label>
+              <label>
+                <input type="checkbox" /> Extra Chicken + ₦300
+              </label>
+              <label>
+                <input type="checkbox" /> Cheese + ₦150
+              </label>
+              <label>
+                <input type="checkbox" /> Sauce + ₦100
+              </label>
+            </div>
+
+            <div className="notes-box">
+              <textarea placeholder="Add a note..." />
             </div>
 
             <button
@@ -169,9 +225,12 @@ export default function RestaurantDetails() {
         </div>
       )}
 
-      {/* Sticky Cart */}
+      {/* STICKY CART */}
       {cart.length > 0 && (
-        <div className="sticky-cart" onClick={() => alert("Proceed to checkout")}>
+        <div
+          className="sticky-cart"
+          onClick={() => alert("Proceed to checkout")}
+        >
           <span>{cart.reduce((acc, i) => acc + i.qty, 0)} items</span>
           <span>₦{total}</span>
         </div>
