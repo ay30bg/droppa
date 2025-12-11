@@ -1,142 +1,179 @@
-// src/pages/RestaurantDetails.jsx
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { featuredRestaurants, restaurantMenus, getRestaurantTimeDisplay } from "../data/restaurants.js";
-import "../styles/restaurantdetails.css";
+import {
+  featuredRestaurants,
+  restaurantMenus,
+  getRestaurantTimeDisplay,
+} from "../data/restaurants";
+
+import "../styles/restaurantdetails.css"; // create this
 
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const restaurantId = parseInt(id);
 
-  // ---------- Hooks ----------
+  const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
+  const menu = restaurantMenus[id] || [];
+
+  const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [favorites, setFavorites] = useState(false);
   const [cart, setCart] = useState([]);
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [searchText, setSearchText] = useState("");
-  const [favourite, setFavourite] = useState(false);
+  const [activeTab, setActiveTab] = useState("All");
+  const [selectedItem, setSelectedItem] = useState(null);
 
-  // ---------- Derived values ----------
-  const restaurant = useMemo(
-    () => featuredRestaurants.find((r) => r.id === restaurantId),
-    [restaurantId]
-  );
-
-  const menuSections = useMemo(
-    () => (restaurant ? restaurantMenus[restaurantId] || [] : []),
-    [restaurant, restaurantId]
-  );
-
-  const categories = useMemo(() => {
-    if (!menuSections) return [];
-    const unique = new Set(menuSections.map((m) => m.category));
-    return [...unique];
-  }, [menuSections]);
-
-  // Initialize active category once
+  // Simulate loading delay
   useEffect(() => {
-    if (categories.length > 0 && !activeCategory) {
-      setActiveCategory(categories[0]);
-    }
-  }, [categories, activeCategory]);
+    const timer = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const filteredItems = useMemo(() => {
-    if (!menuSections) return [];
-    let items = menuSections
-      .filter((s) => (activeCategory ? s.category === activeCategory : true))
-      .flatMap((s) => s.items);
-    if (searchText) {
-      const q = searchText.toLowerCase();
-      items = items.filter(
-        (i) =>
-          i.name.toLowerCase().includes(q) ||
-          (i.details && i.details.toLowerCase().includes(q))
-      );
-    }
-    return items;
-  }, [menuSections, activeCategory, searchText]);
+  // Filter menu using search
+  const filteredMenu = menu.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
 
-  const cartTotal = cart.reduce((sum, it) => sum + it.price, 0);
+  const addToCart = (item) => {
+    setCart((prev) => {
+      const exists = prev.find((p) => p.id === item.id);
+      if (exists) {
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, qty: p.qty + 1 } : p
+        );
+      }
+      return [...prev, { ...item, qty: 1 }];
+    });
+  };
 
-  // ---------- Early return if restaurant not found ----------
-  if (!restaurant) {
-    return (
-      <div style={{ padding: 20 }}>
-        <button onClick={() => navigate(-1)}>Back</button>
-        <p>Restaurant not found!</p>
-      </div>
+  const updateQty = (id, type) => {
+    setCart((prev) =>
+      prev
+        .map((p) =>
+          p.id === id
+            ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 }
+            : p
+        )
+        .filter((p) => p.qty > 0)
     );
-  }
+  };
 
-  // ---------- JSX ----------
+  const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+
+  if (!restaurant) return <div>Restaurant Not Found</div>;
+
+  const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
+
   return (
-    <div className="restaurant-details">
-      {/* Header */}
-      <div className="rd-header">
-        <button className="rd-back-btn" onClick={() => navigate(-1)}>
-          ←
-        </button>
-        <div className="rd-header-info">
-          <h1>{restaurant.name}</h1>
-          <div className="rd-meta">
-            {restaurant.rating} ⭐ • {restaurant.time} mins • {restaurant.street}
-          </div>
-        </div>
-        <button
-          className={`rd-fav ${favourite ? "active" : ""}`}
-          onClick={() => setFavourite((f) => !f)}
+    <div className="restaurant-page">
+      {/* Back Button */}
+      <div className="top-nav">
+        <button onClick={() => navigate(-1)} className="back-btn">←</button>
+        <h3>{restaurant.name}</h3>
+
+        {/* Favourite */}
+        <span
+          className={`fav ${favorites ? "active" : ""}`}
+          onClick={() => setFavorites(!favorites)}
         >
           ❤️
-        </button>
+        </span>
       </div>
 
-      {/* Categories & Search */}
-      <div className="rd-categories">
-        {categories.map((cat) => (
-          <button
-            key={cat}
-            className={`rd-cat-btn ${activeCategory === cat ? "active" : ""}`}
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
+      {/* Hero Image */}
+      <div className="hero">
+        <img src={restaurant.image} alt="" />
+        {isClosed && <span className="closed-badge">Closed</span>}
+      </div>
+
+      {/* Restaurant Info */}
+      <div className="rest-info">
+        <h2>{restaurant.name}</h2>
+        <div className="details">
+          <span>⭐ {restaurant.rating}</span>
+          <span>•</span>
+          <span>{restaurant.street}</span>
+          <span>•</span>
+          <span>{isClosed ? "Closed" : restaurant.time}</span>
+        </div>
+      </div>
+
+      {/* Search */}
+      <div className="search-box">
         <input
           type="text"
           placeholder="Search menu..."
-          value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
-          className="rd-search-input"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
-      {/* Menu Items */}
-      <div className="rd-menu-list">
-        {filteredItems.map((item) => (
-          <div key={item.id} className="rd-menu-item">
-            <div className="rd-menu-info">
-              <h3>{item.name}</h3>
-              {item.details && <p className="rd-menu-sub">{item.details}</p>}
-              <span className="rd-menu-price">₦{item.price.toLocaleString()}</span>
+      {/* Tabs */}
+      <div className="tabs">
+        {["All", "Popular", "Recommended"].map((tab) => (
+          <button
+            key={tab}
+            className={activeTab === tab ? "active" : ""}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </div>
+
+      {/* Loading Skeleton */}
+      {loading ? (
+        <div className="skeleton-wrapper">
+          {[1, 2, 3, 4].map((i) => (
+            <div className="skeleton" key={i}></div>
+          ))}
+        </div>
+      ) : (
+        <div className="menu-list">
+          {filteredMenu.map((item) => (
+            <div className="menu-item" key={item.id} onClick={() => setSelectedItem(item)}>
+              <div>
+                <h4>{item.name}</h4>
+                <p>₦{item.price}</p>
+              </div>
+              <button className="add-btn">+</button>
             </div>
+          ))}
+        </div>
+      )}
+
+      {/* Item Modal */}
+      {selectedItem && (
+        <div className="modal-overlay" onClick={() => setSelectedItem(null)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <h2>{selectedItem.name}</h2>
+            <p>₦{selectedItem.price}</p>
+
+            {/* Add-ons */}
+            <div className="addons">
+              <h4>Add-ons</h4>
+              <label><input type="checkbox" /> Extra Chicken + ₦300</label>
+              <label><input type="checkbox" /> Cheese + ₦150</label>
+              <label><input type="checkbox" /> Sauce + ₦100</label>
+            </div>
+
             <button
-              className="rd-add-btn"
-              onClick={() => setCart((prev) => [...prev, item])}
+              className="confirm-btn"
+              onClick={() => {
+                addToCart(selectedItem);
+                setSelectedItem(null);
+              }}
             >
-              Add
+              Add to Cart
             </button>
           </div>
-        ))}
-        {filteredItems.length === 0 && (
-          <div className="rd-empty">No items found</div>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Sticky Cart */}
       {cart.length > 0 && (
-        <div className="rd-cart-bar">
-          <div>{cart.length} item(s)</div>
-          <div>₦{cartTotal.toLocaleString()}</div>
-          <button className="rd-checkout-btn">Proceed to Checkout</button>
+        <div className="sticky-cart" onClick={() => alert("Proceed to checkout")}>
+          <span>{cart.reduce((acc, i) => acc + i.qty, 0)} items</span>
+          <span>₦{total}</span>
         </div>
       )}
     </div>
