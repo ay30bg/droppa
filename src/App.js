@@ -22,10 +22,10 @@ function AppWrapper() {
   const location = useLocation();
 
   // Hide Header on these pages
-  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login", "/get-started", "/verify"];
+  const hideHeaderPaths = ["/locations", "/orders", "/profile", "/welcome", "/login", "/get-started", "/verify", "/details"];
 
   // Hide BottomNav on these pages
-  const hideBottomNavPaths = ["/welcome", "/login", "/get-started", "/verify"];
+  const hideBottomNavPaths = ["/welcome", "/login", "/get-started", "/verify", "/details"];
 
   return (
     <>
