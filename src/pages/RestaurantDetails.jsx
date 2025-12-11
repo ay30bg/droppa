@@ -37,7 +37,7 @@ export default function RestaurantDetails() {
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  const categories = ["All", "Popular", "Recommended"]; // expand later if needed
+  const categories = ["All", "Popular", "Recommended"];
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -86,19 +86,38 @@ export default function RestaurantDetails() {
 
       {/* ──────────── RESTAURANT INFO ──────────── */}
       <div className="cd-rest-info">
+        {/* Rating, Orders, Time, Avg Price */}
         <div className="cd-sub-info">
           <span>⭐ {restaurant.rating}</span>
           <span>|</span>
+          <span>{restaurant.orders} orders</span>
+          <span>|</span>
           <span>{restaurant.time}</span>
           <span>|</span>
-          <span>₦{restaurant.price} avg price</span>
+          <span>₦{restaurant.price} avg</span>
         </div>
 
+        {/* Street / Location */}
+        <div className="cd-street-info">📍 {restaurant.street}</div>
+
+        {/* Tags / Badges */}
+        <div className="cd-tags">
+          {restaurant.rating >= 4.8 && (
+            <span className="cd-badge top-rated">Top Rated</span>
+          )}
+          {restaurant.orders > 1000 && (
+            <span className="cd-badge popular">Popular</span>
+          )}
+        </div>
+
+        {/* Delivery Fee or Closed */}
         {isClosed ? (
-          <div className="cd-closed-banner">Closed — Opens tomorrow morning</div>
+          <div className="cd-closed-banner">
+            Closed — Opens tomorrow morning
+          </div>
         ) : (
           <div className="cd-delivery-box">
-            <span>🚚 Delivery Fee: ₦200</span>
+            <span>🚚 Delivery Fee: ₦200 | ⏱️ {restaurant.time}</span>
           </div>
         )}
       </div>
@@ -126,7 +145,6 @@ export default function RestaurantDetails() {
           </>
         ) : (
           <>
-            {/* Recommended section anchor */}
             <h3
               className="cd-section-title"
               ref={(el) => (sectionRefs.current["Recommended"] = el)}
