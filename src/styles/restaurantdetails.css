@@ -4,14 +4,14 @@
   overflow-y: auto;
   background: #f7f7f7;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  padding-bottom: 80px;
+  padding-bottom: 90px;
 }
 
 /* ───────────── HEADER ───────────── */
 .cd-header {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 30;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -38,7 +38,7 @@
   font-weight: 600;
 }
 
-/* ───────────── RESTAURANT HEADER ───────────── */
+/* ───────────── RESTAURANT INFO ───────────── */
 .cd-rest-info {
   background: white;
   padding: 20px 16px;
@@ -68,21 +68,14 @@
   color: #333;
 }
 
-/* ───────────── SEARCH ───────────── */
-.cd-search {
-  background: white;
-  padding: 12px 16px;
-  border-bottom: 1px solid #eee;
-}
-
-.cd-search input {
-  width: 100%;
-  padding: 12px 14px;
-  background: #f4f4f4;
-  border: none;
+/* CLOSED STATE BANNER */
+.cd-closed-banner {
+  background: #ffe6e6;
+  color: #b50000;
+  padding: 10px 14px;
   border-radius: 10px;
-  font-size: 15px;
-  outline: none;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 /* ───────────── CATEGORY SCROLL ───────────── */
@@ -103,23 +96,31 @@
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
+  transition: 0.2s;
 }
 
 .cd-categories .active {
-  background: #000;
+  background: black;
   color: white;
 }
 
 /* ───────────── MENU SECTION ───────────── */
 .cd-menu-section {
-  padding: 10px 16px;
+  padding: 12px 16px;
 }
 
+.cd-section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px 0 16px 0;
+}
+
+/* MENU ITEMS */
 .cd-menu-item {
   background: white;
   padding: 16px;
-  border-radius: 12px;
-  margin-bottom: 12px;
+  border-radius: 14px;
+  margin-bottom: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,7 +133,7 @@
 
 .cd-price {
   color: #5a5a5a;
-  margin-top: 4px;
+  margin-top: 3px;
   font-size: 14px;
 }
 
@@ -141,7 +142,7 @@
   background: black;
   color: white;
   border: none;
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: 8px;
   font-size: 14px;
   cursor: pointer;
@@ -151,10 +152,10 @@
 .cd-qty-box {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: #f0f0f0;
-  padding: 6px 10px;
-  border-radius: 8px;
+  padding: 7px 12px;
+  border-radius: 10px;
 }
 
 .cd-qty-box button {
@@ -169,23 +170,48 @@
   font-weight: 600;
 }
 
-/* ───────────── STICKY CART BAR ───────────── */
+/* ───────────── SHIMMER SKELETONS ───────────── */
+.cd-skeleton-card {
+  height: 80px;
+  border-radius: 12px;
+  background: linear-gradient(
+    90deg,
+    #e9e9e9 0%,
+    #f5f5f5 50%,
+    #e9e9e9 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  margin-bottom: 14px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* ───────────── FLOATING CART BAR ───────────── */
 .cd-cart-bar {
   position: fixed;
-  bottom: 10px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
   width: calc(100% - 40px);
   background: black;
   color: white;
-  padding: 14px 18px;
+  padding: 15px 18px;
   border-radius: 14px;
   display: flex;
   justify-content: space-between;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  z-index: 30;
+  z-index: 40;
+  transition: 0.3s;
 }
 
 .cd-cart-total {
