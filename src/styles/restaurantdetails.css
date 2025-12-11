@@ -131,6 +131,12 @@
   font-weight: 600;
 }
 
+.cd-subtext {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 2px;
+}
+
 .cd-price {
   color: #5a5a5a;
   margin-top: 3px;
