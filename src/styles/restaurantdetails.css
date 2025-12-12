@@ -1,5 +1,5 @@
 /* -------------------------------------------------------
-   GLOBAL PAGE STYLING
+   GLOBAL PAGE
 ------------------------------------------------------- */
 .cd-page {
   height: 100vh;
@@ -7,10 +7,8 @@
   background: #fafafa;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   padding-bottom: 100px;
-  overscroll-behavior: none;
 }
 
-/* Hide scrollbars (iOS-like look) */
 .cd-page::-webkit-scrollbar {
   width: 0;
 }
@@ -59,21 +57,50 @@
   margin-bottom: 12px;
 }
 
+/* ---------- TOP INFO BOXES: Rating, ETA, Delivery ---------- */
 .cd-sub-info {
   display: flex;
-  gap: 6px;
-  align-items: center;
-  font-size: 14px;
-  color: #555;
-  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 12px;
 }
 
+.cd-info-box {
+  background: #f2f2f7;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 95px;
+  text-align: center;
+}
+
+.cd-info-label {
+  font-size: 11px;
+  color: #666;
+  margin-top: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.cd-orders {
+  font-size: 12px;
+  font-weight: 500;
+  color: #777;
+  margin-left: 2px;
+}
+
+/* ---------- Street ---------- */
 .cd-street-info {
   margin-top: 8px;
   font-size: 14px;
   color: #777;
 }
 
+/* ---------- Tags ---------- */
 .cd-tags {
   margin-top: 10px;
   display: flex;
@@ -98,6 +125,7 @@
   color: #0068c9;
 }
 
+/* ---------- Closed --------- */
 .cd-closed-banner {
   margin-top: 15px;
   padding: 12px;
@@ -108,6 +136,7 @@
   font-weight: 500;
 }
 
+/* ---------- Delivery Box ---------- */
 .cd-delivery-box {
   margin-top: 15px;
   padding: 12px;
@@ -120,7 +149,7 @@
 }
 
 /* -------------------------------------------------------
-   CATEGORIES NAV
+   CATEGORY BUTTON SCROLLER
 ------------------------------------------------------- */
 .cd-categories {
   position: sticky;
@@ -146,7 +175,7 @@
   font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .cd-categories button.active {
@@ -169,7 +198,7 @@
   color: #222;
 }
 
-/* ---------- MENU ITEM ---------- */
+/* ---------- MENU CARD ---------- */
 .cd-menu-item {
   background: #ffffff;
   padding: 15px;
@@ -216,7 +245,7 @@
   height: fit-content;
 }
 
-/* ---------- QTY SELECTOR ---------- */
+/* ---------- QTY BOX ---------- */
 .cd-qty-box {
   display: flex;
   align-items: center;
@@ -252,12 +281,11 @@
 }
 
 /* -------------------------------------------------------
-   STICKY CART BAR
+   CART BAR
 ------------------------------------------------------- */
 .cd-cart-bar {
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
   background: #222;
   color: #fff;
