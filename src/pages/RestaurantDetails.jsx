@@ -76,31 +76,37 @@ export default function RestaurantDetails() {
 
   return (
     <div className="cd-page" ref={scrollRef}>
-      {/* ──────────── HEADER ──────────── */}
+
+      {/* ---------- HEADER ---------- */}
       <div className={`cd-header ${shrunk ? "shrunk" : ""}`}>
-        <button onClick={() => navigate(-1)} className="cd-back">
-          ←
-        </button>
+        <button onClick={() => navigate(-1)} className="cd-back">←</button>
         <span className="cd-title">{restaurant.name}</span>
       </div>
 
-      {/* ──────────── RESTAURANT INFO ──────────── */}
+      {/* ---------- RESTAURANT INFO ---------- */}
       <div className="cd-rest-info">
-        {/* Rating, Orders, Time, Avg Price */}
+
+        {/* Rating | ETA | Delivery fee */}
         <div className="cd-sub-info">
-          <span>⭐ {restaurant.rating}</span>
-          <span>|</span>
-          <span>{restaurant.orders} orders</span>
-          <span>|</span>
-          <span>{restaurant.time}</span>
-          <span>|</span>
-          <span>₦{restaurant.price} avg</span>
+          <div className="cd-info-box">
+            ⭐ {restaurant.rating}{" "}
+            <span className="cd-orders">({restaurant.orders})</span>
+            <span className="cd-info-label">Rating</span>
+          </div>
+
+          <div className="cd-info-box">
+            ⏱️ {restaurant.time}
+            <span className="cd-info-label">ETA</span>
+          </div>
+
+          <div className="cd-info-box">
+            🚚 ₦200
+            <span className="cd-info-label">Delivery Fee</span>
+          </div>
         </div>
 
-        {/* Street / Location */}
         <div className="cd-street-info">📍 {restaurant.street}</div>
 
-        {/* Tags / Badges */}
         <div className="cd-tags">
           {restaurant.rating >= 4.8 && (
             <span className="cd-badge top-rated">Top Rated</span>
@@ -110,19 +116,18 @@ export default function RestaurantDetails() {
           )}
         </div>
 
-        {/* Delivery Fee or Closed */}
         {isClosed ? (
           <div className="cd-closed-banner">
             Closed — Opens tomorrow morning
           </div>
         ) : (
           <div className="cd-delivery-box">
-            <span>🚚 Delivery Fee: ₦200 | ⏱️ {restaurant.time}</span>
+            🚚 Delivery Fee: ₦200 | ⏱️ {restaurant.time}
           </div>
         )}
       </div>
 
-      {/* ──────────── CATEGORIES ──────────── */}
+      {/* ---------- CATEGORY SCROLLER ---------- */}
       <div className="cd-categories">
         {categories.map((cat) => (
           <button
@@ -135,7 +140,7 @@ export default function RestaurantDetails() {
         ))}
       </div>
 
-      {/* ──────────── MENU LIST ──────────── */}
+      {/* ---------- MENU LIST ---------- */}
       <div className="cd-menu-section">
         {loading ? (
           <>
@@ -186,7 +191,7 @@ export default function RestaurantDetails() {
         )}
       </div>
 
-      {/* ──────────── STICKY CART BAR ──────────── */}
+      {/* ---------- CART BAR ---------- */}
       {cart.length > 0 && (
         <div className="cd-cart-bar" onClick={() => alert("Checkout modal…")}>
           <div>{cart.reduce((acc, it) => acc + it.qty, 0)} item(s)</div>
