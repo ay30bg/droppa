@@ -73,17 +73,29 @@
 
 .cd-meta {
   display: flex;
-  gap: 24px;
+  gap: 16px;
   font-size: 14px;
   color: #444;
-  flex-wrap: nowrap; /* stay on one line */
-  align-items: flex-start;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .cd-meta-item {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
+  padding-right: 16px;
+}
+
+.cd-meta-item:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+  font-weight: 400;
 }
 
 .cd-meta-label {
