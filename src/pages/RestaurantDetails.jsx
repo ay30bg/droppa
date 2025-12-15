@@ -109,7 +109,7 @@ export default function RestaurantDetails() {
             onClick={() => setActiveCategory(cat)}
           >
             {cat}
-          </button>
+          </button> 
         ))}
       </div>
 
