@@ -13,7 +13,6 @@ export default function RestaurantDetails() {
   const navigate = useNavigate();
   const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
 
-  // Safe menu load
   const menu = restaurantMenus[Number(id)] || [];
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -21,28 +20,52 @@ export default function RestaurantDetails() {
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const [shareOpen, setShareOpen] = useState(false);
 
   const scrollRef = useRef();
   const sectionRefs = useRef({});
 
-  useEffect(() => setTimeout(() => setLoading(false), 1000), []);
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  // Categories
-  const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
+  /* ---------------- NATIVE SHARE ---------------- */
+  const handleNativeShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: restaurant.name,
+          text: `Check out ${restaurant.name}`,
+          url: window.location.href,
+        });
+      } catch (err) {
+        console.log("Share dismissed");
+      }
+    } else {
+      await navigator.clipboard.writeText(window.location.href);
+      alert("Link copied to clipboard");
+    }
+  };
 
-  // Cart handlers
+  /* ---------------- CATEGORIES ---------------- */
+  const categories = [
+    "All",
+    ...Array.from(new Set(menu.map((item) => item.category))),
+  ];
+
+  /* ---------------- CART ---------------- */
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
-      if (exists)
+      if (exists) {
         return prev.map((p) =>
           p.id === item.id ? { ...p, qty: p.qty + 1 } : p
         );
+      }
       return [...prev, { ...item, qty: 1 }];
     });
   };
@@ -51,13 +74,18 @@ export default function RestaurantDetails() {
     setCart((prev) =>
       prev
         .map((p) =>
-          p.id === id ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 } : p
+          p.id === id
+            ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 }
+            : p
         )
         .filter((p) => p.qty > 0)
     );
   };
 
-  const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const total = cart.reduce(
+    (acc, item) => acc + item.price * item.qty,
+    0
+  );
 
   const toggleCart = () => setCartOpen((prev) => !prev);
 
@@ -67,7 +95,7 @@ export default function RestaurantDetails() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  // Dynamic open/close
+  /* ---------------- DYNAMIC OPEN/CLOSE ---------------- */
   const getDynamicStatus = (time) => {
     if (!time || !time.includes("-")) return isClosed ? "Closed" : "Open";
 
@@ -77,8 +105,8 @@ export default function RestaurantDetails() {
 
       const parseTime = (str) => {
         const [h, mPart] = str.split(":");
-        let m = parseInt(mPart) || 0;
-        let isPM = str.toUpperCase().includes("PM");
+        const m = parseInt(mPart) || 0;
+        const isPM = str.toUpperCase().includes("PM");
         let hour = parseInt(h);
         if (isPM && hour !== 12) hour += 12;
         if (!isPM && hour === 12) hour = 0;
@@ -93,11 +121,11 @@ export default function RestaurantDetails() {
       const closeDate = new Date();
       closeDate.setHours(close.hour, close.m, 0);
 
-      if (now >= openDate && now <= closeDate)
+      if (now >= openDate && now <= closeDate) {
         return `Open now (closes at ${closeStr})`;
+      }
       return `Closed (opens at ${openStr})`;
     } catch (err) {
-      console.error("Time parse error", err);
       return isClosed ? "Closed" : "Open";
     }
   };
@@ -112,8 +140,9 @@ export default function RestaurantDetails() {
           </button>
           <span className="cd-title">{restaurant.name}</span>
         </div>
+
         <div className="cd-header-right">
-          <FiShare2 size={20} onClick={() => setShareOpen(true)} />
+          <FiShare2 size={20} onClick={handleNativeShare} />
           <FiHeart
             size={20}
             className={`cd-icon-btn ${favorite ? "liked" : ""}`}
@@ -139,10 +168,12 @@ export default function RestaurantDetails() {
               <FiStar size={16} /> {restaurant.rating} ({restaurant.orders})
             </div>
           </div>
+
           <div className="cd-meta-item">
             <div className="cd-meta-label">Preparation Time</div>
             <div className="cd-meta-value">{restaurant.time}</div>
           </div>
+
           <div className="cd-meta-item">
             <div className="cd-meta-label">Delivery Fee</div>
             <div className="cd-meta-value">₦200</div>
@@ -184,24 +215,41 @@ export default function RestaurantDetails() {
                     >
                       {cat}
                     </h3>
+
                     {menu
                       .filter((item) => item.category === cat)
                       .map((item) => {
                         const inCart = cart.find((c) => c.id === item.id);
+
                         return (
                           <div className="cd-menu-item" key={item.id}>
                             <div className="cd-item-info">
                               <h4>{item.name}</h4>
                               {item.description && (
-                                <p className="cd-subtext">{item.description}</p>
+                                <p className="cd-subtext">
+                                  {item.description}
+                                </p>
                               )}
                               <p className="cd-price">₦{item.price}</p>
                             </div>
+
                             {inCart ? (
                               <div className="cd-qty-box">
-                                <button onClick={() => changeQty(item.id, "dec")}>−</button>
+                                <button
+                                  onClick={() =>
+                                    changeQty(item.id, "dec")
+                                  }
+                                >
+                                  −
+                                </button>
                                 <span>{inCart.qty}</span>
-                                <button onClick={() => changeQty(item.id, "inc")}>+</button>
+                                <button
+                                  onClick={() =>
+                                    changeQty(item.id, "inc")
+                                  }
+                                >
+                                  +
+                                </button>
                               </div>
                             ) : (
                               <button
@@ -220,10 +268,12 @@ export default function RestaurantDetails() {
         )}
       </div>
 
-      {/* CART BUTTON */}
+      {/* CART BAR */}
       {cart.length > 0 && !cartOpen && (
         <div className="cd-cart-bar" onClick={toggleCart}>
-          <span>{cart.reduce((a, b) => a + b.qty, 0)} items</span>
+          <span>
+            {cart.reduce((a, b) => a + b.qty, 0)} items
+          </span>
           <span>₦{total}</span>
         </div>
       )}
@@ -231,38 +281,27 @@ export default function RestaurantDetails() {
       {/* CART DRAWER */}
       <div className={`cd-cart-drawer ${cartOpen ? "open" : ""}`}>
         <h3>Cart</h3>
+
         {cart.map((item) => (
           <div key={item.id} className="cd-cart-item">
             <span>{item.name}</span>
             <div className="cd-qty-box">
-              <button onClick={() => changeQty(item.id, "dec")}>−</button>
+              <button onClick={() => changeQty(item.id, "dec")}>
+                −
+              </button>
               <span>{item.qty}</span>
-              <button onClick={() => changeQty(item.id, "inc")}>+</button>
+              <button onClick={() => changeQty(item.id, "inc")}>
+                +
+              </button>
             </div>
             <span>₦{item.price * item.qty}</span>
           </div>
         ))}
-        <button className="cd-checkout-btn">Checkout ₦{total}</button>
-      </div>
 
-      {/* SHARE MODAL */}
-      {shareOpen && (
-        <div className="cd-share-modal" onClick={() => setShareOpen(false)}>
-          <div className="cd-share-content" onClick={(e) => e.stopPropagation()}>
-            <h4>Share this restaurant</h4>
-            <button onClick={() => navigator.clipboard.writeText(window.location.href)}>
-              Copy Link
-            </button>
-            <button
-              onClick={() =>
-                window.open(`https://wa.me/?text=${window.location.href}`, "_blank")
-              }
-            >
-              WhatsApp
-            </button>
-          </div>
-        </div>
-      )}
+        <button className="cd-checkout-btn">
+          Checkout ₦{total}
+        </button>
+      </div>
     </div>
   );
 }
