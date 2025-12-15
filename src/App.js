@@ -14,6 +14,7 @@ import Locations from "./pages/Locations.jsx";
 import WelcomePage from "./pages/WelcomePage.jsx";
 import Login from "./pages/Login.jsx";
 import Verify from "./pages/Verify.jsx";
+import Checkout from "./pages/Checkout.jsx";
 import GetStarted from "./pages/GetStarted.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import "./styles/global.css";
@@ -33,12 +34,13 @@ function AppWrapper() {
       "/login",
       "/get-started",
       "/verify",
+      "/checkout"
     ].includes(path);
 
   // Hide BottomNav on specific pages
   const hideBottomNav =
     path.startsWith("/details/") || // hide bottom nav on details page
-    ["/welcome", "/login", "/get-started", "/verify"].includes(path);
+    ["/welcome", "/login", "/get-started", "/verify", "/checkout"].includes(path);
 
   return (
     <>
@@ -57,6 +59,7 @@ function AppWrapper() {
         <Route path="/locations" element={<Locations />} />
         <Route path="/login" element={<Login />} />
         <Route path="/verify" element={<Verify />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/welcome" element={<WelcomePage />} />
         <Route path="*" element={<NotFound />} />
