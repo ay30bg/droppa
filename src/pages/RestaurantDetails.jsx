@@ -27,12 +27,20 @@ export default function RestaurantDetails() {
   if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
-  const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
+
+  // Categories based on menu items dynamically
+  const categories = [
+    "All",
+    ...Array.from(new Set(menu.map((item) => item.category)))
+  ];
 
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
-      if (exists) return prev.map((p) => (p.id === item.id ? { ...p, qty: p.qty + 1 } : p));
+      if (exists)
+        return prev.map((p) =>
+          p.id === item.id ? { ...p, qty: p.qty + 1 } : p
+        );
       return [...prev, { ...item, qty: 1 }];
     });
   };
@@ -40,7 +48,9 @@ export default function RestaurantDetails() {
   const changeQty = (id, type) => {
     setCart((prev) =>
       prev
-        .map((p) => (p.id === id ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 } : p))
+        .map((p) =>
+          p.id === id ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 } : p
+        )
         .filter((p) => p.qty > 0)
     );
   };
@@ -57,7 +67,6 @@ export default function RestaurantDetails() {
           </button>
           <span className="cd-title">{restaurant.name}</span>
         </div>
-
         <div className="cd-header-right">
           <FiShare2 size={20} />
           <FiHeart size={20} />
@@ -67,9 +76,20 @@ export default function RestaurantDetails() {
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
         <div className="cd-meta">
-          <span><FiStar size={16} /> {restaurant.rating} ({restaurant.orders})</span>
-          <span>• {restaurant.time}</span>
-          <span>• ₦200</span>
+          <div className="cd-meta-item">
+            <div className="cd-meta-label">Ratings</div>
+            <div className="cd-meta-value">
+              <FiStar size={16} /> {restaurant.rating} ({restaurant.orders})
+            </div>
+          </div>
+          <div className="cd-meta-item">
+            <div className="cd-meta-label">Preparation Time</div>
+            <div className="cd-meta-value">{restaurant.time}</div>
+          </div>
+          <div className="cd-meta-item">
+            <div className="cd-meta-label">Delivery Fee</div>
+            <div className="cd-meta-value">₦200</div>
+          </div>
         </div>
         <div className="cd-street">{restaurant.street}</div>
         {isClosed && <div className="cd-closed">Closed</div>}
