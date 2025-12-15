@@ -29,10 +29,7 @@ export default function RestaurantDetails() {
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
   // Categories based on menu items dynamically
-  const categories = [
-    "All",
-    ...Array.from(new Set(menu.map((item) => item.category)))
-  ];
+  const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -75,6 +72,15 @@ export default function RestaurantDetails() {
 
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
+        {/* LOCATION & OPEN/CLOSED STATUS */}
+        <div className="cd-location-status">
+          <div className="cd-street">{restaurant.street}</div>
+          <div className={`cd-status ${isClosed ? "closed" : "open"}`}>
+            {isClosed ? "Closed" : "Open"}
+          </div>
+        </div>
+
+        {/* META INFO */}
         <div className="cd-meta">
           <div className="cd-meta-item">
             <div className="cd-meta-label">Ratings</div>
@@ -91,8 +97,6 @@ export default function RestaurantDetails() {
             <div className="cd-meta-value">₦200</div>
           </div>
         </div>
-        <div className="cd-street">{restaurant.street}</div>
-        {isClosed && <div className="cd-closed">Closed</div>}
       </div>
 
       {/* CATEGORIES */}
