@@ -14,8 +14,8 @@
   top: 0;
   z-index: 50;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-between; /* keeps title centered with actions on right */
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
@@ -23,41 +23,47 @@
   gap: 12px;
 }
 
-.cd-back {
-  border: none;
-  background: none;
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.cd-title {
-  font-size: 17px;
-  font-weight: 600;
-  flex: 1;
-  text-align: center; /* keep it centered */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.cd-header-actions {
+.cd-header-left {
   display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.cd-icon-btn {
+.cd-back {
   border: none;
   background: none;
-  font-size: 20px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+.cd-title {
+  font-size: 17px;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cd-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px; /* space between share & favorite icons */
+}
+
+.cd-icon-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .cd-icon-btn.liked {
-  color: #e11d48;
+  color: #e11d48; /* red color for favorite */
 }
 
 /* ================= REST INFO ================= */
