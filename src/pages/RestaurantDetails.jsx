@@ -7,7 +7,7 @@ import {
   getRestaurantTimeDisplay,
 } from "../data/restaurants";
 import "../styles/restaurantdetails.css";
-import { FiArrowLeft, FiShare2, FiHeart } from "react-icons/fi";
+import { FiArrowLeft, FiShare2, FiHeart, FiStar } from "react-icons/fi";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -67,7 +67,7 @@ export default function RestaurantDetails() {
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
         <div className="cd-meta">
-          <span>⭐ {restaurant.rating} ({restaurant.orders})</span>
+          <span><FiStar size={16} /> {restaurant.rating} ({restaurant.orders})</span>
           <span>• {restaurant.time}</span>
           <span>• ₦200</span>
         </div>
