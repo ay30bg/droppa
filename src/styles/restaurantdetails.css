@@ -77,12 +77,12 @@
   align-items: center;
   margin-bottom: 12px;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1rem; /* location font size */
 }
 
-.cd-divider {
-  margin: 0 6px;
-  color: #888;
+.cd-status {
+  font-size: 0.85rem; /* slightly smaller than location */
+  font-weight: 500;
 }
 
 .cd-status.open {
@@ -91,6 +91,11 @@
 
 .cd-status.closed {
   color: red;
+}
+
+.cd-divider {
+  margin: 0 6px;
+  color: #888;
 }
 
 .cd-meta {
@@ -228,7 +233,7 @@
 .cd-add-btn {
   align-self: center;
   border: 1px solid #014f50;
-  background: #ffffff;
+  background: #f5f5f5;
   padding: 6px 14px;
   border-radius:6px;
   color: #000;
