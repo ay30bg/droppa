@@ -1,4 +1,3 @@
-// src/pages/RestaurantDetails.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
@@ -18,6 +17,9 @@ export default function RestaurantDetails() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favorite, setFavorite] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
 
   const scrollRef = useRef();
   const sectionRefs = useRef({});
@@ -28,7 +30,6 @@ export default function RestaurantDetails() {
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  // Categories based on menu items dynamically
   const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
 
   const addToCart = (item) => {
@@ -54,6 +55,39 @@ export default function RestaurantDetails() {
 
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
+  const toggleCart = () => setCartOpen((prev) => !prev);
+
+  const scrollToCategory = (cat) => {
+    setActiveCategory(cat);
+    const el = sectionRefs.current[cat];
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const getDynamicStatus = (time) => {
+    // Parse "10:00 AM - 10:00 PM" format
+    const now = new Date();
+    const [openStr, closeStr] = time.split(" - ");
+    const parseTime = (str) => {
+      let [h, mPart] = str.split(":");
+      let m = parseInt(mPart);
+      let isPM = str.includes("PM");
+      h = parseInt(h);
+      if (isPM && h !== 12) h += 12;
+      if (!isPM && h === 12) h = 0;
+      return { h, m };
+    };
+    const open = parseTime(openStr);
+    const close = parseTime(closeStr);
+
+    const openDate = new Date();
+    openDate.setHours(open.h, open.m, 0);
+    const closeDate = new Date();
+    closeDate.setHours(close.h, close.m, 0);
+
+    if (now >= openDate && now <= closeDate) return `Open now (closes at ${closeStr})`;
+    return `Closed (opens at ${openStr})`;
+  };
+
   return (
     <div className="cd-page" ref={scrollRef}>
       {/* HEADER */}
@@ -65,23 +99,25 @@ export default function RestaurantDetails() {
           <span className="cd-title">{restaurant.name}</span>
         </div>
         <div className="cd-header-right">
-          <FiShare2 size={20} />
-          <FiHeart size={20} />
+          <FiShare2 size={20} onClick={() => setShareOpen(true)} />
+          <FiHeart
+            size={20}
+            className={`cd-icon-btn ${favorite ? "liked" : ""}`}
+            onClick={() => setFavorite(!favorite)}
+          />
         </div>
       </div>
 
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
-        {/* LOCATION | OPEN/CLOSED */}
         <div className="cd-location-status">
           <span className="cd-street">{restaurant.street}</span>
-          <span className="cd-divider"> | </span>
+          <span className="cd-divider">|</span>
           <span className={`cd-status ${isClosed ? "closed" : "open"}`}>
-            {isClosed ? "Closed" : "Open"}
+            {getDynamicStatus(restaurant.time)}
           </span>
         </div>
 
-        {/* META INFO */}
         <div className="cd-meta">
           <div className="cd-meta-item">
             <div className="cd-meta-label">Ratings</div>
@@ -106,10 +142,10 @@ export default function RestaurantDetails() {
           <button
             key={cat}
             className={activeCategory === cat ? "active" : ""}
-            onClick={() => setActiveCategory(cat)}
+            onClick={() => scrollToCategory(cat)}
           >
             {cat}
-          </button> 
+          </button>
         ))}
       </div>
 
@@ -149,9 +185,13 @@ export default function RestaurantDetails() {
                             </div>
                             {inCart ? (
                               <div className="cd-qty-box">
-                                <button onClick={() => changeQty(item.id, "dec")}>−</button>
+                                <button onClick={() => changeQty(item.id, "dec")}>
+                                  −
+                                </button>
                                 <span>{inCart.qty}</span>
-                                <button onClick={() => changeQty(item.id, "inc")}>+</button>
+                                <button onClick={() => changeQty(item.id, "inc")}>
+                                  +
+                                </button>
                               </div>
                             ) : (
                               <button
@@ -170,11 +210,47 @@ export default function RestaurantDetails() {
         )}
       </div>
 
-      {/* CART BAR */}
-      {cart.length > 0 && (
-        <div className="cd-cart-bar">
+      {/* CART BUTTON */}
+      {cart.length > 0 && !cartOpen && (
+        <div className="cd-cart-bar" onClick={toggleCart}>
           <span>{cart.reduce((a, b) => a + b.qty, 0)} items</span>
           <span>₦{total}</span>
+        </div>
+      )}
+
+      {/* CART DRAWER */}
+      <div className={`cd-cart-drawer ${cartOpen ? "open" : ""}`}>
+        <h3>Cart</h3>
+        {cart.map((item) => (
+          <div key={item.id} className="cd-cart-item">
+            <span>{item.name}</span>
+            <div className="cd-qty-box">
+              <button onClick={() => changeQty(item.id, "dec")}>−</button>
+              <span>{item.qty}</span>
+              <button onClick={() => changeQty(item.id, "inc")}>+</button>
+            </div>
+            <span>₦{item.price * item.qty}</span>
+          </div>
+        ))}
+        <button className="cd-checkout-btn">Checkout ₦{total}</button>
+      </div>
+
+      {/* SHARE MODAL */}
+      {shareOpen && (
+        <div className="cd-share-modal" onClick={() => setShareOpen(false)}>
+          <div className="cd-share-content" onClick={(e) => e.stopPropagation()}>
+            <h4>Share this restaurant</h4>
+            <button onClick={() => navigator.clipboard.writeText(window.location.href)}>
+              Copy Link
+            </button>
+            <button
+              onClick={() =>
+                window.open(`https://wa.me/?text=${window.location.href}`, "_blank")
+              }
+            >
+              WhatsApp
+            </button>
+          </div>
         </div>
       )}
     </div>
