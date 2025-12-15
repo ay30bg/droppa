@@ -49,7 +49,7 @@
 .cd-header-right {
   display: flex;
   align-items: center;
-  gap: 16px; /* space between share & favorite icons */
+  gap: 16px;
 }
 
 .cd-icon-btn {
@@ -73,10 +73,16 @@
 
 .cd-meta {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   font-size: 14px;
   color: #444;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* force one line */
+  align-items: center;
+}
+
+.cd-meta span svg {
+  vertical-align: middle;
+  margin-right: 4px;
 }
 
 .cd-meta span {
@@ -176,6 +182,12 @@
   border-radius: 999px;
   font-size: 14px;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cd-add-btn:hover {
+  background: #111;
+  color: #fff;
 }
 
 .cd-qty-box {
@@ -190,6 +202,11 @@
   background: none;
   font-size: 20px;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cd-qty-box button:hover {
+  color: #111;
 }
 
 .cd-qty-box span {
@@ -214,6 +231,11 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cd-cart-bar:hover {
+  background: #222;
 }
 
 /* ================= SKELETON ================= */
