@@ -5,8 +5,8 @@ import "../styles/checkout.css";
 export default function Checkout() {
   const [activeTab, setActiveTab] = useState("order");
   const [cart, setCart] = useState([
-    { id: 1, name: "Burger", price: 1200, qty: 2 },
-    { id: 2, name: "Fries", price: 500, qty: 1 },
+    { id: 1, name: "Burger", price: 1200, qty: 2, note: "" },
+    { id: 2, name: "Fries", price: 500, qty: 1, note: "" },
   ]);
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("card");
@@ -22,6 +22,12 @@ export default function Checkout() {
       prev
         .map((i) => (i.id === id ? { ...i, qty: i.qty - 1 } : i))
         .filter((i) => i.qty > 0)
+    );
+  };
+
+  const updateNote = (id, value) => {
+    setCart((prev) =>
+      prev.map((i) => (i.id === id ? { ...i, note: value } : i))
     );
   };
 
@@ -64,11 +70,16 @@ export default function Checkout() {
           <section className="co-section">
             {cart.map((item) => (
               <div key={item.id} className="co-order-item">
-                <div>
+                <div className="co-item-details">
                   <h4>{item.name}</h4>
                   <p>₦{item.price}</p>
+                  <input
+                    className="co-note"
+                    placeholder="Add note (optional)"
+                    value={item.note}
+                    onChange={(e) => updateNote(item.id, e.target.value)}
+                  />
                 </div>
-
                 <div className="co-qty-box">
                   <button onClick={() => decreaseQty(item.id)}>
                     <FiMinus />
