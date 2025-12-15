@@ -164,7 +164,7 @@
   padding: 10px 16px;
   overflow-x: auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background: #dcdcdc;
+  background: #f5f5f5;
 }
 
 .cd-categories::-webkit-scrollbar {
