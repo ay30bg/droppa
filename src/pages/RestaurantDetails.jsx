@@ -1,13 +1,18 @@
+// src/pages/RestaurantDetails.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { featuredRestaurants, restaurantMenus, getRestaurantTimeDisplay } from "../data/restaurants";
+import {
+  featuredRestaurants,
+  restaurantMenus,
+  getRestaurantTimeDisplay,
+} from "../data/restaurants";
 import "../styles/restaurantdetails.css";
 import { FiShare2, FiHeart } from "react-icons/fi";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const restaurant = featuredRestaurants.find(r => r.id === Number(id));
+  const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
   const menu = restaurantMenus[id] || [];
 
   const [activeCategory, setActiveCategory] = useState("All");
@@ -22,18 +27,22 @@ export default function RestaurantDetails() {
   if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
-  const categories = ["All", ...Array.from(new Set(menu.map(item => item.category)))];
+  const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
 
-  const addToCart = item => {
-    setCart(prev => {
-      const exists = prev.find(p => p.id === item.id);
-      if (exists) return prev.map(p => p.id === item.id ? { ...p, qty: p.qty + 1 } : p);
+  const addToCart = (item) => {
+    setCart((prev) => {
+      const exists = prev.find((p) => p.id === item.id);
+      if (exists) return prev.map((p) => (p.id === item.id ? { ...p, qty: p.qty + 1 } : p));
       return [...prev, { ...item, qty: 1 }];
     });
   };
 
   const changeQty = (id, type) => {
-    setCart(prev => prev.map(p => p.id === id ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 } : p).filter(p => p.qty > 0));
+    setCart((prev) =>
+      prev
+        .map((p) => (p.id === id ? { ...p, qty: type === "inc" ? p.qty + 1 : p.qty - 1 } : p))
+        .filter((p) => p.qty > 0)
+    );
   };
 
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
@@ -42,7 +51,7 @@ export default function RestaurantDetails() {
     <div className="cd-page" ref={scrollRef}>
       {/* HEADER */}
       <div className="cd-header">
-        <button className="cd-back" onClick={() => navigate(-1)}>←</button>
+        <button className="cd-back" onClick={() => navigate("/restaurant")}>←</button>
         <span className="cd-title">{restaurant.name}</span>
         <div className="cd-header-icons">
           <FiShare2 size={20} />
@@ -50,7 +59,7 @@ export default function RestaurantDetails() {
         </div>
       </div>
 
-      {/* REST INFO */}
+      {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
         <div className="cd-meta">
           <span>⭐ {restaurant.rating} ({restaurant.orders})</span>
@@ -63,7 +72,7 @@ export default function RestaurantDetails() {
 
       {/* CATEGORIES */}
       <div className="cd-categories">
-        {categories.map(cat => (
+        {categories.map((cat) => (
           <button
             key={cat}
             className={activeCategory === cat ? "active" : ""}
@@ -83,34 +92,51 @@ export default function RestaurantDetails() {
             <div className="cd-skeleton-card" />
           </>
         ) : (
-          categories.filter(c => c !== "All").map(cat => (
-            (activeCategory === "All" || activeCategory === cat) && (
-              <div key={cat}>
-                <h3 className="cd-section-title" ref={el => sectionRefs.current[cat] = el}>{cat}</h3>
-                {menu.filter(item => item.category === cat).map(item => {
-                  const inCart = cart.find(c => c.id === item.id);
-                  return (
-                    <div className="cd-menu-item" key={item.id}>
-                      <div className="cd-item-info">
-                        <h4>{item.name}</h4>
-                        {item.description && <p className="cd-subtext">{item.description}</p>}
-                        <p className="cd-price">₦{item.price}</p>
-                      </div>
-                      {inCart ? (
-                        <div className="cd-qty-box">
-                          <button onClick={() => changeQty(item.id, "dec")}>−</button>
-                          <span>{inCart.qty}</span>
-                          <button onClick={() => changeQty(item.id, "inc")}>+</button>
-                        </div>
-                      ) : (
-                        <button className="cd-add-btn" onClick={() => addToCart(item)}>Add</button>
-                      )}
-                    </div>
-                  )
-                })}
-              </div>
+          categories
+            .filter((c) => c !== "All")
+            .map(
+              (cat) =>
+                (activeCategory === "All" || activeCategory === cat) && (
+                  <div key={cat}>
+                    <h3
+                      className="cd-section-title"
+                      ref={(el) => (sectionRefs.current[cat] = el)}
+                    >
+                      {cat}
+                    </h3>
+                    {menu
+                      .filter((item) => item.category === cat)
+                      .map((item) => {
+                        const inCart = cart.find((c) => c.id === item.id);
+                        return (
+                          <div className="cd-menu-item" key={item.id}>
+                            <div className="cd-item-info">
+                              <h4>{item.name}</h4>
+                              {item.description && (
+                                <p className="cd-subtext">{item.description}</p>
+                              )}
+                              <p className="cd-price">₦{item.price}</p>
+                            </div>
+                            {inCart ? (
+                              <div className="cd-qty-box">
+                                <button onClick={() => changeQty(item.id, "dec")}>−</button>
+                                <span>{inCart.qty}</span>
+                                <button onClick={() => changeQty(item.id, "inc")}>+</button>
+                              </div>
+                            ) : (
+                              <button
+                                className="cd-add-btn"
+                                onClick={() => addToCart(item)}
+                              >
+                                Add
+                              </button>
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                )
             )
-          ))
         )}
       </div>
 
