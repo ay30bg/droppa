@@ -15,10 +15,12 @@
   z-index: 50;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* keeps title centered with actions on right */
   padding: 14px 16px;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  gap: 12px;
 }
 
 .cd-back {
@@ -27,46 +29,34 @@
   font-size: 22px;
   cursor: pointer;
   line-height: 1;
-  display: flex;
-  align-items: center;
 }
 
 .cd-title {
   font-size: 17px;
   font-weight: 600;
   flex: 1;
-  text-align: center;
-  white-space: nowrap;
+  text-align: center; /* keep it centered */
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-/* Header right icons */
 .cd-header-actions {
   display: flex;
-  gap: 10px;
+  gap: 12px;
 }
 
 .cd-icon-btn {
   border: none;
-  background: #f3f3f3;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.cd-icon-btn:active {
-  transform: scale(0.96);
 }
 
 .cd-icon-btn.liked {
-  background: #fde8ee;
   color: #e11d48;
 }
 
@@ -77,16 +67,13 @@
 
 .cd-meta {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   font-size: 14px;
   color: #444;
   flex-wrap: wrap;
 }
 
 .cd-meta span {
-  display: flex;
-  align-items: center;
-  gap: 4px;
   white-space: nowrap;
 }
 
@@ -110,6 +97,7 @@
   padding: 10px 16px;
   overflow-x: auto;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fff;
 }
 
 .cd-categories::-webkit-scrollbar {
@@ -178,16 +166,10 @@
   align-self: center;
   border: 1px solid #111;
   background: #ffffff;
-  padding: 6px 16px;
+  padding: 6px 14px;
   border-radius: 999px;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease;
-}
-
-.cd-add-btn:hover {
-  background: #111;
-  color: #ffffff;
 }
 
 .cd-qty-box {
@@ -199,14 +181,8 @@
 
 .cd-qty-box button {
   border: none;
-  background: #f3f3f3;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
+  background: none;
+  font-size: 20px;
   cursor: pointer;
 }
 
@@ -232,7 +208,6 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 /* ================= SKELETON ================= */
