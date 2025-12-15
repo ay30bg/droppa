@@ -72,6 +72,26 @@
   padding: 16px;
 }
 
+.cd-location-status {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.cd-divider {
+  margin: 0 6px;
+  color: #888;
+}
+
+.cd-status.open {
+  color: green;
+}
+
+.cd-status.closed {
+  color: red;
+}
+
 .cd-meta {
   display: flex;
   gap: 16px;
