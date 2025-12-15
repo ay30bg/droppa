@@ -1,122 +1,68 @@
-.co-page {
-  min-height: 100vh;
-  background: #f6f6f6;
-  padding-bottom: 90px;
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-}
-
-/* HEADER */
-.co-header {
-  position: sticky;
-  top: 0;
-  background: #fff;
+/* TABS */
+.co-tabs {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
-  border-bottom: 1px solid #eee;
-  z-index: 10;
-}
-
-.co-back {
-  background: none;
-  border: none;
-}
-
-/* CARD */
-.co-card {
-  background: #fff;
   margin: 12px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.co-tabs button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  background: none;
+  font-weight: 600;
+}
+
+.co-tabs button.active {
+  background: #000;
+  color: #fff;
+}
+
+/* ORDER ITEM */
+.co-order-item {
+  background: #fff;
+  margin: 0 12px 12px;
   padding: 14px;
   border-radius: 14px;
-}
-
-.co-card-title {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.co-inline {
-  display: flex;
-  align-items: center;
   justify-content: space-between;
-  font-weight: 500;
+  align-items: center;
 }
 
-/* INPUTS */
-.co-input,
-.co-textarea {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 12px;
-  font-size: 14px;
-  margin-bottom: 10px;
+.co-order-item h4 {
+  margin: 0;
+  font-size: 15px;
 }
 
-.co-textarea {
-  resize: none;
-  height: 70px;
+.co-order-item p {
+  margin: 4px 0 0;
+  color: #555;
 }
 
-/* PAYMENT */
-.co-payment {
+/* QTY */
+.co-qty-box {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  margin-bottom: 10px;
-  cursor: pointer;
 }
 
-.co-payment.active {
-  border-color: #000;
-  background: #fafafa;
+.co-qty-box button {
+  background: #f1f1f1;
+  border: none;
+  padding: 6px;
+  border-radius: 8px;
 }
 
 /* SUMMARY */
 .co-summary-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
   margin-bottom: 8px;
 }
 
 .co-summary-row.total {
   font-weight: 700;
   font-size: 16px;
-}
-
-.co-divider {
-  height: 1px;
-  background: #eee;
-  margin: 10px 0;
-}
-
-/* CTA */
-.co-pay-btn {
-  position: fixed;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  background: #000;
-  color: #fff;
-  border: none;
-  padding: 16px;
-  border-radius: 16px;
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.co-pay-btn:disabled {
-  background: #ccc;
 }
