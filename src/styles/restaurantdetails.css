@@ -1,35 +1,33 @@
-/* GLOBAL PAGE */
+/* ================= BASE ================= */
 .cd-page {
   height: 100vh;
   overflow-y: auto;
-  background: #f7f7f7;
+  background: #ffffff;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  padding-bottom: 90px;
+  padding-bottom: 96px;
+  color: #111;
 }
 
-/* HEADER */
+/* ================= HEADER ================= */
 .cd-header {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 50;
   display: flex;
   align-items: center;
+  gap: 12px;
   padding: 14px 16px;
-  background: #fff;
-  transition: all 0.25s ease-in-out;
-  border-bottom: 1px solid #eee;
-}
-
-.cd-header.shrunk {
-  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
 .cd-back {
-  background: none;
   border: none;
+  background: none;
   font-size: 22px;
-  margin-right: 8px;
   cursor: pointer;
+  line-height: 1;
 }
 
 .cd-title {
@@ -37,211 +35,175 @@
   font-weight: 600;
 }
 
-/* RESTAURANT INFO CONTAINER */
+/* ================= REST INFO ================= */
 .cd-rest-info {
-  padding: 18px 16px;
-  background: #fff;
-  margin-bottom: 10px;
+  padding: 16px;
 }
 
-/* ⭐ Rating | ETA | Delivery Fee */
-.cd-sub-info {
+.cd-meta {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  gap: 10px;
   font-size: 14px;
-  font-weight: 600;
-  color: #222;
-  margin-bottom: 8px;
+  color: #444;
+  flex-wrap: wrap;
 }
 
-.cd-rating {
-  display: flex;
-  align-items: center;
+.cd-meta span {
+  white-space: nowrap;
 }
 
-.cd-orders {
-  margin-left: 2px;
-  font-size: 12px;
+.cd-street {
+  margin-top: 6px;
+  font-size: 13px;
   color: #777;
 }
 
-.cd-separator {
-  color: #999;
-  font-weight: 400;
-}
-
-.cd-eta,
-.cd-fee {
-  color: #333;
+.cd-closed {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #d32f2f;
   font-weight: 500;
 }
 
-/* STREET */
-.cd-street-info {
-  font-size: 14px;
-  margin-bottom: 10px;
-  color: #444;
-}
-
-/* TAGS */
-.cd-tags {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.cd-badge {
-  font-size: 12px;
-  padding: 5px 10px;
-  border-radius: 8px;
-  color: #fff;
-}
-
-.top-rated {
-  background: #34c759; /* green */
-}
-
-.popular {
-  background: #ff9500; /* orange */
-}
-
-/* CLOSED OR DELIVERY BOX */
-.cd-closed-banner {
-  padding: 10px;
-  background: #ff3b30;
-  color: #fff;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.cd-delivery-box {
-  padding: 10px;
-  background: #f2f2f7;
-  color: #333;
-  text-align: center;
-  border-radius: 8px;
-}
-
-/* CATEGORIES */
+/* ================= CATEGORIES ================= */
 .cd-categories {
   display: flex;
   gap: 10px;
+  padding: 10px 16px;
   overflow-x: auto;
-  padding: 12px 16px;
-  background: #fff;
-  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.cd-categories::-webkit-scrollbar {
+  display: none;
 }
 
 .cd-categories button {
-  padding: 8px 16px;
-  border-radius: 20px;
+  background: #f2f2f2;
   border: none;
-  background: #eee;
+  padding: 8px 14px;
+  border-radius: 999px;
   font-size: 14px;
   cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease;
 }
 
-.cd-categories .active {
-  background: #000;
-  color: #fff;
+.cd-categories button.active {
+  background: #111;
+  color: #ffffff;
 }
 
-/* MENU SECTION */
+/* ================= MENU ================= */
 .cd-menu-section {
-  padding: 14px 16px;
+  padding: 12px 16px;
 }
 
 .cd-section-title {
   font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-weight: 600;
+  margin: 18px 0 10px;
 }
 
-/* MENU ITEM */
+/* ================= MENU ITEM ================= */
 .cd-menu-item {
   display: flex;
   justify-content: space-between;
+  gap: 14px;
   padding: 14px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cd-item-info {
+  flex: 1;
 }
 
 .cd-item-info h4 {
   margin: 0;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .cd-subtext {
   font-size: 13px;
-  color: #666;
-  margin: 4px 0;
+  color: #777;
+  margin: 6px 0;
 }
 
 .cd-price {
-  font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-/* ADD BUTTON & QTY */
+/* ================= ADD / QTY ================= */
 .cd-add-btn {
-  background: #000;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 12px;
-  border: none;
-  cursor: pointer;
+  align-self: center;
+  border: 1px solid #111;
+  background: #ffffff;
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 14px;
+  cursor: pointer;
 }
 
 .cd-qty-box {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  align-self: center;
 }
 
 .cd-qty-box button {
-  background: #f2f2f7;
   border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  font-size: 18px;
+  background: none;
+  font-size: 20px;
   cursor: pointer;
 }
 
-/* SKELETON LOADING */
-.cd-skeleton-card {
-  height: 70px;
-  background: #e2e2e2;
-  border-radius: 10px;
-  margin-bottom: 12px;
-  animation: pulse 1.5s infinite ease-in-out;
+.cd-qty-box span {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 600;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.6; }
-  50% { opacity: 1; }
-  100% { opacity: 0.6; }
-}
-
-/* CART BAR */
+/* ================= CART BAR ================= */
 .cd-cart-bar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #000;
-  color: #fff;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: #111;
+  color: #ffffff;
   padding: 16px;
+  border-radius: 14px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.cd-cart-total {
-  font-size: 16px;
+/* ================= SKELETON ================= */
+.cd-skeleton-card {
+  height: 72px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: linear-gradient(
+    90deg,
+    #eeeeee 25%,
+    #f5f5f5 37%,
+    #eeeeee 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.3s ease infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
