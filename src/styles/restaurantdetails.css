@@ -96,6 +96,8 @@
   transform: translateY(-50%);
   color: #ccc;
   font-weight: 400;
+  font-size: 16px; /* increase height */
+  line-height: 1.5; /* vertical spacing */
 }
 
 .cd-meta-label {
