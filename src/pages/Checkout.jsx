@@ -1,44 +1,31 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  FiArrowLeft,
-  FiPlus,
-  FiMinus,
-  FiMapPin,
-  FiCreditCard,
-  FiCheckCircle,
-} from "react-icons/fi";
+import { FiArrowLeft, FiPlus, FiMinus, FiMapPin, FiCreditCard, FiCheckCircle } from "react-icons/fi";
 import "../styles/checkout.css";
 
-export default function Checkout({ cart, setCart }) {
-  const navigate = useNavigate();
+export default function Checkout() {
   const [activeTab, setActiveTab] = useState("order");
+  const [cart, setCart] = useState([
+    { id: 1, name: "Burger", price: 1200, qty: 2 },
+    { id: 2, name: "Fries", price: 500, qty: 1 },
+  ]);
   const [address, setAddress] = useState("");
   const [payment, setPayment] = useState("card");
 
-  /* ---------------- CART LOGIC ---------------- */
   const increaseQty = (id) => {
     setCart((prev) =>
-      prev.map((i) =>
-        i.id === id ? { ...i, qty: i.qty + 1 } : i
-      )
+      prev.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i))
     );
   };
 
   const decreaseQty = (id) => {
     setCart((prev) =>
       prev
-        .map((i) =>
-          i.id === id ? { ...i, qty: i.qty - 1 } : i
-        )
+        .map((i) => (i.id === id ? { ...i, qty: i.qty - 1 } : i))
         .filter((i) => i.qty > 0)
     );
   };
 
-  const subtotal = cart.reduce(
-    (acc, i) => acc + i.price * i.qty,
-    0
-  );
+  const subtotal = cart.reduce((acc, i) => acc + i.price * i.qty, 0);
   const deliveryFee = 200;
   const vat = Math.round(subtotal * 0.075);
   const total = subtotal + deliveryFee + vat;
@@ -48,7 +35,7 @@ export default function Checkout({ cart, setCart }) {
       {/* HEADER */}
       <div className="co-header">
         <div className="co-header-left">
-          <button className="co-back" onClick={() => navigate(-1)}>
+          <button className="co-back" onClick={() => alert("Go back")}>
             <FiArrowLeft size={20} />
           </button>
           <span className="co-title">Checkout</span>
@@ -61,13 +48,13 @@ export default function Checkout({ cart, setCart }) {
           className={activeTab === "order" ? "active" : ""}
           onClick={() => setActiveTab("order")}
         >
-          Your order
+          Your Order
         </button>
         <button
           className={activeTab === "payment" ? "active" : ""}
           disabled={cart.length === 0}
         >
-          Delivery & payment
+          Delivery & Payment
         </button>
       </div>
 
@@ -118,7 +105,7 @@ export default function Checkout({ cart, setCart }) {
               disabled={cart.length === 0}
               onClick={() => setActiveTab("payment")}
             >
-              Make payment · ₦{subtotal + deliveryFee}
+              Make Payment · ₦{subtotal + deliveryFee}
             </button>
           </div>
         </>
@@ -143,7 +130,7 @@ export default function Checkout({ cart, setCart }) {
 
           {/* PAYMENT SUMMARY */}
           <section className="co-card">
-            <div className="co-card-title">Payment summary</div>
+            <div className="co-card-title">Payment Summary</div>
 
             <div className="co-summary-row">
               <span>Order total</span>
@@ -167,7 +154,7 @@ export default function Checkout({ cart, setCart }) {
           {/* PAYMENT METHOD */}
           <section className="co-card">
             <div className="co-card-title">
-              <FiCreditCard /> Payment method
+              <FiCreditCard /> Payment Method
             </div>
 
             <label className={`co-payment ${payment === "card" ? "active" : ""}`}>
@@ -185,18 +172,18 @@ export default function Checkout({ cart, setCart }) {
                 checked={payment === "cash"}
                 onChange={() => setPayment("cash")}
               />
-              Cash on delivery
+              Cash on Delivery
             </label>
           </section>
 
-          {/* FINAL CTA */}
+          {/* PLACE ORDER */}
           <div className="co-cart-bar">
             <button
               className="co-pay-btn"
               disabled={!address}
               onClick={() => alert("Order placed successfully")}
             >
-              <FiCheckCircle /> Place order · ₦{total}
+              <FiCheckCircle /> Place Order · ₦{total}
             </button>
           </div>
         </>
