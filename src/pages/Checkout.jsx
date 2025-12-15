@@ -59,6 +59,7 @@ export default function Checkout() {
         <button
           className={activeTab === "payment" ? "active" : ""}
           disabled={cart.length === 0}
+          onClick={() => setActiveTab("payment")}
         >
           Delivery & Payment
         </button>
@@ -130,7 +131,6 @@ export default function Checkout() {
             <div className="co-card-title">
               <FiMapPin /> Delivery address
             </div>
-
             <input
               className="co-input"
               placeholder="Enter delivery address"
@@ -142,7 +142,6 @@ export default function Checkout() {
           {/* PAYMENT SUMMARY */}
           <section className="co-card">
             <div className="co-card-title">Payment Summary</div>
-
             <div className="co-summary-row">
               <span>Order total</span>
               <span>₦{subtotal}</span>
@@ -155,7 +154,6 @@ export default function Checkout() {
               <span>VAT (7.5%)</span>
               <span>₦{vat}</span>
             </div>
-
             <div className="co-summary-row total">
               <span>Total</span>
               <span>₦{total}</span>
