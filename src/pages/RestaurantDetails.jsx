@@ -7,7 +7,7 @@ import {
   getRestaurantTimeDisplay,
 } from "../data/restaurants";
 import "../styles/restaurantdetails.css";
-import { FiShare2, FiHeart } from "react-icons/fi";
+import { FiArrowLeft, FiShare2, FiHeart } from "react-icons/fi";
 
 export default function RestaurantDetails() {
   const { id } = useParams();
@@ -51,9 +51,14 @@ export default function RestaurantDetails() {
     <div className="cd-page" ref={scrollRef}>
       {/* HEADER */}
       <div className="cd-header">
-        <button className="cd-back" onClick={() => navigate("/restaurant")}>←</button>
-        <span className="cd-title">{restaurant.name}</span>
-        <div className="cd-header-icons">
+        <div className="cd-header-left">
+          <button className="cd-back" onClick={() => navigate("/restaurant")}>
+            <FiArrowLeft size={20} />
+          </button>
+          <span className="cd-title">{restaurant.name}</span>
+        </div>
+
+        <div className="cd-header-right">
           <FiShare2 size={20} />
           <FiHeart size={20} />
         </div>
