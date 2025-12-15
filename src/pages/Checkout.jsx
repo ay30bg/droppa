@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./checkout.css";
+import "../styles/checkout.css";
 
 const sampleCart = [
   { id: 1, name: "Chicken Burger", price: 1500, quantity: 1 },
