@@ -72,12 +72,13 @@ export default function RestaurantDetails() {
 
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
-        {/* LOCATION & OPEN/CLOSED STATUS */}
+        {/* LOCATION | OPEN/CLOSED */}
         <div className="cd-location-status">
-          <div className="cd-street">{restaurant.street}</div>
-          <div className={`cd-status ${isClosed ? "closed" : "open"}`}>
+          <span className="cd-street">{restaurant.street}</span>
+          <span className="cd-divider"> | </span>
+          <span className={`cd-status ${isClosed ? "closed" : "open"}`}>
             {isClosed ? "Closed" : "Open"}
-          </div>
+          </span>
         </div>
 
         {/* META INFO */}
