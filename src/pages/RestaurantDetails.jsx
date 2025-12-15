@@ -14,7 +14,6 @@ export default function RestaurantDetails() {
   const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
   const menu = restaurantMenus[id] || [];
 
-  const [shrunk, setShrunk] = useState(false);
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -23,21 +22,14 @@ export default function RestaurantDetails() {
   const sectionRefs = useRef({});
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 1200);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setShrunk(scrollRef.current.scrollTop > 30);
-    scrollRef.current.addEventListener("scroll", handleScroll);
-    return () =>
-      scrollRef.current?.removeEventListener("scroll", handleScroll);
+    setTimeout(() => setLoading(false), 1000);
   }, []);
 
   if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  const categories = ["All", "Popular", "Recommended"];
+  const categories = ["All", "Recommended"];
 
   const addToCart = (item) => {
     setCart((prev) => {
@@ -63,68 +55,27 @@ export default function RestaurantDetails() {
     );
   };
 
-  const scrollToCategory = (cat) => {
-    setActiveCategory(cat);
-    if (cat === "All") {
-      scrollRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    } else if (sectionRefs.current[cat]) {
-      sectionRefs.current[cat].scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   return (
     <div className="cd-page" ref={scrollRef}>
-      
       {/* HEADER */}
-      <div className={`cd-header ${shrunk ? "shrunk" : ""}`}>
-        <button onClick={() => navigate(-1)} className="cd-back">←</button>
+      <div className="cd-header">
+        <button className="cd-back" onClick={() => navigate(-1)}>←</button>
         <span className="cd-title">{restaurant.name}</span>
       </div>
 
       {/* RESTAURANT INFO */}
       <div className="cd-rest-info">
-
-        {/* RATING | ETA | DELIVERY FEE */}
-        <div className="cd-sub-info">
-          <span className="cd-rating">
-            ⭐ {restaurant.rating}
-            <span className="cd-orders">({restaurant.orders})</span>
-          </span>
-
-          <span className="cd-separator">|</span>
-
-          <span className="cd-eta">{restaurant.time}</span>
-
-          <span className="cd-separator">|</span>
-
-          <span className="cd-fee">₦200</span>
+        <div className="cd-meta">
+          <span>⭐ {restaurant.rating} ({restaurant.orders})</span>
+          <span>• {restaurant.time}</span>
+          <span>• ₦200</span>
         </div>
 
-        {/* STREET */}
-        <div className="cd-street-info">📍 {restaurant.street}</div>
+        <div className="cd-street">{restaurant.street}</div>
 
-        {/* TAGS */}
-        <div className="cd-tags">
-          {restaurant.rating >= 4.8 && (
-            <span className="cd-badge top-rated">Top Rated</span>
-          )}
-          {restaurant.orders > 1000 && (
-            <span className="cd-badge popular">Popular</span>
-          )}
-        </div>
-
-        {/* CLOSED OR DELIVERY BOX */}
-        {isClosed ? (
-          <div className="cd-closed-banner">
-            Closed — Opens tomorrow morning
-          </div>
-        ) : (
-          <div className="cd-delivery-box">
-            <span>🚚 Delivery Fee: ₦200 | ⏱️ {restaurant.time}</span>
-          </div>
-        )}
+        {isClosed && <div className="cd-closed">Closed</div>}
       </div>
 
       {/* CATEGORIES */}
@@ -133,7 +84,7 @@ export default function RestaurantDetails() {
           <button
             key={cat}
             className={activeCategory === cat ? "active" : ""}
-            onClick={() => scrollToCategory(cat)}
+            onClick={() => setActiveCategory(cat)}
           >
             {cat}
           </button>
@@ -144,9 +95,9 @@ export default function RestaurantDetails() {
       <div className="cd-menu-section">
         {loading ? (
           <>
-            <div className="cd-skeleton-card"></div>
-            <div className="cd-skeleton-card"></div>
-            <div className="cd-skeleton-card"></div>
+            <div className="cd-skeleton-card" />
+            <div className="cd-skeleton-card" />
+            <div className="cd-skeleton-card" />
           </>
         ) : (
           <>
@@ -193,9 +144,9 @@ export default function RestaurantDetails() {
 
       {/* CART BAR */}
       {cart.length > 0 && (
-        <div className="cd-cart-bar" onClick={() => alert("Checkout modal…")}>
-          <div>{cart.reduce((acc, it) => acc + it.qty, 0)} item(s)</div>
-          <div className="cd-cart-total">₦{total}</div>
+        <div className="cd-cart-bar">
+          <span>{cart.reduce((a, b) => a + b.qty, 0)} items</span>
+          <span>₦{total}</span>
         </div>
       )}
     </div>
