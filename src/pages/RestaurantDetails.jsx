@@ -12,7 +12,9 @@ export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
-  const menu = restaurantMenus[id] || [];
+
+  // Safe menu load
+  const menu = restaurantMenus[Number(id)] || [];
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
@@ -30,8 +32,10 @@ export default function RestaurantDetails() {
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
+  // Categories
   const categories = ["All", ...Array.from(new Set(menu.map((item) => item.category)))];
 
+  // Cart handlers
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
@@ -63,29 +67,39 @@ export default function RestaurantDetails() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
+  // Dynamic open/close
   const getDynamicStatus = (time) => {
-    // Parse "10:00 AM - 10:00 PM" format
-    const now = new Date();
-    const [openStr, closeStr] = time.split(" - ");
-    const parseTime = (str) => {
-      let [h, mPart] = str.split(":");
-      let m = parseInt(mPart);
-      let isPM = str.includes("PM");
-      h = parseInt(h);
-      if (isPM && h !== 12) h += 12;
-      if (!isPM && h === 12) h = 0;
-      return { h, m };
-    };
-    const open = parseTime(openStr);
-    const close = parseTime(closeStr);
+    if (!time || !time.includes("-")) return isClosed ? "Closed" : "Open";
 
-    const openDate = new Date();
-    openDate.setHours(open.h, open.m, 0);
-    const closeDate = new Date();
-    closeDate.setHours(close.h, close.m, 0);
+    try {
+      const now = new Date();
+      const [openStr, closeStr] = time.split(" - ");
 
-    if (now >= openDate && now <= closeDate) return `Open now (closes at ${closeStr})`;
-    return `Closed (opens at ${openStr})`;
+      const parseTime = (str) => {
+        const [h, mPart] = str.split(":");
+        let m = parseInt(mPart) || 0;
+        let isPM = str.toUpperCase().includes("PM");
+        let hour = parseInt(h);
+        if (isPM && hour !== 12) hour += 12;
+        if (!isPM && hour === 12) hour = 0;
+        return { hour, m };
+      };
+
+      const open = parseTime(openStr);
+      const close = parseTime(closeStr);
+
+      const openDate = new Date();
+      openDate.setHours(open.hour, open.m, 0);
+      const closeDate = new Date();
+      closeDate.setHours(close.hour, close.m, 0);
+
+      if (now >= openDate && now <= closeDate)
+        return `Open now (closes at ${closeStr})`;
+      return `Closed (opens at ${openStr})`;
+    } catch (err) {
+      console.error("Time parse error", err);
+      return isClosed ? "Closed" : "Open";
+    }
   };
 
   return (
@@ -185,13 +199,9 @@ export default function RestaurantDetails() {
                             </div>
                             {inCart ? (
                               <div className="cd-qty-box">
-                                <button onClick={() => changeQty(item.id, "dec")}>
-                                  −
-                                </button>
+                                <button onClick={() => changeQty(item.id, "dec")}>−</button>
                                 <span>{inCart.qty}</span>
-                                <button onClick={() => changeQty(item.id, "inc")}>
-                                  +
-                                </button>
+                                <button onClick={() => changeQty(item.id, "inc")}>+</button>
                               </div>
                             ) : (
                               <button
