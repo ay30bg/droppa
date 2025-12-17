@@ -15,13 +15,27 @@ export default function RestaurantDetails() {
   const menu = restaurantMenus[Number(id)] || [];
 
   const [activeCategory, setActiveCategory] = useState("All");
-  const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState(false);
 
   const scrollRef = useRef();
   const sectionRefs = useRef({});
 
+  // ---------- CART STATE WITH LOCALSTORAGE PERSISTENCE ----------
+  const [cart, setCart] = useState(() => {
+    const saved = localStorage.getItem("restaurant_cart");
+    const parsed = saved ? JSON.parse(saved) : {};
+    return parsed[id] || [];
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem("restaurant_cart");
+    const parsed = saved ? JSON.parse(saved) : {};
+    parsed[id] = cart;
+    localStorage.setItem("restaurant_cart", JSON.stringify(parsed));
+  }, [cart, id]);
+
+  // ---------- LOADING SIMULATION ----------
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
@@ -31,7 +45,7 @@ export default function RestaurantDetails() {
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
 
-  /* ---------------- NATIVE SHARE ---------------- */
+  // ---------- NATIVE SHARE ----------
   const handleNativeShare = async () => {
     if (navigator.share) {
       try {
@@ -49,13 +63,13 @@ export default function RestaurantDetails() {
     }
   };
 
-  /* ---------------- CATEGORIES ---------------- */
+  // ---------- CATEGORIES ----------
   const categories = [
     "All",
     ...Array.from(new Set(menu.map((item) => item.category))),
   ];
 
-  /* ---------------- CART ---------------- */
+  // ---------- CART FUNCTIONS ----------
   const addToCart = (item) => {
     setCart((prev) => {
       const exists = prev.find((p) => p.id === item.id);
@@ -88,7 +102,7 @@ export default function RestaurantDetails() {
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
-  /* ---------------- DYNAMIC OPEN/CLOSE ---------------- */
+  // ---------- DYNAMIC OPEN/CLOSE ----------
   const getDynamicStatus = (time) => {
     if (!time || !time.includes("-")) return isClosed ? "Closed" : "Open";
 
@@ -265,4 +279,4 @@ export default function RestaurantDetails() {
       )}
     </div>
   );
-                      }
+}
