@@ -181,6 +181,38 @@
   font-weight: 600;
 }
 
+.ck-step-content {
+  position: relative;
+  min-height: 300px; /* adjust to content */
+  overflow: hidden;
+}
+
+.ck-step1, .ck-step2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transition: all 0.4s ease;
+  opacity: 0;
+  transform: translateX(50px);
+  pointer-events: none;
+}
+
+.step-1 .ck-step1,
+.step-2 .ck-step2 {
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: all;
+}
+
+.step-1 .ck-step2 {
+  transform: translateX(50px);
+}
+
+.step-2 .ck-step1 {
+  transform: translateX(-50px);
+}
+
 /* ================= FOOTER ================= */
 .ck-footer {
   position: fixed;
