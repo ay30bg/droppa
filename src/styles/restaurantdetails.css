@@ -1,192 +1,225 @@
 /* ================= BASE ================= */
-.ck-page {
-  min-height: 100vh;
-  background: #f5f5f5;
+.cd-page {
+  height: 100vh;
+  overflow-y: auto;
+  background: #e0e0e0; /* deeper than #f5f5f5 */
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  padding-bottom: 110px;
+  padding-bottom: 96px;
   color: #000;
 }
 
-/* ================= HEADER (MATCHES cd-header) ================= */
-.ck-header {
+/* ================= HEADER ================= */
+.cd-header {
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 30;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  padding: 14px 16px;
-  background: #f5f5f5;
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-}
-
-.ck-header-left {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.ck-back {
-  border: none;
-  background: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ck-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-/* ================= STEPS ================= */
-.ck-steps {
-  display: flex;
-  gap: 10px;
-  padding: 10px 16px;
-  background: #f5f5f5;
-}
-
-.ck-step {
-  flex: 1;
-  height: 6px;
-  border-radius: 6px;
-  background: #ddd;
-}
-
-.ck-step.active {
-  background: #014f50;
-}
-
-/* ================= CARD ================= */
-.ck-card {
+  padding: 12px 16px;
   background: #fff;
-  margin: 12px 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.cd-header-left {
+  display: flex;
+  align-items: center;
+}
+
+.cd-back {
+  border: none;
+  background: transparent;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.cd-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.cd-header-right svg {
+  margin-left: 16px;
+  cursor: pointer;
+}
+
+/* ================= RESTAURANT INFO ================= */
+.cd-rest-info {
   padding: 16px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
-/* ================= RESTAURANT ================= */
-.ck-restaurant {
+/* Location | Open/Closed */
+.cd-location-status {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+  font-size: 1rem; /* location font size */
 }
 
-.ck-restaurant h4 {
-  font-size: 15px;
+.cd-divider {
+  margin: 0 6px;
+  color: #888;
+}
+
+.cd-status.open {
+  color: green;
+}
+
+.cd-status.closed {
+  color: red;
+}
+
+/* Meta info */
+.cd-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.cd-meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.cd-meta-label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 2px;
+}
+
+.cd-meta-value {
   font-weight: 600;
-}
-
-.ck-restaurant p {
-  font-size: 13px;
-  color: #777;
-}
-
-.ck-edit {
-  border: none;
-  background: none;
-  font-size: 14px;
-  color: #014f50;
-  cursor: pointer;
-}
-
-/* ================= DIVIDER ================= */
-.ck-divider {
-  height: 1px;
-  background: #eee;
-  margin: 14px 0;
-}
-
-/* ================= ITEM ================= */
-.ck-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-  padding: 12px 0;
-}
-
-.ck-item-name {
-  font-size: 14.5px;
-}
-
-.ck-price {
-  font-size: 13.5px;
-  color: #777;
-  margin-top: 4px;
-  display: inline-block;
-}
-
-/* ================= QTY ================= */
-.ck-qty-box {
   display: flex;
   align-items: center;
+  gap: 4px;
+}
+
+/* Categories */
+.cd-categories {
+  display: flex;
+  overflow-x: auto;
+  padding: 8px 16px;
   gap: 12px;
+  margin-bottom: 12px;
 }
 
-.ck-qty-box button {
+.cd-categories button {
   border: none;
-  background: none;
-  font-size: 20px;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
   cursor: pointer;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.2s ease;
 }
 
-.ck-qty-box span {
-  min-width: 18px;
-  text-align: center;
+.cd-categories button.active {
+  background: #000;
+  color: #fff;
+}
+
+/* MENU SECTION */
+.cd-menu-section {
+  padding: 0 16px 16px;
+}
+
+.cd-section-title {
+  font-size: 1rem;
   font-weight: 600;
+  margin: 12px 0 8px;
 }
 
-/* ================= ADD MORE ================= */
-.ck-add-more {
-  margin-top: 14px;
-  width: 100%;
-  padding: 10px;
-  border-radius: 6px;
-  background: #f5f5f5;
-  border: 1px dashed #ccc;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/* ================= ROW ================= */
-.ck-row {
+.cd-menu-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 12px;
+  background: #fff;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-.ck-arrow {
-  font-size: 18px;
-  color: #777;
+.cd-item-info h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
-/* ================= FOOTER ================= */
-.ck-footer {
+.cd-subtext {
+  margin: 2px 0;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.cd-price {
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.cd-add-btn {
+  border: none;
+  background: #000;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.cd-qty-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+.cd-qty-box button {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* CART BAR */
+.cd-cart-bar {
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;
-  padding: 14px 16px;
-  background: #fff;
-  border-top: 1px solid #eee;
-}
-
-.ck-pay {
   width: 100%;
-  padding: 14px;
-  background: #014f50;
+  background: #000;
   color: #fff;
-  border: none;
-  border-radius: 7px;
-  font-size: 16px;
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
   font-weight: 600;
-  cursor: pointer;
+  font-size: 0.95rem;
+  z-index: 50;
 }
 
-.ck-pay:hover {
-  background: #222;
+/* SKELETON LOADING */
+.cd-skeleton-card {
+  height: 80px;
+  background: #ddd;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* Closed badge */
+.cd-closed {
+  color: red;
+  font-weight: 600;
+  margin-top: 4px;
 }
