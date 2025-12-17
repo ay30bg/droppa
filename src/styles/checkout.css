@@ -181,34 +181,30 @@
   font-weight: 600;
 }
 
+/* ================= STEP CONTENT (UPDATED) ================= */
 .ck-step-content {
   position: relative;
-  min-height: 300px; /* adjust to content */
-  overflow: hidden;
 }
 
 .ck-step1, .ck-step2 {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  transition: all 0.4s ease;
   opacity: 0;
   transform: translateX(50px);
-  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
 }
 
-.step-1 .ck-step1,
-.step-2 .ck-step2 {
+.ck-step1.active, .ck-step2.active {
   opacity: 1;
   transform: translateX(0);
-  pointer-events: all;
+  max-height: 2000px; /* enough for content */
 }
 
+/* Optional slide effect for non-active step */
 .step-1 .ck-step2 {
   transform: translateX(50px);
 }
-
 .step-2 .ck-step1 {
   transform: translateX(-50px);
 }
