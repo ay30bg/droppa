@@ -255,7 +255,9 @@ export default function RestaurantDetails() {
       {cart.length > 0 && (
         <div
           className="cd-cart-bar"
-          onClick={() => navigate("/checkout", { state: { cart } })}
+          onClick={() =>
+            navigate("/checkout", { state: { cart, restaurant } })
+          }
         >
           <span>{cart.reduce((a, b) => a + b.qty, 0)} items</span>
           <span>₦{total}</span>
@@ -263,4 +265,4 @@ export default function RestaurantDetails() {
       )}
     </div>
   );
-}
+                      }
