@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import "../styles/checkout.css";
@@ -7,10 +7,27 @@ export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Get cart and restaurant from RestaurantDetails
   const { cart: initialCart = [], restaurant } = location.state || {};
+
   const [cart, setCart] = useState(initialCart);
   const [step, setStep] = useState(1);
+  const [droppaBag, setDroppaBag] = useState(true); // default added
+
+  // Add or remove Droppa Bag dynamically
+  useEffect(() => {
+    if (droppaBag) {
+      // add if not already in cart
+      if (!cart.find((item) => item.id === "droppa-bag")) {
+        setCart((prev) => [
+          ...prev,
+          { id: "droppa-bag", name: "Droppa Bag", price: 100, qty: 1 },
+        ]);
+      }
+    } else {
+      // remove if unchecked
+      setCart((prev) => prev.filter((item) => item.id !== "droppa-bag"));
+    }
+  }, [droppaBag]);
 
   const changeQty = (id, type) => {
     setCart((prev) =>
@@ -72,6 +89,7 @@ export default function Checkout() {
 
             <div className="ck-divider" />
 
+            {/* Cart items */}
             {cart.map((item) => (
               <div className="ck-item" key={item.id}>
                 <div className="ck-item-info">
@@ -79,13 +97,28 @@ export default function Checkout() {
                   <span className="ck-price">₦{item.price}</span>
                 </div>
 
-                <div className="ck-qty-box">
-                  <button onClick={() => changeQty(item.id, "dec")}>−</button>
-                  <span>{item.qty}</span>
-                  <button onClick={() => changeQty(item.id, "inc")}>+</button>
-                </div>
+                {/* Quantity buttons only for regular items */}
+                {item.id !== "droppa-bag" && (
+                  <div className="ck-qty-box">
+                    <button onClick={() => changeQty(item.id, "dec")}>−</button>
+                    <span>{item.qty}</span>
+                    <button onClick={() => changeQty(item.id, "inc")}>+</button>
+                  </div>
+                )}
               </div>
             ))}
+
+            {/* Droppa Bag option */}
+            <div className="ck-droppa-bag">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={droppaBag}
+                  onChange={(e) => setDroppaBag(e.target.checked)}
+                />
+                Droppa Bag (₦100)
+              </label>
+            </div>
           </div>
 
           <div className="ck-card ck-row">
