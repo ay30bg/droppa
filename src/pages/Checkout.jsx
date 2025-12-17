@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./checkout.css";
+import "../styles/checkout.css";
 
 export default function Checkout() {
   const [quantity, setQuantity] = useState(1);
