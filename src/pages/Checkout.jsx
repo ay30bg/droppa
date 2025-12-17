@@ -16,9 +16,6 @@ export default function Checkout() {
     },
   ]);
 
-  const [paymentMethod, setPaymentMethod] = useState("card");
-  const [note, setNote] = useState("");
-
   const changeQty = (id, type) => {
     setCart((prev) =>
       prev
@@ -40,10 +37,7 @@ export default function Checkout() {
   );
 
   const deliveryFee = 200;
-  const vat = subtotal * 0.075;
-  const total = subtotal + deliveryFee + vat;
-
-  const canPlaceOrder = cart.length > 0;
+  const total = subtotal + deliveryFee;
 
   return (
     <div className="ck-page">
@@ -78,49 +72,40 @@ export default function Checkout() {
               <div>
                 <h4>The Place</h4>
                 <p>Surulere · {cart.length} item(s)</p>
-                <p className="ck-eta">Delivery in 25–35 mins</p>
               </div>
-              <button className="ck-edit" onClick={() => navigate(-1)}>
+              <button
+                className="ck-edit"
+                onClick={() => navigate(-1)}
+              >
                 Edit
               </button>
             </div>
 
             <div className="ck-divider" />
 
-            {cart.length === 0 ? (
-              <div className="ck-empty">
-                <p>Your cart is empty</p>
-                <button onClick={() => navigate(-1)}>Add items</button>
-              </div>
-            ) : (
-              cart.map((item) => (
-                <div className="ck-item" key={item.id}>
-                  <div className="ck-item-info">
-                    <p className="ck-item-name">{item.name}</p>
-                    <span className="ck-price">₦{item.price}</span>
-                  </div>
-
-                  <div className="ck-qty-box">
-                    <button onClick={() => changeQty(item.id, "dec")}>
-                      −
-                    </button>
-                    <span>{item.qty}</span>
-                    <button onClick={() => changeQty(item.id, "inc")}>
-                      +
-                    </button>
-                  </div>
+            {cart.map((item) => (
+              <div className="ck-item" key={item.id}>
+                <div className="ck-item-info">
+                  <p className="ck-item-name">{item.name}</p>
+                  <span className="ck-price">₦{item.price}</span>
                 </div>
-              ))
-            )}
+
+                <div className="ck-qty-box">
+                  <button onClick={() => changeQty(item.id, "dec")}>
+                    −
+                  </button>
+                  <span>{item.qty}</span>
+                  <button onClick={() => changeQty(item.id, "inc")}>
+                    +
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div className="ck-card">
-            <textarea
-              className="ck-note"
-              placeholder="Add note for vendor (optional)"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            />
+          <div className="ck-card ck-row">
+            <span>Add note for vendor</span>
+            <span className="ck-arrow">›</span>
           </div>
         </>
       )}
@@ -143,35 +128,11 @@ export default function Checkout() {
           </div>
 
           <div className="ck-card">
-            <h4 className="ck-section-title">Payment method</h4>
-
-            <label className="ck-radio">
-              <input
-                type="radio"
-                name="payment"
-                checked={paymentMethod === "card"}
-                onChange={() => setPaymentMethod("card")}
-              />
-              Card
-            </label>
-
-            <label className="ck-radio">
-              <input
-                type="radio"
-                name="payment"
-                checked={paymentMethod === "transfer"}
-                onChange={() => setPaymentMethod("transfer")}
-              />
-              Bank Transfer
-            </label>
-          </div>
-
-          <div className="ck-card">
             <h4 className="ck-section-title">Payment summary</h4>
 
             <div className="ck-summary-row">
               <span>Subtotal</span>
-              <span>₦{subtotal.toFixed(0)}</span>
+              <span>₦{subtotal}</span>
             </div>
 
             <div className="ck-summary-row">
@@ -179,16 +140,11 @@ export default function Checkout() {
               <span>₦{deliveryFee}</span>
             </div>
 
-            <div className="ck-summary-row">
-              <span>VAT (7.5%)</span>
-              <span>₦{vat.toFixed(0)}</span>
-            </div>
-
             <div className="ck-divider" />
 
             <div className="ck-summary-row total">
               <span>Total</span>
-              <span>₦{total.toFixed(0)}</span>
+              <span>₦{total}</span>
             </div>
           </div>
         </>
@@ -199,20 +155,17 @@ export default function Checkout() {
         {step === 1 ? (
           <button
             className="ck-pay"
-            disabled={!cart.length}
             onClick={() => setStep(2)}
           >
-            Continue · ₦{total.toFixed(0)}
+            Continue
           </button>
         ) : (
-          <>
-            <button className="ck-pay" disabled={!canPlaceOrder}>
-              Place Order · ₦{total.toFixed(0)}
-            </button>
-            <p className="ck-secure">🔒 Payments are secure and encrypted</p>
-          </>
+          <button className="ck-pay">
+            Place Order · ₦{total}
+          </button>
         )}
       </div>
     </div>
   );
 }
+
