@@ -1,123 +1,96 @@
 import React, { useState } from "react";
-import "../styles/checkout.css";
+import "./checkout.css";
 
-const sampleCart = [
-  { id: 1, name: "Chicken Burger", price: 1500, quantity: 1 },
-  { id: 2, name: "Fries", price: 500, quantity: 2 },
-];
-
-export default function CheckoutPage() {
-  const [cart, setCart] = useState(sampleCart);
-  const [step, setStep] = useState(1);
-  const [address, setAddress] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("card");
-
-  const updateQty = (id, delta) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + delta) }
-          : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
-  const deliveryFee = 300;
-  const vat = Math.round(subtotal * 0.075);
-  const total = subtotal + deliveryFee + vat;
+export default function Checkout() {
+  const [quantity, setQuantity] = useState(1);
+  const [bag, setBag] = useState(false);
 
   return (
-    <div className="checkout-page">
-      {/* Tabs */}
-      <div className="checkout-tabs">
-        <button className={step === 1 ? "active" : ""}>Order</button>
-        <button className={step === 2 ? "active" : ""}>Payment</button>
+    <div className="ck-page">
+      {/* Header */}
+      <div className="ck-header">
+        <span className="ck-back">←</span>
+        <h3>Checkout</h3>
       </div>
 
-      {/* STEP 1 */}
-      {step === 1 && (
-        <div className="checkout-card">
-          <h3>Your Order</h3>
+      {/* Steps */}
+      <div className="ck-steps">
+        <div className="ck-step active">Your Order</div>
+        <div className="ck-step">Delivery & Payment</div>
+      </div>
 
-          {cart.map((item) => (
-            <div key={item.id} className="cart-row">
-              <div>
-                <p className="item-name">{item.name}</p>
-                <p className="item-price">₦{item.price}</p>
-              </div>
+      {/* Order Summary */}
+      <div className="ck-section">
+        <h4>Order Summary</h4>
 
-              <div className="qty-controls">
-                <button onClick={() => updateQty(item.id, -1)}>-</button>
-                <span>{item.quantity}</span>
-                <button onClick={() => updateQty(item.id, 1)}>+</button>
-              </div>
+        <div className="ck-restaurant">
+          <div>
+            <h5>The Place – Surulere</h5>
+            <p>2 Items</p>
+          </div>
+          <span className="ck-hide">Hide Selection</span>
+        </div>
 
-              <button className="remove" onClick={() => removeItem(item.id)}>
-                ✕
-              </button>
-            </div>
-          ))}
+        {/* Pack */}
+        <div className="ck-pack">
+          <div className="ck-pack-header">
+            <h5>Pack 1</h5>
+            <button className="ck-add-pack">+ Add to this pack</button>
+          </div>
 
-          <div className="summary">
+          <div className="ck-item">
             <div>
-              <span>Subtotal</span>
-              <span>₦{subtotal}</span>
+              <p className="ck-item-name">
+                ✦ Asun Pepper Rice + Maltina/Amstel Malt
+              </p>
+              <p className="ck-price">₦5,750</p>
+            </div>
+
+            <div className="ck-qty">
+              <button onClick={() => setQuantity(Math.max(1, quantity - 1))}>
+                −
+              </button>
+              <span>{quantity}</span>
+              <button onClick={() => setQuantity(quantity + 1)}>+</button>
             </div>
           </div>
 
-          <button className="primary-btn" onClick={() => setStep(2)}>
-            Make Payment • ₦{subtotal}
-          </button>
+          <div className="ck-item muted">
+            <p>✦ Nylon</p>
+            <p>₦100</p>
+          </div>
+
+          <button className="ck-add-another">+ Add Another Pack</button>
         </div>
-      )}
+      </div>
 
-      {/* STEP 2 */}
-      {step === 2 && (
-        <div className="checkout-card">
-          <h3>Delivery & Payment</h3>
+      {/* Message */}
+      <div className="ck-row">
+        <span>Leave a message for the restaurant</span>
+        <span>›</span>
+      </div>
 
-          <div className="field">
-            <label>Delivery Address</label>
-            <input
-              placeholder="Enter delivery address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
-          </div>
-
-          <div className="summary">
-            <div><span>Subtotal</span><span>₦{subtotal}</span></div>
-            <div><span>Delivery</span><span>₦{deliveryFee}</span></div>
-            <div><span>VAT</span><span>₦{vat}</span></div>
-            <div className="total"><span>Total</span><span>₦{total}</span></div>
-          </div>
-
-          <div className="field">
-            <label>Payment Method</label>
-            <select
-              value={paymentMethod}
-              onChange={(e) => setPaymentMethod(e.target.value)}
-            >
-              <option value="card">Card</option>
-              <option value="wallet">Wallet</option>
-              <option value="cash">Cash on Delivery</option>
-            </select>
-          </div>
-
-          <button
-            className="primary-btn"
-            disabled={!address}
-            onClick={() => alert("Order Placed")}
-          >
-            Place Order • ₦{total}
-          </button>
+      {/* Brown bag */}
+      <div className="ck-row">
+        <div>
+          <p className="bold">Need a Chowdeck brown bag?</p>
+          <p className="muted">Package your order for just ₦200</p>
         </div>
-      )}
+        <input
+          type="checkbox"
+          checked={bag}
+          onChange={() => setBag(!bag)}
+        />
+      </div>
+
+      {/* Footer */}
+      <div className="ck-footer">
+        <p className="terms">
+          By proceeding, you agree to our <span>Terms of Use</span> and{" "}
+          <span>Privacy Policy</span>
+        </p>
+        <button className="ck-pay">Make Payment</button>
+      </div>
     </div>
   );
 }
