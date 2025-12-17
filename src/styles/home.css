@@ -157,7 +157,7 @@
   }
 }
 
-/* ======= RECOMMENDED (FIXED) ======= */
+/* ======= RECOMMENDED ======= */
 .recommended-list {
   width: 100%;
   display: flex;
@@ -166,7 +166,12 @@
   box-sizing: border-box;
 }
 
-/* (Existing but currently unused — kept intentionally) */
+/* Make Recommended cards full width */
+.recommended-list .featured-card {
+  width: 100%;
+}
+
+/* Optional / currently unused Recommended card styles */
 .recommended-card {
   margin-bottom: 20px;
   transition: transform .2s ease;
