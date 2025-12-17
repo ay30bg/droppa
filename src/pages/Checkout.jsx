@@ -1,30 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import "../styles/checkout.css";
 
 export default function Checkout() {
   const navigate = useNavigate();
-  const [step, setStep] = useState(1);
+  const location = useLocation();
 
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      name: "Asun Pepper Rice + Maltina",
-      price: 5750,
-      qty: 1,
-    },
-  ]);
+  // Get cart and restaurant from RestaurantDetails
+  const { cart: initialCart = [], restaurant } = location.state || {};
+  const [cart, setCart] = useState(initialCart);
+  const [step, setStep] = useState(1);
 
   const changeQty = (id, type) => {
     setCart((prev) =>
       prev
         .map((item) =>
           item.id === id
-            ? {
-                ...item,
-                qty: type === "inc" ? item.qty + 1 : item.qty - 1,
-              }
+            ? { ...item, qty: type === "inc" ? item.qty + 1 : item.qty - 1 }
             : item
         )
         .filter((item) => item.qty > 0)
@@ -37,7 +30,7 @@ export default function Checkout() {
 
   return (
     <div className="ck-page">
-      {/* ================= HEADER ================= */}
+      {/* HEADER */}
       <div className="ck-header">
         <div className="ck-header-left">
           <button className="ck-back" onClick={() => navigate(-1)}>
@@ -47,7 +40,7 @@ export default function Checkout() {
         </div>
       </div>
 
-      {/* ================= STEPS ================= */}
+      {/* STEPS */}
       <div className="ck-steps">
         <div className={`ck-step-item ${step === 1 ? "active" : ""}`}>
           <span className="ck-step-label">Order Summary</span>
@@ -60,15 +53,17 @@ export default function Checkout() {
         </div>
       </div>
 
-      {/* ================= STEP CONTENT ================= */}
+      {/* STEP CONTENT */}
       <div className={`ck-step-content step-${step}`}>
         {/* Step 1: Order Summary */}
         <div className={`ck-step1 ${step === 1 ? "active" : ""}`}>
           <div className="ck-card">
             <div className="ck-restaurant">
               <div>
-                <h4>The Place</h4>
-                <p>Surulere · {cart.length} item(s)</p>
+                <h4>{restaurant?.name || "Restaurant"}</h4>
+                <p>
+                  {restaurant?.street || "Unknown"} · {cart.length} item(s)
+                </p>
               </div>
               <button className="ck-edit" onClick={() => navigate(-1)}>
                 Edit
@@ -138,7 +133,7 @@ export default function Checkout() {
         </div>
       </div>
 
-      {/* ================= FOOTER ================= */}
+      {/* FOOTER */}
       <div className="ck-footer">
         {step === 1 ? (
           <button className="ck-pay" onClick={() => setStep(2)}>
