@@ -8,11 +8,11 @@ const sampleCart = [
 
 export default function CheckoutPage() {
   const [cart, setCart] = useState(sampleCart);
-  const [step, setStep] = useState(1); // 1 = Order Review, 2 = Payment
+  const [step, setStep] = useState(1);
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("card");
 
-  const handleQuantity = (id, delta) => {
+  const updateQty = (id, delta) => {
     setCart((prev) =>
       prev.map((item) =>
         item.id === id
@@ -22,82 +22,99 @@ export default function CheckoutPage() {
     );
   };
 
-  const handleRemove = (id) => {
+  const removeItem = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
   };
 
-  const orderTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const subtotal = cart.reduce((s, i) => s + i.price * i.quantity, 0);
   const deliveryFee = 300;
-  const VAT = Math.round(orderTotal * 0.075); // 7.5% VAT
-  const totalPayable = orderTotal + deliveryFee + VAT;
+  const vat = Math.round(subtotal * 0.075);
+  const total = subtotal + deliveryFee + vat;
 
   return (
     <div className="checkout-page">
+      {/* Tabs */}
       <div className="checkout-tabs">
-        <div className={`tab ${step === 1 ? "active" : ""}`}>1. Order</div>
-        <div className={`tab ${step === 2 ? "active" : ""}`}>2. Payment</div>
+        <button className={step === 1 ? "active" : ""}>Order</button>
+        <button className={step === 2 ? "active" : ""}>Payment</button>
       </div>
 
+      {/* STEP 1 */}
       {step === 1 && (
-        <div className="order-step">
-          <h2>Review Your Order</h2>
-          <div className="cart-items">
-            {cart.map((item) => (
-              <div key={item.id} className="cart-item">
-                <div className="item-name">{item.name}</div>
-                <div className="item-actions">
-                  <button onClick={() => handleQuantity(item.id, -1)}>-</button>
-                  <span>{item.quantity}</span>
-                  <button onClick={() => handleQuantity(item.id, 1)}>+</button>
-                  <span className="item-price">₦{item.price * item.quantity}</span>
-                  <button className="remove-btn" onClick={() => handleRemove(item.id)}>Remove</button>
-                </div>
+        <div className="checkout-card">
+          <h3>Your Order</h3>
+
+          {cart.map((item) => (
+            <div key={item.id} className="cart-row">
+              <div>
+                <p className="item-name">{item.name}</p>
+                <p className="item-price">₦{item.price}</p>
               </div>
-            ))}
+
+              <div className="qty-controls">
+                <button onClick={() => updateQty(item.id, -1)}>-</button>
+                <span>{item.quantity}</span>
+                <button onClick={() => updateQty(item.id, 1)}>+</button>
+              </div>
+
+              <button className="remove" onClick={() => removeItem(item.id)}>
+                ✕
+              </button>
+            </div>
+          ))}
+
+          <div className="summary">
+            <div>
+              <span>Subtotal</span>
+              <span>₦{subtotal}</span>
+            </div>
           </div>
-          <div className="order-summary">
-            <span>Subtotal:</span>
-            <span>₦{orderTotal}</span>
-          </div>
-          <button className="next-btn" onClick={() => setStep(2)}>Make Payment</button>
+
+          <button className="primary-btn" onClick={() => setStep(2)}>
+            Make Payment • ₦{subtotal}
+          </button>
         </div>
       )}
 
+      {/* STEP 2 */}
       {step === 2 && (
-        <div className="payment-step">
-          <h2>Delivery & Payment</h2>
-          <div className="delivery-address">
+        <div className="checkout-card">
+          <h3>Delivery & Payment</h3>
+
+          <div className="field">
             <label>Delivery Address</label>
             <input
-              type="text"
-              placeholder="Enter your address"
+              placeholder="Enter delivery address"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             />
           </div>
 
-          <div className="payment-summary">
-            <div><span>Order Total:</span> <span>₦{orderTotal}</span></div>
-            <div><span>Delivery Fee:</span> <span>₦{deliveryFee}</span></div>
-            <div><span>VAT (7.5%):</span> <span>₦{VAT}</span></div>
-            <div className="total"><span>Total:</span> <span>₦{totalPayable}</span></div>
+          <div className="summary">
+            <div><span>Subtotal</span><span>₦{subtotal}</span></div>
+            <div><span>Delivery</span><span>₦{deliveryFee}</span></div>
+            <div><span>VAT</span><span>₦{vat}</span></div>
+            <div className="total"><span>Total</span><span>₦{total}</span></div>
           </div>
 
-          <div className="payment-method">
+          <div className="field">
             <label>Payment Method</label>
-            <select value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
+            <select
+              value={paymentMethod}
+              onChange={(e) => setPaymentMethod(e.target.value)}
+            >
               <option value="card">Card</option>
-              <option value="cash">Cash on Delivery</option>
               <option value="wallet">Wallet</option>
+              <option value="cash">Cash on Delivery</option>
             </select>
           </div>
 
           <button
-            className="place-order-btn"
+            className="primary-btn"
             disabled={!address}
-            onClick={() => alert("Order Placed!")}
+            onClick={() => alert("Order Placed")}
           >
-            Place Order
+            Place Order • ₦{total}
           </button>
         </div>
       )}
