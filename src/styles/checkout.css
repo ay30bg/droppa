@@ -1,186 +1,178 @@
 :root {
-  --bg: #f5f7fb;
+  --bg: #f6f8f7;
   --card: #ffffff;
-  --text: #0f172a;
-  --muted: #64748b;
-  --line: #e5e7eb;
-  --primary: #0f172a;
-  --radius: 16px;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e6e9ee;
+  --green: #0d6f46; /* Different green */
 }
 
 /* BASE */
-.dp-root {
+.dr-root {
   background: var(--bg);
   min-height: 100vh;
-  padding-bottom: 120px;
+  padding-bottom: 110px;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  color: var(--text);
 }
 
 /* HEADER */
-.dp-header {
+.dr-header {
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 18px 16px;
   background: var(--card);
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--border);
 }
 
-.dp-header h1 {
-  font-size: 18px;
+.dr-header h2 {
+  font-size: 17px;
   font-weight: 600;
 }
 
-.dp-back {
-  background: none;
-  border: none;
-  font-size: 22px;
-}
-
-/* PROGRESS */
-.dp-progress {
+/* STEPS */
+.dr-steps {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   padding: 14px 16px;
   background: var(--card);
 }
 
-.dp-progress span {
+.dr-step {
   flex: 1;
-  height: 5px;
-  border-radius: 999px;
-  background: #e2e8f0;
+  height: 6px;
+  border-radius: 6px;
+  background: #dde3e0;
 }
 
-.dp-progress span.active {
-  background: var(--primary);
+.dr-step.active {
+  background: var(--green);
 }
 
 /* CARD */
-.dp-card {
+.dr-card {
   background: var(--card);
-  margin: 14px 16px;
-  padding: 18px;
-  border-radius: var(--radius);
-  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+  margin: 12px 16px;
+  padding: 16px;
+  border-radius: 14px; /* different radius */
+  border: 1px solid var(--border);
 }
 
 /* MERCHANT */
-.dp-merchant {
+.dr-merchant {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dp-merchant h4 {
+.dr-merchant h4 {
   font-size: 15px;
   font-weight: 600;
 }
 
-.dp-merchant p {
+.dr-merchant p {
   font-size: 13px;
   color: var(--muted);
 }
 
-.dp-edit {
+.dr-text-btn {
   background: none;
   border: none;
   font-size: 14px;
-  color: var(--primary);
+  color: var(--green);
 }
 
 /* DIVIDER */
-.dp-divider {
+.dr-divider {
   height: 1px;
-  background: var(--line);
-  margin: 16px 0;
+  background: var(--border);
+  margin: 14px 0;
 }
 
 /* ITEM */
-.dp-item {
+.dr-item {
   display: flex;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
 }
 
-.dp-item-title {
-  font-size: 15px;
-  line-height: 1.4;
+.dr-item-name {
+  font-size: 14.5px;
+  line-height: 1.45;
 }
 
-.dp-item-price {
-  font-size: 14px;
+.dr-price {
+  font-size: 13.5px;
   color: var(--muted);
   margin-top: 4px;
-  display: block;
+  display: inline-block;
 }
 
-/* COUNTER */
-.dp-counter {
+/* QTY */
+.dr-qty {
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 6px 14px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
+  gap: 12px;
+  padding: 6px 12px;
+  border-radius: 10px; /* less pill-like */
+  border: 1px solid var(--border);
 }
 
-.dp-counter button {
+.dr-qty button {
   border: none;
   background: none;
-  font-size: 18px;
+  font-size: 16px;
 }
 
 /* ADDON */
-.dp-addon {
+.dr-addon {
   display: flex;
   justify-content: space-between;
-  margin-top: 14px;
-  font-size: 14px;
+  margin-top: 12px;
+  font-size: 13.5px;
   color: var(--muted);
 }
 
 /* BUTTONS */
-.dp-outline {
-  margin-top: 18px;
+.dr-outline {
+  margin-top: 16px;
   width: 100%;
   padding: 12px;
-  border-radius: 999px;
-  border: 1px dashed var(--line);
-  background: transparent;
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  background: #fafafa;
   font-size: 14px;
 }
 
 /* ROW */
-.dp-row {
+.dr-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.dp-chevron {
-  font-size: 20px;
+.dr-arrow {
+  font-size: 18px;
   color: var(--muted);
 }
 
 /* FOOTER */
-.dp-footer {
+.dr-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   padding: 16px;
   background: var(--card);
-  border-top: 1px solid var(--line);
+  border-top: 1px solid var(--border);
 }
 
-.dp-primary {
+.dr-primary {
   width: 100%;
-  padding: 15px;
-  border-radius: 14px;
-  background: var(--primary);
+  padding: 14px;
+  background: var(--green);
   color: #fff;
   border: none;
+  border-radius: 10px; /* different CTA shape */
   font-size: 16px;
   font-weight: 500;
 }
