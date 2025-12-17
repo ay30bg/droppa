@@ -1,13 +1,14 @@
 /* BASE */
-.ck-page {
-  background: #f7f7f7;
+.dp-page {
+  background: #f4f6f8;
   min-height: 100vh;
-  padding-bottom: 120px;
+  padding-bottom: 110px;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  color: #111;
 }
 
 /* HEADER */
-.ck-header {
+.dp-header {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -15,156 +16,138 @@
   background: #fff;
 }
 
-.ck-back {
+.dp-back {
+  border: none;
+  background: none;
   font-size: 20px;
 }
 
-/* STEPS */
-.ck-steps {
+/* PROGRESS */
+.dp-progress {
   display: flex;
-  gap: 12px;
-  padding: 16px;
+  gap: 8px;
+  padding: 12px 16px;
   background: #fff;
 }
 
-.ck-step {
+.dp-bar {
   flex: 1;
-  height: 6px;
-  background: #e5e5e5;
-  border-radius: 6px;
-  position: relative;
+  height: 5px;
+  background: #e6e9ee;
+  border-radius: 4px;
 }
 
-.ck-step.active {
-  background: #0b6f44;
+.dp-bar.active {
+  background: #1f2937;
 }
 
-.ck-step::after {
-  content: attr(data-label);
-}
-
-/* SECTION */
-.ck-section {
-  margin-top: 10px;
+/* CARD */
+.dp-card {
   background: #fff;
+  margin: 12px 16px;
   padding: 16px;
+  border-radius: 14px;
 }
 
-.ck-restaurant {
+/* CARD HEAD */
+.dp-card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.ck-hide {
-  color: #0b6f44;
-  font-size: 14px;
-}
-
-/* PACK */
-.ck-pack {
-  margin-top: 16px;
-}
-
-.ck-pack-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.ck-add-pack {
-  border: 1px solid #ddd;
-  background: #fff;
-  padding: 6px 12px;
-  border-radius: 20px;
+.dp-card-head span {
   font-size: 13px;
+  color: #6b7280;
+}
+
+.dp-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-size: 14px;
 }
 
 /* ITEM */
-.ck-item {
+.dp-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 14px;
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.ck-item-name {
+.dp-item-name {
   font-size: 15px;
 }
 
-.ck-price {
-  color: #777;
+.dp-price {
+  color: #6b7280;
   font-size: 14px;
 }
 
-.ck-qty {
+.dp-qty {
   display: flex;
   align-items: center;
-  gap: 10px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  padding: 4px 10px;
+  gap: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 4px 12px;
 }
 
-.ck-qty button {
-  background: none;
+.dp-qty button {
   border: none;
+  background: none;
   font-size: 18px;
 }
 
-.ck-add-another {
+/* ADDON */
+.dp-addon {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* BUTTONS */
+.dp-secondary {
   margin-top: 16px;
   width: 100%;
-  background: #eef6f2;
-  border: none;
   padding: 12px;
-  border-radius: 24px;
-  color: #0b6f44;
-  font-weight: 500;
+  border-radius: 999px;
+  border: 1px dashed #d1d5db;
+  background: #f9fafb;
+  font-size: 14px;
+}
+
+.dp-primary {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  background: #111827;
+  color: #fff;
+  border: none;
+  font-size: 16px;
 }
 
 /* ROW */
-.ck-row {
-  background: #fff;
-  padding: 16px;
-  margin-top: 10px;
+.dp-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.dp-row p {
+  font-size: 13px;
+  color: #6b7280;
+}
+
 /* FOOTER */
-.ck-footer {
+.dp-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: #fff;
   padding: 16px;
-  border-top: 1px solid #eee;
-}
-
-.ck-pay {
-  width: 100%;
-  background: #0b6f44;
-  color: #fff;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  margin-top: 8px;
-}
-
-.terms {
-  font-size: 12px;
-  text-align: center;
-  color: #777;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.muted {
-  color: #888;
-  font-size: 14px;
+  background: #fff;
+  border-top: 1px solid #e5e7eb;
 }
