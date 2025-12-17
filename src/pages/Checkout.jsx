@@ -35,7 +35,6 @@ export default function Checkout() {
     (sum, item) => sum + item.price * item.qty,
     0
   );
-
   const deliveryFee = 200;
   const total = subtotal + deliveryFee;
 
@@ -64,99 +63,94 @@ export default function Checkout() {
         </div>
       </div>
 
-      {/* ================= STEP 1 ================= */}
-      {step === 1 && (
-        <>
-          <div className="ck-card">
-            <div className="ck-restaurant">
-              <div>
-                <h4>The Place</h4>
-                <p>Surulere · {cart.length} item(s)</p>
-              </div>
-              <button
-                className="ck-edit"
-                onClick={() => navigate(-1)}
-              >
-                Edit
-              </button>
-            </div>
-
-            <div className="ck-divider" />
-
-            {cart.map((item) => (
-              <div className="ck-item" key={item.id}>
-                <div className="ck-item-info">
-                  <p className="ck-item-name">{item.name}</p>
-                  <span className="ck-price">₦{item.price}</span>
+      {/* ================= STEP CONTENT WITH TRANSITION ================= */}
+      <div className={`ck-step-content step-${step}`}>
+        {step === 1 && (
+          <div className="ck-step1">
+            <div className="ck-card">
+              <div className="ck-restaurant">
+                <div>
+                  <h4>The Place</h4>
+                  <p>Surulere · {cart.length} item(s)</p>
                 </div>
-
-                <div className="ck-qty-box">
-                  <button onClick={() => changeQty(item.id, "dec")}>
-                    −
-                  </button>
-                  <span>{item.qty}</span>
-                  <button onClick={() => changeQty(item.id, "inc")}>
-                    +
-                  </button>
-                </div>
+                <button className="ck-edit" onClick={() => navigate(-1)}>
+                  Edit
+                </button>
               </div>
-            ))}
-          </div>
 
-          <div className="ck-card ck-row">
-            <span>Add note for vendor</span>
-            <span className="ck-arrow">›</span>
-          </div>
-        </>
-      )}
+              <div className="ck-divider" />
 
-      {/* ================= STEP 2 ================= */}
-      {step === 2 && (
-        <>
-          <div className="ck-card">
-            <h4 className="ck-section-title">Delivery details</h4>
+              {cart.map((item) => (
+                <div className="ck-item" key={item.id}>
+                  <div className="ck-item-info">
+                    <p className="ck-item-name">{item.name}</p>
+                    <span className="ck-price">₦{item.price}</span>
+                  </div>
 
-            <div className="ck-info-row">
-              <span>Delivery address</span>
-              <button className="ck-edit">Add</button>
+                  <div className="ck-qty-box">
+                    <button onClick={() => changeQty(item.id, "dec")}>
+                      −
+                    </button>
+                    <span>{item.qty}</span>
+                    <button onClick={() => changeQty(item.id, "inc")}>
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            <div className="ck-info-row">
-              <span>Contact phone</span>
-              <button className="ck-edit">Add</button>
-            </div>
-          </div>
-
-          <div className="ck-card">
-            <h4 className="ck-section-title">Payment summary</h4>
-
-            <div className="ck-summary-row">
-              <span>Subtotal</span>
-              <span>₦{subtotal}</span>
-            </div>
-
-            <div className="ck-summary-row">
-              <span>Delivery fee</span>
-              <span>₦{deliveryFee}</span>
-            </div>
-
-            <div className="ck-divider" />
-
-            <div className="ck-summary-row total">
-              <span>Total</span>
-              <span>₦{total}</span>
+            <div className="ck-card ck-row">
+              <span>Add note for vendor</span>
+              <span className="ck-arrow">›</span>
             </div>
           </div>
-        </>
-      )}
+        )}
+
+        {step === 2 && (
+          <div className="ck-step2">
+            <div className="ck-card">
+              <h4 className="ck-section-title">Delivery details</h4>
+
+              <div className="ck-info-row">
+                <span>Delivery address</span>
+                <button className="ck-edit">Add</button>
+              </div>
+
+              <div className="ck-info-row">
+                <span>Contact phone</span>
+                <button className="ck-edit">Add</button>
+              </div>
+            </div>
+
+            <div className="ck-card">
+              <h4 className="ck-section-title">Payment summary</h4>
+
+              <div className="ck-summary-row">
+                <span>Subtotal</span>
+                <span>₦{subtotal}</span>
+              </div>
+
+              <div className="ck-summary-row">
+                <span>Delivery fee</span>
+                <span>₦{deliveryFee}</span>
+              </div>
+
+              <div className="ck-divider" />
+
+              <div className="ck-summary-row total">
+                <span>Total</span>
+                <span>₦{total}</span>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
 
       {/* ================= FOOTER ================= */}
       <div className="ck-footer">
         {step === 1 ? (
-          <button
-            className="ck-pay"
-            onClick={() => setStep(2)}
-          >
+          <button className="ck-pay" onClick={() => setStep(2)}>
             Continue
           </button>
         ) : (
@@ -168,4 +162,3 @@ export default function Checkout() {
     </div>
   );
 }
-
