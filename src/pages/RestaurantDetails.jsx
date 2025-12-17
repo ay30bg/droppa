@@ -12,14 +12,12 @@ export default function RestaurantDetails() {
   const { id } = useParams();
   const navigate = useNavigate();
   const restaurant = featuredRestaurants.find((r) => r.id === Number(id));
-
   const menu = restaurantMenus[Number(id)] || [];
 
   const [activeCategory, setActiveCategory] = useState("All");
   const [cart, setCart] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favorite, setFavorite] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
 
   const scrollRef = useRef();
   const sectionRefs = useRef({});
@@ -82,12 +80,7 @@ export default function RestaurantDetails() {
     );
   };
 
-  const total = cart.reduce(
-    (acc, item) => acc + item.price * item.qty,
-    0
-  );
-
-  const toggleCart = () => setCartOpen((prev) => !prev);
+  const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
 
   const scrollToCategory = (cat) => {
     setActiveCategory(cat);
@@ -226,28 +219,18 @@ export default function RestaurantDetails() {
                             <div className="cd-item-info">
                               <h4>{item.name}</h4>
                               {item.description && (
-                                <p className="cd-subtext">
-                                  {item.description}
-                                </p>
+                                <p className="cd-subtext">{item.description}</p>
                               )}
                               <p className="cd-price">₦{item.price}</p>
                             </div>
 
                             {inCart ? (
                               <div className="cd-qty-box">
-                                <button
-                                  onClick={() =>
-                                    changeQty(item.id, "dec")
-                                  }
-                                >
+                                <button onClick={() => changeQty(item.id, "dec")}>
                                   −
                                 </button>
                                 <span>{inCart.qty}</span>
-                                <button
-                                  onClick={() =>
-                                    changeQty(item.id, "inc")
-                                  }
-                                >
+                                <button onClick={() => changeQty(item.id, "inc")}>
                                   +
                                 </button>
                               </div>
@@ -269,39 +252,15 @@ export default function RestaurantDetails() {
       </div>
 
       {/* CART BAR */}
-      {cart.length > 0 && !cartOpen && (
-        <div className="cd-cart-bar" onClick={toggleCart}>
-          <span>
-            {cart.reduce((a, b) => a + b.qty, 0)} items
-          </span>
+      {cart.length > 0 && (
+        <div
+          className="cd-cart-bar"
+          onClick={() => navigate("/checkout", { state: { cart } })}
+        >
+          <span>{cart.reduce((a, b) => a + b.qty, 0)} items</span>
           <span>₦{total}</span>
         </div>
       )}
-
-      {/* CART DRAWER */}
-      <div className={`cd-cart-drawer ${cartOpen ? "open" : ""}`}>
-        <h3>Cart</h3>
-
-        {cart.map((item) => (
-          <div key={item.id} className="cd-cart-item">
-            <span>{item.name}</span>
-            <div className="cd-qty-box">
-              <button onClick={() => changeQty(item.id, "dec")}>
-                −
-              </button>
-              <span>{item.qty}</span>
-              <button onClick={() => changeQty(item.id, "inc")}>
-                +
-              </button>
-            </div>
-            <span>₦{item.price * item.qty}</span>
-          </div>
-        ))}
-
-        <button className="cd-checkout-btn">
-          Checkout ₦{total}
-        </button>
-      </div>
     </div>
   );
 }
