@@ -216,8 +216,7 @@
   left: 0;
   right: 0;
   padding: 14px 16px;
-  background: #fff;
-  border-top: 1px solid #eee;
+  background: none;
 }
 
 .ck-pay {
@@ -232,6 +231,3 @@
   cursor: pointer;
 }
 
-.ck-pay:hover {
-  background: #222;
-}
