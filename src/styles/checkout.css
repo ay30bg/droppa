@@ -1,127 +1,170 @@
-.checkout-page {
-  min-height: 100vh;
+/* BASE */
+.ck-page {
   background: #f7f7f7;
-  padding: 16px;
-  font-family: Inter, system-ui, sans-serif;
+  min-height: 100vh;
+  padding-bottom: 120px;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
 }
 
-/* Tabs */
-.checkout-tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.checkout-tabs button {
-  flex: 1;
-  padding: 12px;
-  border-radius: 10px;
-  border: none;
-  background: #eee;
-  font-weight: 500;
-}
-
-.checkout-tabs .active {
-  background: #111;
-  color: #fff;
-}
-
-/* Card */
-.checkout-card {
-  background: #fff;
-  border-radius: 16px;
-  padding: 16px;
-}
-
-/* Cart rows */
-.cart-row {
+/* HEADER */
+.ck-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid #eee;
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
 }
 
-.item-name {
+.ck-back {
+  font-size: 20px;
+}
+
+/* STEPS */
+.ck-steps {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: #fff;
+}
+
+.ck-step {
+  flex: 1;
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 6px;
+  position: relative;
+}
+
+.ck-step.active {
+  background: #0b6f44;
+}
+
+.ck-step::after {
+  content: attr(data-label);
+}
+
+/* SECTION */
+.ck-section {
+  margin-top: 10px;
+  background: #fff;
+  padding: 16px;
+}
+
+.ck-restaurant {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ck-hide {
+  color: #0b6f44;
+  font-size: 14px;
+}
+
+/* PACK */
+.ck-pack {
+  margin-top: 16px;
+}
+
+.ck-pack-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ck-add-pack {
+  border: 1px solid #ddd;
+  background: #fff;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 13px;
+}
+
+/* ITEM */
+.ck-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.ck-item-name {
+  font-size: 15px;
+}
+
+.ck-price {
+  color: #777;
+  font-size: 14px;
+}
+
+.ck-qty {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 4px 10px;
+}
+
+.ck-qty button {
+  background: none;
+  border: none;
+  font-size: 18px;
+}
+
+.ck-add-another {
+  margin-top: 16px;
+  width: 100%;
+  background: #eef6f2;
+  border: none;
+  padding: 12px;
+  border-radius: 24px;
+  color: #0b6f44;
   font-weight: 500;
 }
 
-.item-price {
-  font-size: 13px;
+/* ROW */
+.ck-row {
+  background: #fff;
+  padding: 16px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* FOOTER */
+.ck-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  padding: 16px;
+  border-top: 1px solid #eee;
+}
+
+.ck-pay {
+  width: 100%;
+  background: #0b6f44;
+  color: #fff;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.terms {
+  font-size: 12px;
+  text-align: center;
   color: #777;
 }
 
-/* Quantity */
-.qty-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.qty-controls button {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: none;
-  background: #f1f1f1;
-}
-
-.remove {
-  border: none;
-  background: none;
-  color: #999;
-  font-size: 16px;
-}
-
-/* Summary */
-.summary {
-  margin: 16px 0;
-}
-
-.summary div {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-}
-
-.summary .total {
-  font-weight: 600;
-  border-top: 1px solid #eee;
-  padding-top: 10px;
-}
-
-/* Form */
-.field {
-  margin-bottom: 16px;
-}
-
-.field label {
-  display: block;
-  font-size: 13px;
-  margin-bottom: 6px;
-  color: #555;
-}
-
-.field input,
-.field select {
-  width: 100%;
-  padding: 12px;
-  border-radius: 10px;
-  border: 1px solid #ddd;
-}
-
-/* Buttons */
-.primary-btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: none;
-  background: #111;
-  color: #fff;
-  font-size: 15px;
+.bold {
   font-weight: 600;
 }
 
-.primary-btn:disabled {
-  opacity: 0.5;
+.muted {
+  color: #888;
+  font-size: 14px;
 }
