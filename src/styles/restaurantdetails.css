@@ -2,7 +2,7 @@
 .cd-page {
   height: 100vh;
   overflow-y: auto;
-  background: #e0e0e0; /* deeper than #f5f5f5 */
+  background: #f5f5f5;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   padding-bottom: 96px;
   color: #000;
@@ -12,43 +12,66 @@
 .cd-header {
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 50;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  padding: 14px 16px;
+  background: #f5f5f5;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  gap: 12px;
 }
 
 .cd-header-left {
   display: flex;
   align-items: center;
+  gap: 9px;
 }
 
 .cd-back {
   border: none;
-  background: transparent;
-  margin-right: 8px;
+  background: none;
+  color: #000;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cd-title {
+  font-size: 15px;
   font-weight: 600;
-  font-size: 1.1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-.cd-header-right svg {
-  margin-left: 16px;
+.cd-header-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cd-icon-btn {
+  border: none;
+  background: none;
   cursor: pointer;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* ================= RESTAURANT INFO ================= */
+.cd-icon-btn.liked {
+  color: #e11d48;
+}
+
+/* ================= REST INFO ================= */
 .cd-rest-info {
   padding: 16px;
 }
 
-/* Location | Open/Closed */
 .cd-location-status {
   display: flex;
   align-items: center;
@@ -57,9 +80,9 @@
   font-size: 1rem; /* location font size */
 }
 
-.cd-divider {
-  margin: 0 6px;
-  color: #888;
+.cd-status {
+  font-size: 0.85rem; /* slightly smaller than location */
+  font-weight: 500;
 }
 
 .cd-status.open {
@@ -70,156 +93,229 @@
   color: red;
 }
 
-/* Meta info */
+.cd-divider {
+  margin: 0 6px;
+  color: #888;
+}
+
 .cd-meta {
   display: flex;
-  gap: 24px;
-  margin-bottom: 8px;
-  font-size: 0.9rem;
+  gap: 16px;
+  font-size: 14px;
+  color: #444;
+  flex-wrap: nowrap;
+  align-items: center;
 }
 
 .cd-meta-item {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  padding-right: 16px;
+}
+
+.cd-meta-item:not(:last-child)::after {
+  content: "|";
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ccc;
+  font-weight: 400;
+  font-size: 16px; /* increase height */
+  line-height: 1.5; /* vertical spacing */
 }
 
 .cd-meta-label {
-  font-weight: 500;
-  color: #555;
+  font-size: 12px;
+  color: #777;
   margin-bottom: 2px;
 }
 
 .cd-meta-value {
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-/* Categories */
+.cd-meta-value svg {
+  vertical-align: middle;
+}
+
+.cd-street {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #777;
+}
+
+.cd-closed {
+  margin-top: 10px; 
+  font-size: 13px;
+  color: #d32f2f;
+  font-weight: 500;
+}
+
+/* ================= CATEGORIES ================= */
 .cd-categories {
   display: flex;
+  gap: 10px;
+  padding: 10px 16px;
   overflow-x: auto;
-  padding: 8px 16px;
-  gap: 12px;
-  margin-bottom: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  background: #f5f5f5;
+}
+
+.cd-categories::-webkit-scrollbar {
+  display: none;
 }
 
 .cd-categories button {
+  background: #f2f2f2;
+  color: #000;
   border: none;
-  background: #fff;
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 14px;
   cursor: pointer;
-  font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .cd-categories button.active {
-  background: #000;
-  color: #fff;
+  background: #014f50;
+  color: #ffffff;
 }
 
-/* MENU SECTION */
+/* ================= MENU ================= */
 .cd-menu-section {
-  padding: 0 16px 16px;
+  padding: 12px 16px;
 }
 
 .cd-section-title {
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: 600;
-  margin: 12px 0 8px;
+  margin: 18px 0 10px;
 }
 
+/* ================= MENU ITEM ================= */
 .cd-menu-item {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  background: #fff;
-  margin-bottom: 8px;
-  border-radius: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cd-item-info {
+  flex: 1;
 }
 
 .cd-item-info h4 {
   margin: 0;
-  font-size: 0.95rem;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
 }
 
 .cd-subtext {
-  margin: 2px 0;
-  font-size: 0.85rem;
-  color: #666;
+  font-size: 13px;
+  color: #777;
+  margin: 6px 0;
 }
 
 .cd-price {
   font-weight: 600;
-  margin-top: 4px;
+  font-size: 14px;
 }
 
+/* ================= ADD / QTY ================= */
 .cd-add-btn {
-  border: none;
-  background: #000;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 6px;
+  align-self: center;
+  border: 1px solid #014f50;
+  background: #f5f5f5;
+  padding: 6px 14px;
+  border-radius:6px;
+  color: #000;
+  font-size: 14px;
   cursor: pointer;
-  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.cd-add-btn:hover {
+  background: #014f50;
+  color: #fff;
 }
 
 .cd-qty-box {
   display: flex;
   align-items: center;
-  gap: 6px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  padding: 4px 8px;
+  gap: 12px;
+  align-self: center;
 }
 
 .cd-qty-box button {
   border: none;
-  background: transparent;
-  font-size: 1rem;
+  background: none;
+  font-size: 20px;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-/* CART BAR */
+.cd-qty-box button:hover {
+  color: #111;
+}
+
+.cd-qty-box span {
+  min-width: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ================= CART BAR ================= */
 .cd-cart-bar {
   position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #000;
-  color: #fff;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: #014f50;
+  color: #ffffff;
+  padding: 16px;
+  border-radius: 7px;
   display: flex;
   justify-content: space-between;
-  padding: 12px 16px;
+  align-items: center;
+  font-size: 15px;
   font-weight: 600;
-  font-size: 0.95rem;
-  z-index: 50;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-/* SKELETON LOADING */
+.cd-cart-bar:hover {
+  background: #222;
+}
+
+/* ================= SKELETON ================= */
 .cd-skeleton-card {
-  height: 80px;
-  background: #ddd;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  animation: pulse 1.2s infinite;
+  height: 72px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  background: linear-gradient(
+    90deg,
+    #eeeeee 25%,
+    #f5f5f5 37%,
+    #eeeeee 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.3s ease infinite;
 }
 
-@keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.4; }
-  100% { opacity: 1; }
-}
-
-/* Closed badge */
-.cd-closed {
-  color: red;
-  font-weight: 600;
-  margin-top: 4px;
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
 }
