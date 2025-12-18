@@ -6,6 +6,7 @@
   background: #f5f5f5;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   color: #000;
+  box-sizing: border-box;
 }
 
 /* ================= TABS ================= */
@@ -13,20 +14,24 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  width: 100%;
   background: #f5f5f5;
   padding: 12px 0;
   box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
 }
 
 .order-tabs {
   display: flex;
   background: #e0e0e0;
-  margin: 0 15px;
+  margin: 0 0;
   border-radius: 8px;
   overflow: hidden;
+  width: 95%;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .order-tab {
@@ -53,6 +58,7 @@
 /* ================= ORDER CONTENT ================= */
 .order-content {
   margin-top: 24px;
+  box-sizing: border-box;
 }
 
 /* ================= EMPTY STATE ================= */
@@ -62,6 +68,7 @@
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
+  box-sizing: border-box;
 }
 
 .empty-icon {
@@ -97,14 +104,15 @@
 /* ================= RESTAURANT CART ================= */
 .restaurant-cart.polished {
   background: #fff;
-  margin: 16px auto;          /* center card */
+  margin: 16px auto;           /* center horizontally */
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
-  max-width: 720px;           /* max width */
-  width: 95%;                 /* responsive width */
+  max-width: 720px;            /* max width */
+  width: 100%;                 /* responsive full width */
+  box-sizing: border-box;
 }
 
 .restaurant-cart.polished:hover {
@@ -127,6 +135,7 @@
   gap: 12px;
   padding: 10px 0;
   border-bottom: 1px solid #eee;
+  box-sizing: border-box;
 }
 
 .cart-item-polished:last-child {
