@@ -103,8 +103,8 @@
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
-  max-width: 720px;           /* increased width */
-  width: calc(100% - 32px);
+  max-width: 720px;           /* max width */
+  width: 95%;                 /* responsive width */
 }
 
 .restaurant-cart.polished:hover {
@@ -211,7 +211,7 @@
 
 .cart-checkout-bar button {
   width: 100%;
-  max-width: 360px;  /* slightly wider checkout button */
+  max-width: 360px;
   padding: 14px;
   border-radius: 8px;
   border: none;
