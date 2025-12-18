@@ -14,7 +14,7 @@
 
 .droppa-header--orders {
   justify-content: flex-start;
-  padding-right: -8px;
+  margin-right: -8px;
 }
 
 .orders-title {
@@ -196,6 +196,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
