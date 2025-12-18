@@ -108,6 +108,86 @@
   margin-bottom: 20px;
 }
 
+/* Restaurant cart wrapper */
+.restaurant-cart.polished {
+  margin: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Restaurant name */
+.restaurant-name {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+/* Cart item row */
+.cart-item-polished {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.item-name {
+  flex: 1;
+}
+
+.item-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.item-qty button {
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: #eee;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.item-total {
+  width: 60px;
+  text-align: right;
+}
+
+/* Cart summary */
+.cart-summary {
+  border-top: 1px solid #eee;
+  padding-top: 8px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cart-total-polished {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Sticky checkout bar */
+.cart-checkout-bar {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-checkout-bar button {
+  background: #014F50;
+  color: #fff;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 
 
 
