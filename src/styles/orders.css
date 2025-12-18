@@ -1,210 +1,210 @@
+/* ================= ORDER PAGE BASE ================= */
 .order-page {
   padding: 20px;
   max-width: 760px;
   margin: auto;
   background: #f5f5f5;
+  font-family: 'Inter', sans-serif;
 }
 
+/* ================= TABS ================= */
 .order-tabs-wrapper {
   position: sticky;
   top: 0;
   z-index: 50;
   width: 100vw;
-  margin-left: calc(50% - 50vw);  /* pulls it out of the container */
+  margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   background: #f5f5f5;
-  padding: 10px 0;
-  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.12);
+  padding: 12px 0;
+  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
 }
 
 .order-tabs {
   display: flex;
-  background: #DDDDDD;
-  margin: 15px 15px 5px;
-  border: 1px solid #eee;
-  border-radius: 6px;
-  padding: 6px;
+  background: #e0e0e0;
+  margin: 0 15px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
 .order-tab {
   flex: 1;
-  padding: 12px;
+  padding: 14px 0;
   text-align: center;
-  border-radius: 5px;
   cursor: pointer;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  font-size: 14px;
-  color: #505d62;
+  font-size: 15px;
+  color: #6b7c82;
   transition: all 0.3s ease;
 }
 
 .order-tab.active {
   background: #014f50;
   color: #fff;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
 }
 
-.order-divider {
-  width: 100%;
-  background-color: #eee;
-  position: absolute;
-  left: 0;
-  right: 0;
-  margin-top: 20px;
-  border: 2px solid #eee;
-  box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* bottom shadow */
-}
-
+/* ================= ORDER CONTENT ================= */
 .order-content {
-  margin-top: 40px;
+  margin-top: 24px;
 }
 
-/* EMPTY STATE */
-  .empty-state {
+/* ================= EMPTY STATE ================= */
+.empty-state {
   text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;   /* centers children horizontally */
-}
-
-.empty-state img {
-  width: 200px;
-  opacity: 0.9;
-}
-
-.empty-state p {
-  color: #C2C2C2;
-  margin: 6px 10px;
-  font-size: 14px;
-}
-
-.empty-state button {
-  margin-top: 50px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 12px 20px;
-  border: none;
-  width: 350px;
-  height: 45px;
-  border-radius: 6px;
-  background: #014f50;
-  color: white;
-  font-size: 15px;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.3s;
+  align-items: center;
+  padding: 40px 20px;
 }
 
 .empty-icon {
-  width: 220px;
-  height: 220px;
-  margin-top: 40px;
-  margin-bottom: 20px;
+  width: 180px;
+  height: 180px;
+  margin-bottom: 24px;
 }
 
-/* Restaurant cart wrapper */
-.restaurant-cart.polished {
-  margin: 16px;
-  padding: 16px;
-  border-radius: 12px;
-  background: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+.empty-state p {
+  color: #9aa1a6;
+  font-size: 15px;
+  margin-bottom: 30px;
 }
 
-/* Restaurant name */
-.restaurant-name {
+.empty-state button {
+  padding: 14px 0;
+  width: 100%;
+  max-width: 360px;
+  border-radius: 8px;
+  border: none;
+  background: #014f50;
+  color: #fff;
   font-weight: 600;
-  margin-bottom: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Cart item row */
+.empty-state button:hover {
+  background: #013f43;
+}
+
+/* ================= RESTAURANT CART ================= */
+.restaurant-cart.polished {
+  margin: 16px 0;
+  padding: 20px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.restaurant-cart.polished:hover {
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.restaurant-name {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: #014f50;
+}
+
+/* ================= CART ITEMS ================= */
 .cart-item-polished {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.cart-item-polished:last-child {
+  border-bottom: none;
 }
 
 .item-name {
   flex: 1;
+  font-size: 15px;
+  color: #333;
 }
 
 .item-qty {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .item-qty button {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   border: none;
-  background: #eee;
+  background: #f0f0f0;
   border-radius: 50%;
   font-size: 16px;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.item-qty button:hover {
+  background: #dcdcdc;
 }
 
 .item-total {
-  width: 60px;
+  width: 70px;
   text-align: right;
+  font-weight: 500;
+  color: #333;
 }
 
-/* Cart summary */
+/* ================= CART SUMMARY ================= */
 .cart-summary {
   border-top: 1px solid #eee;
-  padding-top: 8px;
-  margin-top: 8px;
+  padding-top: 12px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  font-size: 15px;
+}
+
+.cart-summary div {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
 }
 
 .cart-total-polished {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 16px;
+  color: #014f50;
 }
 
-/* Sticky checkout bar */
+/* ================= CHECKOUT BAR ================= */
 .cart-checkout-bar {
-  margin-top: 12px;
+  margin-top: 16px;
   display: flex;
   justify-content: center;
 }
 
 .cart-checkout-bar button {
-  background: #014F50;
-  color: #fff;
-  padding: 10px 24px;
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 0;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
+  background: #014f50;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.cart-checkout-bar button:hover {
+  background: #013f43;
+}
