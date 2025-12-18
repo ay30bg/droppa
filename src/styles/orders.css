@@ -7,6 +7,7 @@
   margin-bottom: 90px;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   color: #000;
+  box-sizing: border-box;
 }
 
 /* ================= TABS ================= */
@@ -53,7 +54,9 @@
 
 /* ================= ORDER CONTENT ================= */
 .order-content {
-  margin-top: 24px;
+  margin-top: 24px; 
+  padding-top: 70px; /* prevent sticky tabs from overlaying content */
+  box-sizing: border-box;
 }
 
 /* ================= EMPTY STATE ================= */
@@ -96,108 +99,9 @@
 }
 
 /* ================= RESTAURANT CART ================= */
-
-/* ================= BASE ================= */
-.order-page {
-  padding: 20px;
-  max-width: 760px;
-  margin: auto;
-  background: #f5f5f5;
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  color: #000;
-}
-
-/* ================= TABS ================= */
-.order-tabs-wrapper {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-  background: #f5f5f5;
-  padding: 12px 0;
-  box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.08);
-}
-
-.order-tabs {
-  display: flex;
-  background: #e0e0e0;
-  margin: 0 15px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.order-tab {
-  flex: 1;
-  padding: 14px 0;
-  text-align: center;
-  cursor: pointer;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 15px;
-  color: #6b7c82;
-  transition: all 0.3s ease;
-}
-
-.order-tab.active {
-  background: #014f50;
-  color: #fff;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.15);
-}
-
-/* ================= ORDER CONTENT ================= */
-.order-content {
-  margin-top: 24px;
-}
-
-/* ================= EMPTY STATE ================= */
-.empty-state {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.empty-icon {
-  width: 180px;
-  height: 180px;
-  margin-bottom: 24px;
-}
-
-.empty-state p {
-  color: #9aa1a6;
-  font-size: 15px;
-  margin-bottom: 30px;
-}
-
-.empty-state button {
-  padding: 14px 0;
-  width: 100%;
-  max-width: 360px;
-  border-radius: 8px;
-  border: none;
-  background: #014f50;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.empty-state button:hover {
-  background: #013f43;
-}
-
-/* ================= RESTAURANT CART ================= */
-
 .restaurant-cart.polished {
   background: #fff;
-  margin: 16px auto;       /* centers horizontally */
+  margin: 16px auto;       /* center card */
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.06);
@@ -207,120 +111,8 @@
   box-sizing: border-box;  /* ensures padding stays inside width */
 }
 
-/* Restaurant Name */
-.restaurant-name {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 12px;
-  color: #014f50;
-}
-
-/* Cart Item */
-.cart-item-polished {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.cart-item-polished:last-child {
-  border-bottom: none;
-}
-
-.item-name {
-  flex: 1;
-  font-size: 14.5px;
-  color: #333;
-}
-
-.item-total {
-  width: 60px;
-  text-align: right;
-  font-weight: 500;
-  color: #333;
-}
-
-/* Quantity Box */
-.item-qty {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.item-qty span {
-  min-width: 20px;
-  text-align: center;
-  color: #014f50;
-}
-
-/* Quantity Buttons */
-.item-qty button {
-  border: none;
-  background: none;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  color: #014f50;
-  transition: all 0.2s ease;
-}
-
-.item-qty button:hover {
-  color: #013f43;
-}
-
-/* ================= CART SUMMARY ================= */
-.cart-summary {
-  border-top: 1px solid #eee;
-  padding-top: 12px;
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
-}
-
-.cart-summary div {
-  display: flex;
-  justify-content: space-between;
-  color: #555;
-}
-
-.cart-total-polished {
-  font-weight: 600;
-  font-size: 15.5px;
-  color: #014f50;
-}
-
-/* ================= CHECKOUT BAR ================= */
-.cart-checkout-bar {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-}
-
-.cart-checkout-bar button {
-  width: 100%;
-  max-width: 360px;
-  padding: 14px;
-  border-radius: 8px;
-  border: none;
-  background: #014f50;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cart-checkout-bar button:hover {
-  background: #013f43;
+.restaurant-cart.polished:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 /* Restaurant Name */
@@ -438,8 +230,3 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
-
-
-
-
-
