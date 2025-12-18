@@ -13,35 +13,10 @@ export default function OrderPage() {
 
   return (
     <div className="order-page">
-      
-      {/* ================= HEADER ================= */}
-      <OrdersHeader activeTab={activeTab} />
-
-      {/* ================= TABS ================= */}
-      <div className="order-tabs-wrapper">
-        <div className="order-tabs">
-          <div
-            className={`order-tab ${activeTab === "cart" ? "active" : ""}`}
-            onClick={() => setActiveTab("cart")}
-          >
-            My Cart
-          </div>
-
-          <div
-            className={`order-tab ${activeTab === "track" ? "active" : ""}`}
-            onClick={() => setActiveTab("track")}
-          >
-            Track Order
-          </div>
-
-          <div
-            className={`order-tab ${activeTab === "history" ? "active" : ""}`}
-            onClick={() => setActiveTab("history")}
-          >
-            History
-          </div>
-        </div>
-      </div>
+      <OrdersHeader
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+      />
 
       {/* ================= CONTENT ================= */}
       <div className="order-content">
