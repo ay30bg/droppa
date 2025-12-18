@@ -24,13 +24,9 @@
 .order-tabs {
   display: flex;
   background: #e0e0e0;
-  margin: 0 auto;
+  margin: 0 15px;
   border-radius: 8px;
   overflow: hidden;
-  max-width: 720px;   /* prevent it from getting too wide */
-  width: 100%;        /* fill available space */
-  min-width: 320px;   /* prevent shrinking too much on mobile */
-  box-sizing: border-box;
 }
 
 .order-tab {
@@ -234,4 +230,5 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
