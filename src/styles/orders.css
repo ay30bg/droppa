@@ -4,6 +4,7 @@
   max-width: 760px;
   margin: auto;
   background: #f5f5f5;
+  margin-bottom: 50px;
   font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
   color: #000;
 }
@@ -437,6 +438,7 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
 
 
