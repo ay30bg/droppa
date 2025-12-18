@@ -200,15 +200,126 @@
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.06);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
   max-width: 720px;        /* max width */
   width: 100%;             /* fill container without overflowing */
   box-sizing: border-box;  /* ensures padding stays inside width */
 }
 
-.restaurant-cart.polished:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+/* Restaurant Name */
+.restaurant-name {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: #014f50;
+}
+
+/* Cart Item */
+.cart-item-polished {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-item-polished:last-child {
+  border-bottom: none;
+}
+
+.item-name {
+  flex: 1;
+  font-size: 14.5px;
+  color: #333;
+}
+
+.item-total {
+  width: 60px;
+  text-align: right;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Quantity Box */
+.item-qty {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 4px 8px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.item-qty span {
+  min-width: 20px;
+  text-align: center;
+  color: #014f50;
+}
+
+/* Quantity Buttons */
+.item-qty button {
+  border: none;
+  background: none;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  color: #014f50;
+  transition: all 0.2s ease;
+}
+
+.item-qty button:hover {
+  color: #013f43;
+}
+
+/* ================= CART SUMMARY ================= */
+.cart-summary {
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+
+.cart-summary div {
+  display: flex;
+  justify-content: space-between;
+  color: #555;
+}
+
+.cart-total-polished {
+  font-weight: 600;
+  font-size: 15.5px;
+  color: #014f50;
+}
+
+/* ================= CHECKOUT BAR ================= */
+.cart-checkout-bar {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.cart-checkout-bar button {
+  width: 100%;
+  max-width: 360px;
+  padding: 14px;
+  border-radius: 8px;
+  border: none;
+  background: #014f50;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cart-checkout-bar button:hover {
+  background: #013f43;
 }
 
 /* Restaurant Name */
@@ -327,124 +438,5 @@
   background: #013f43;
 }
 
-.restaurant-cart.polished:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-}
-
-/* Restaurant Name */
-.restaurant-name {
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 12px;
-  color: #014f50;
-}
-
-/* Cart Item */
-.cart-item-polished {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.cart-item-polished:last-child {
-  border-bottom: none;
-}
-
-.item-name {
-  flex: 1;
-  font-size: 14.5px;
-  color: #333;
-}
-
-.item-total {
-  width: 60px;
-  text-align: right;
-  font-weight: 500;
-  color: #333;
-}
-
-/* Quantity Box */
-.item-qty {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: #f5f5f5;
-  border-radius: 8px;
-  padding: 4px 8px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.item-qty span {
-  min-width: 20px;
-  text-align: center;
-  color: #014f50;
-}
-
-/* Quantity Buttons */
-.item-qty button {
-  border: none;
-  background: none;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  color: #014f50;
-  transition: all 0.2s ease;
-}
-
-.item-qty button:hover {
-  color: #013f43;
-}
-
-/* ================= CART SUMMARY ================= */
-.cart-summary {
-  border-top: 1px solid #eee;
-  padding-top: 12px;
-  margin-top: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-size: 14px;
-}
-
-.cart-summary div {
-  display: flex;
-  justify-content: space-between;
-  color: #555;
-}
-
-.cart-total-polished {
-  font-weight: 600;
-  font-size: 15.5px;
-  color: #014f50;
-}
-
-/* ================= CHECKOUT BAR ================= */
-.cart-checkout-bar {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-}
-
-.cart-checkout-bar button {
-  width: 100%;
-  max-width: 360px;
-  padding: 14px;
-  border-radius: 8px;
-  border: none;
-  background: #014f50;
-  color: #fff;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.cart-checkout-bar button:hover {
-  background: #013f43;
-}
 
 
