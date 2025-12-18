@@ -193,16 +193,18 @@
 }
 
 /* ================= RESTAURANT CART ================= */
+
 .restaurant-cart.polished {
   background: #fff;
-  margin: 16px auto;          /* center card */
+  margin: 16px auto;       /* centers horizontally */
   padding: 20px;
   border-radius: 12px;
   border: 1px solid rgba(0,0,0,0.06);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
-  max-width: 720px;           /* max width */
-  width: 95%;                 /* responsive width */
+  max-width: 720px;        /* max width */
+  width: 100%;             /* fill container without overflowing */
+  box-sizing: border-box;  /* ensures padding stays inside width */
 }
 
 .restaurant-cart.polished:hover {
@@ -444,4 +446,5 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
