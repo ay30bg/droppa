@@ -10,6 +10,18 @@
   z-index: 1000;
 }
 
+/* ================= ORDERS HEADER VARIANT ================= */
+
+.droppa-header--orders {
+  justify-content: flex-start;
+}
+
+.orders-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+}
+
 /* --- Location Picker --- */
 .location-picker {
   position: relative;
@@ -183,6 +195,7 @@
     font-size: 0.9rem;
   }
 }
+
 
 
 
