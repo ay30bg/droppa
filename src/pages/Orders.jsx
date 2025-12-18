@@ -115,7 +115,9 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
 
             <div className="cart-checkout-bar">
               <button
-                onClick={() => navigate("/checkout", { state: { cart: cartItems, restaurantId: rid } })}
+                onClick={() =>
+                  navigate("/checkout", { state: { cart: cartItems, restaurantId: rid } })
+                }
               >
                 Checkout
               </button>
