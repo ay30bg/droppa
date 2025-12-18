@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/orders.css";
 
-// Import your downloaded SVGs as React components
+import OrdersHeader from "../components/OrdersHeader";
+
 import { ReactComponent as CartIcon } from "../assets/CartIcon.svg";
 import { ReactComponent as TrackIcon } from "../assets/TrackIcon.svg";
 import { ReactComponent as HistoryIcon } from "../assets/HistoryIcon.svg";
@@ -13,7 +14,10 @@ export default function OrderPage() {
   return (
     <div className="order-page">
       
-      {/* Sticky Tabs */}
+      {/* ================= HEADER ================= */}
+      <OrdersHeader activeTab={activeTab} />
+
+      {/* ================= TABS ================= */}
       <div className="order-tabs-wrapper">
         <div className="order-tabs">
           <div
@@ -39,7 +43,7 @@ export default function OrderPage() {
         </div>
       </div>
 
-      {/* Scrollable Content */}
+      {/* ================= CONTENT ================= */}
       <div className="order-content">
         {activeTab === "cart" && <EmptyCart />}
         {activeTab === "track" && <EmptyTrack />}
@@ -49,7 +53,7 @@ export default function OrderPage() {
   );
 }
 
-/* ---------------- EMPTY STATES ---------------- */
+/* ================= EMPTY STATES ================= */
 
 function EmptyCart() {
   const navigate = useNavigate();
@@ -92,4 +96,3 @@ function EmptyHistory() {
     </div>
   );
 }
-
