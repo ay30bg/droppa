@@ -2,7 +2,12 @@ import React from "react";
 import "../styles/orders.css";
 import "../styles/header.css";
 
-export default function OrdersHeader({ activeTab, setActiveTab }) {
+export default function OrdersHeader({
+  activeTab,
+  setActiveTab,
+  hasCartItems,
+  onClearCart,
+}) {
   const getTitle = () => {
     if (activeTab === "cart") return "My Cart";
     if (activeTab === "track") return "Track Order";
@@ -12,9 +17,16 @@ export default function OrdersHeader({ activeTab, setActiveTab }) {
 
   return (
     <header className="droppa-header droppa-header--orders droppa-header--with-tabs">
-      <span className="orders-title">{getTitle()}</span>
+      <div className="orders-header-top">
+        <span className="orders-title">{getTitle()}</span>
 
-      {/* ================= TABS ================= */}
+        {activeTab === "cart" && hasCartItems && (
+          <button className="clear-cart-btn" onClick={onClearCart}>
+            Clear cart
+          </button>
+        )}
+      </div>
+
       <div className="order-tabs-wrapper header-tabs">
         <div className="order-tabs">
           <div
@@ -23,14 +35,12 @@ export default function OrdersHeader({ activeTab, setActiveTab }) {
           >
             My Cart
           </div>
-
           <div
             className={`order-tab ${activeTab === "track" ? "active" : ""}`}
             onClick={() => setActiveTab("track")}
           >
             Track Order
           </div>
-
           <div
             className={`order-tab ${activeTab === "history" ? "active" : ""}`}
             onClick={() => setActiveTab("history")}
