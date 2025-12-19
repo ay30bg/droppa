@@ -10,6 +10,24 @@
   box-sizing: border-box;
 }
 
+.orders-header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clear-cart-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: #e53935;
+  cursor: pointer;
+}
+
+.clear-cart-btn:hover {
+  text-decoration: underline;
+}
+
 /* ================= TABS ================= */
 .order-tabs-wrapper {
   position: sticky;
@@ -271,4 +289,5 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
