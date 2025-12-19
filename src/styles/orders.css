@@ -166,6 +166,43 @@
   font-size: 14px;
 }
 
+/* ================= CART CLOSE BUTTON ================= */
+
+.restaurant-cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.cart-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+  font-size: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.cart-close-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.cart-close-btn:active {
+  transform: scale(0.92);
+}
+
+.cart-close-btn:focus {
+  outline: none;
+}
+
 .item-qty span {
   min-width: 20px;
   text-align: center;
@@ -234,3 +271,4 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
