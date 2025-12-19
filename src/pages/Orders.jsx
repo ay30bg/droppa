@@ -32,7 +32,11 @@ export default function OrderPage() {
 
       <div className="order-content">
         {activeTab === "cart" && (
-          <CartTab allCarts={allCarts} setAllCarts={setAllCarts} navigate={navigate} />
+          <CartTab
+            allCarts={allCarts}
+            setAllCarts={setAllCarts}
+            navigate={navigate}
+          />
         )}
         {activeTab === "track" && <EmptyTrack navigate={navigate} />}
         {activeTab === "history" && <EmptyHistory navigate={navigate} />}
@@ -51,7 +55,9 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
       <div className="empty-state">
         <CartIcon className="empty-icon" />
         <p>Add some meals and enjoy fast delivery.</p>
-        <button onClick={() => navigate("/restaurant")}>Browse Restaurants</button>
+        <button onClick={() => navigate("/restaurant")}>
+          Browse Restaurants
+        </button>
       </div>
     );
   }
@@ -61,7 +67,10 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
       const updated = prev[restaurantId]
         .map((item) =>
           item.id === itemId
-            ? { ...item, qty: type === "inc" ? item.qty + 1 : item.qty - 1 }
+            ? {
+                ...item,
+                qty: type === "inc" ? item.qty + 1 : item.qty - 1,
+              }
             : item
         )
         .filter((item) => item.qty > 0);
@@ -70,20 +79,46 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
     });
   };
 
+  const removeRestaurantCart = (restaurantId) => {
+    setAllCarts((prev) => {
+      const updated = { ...prev };
+      delete updated[restaurantId];
+      return updated;
+    });
+  };
+
   return (
     <div className="cart-tab-wrapper">
       {restaurantIds.map((rid) => {
-        const restaurant = featuredRestaurants.find((r) => r.id === Number(rid));
+        const restaurant = featuredRestaurants.find(
+          (r) => r.id === Number(rid)
+        );
         const cartItems = allCarts[rid];
         if (!cartItems || cartItems.length === 0) return null;
 
-        const subtotal = cartItems.reduce((acc, item) => acc + item.price * item.qty, 0);
+        const subtotal = cartItems.reduce(
+          (acc, item) => acc + item.price * item.qty,
+          0
+        );
         const deliveryFee = 200;
         const total = subtotal + deliveryFee;
 
         return (
           <div key={rid} className="restaurant-cart polished">
-            <h3 className="restaurant-name">{restaurant?.name || `Restaurant ${rid}`}</h3>
+            {/* Header with close button */}
+            <div className="restaurant-cart-header">
+              <h3 className="restaurant-name">
+                {restaurant?.name || `Restaurant ${rid}`}
+              </h3>
+
+              <button
+                className="cart-close-btn"
+                onClick={() => removeRestaurantCart(rid)}
+                aria-label="Remove cart"
+              >
+                ×
+              </button>
+            </div>
 
             <div className="cart-items">
               {cartItems.map((item) => (
@@ -91,32 +126,47 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
                   <span className="item-name">{item.name}</span>
 
                   <div className="item-qty">
-                    <button onClick={() => changeQty(rid, item.id, "dec")}>−</button>
+                    <button
+                      onClick={() => changeQty(rid, item.id, "dec")}
+                    >
+                      −
+                    </button>
                     <span>{item.qty}</span>
-                    <button onClick={() => changeQty(rid, item.id, "inc")}>+</button>
+                    <button
+                      onClick={() => changeQty(rid, item.id, "inc")}
+                    >
+                      +
+                    </button>
                   </div>
 
-                  <span className="item-total">₦{item.price * item.qty}</span>
+                  <span className="item-total">
+                    ₦{item.price * item.qty}
+                  </span>
                 </div>
               ))}
             </div>
 
             <div className="cart-summary">
               <div>
-                <span>Subtotal:</span> <span>₦{subtotal}</span>
+                <span>Subtotal:</span>
+                <span>₦{subtotal}</span>
               </div>
               <div>
-                <span>Delivery Fee:</span> <span>₦{deliveryFee}</span>
+                <span>Delivery Fee:</span>
+                <span>₦{deliveryFee}</span>
               </div>
               <div className="cart-total-polished">
-                <strong>Total:</strong> <strong>₦{total}</strong>
+                <strong>Total:</strong>
+                <strong>₦{total}</strong>
               </div>
             </div>
 
             <div className="cart-checkout-bar">
               <button
                 onClick={() =>
-                  navigate("/checkout", { state: { cart: cartItems, restaurantId: rid } })
+                  navigate("/checkout", {
+                    state: { cart: cartItems, restaurantId: rid },
+                  })
                 }
               >
                 Checkout
