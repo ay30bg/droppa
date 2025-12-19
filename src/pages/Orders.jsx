@@ -14,7 +14,7 @@ export default function OrderPage() {
   const [allCarts, setAllCarts] = useState({});
   const navigate = useNavigate();
 
-  // Load all saved carts
+  // Load carts
   useEffect(() => {
     const saved = localStorage.getItem("restaurant_cart");
     const parsed = saved ? JSON.parse(saved) : {};
@@ -26,9 +26,18 @@ export default function OrderPage() {
     localStorage.setItem("restaurant_cart", JSON.stringify(allCarts));
   }, [allCarts]);
 
+  const clearAllCarts = () => {
+    setAllCarts({});
+  };
+
   return (
     <div className="order-page">
-      <OrdersHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+      <OrdersHeader
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        hasCartItems={Object.keys(allCarts).length > 0}
+        onClearCart={clearAllCarts}
+      />
 
       <div className="order-content">
         {activeTab === "cart" && (
@@ -48,12 +57,10 @@ export default function OrderPage() {
 /* ================= CART TAB ================= */
 
 function CartTab({ allCarts, setAllCarts, navigate }) {
-  // ✅ Filter out empty carts
   const restaurantIds = Object.keys(allCarts).filter(
     (rid) => allCarts[rid] && allCarts[rid].length > 0
   );
 
-  // ✅ Empty state now works correctly
   if (restaurantIds.length === 0) {
     return (
       <div className="empty-state">
@@ -81,7 +88,6 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
 
       const updated = { ...prev, [restaurantId]: updatedItems };
 
-      // ✅ Remove restaurant key if cart becomes empty
       if (updatedItems.length === 0) {
         delete updated[restaurantId];
       }
@@ -105,7 +111,6 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
           (r) => r.id === Number(rid)
         );
         const cartItems = allCarts[rid];
-        if (!cartItems || cartItems.length === 0) return null;
 
         const subtotal = cartItems.reduce(
           (acc, item) => acc + item.price * item.qty,
@@ -124,7 +129,6 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
               <button
                 className="cart-close-btn"
                 onClick={() => removeRestaurantCart(rid)}
-                aria-label="Remove cart"
               >
                 ×
               </button>
@@ -136,15 +140,11 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
                   <span className="item-name">{item.name}</span>
 
                   <div className="item-qty">
-                    <button
-                      onClick={() => changeQty(rid, item.id, "dec")}
-                    >
+                    <button onClick={() => changeQty(rid, item.id, "dec")}>
                       −
                     </button>
                     <span>{item.qty}</span>
-                    <button
-                      onClick={() => changeQty(rid, item.id, "inc")}
-                    >
+                    <button onClick={() => changeQty(rid, item.id, "inc")}>
                       +
                     </button>
                   </div>
@@ -205,7 +205,7 @@ function EmptyHistory({ navigate }) {
   return (
     <div className="empty-state">
       <HistoryIcon className="empty-icon" />
-      <p>You haven't ordered anything yet. Let’s fix that!</p>
+      <p>You haven't ordered anything yet.</p>
       <button onClick={() => navigate("/restaurant")}>Order Now</button>
     </div>
   );
