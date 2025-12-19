@@ -48,8 +48,12 @@ export default function OrderPage() {
 /* ================= CART TAB ================= */
 
 function CartTab({ allCarts, setAllCarts, navigate }) {
-  const restaurantIds = Object.keys(allCarts);
+  // ✅ Filter out empty carts
+  const restaurantIds = Object.keys(allCarts).filter(
+    (rid) => allCarts[rid] && allCarts[rid].length > 0
+  );
 
+  // ✅ Empty state now works correctly
   if (restaurantIds.length === 0) {
     return (
       <div className="empty-state">
@@ -64,7 +68,7 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
 
   const changeQty = (restaurantId, itemId, type) => {
     setAllCarts((prev) => {
-      const updated = prev[restaurantId]
+      const updatedItems = prev[restaurantId]
         .map((item) =>
           item.id === itemId
             ? {
@@ -75,7 +79,14 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
         )
         .filter((item) => item.qty > 0);
 
-      return { ...prev, [restaurantId]: updated };
+      const updated = { ...prev, [restaurantId]: updatedItems };
+
+      // ✅ Remove restaurant key if cart becomes empty
+      if (updatedItems.length === 0) {
+        delete updated[restaurantId];
+      }
+
+      return updated;
     });
   };
 
@@ -105,7 +116,6 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
 
         return (
           <div key={rid} className="restaurant-cart polished">
-            {/* Header with close button */}
             <div className="restaurant-cart-header">
               <h3 className="restaurant-name">
                 {restaurant?.name || `Restaurant ${rid}`}
