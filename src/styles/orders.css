@@ -144,10 +144,6 @@
   box-sizing: border-box;  /* ensures padding stays inside width */
 }
 
-.restaurant-cart.polished:hover {
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-}
-
 /* Add spacing for first card to clear sticky tabs */
 .restaurant-cart.polished:first-child {
   margin-top: 24px; /* adjust to match sticky tab height */
@@ -305,6 +301,7 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
 
 
