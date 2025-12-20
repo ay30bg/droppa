@@ -1,0 +1,91 @@
+/* --- Header Container --- */
+.droppa-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 20px;
+  background: #f5f5f5;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Header top layout */
+.orders-header-top {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+}
+
+/* Orders Title */
+.orders-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  /* Remove negative margin to keep button alignment correct */
+  margin-left: 0;
+}
+
+/* Clear cart button */
+.clear-cart-btn {
+  margin-left: auto; /* pushes button to far right */
+  background: rgba(255, 59, 48, 0.08);
+  color: #ff3b30;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.clear-cart-btn:hover {
+  background: rgba(255, 59, 48, 0.15);
+}
+
+.clear-cart-btn:active {
+  transform: scale(0.96);
+}
+
+/* --- Order Tabs --- */
+.order-tabs-wrapper {
+  width: 100%;
+}
+
+.order-tabs {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+}
+
+.order-tab {
+  padding: 6px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.order-tab.active {
+  background-color: #ff6600;
+  color: #fff;
+}
+
+/* --- Responsive --- */
+@media (max-width: 768px) {
+  .orders-title {
+    font-size: 16px;
+  }
+
+  .order-tab {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
+  .clear-cart-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+}
