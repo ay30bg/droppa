@@ -16,7 +16,6 @@ export default function Checkout() {
   // Add or remove Droppa Bag dynamically
   useEffect(() => {
     if (droppaBag) {
-      // add if not already in cart
       if (!cart.find((item) => item.id === "droppa-bag")) {
         setCart((prev) => [
           ...prev,
@@ -24,7 +23,6 @@ export default function Checkout() {
         ]);
       }
     } else {
-      // remove if unchecked
       setCart((prev) => prev.filter((item) => item.id !== "droppa-bag"));
     }
   }, [droppaBag]);
@@ -97,7 +95,6 @@ export default function Checkout() {
                   <span className="ck-price">₦{item.price}</span>
                 </div>
 
-                {/* Quantity buttons only for regular items */}
                 {item.id !== "droppa-bag" && (
                   <div className="ck-qty-box">
                     <button onClick={() => changeQty(item.id, "dec")}>−</button>
