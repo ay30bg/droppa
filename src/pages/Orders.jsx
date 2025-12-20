@@ -78,10 +78,7 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
       const updatedItems = prev[restaurantId]
         .map((item) =>
           item.id === itemId
-            ? {
-                ...item,
-                qty: type === "inc" ? item.qty + 1 : item.qty - 1,
-              }
+            ? { ...item, qty: type === "inc" ? item.qty + 1 : item.qty - 1 }
             : item
         )
         .filter((item) => item.qty > 0);
@@ -149,9 +146,7 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
                     </button>
                   </div>
 
-                  <span className="item-total">
-                    ₦{item.price * item.qty}
-                  </span>
+                  <span className="item-total">₦{item.price * item.qty}</span>
                 </div>
               ))}
             </div>
@@ -175,7 +170,7 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
               <button
                 onClick={() =>
                   navigate("/checkout", {
-                    state: { cart: cartItems, restaurantId: rid },
+                    state: { cart: cartItems, restaurant: restaurant }, // ✅ Pass full restaurant
                   })
                 }
               >
