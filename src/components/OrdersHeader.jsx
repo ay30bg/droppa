@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/orders.css";
-import "../styles/orderheader.css"
+import "../styles/orderheader.css";
 
 export default function OrdersHeader({
   activeTab,
