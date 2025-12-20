@@ -1,8 +1,8 @@
-/* ================= BASE HEADER ================= */
+/* --- Header Container --- */
 .droppa-header {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: space-between;
   padding: 12px 20px;
   background: #f5f5f5;
   position: sticky;
@@ -10,25 +10,18 @@
   z-index: 1000;
 }
 
-/* ================= HEADER TOP ================= */
+/* Header top layout */
 .orders-header-top {
+  position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
+  justify-content: space-between;
   gap: 12px;
 }
 
-/* Orders Title */
-.orders-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  margin-left: 0; /* reset negative margin */
-}
-
-/* Clear Cart Button */
+/* Clear cart button */
 .clear-cart-btn {
-  margin-left: auto; /* pushes button to far right */
+  margin-left: auto;
   background: rgba(255, 59, 48, 0.08);
   color: #ff3b30;
   border: none;
@@ -48,31 +41,25 @@
   transform: scale(0.96);
 }
 
-/* ================= ORDER TABS ================= */
-.order-tabs-wrapper {
-  width: 100%;
+/* ================= ORDERS HEADER WITH TABS ================= */
+
+.droppa-header--with-tabs {
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 0;
 }
 
-.order-tabs {
-  display: flex;
-  gap: 15px;
-  margin-top: 5px;
+.droppa-header--orders .orders-title {
+  margin-left: -20px;
 }
 
-.order-tab {
-  padding: 6px 12px;
-  cursor: pointer;
-  font-weight: 500;
-  border-radius: 6px;
-  transition: background 0.2s, color 0.2s;
+.orders-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
-.order-tab.active {
-  background-color: #ff6600;
-  color: #fff;
-}
-
-/* ================= LOCATION PICKER ================= */
+/* --- Location Picker --- */
 .location-picker {
   position: relative;
   display: flex;
@@ -80,55 +67,49 @@
   gap: 5px;
   font-weight: 600;
   cursor: pointer;
+  /* color: #ff6600; */
   user-select: none;
 }
-
-.map-pin {
+.map-pin{
   color: #ff6600;
 }
-
 .address {
   margin-top: -2px;
-  max-width: 140px;
+  max-width: 140px;    
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
 }
-
 .arrow {
   font-size: 0.7rem;
   transition: transform 0.2s;
   margin-top: 2px;
 }
-
 .arrow.open {
   transform: rotate(180deg);
 }
-
 .location-dropdown {
   position: absolute;
   top: 30px;
   left: 0;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   overflow: hidden;
   min-width: 120px;
   z-index: 10;
 }
-
 .location-item {
   padding: 8px 12px;
   cursor: pointer;
   transition: background 0.2s;
 }
-
 .location-item:hover {
   background: #f5f5f5;
 }
 
-/* ================= RIGHT SECTION ================= */
+/* --- Right Section (Profile & Cart) --- */
 .header-right {
   display: flex;
   align-items: center;
@@ -143,7 +124,6 @@
   color: #333;
   transition: transform 0.2s;
 }
-
 .profile-btn:hover {
   transform: scale(1.1);
 }
@@ -157,7 +137,6 @@
   text-decoration: none;
   transition: transform 0.2s;
 }
-
 .cart-btn:hover {
   transform: scale(1.1);
 }
@@ -177,15 +156,15 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-/* ================= FILTER BUTTON ================= */
+/* --- Filter Button --- */
 .filter-btn {
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: #014f50 !important;
+  background-color: #014F50 !important;
   color: #fff;
   border: none;
   padding: 6px 12px;
@@ -195,7 +174,7 @@
   transition: background 0.2s, transform 0.2s;
 }
 
-/* ================= FILTER DROPDOWN UNDER HEADER ================= */
+/* --- Filters Dropdown Under Header --- */
 .filters-dropdown-under {
   display: flex;
   gap: 10px;
@@ -210,17 +189,17 @@
 
 /* Hide scrollbar */
 .filters-dropdown-under {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 
 .filters-dropdown-under::-webkit-scrollbar {
-  display: none !important;
+  display: none !important;  /* Chrome, Safari, Opera */
 }
 
 /* Individual Filter Items */
 .filter-item {
-  flex: 0 0 auto;
+  flex: 0 0 auto; /* prevent shrinking */
   padding: 8px 14px;
   background-color: #f0f0f0;
   border-radius: 20px;
@@ -228,42 +207,29 @@
   font-weight: 500;
   transition: background-color 0.2s, color 0.2s;
 }
-
 .filter-item:hover {
   background-color: #ff6600;
   color: #fff;
 }
 
-/* ================= RESPONSIVE ================= */
+/* --- Responsive --- */
 @media (max-width: 768px) {
-  .orders-title {
-    font-size: 16px;
-  }
-
-  .order-tab {
-    padding: 5px 10px;
-    font-size: 0.85rem;
-  }
-
-  .clear-cart-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-
   .filters-dropdown-under {
     padding: 8px 12px;
   }
-
   .filter-item {
     padding: 6px 10px;
     font-size: 0.85rem;
   }
+}
 
+/* --- Responsive --- */
+@media (max-width: 768px) {
   .logo {
     font-size: 1.4rem;
   }
-
   .location-picker {
     font-size: 0.9rem;
   }
 }
+
