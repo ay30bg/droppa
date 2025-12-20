@@ -12,30 +12,33 @@
 
 /* Header top layout */
 .orders-header-top {
-  position: relative;
+  position: relative; /* needed for absolute positioning of clear button */
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 100%; /* full width for proper alignment */
   gap: 12px;
+  width: 100%;
 }
 
-/* Clear cart button */
+/* Clear cart button styled like filter button */
 .clear-cart-btn {
-  background: rgba(255, 59, 48, 0.08);
-  color: #ff3b30;
+  position: absolute;
+  right: 20px; /* distance from right edge, adjust if needed */
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #014F50 !important;
+  color: #fff;
   border: none;
   padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 500;
   border-radius: 6px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-  margin-left: auto; /* pushes it to the far right */
+  transition: background 0.2s, transform 0.2s;
 }
 
 .clear-cart-btn:hover {
-  background: rgba(255, 59, 48, 0.15);
+  background-color: #013737; /* slightly darker shade on hover */
+  transform: scale(1.05);
 }
 
 .clear-cart-btn:active {
@@ -180,6 +183,11 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #013737;
+  transform: scale(1.05);
 }
 
 /* --- Filters Dropdown Under Header --- */
