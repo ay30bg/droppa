@@ -10,40 +10,6 @@
   box-sizing: border-box;
 }
 
-.orders-header-top {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center; /* centers title */
-  width: 100%;
-}
-
-/* Title stays centered */
-.orders-title {
-  font-weight: 600;
-  font-size: 18px;
-}
-
-/* Clear cart button floats to the far right */
-.clear-cart-btn {
-  position: absolute;
-  right: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-
-  background: none;
-  border: none;
-  font-size: 14px;
-  color: #e53935;
-  cursor: pointer;
-  padding: 4px 8px;
-  white-space: nowrap;
-}
-
-.clear-cart-btn:hover {
-  text-decoration: underline;
-}
-
 /* ================= TABS ================= */
 .order-tabs-wrapper {
   position: sticky;
@@ -301,6 +267,7 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
 
 
