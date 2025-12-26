@@ -24,12 +24,21 @@ export default function Discover() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  // Filter restaurants based on search
-  const filteredRestaurants = featuredRestaurants.filter(
-    (res) =>
-      res.name.toLowerCase().includes(search.toLowerCase()) ||
-      res.street.toLowerCase().includes(search.toLowerCase())
-  );
+  // -------- SEARCH LOGIC ----------
+  const normalize = (text) =>
+    text?.toString().toLowerCase().replace(/\s+/g, "") || "";
+
+  const filteredRestaurants = featuredRestaurants.filter((res) => {
+    const query = normalize(search);
+    if (!query) return true; // show all when search is empty
+
+    return (
+      normalize(res.name).includes(query) ||
+      normalize(res.street).includes(query) ||
+      normalize(res.time).includes(query) ||
+      normalize(res.price).includes(query)
+    );
+  });
 
   const handleCardClick = (id) => {
     navigate(`/details/${id}`);
@@ -37,15 +46,17 @@ export default function Discover() {
 
   return (
     <div className="discover-page">
+      
       {/* Search Bar */}
       <div className="discover-search">
         <span className="emoji-icon">
           <FiSearch />
         </span>
+
         <input
           type="text"
           className="discover-input"
-          placeholder="Search restaurants or meals..."
+          placeholder="Search restaurants, areas or delivery time..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
@@ -54,27 +65,33 @@ export default function Discover() {
       {/* All Restaurants */}
       <section className="section-wrapper">
         <h2 className="section-title">All Restaurants</h2>
+
         <div className="recommended-list">
           {filteredRestaurants.length > 0 ? (
             filteredRestaurants.map((res) => {
               const timeText = getRestaurantTimeDisplay(res.time);
+
               return (
                 <div
                   key={res.id}
                   className="recommended-card"
                   onClick={() => handleCardClick(res.id)}
-                  style={{ cursor: "pointer" }} // make card clickable
+                  style={{ cursor: "pointer" }}
                 >
                   <img src={res.image} alt={res.name} className="recommended-img" />
+
                   <div className="recommended-info-under">
-                    <h3>
-                      {res.name} - {res.street}
-                    </h3>
+                    <h3>{res.name} - {res.street}</h3>
+
                     <div className="info-row">
                       <p className={timeText === "Closed" ? "closed" : ""}>
-                        <FiTruck style={{ marginRight: "4px" }} /> From {res.price} NGN | {timeText}
+                        <FiTruck style={{ marginRight: "4px" }} />
+                        From {res.price} NGN | {timeText}
                       </p>
-                      <p>⭐ {res.rating.toFixed(1)} ({res.orders})</p>
+
+                      <p>
+                        ⭐ {res.rating.toFixed(1)} ({res.orders})
+                      </p>
                     </div>
                   </div>
                 </div>
