@@ -35,7 +35,7 @@ export default function RestaurantDetails() {
     localStorage.setItem("restaurant_cart", JSON.stringify(parsed));
   }, [cart, id]);
 
-  // ---------- LOADING SIMULATION ----------
+  // ---------- LOADING ----------
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
@@ -44,6 +44,15 @@ export default function RestaurantDetails() {
   if (!restaurant) return <div>Restaurant not found</div>;
 
   const isClosed = getRestaurantTimeDisplay(restaurant.time) === "Closed";
+
+  // ---------- SMART BACK BUTTON ----------
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1); // go back to where user came from
+    } else {
+      navigate("/"); // fallback to Home if opened directly
+    }
+  };
 
   // ---------- NATIVE SHARE ----------
   const handleNativeShare = async () => {
@@ -54,9 +63,7 @@ export default function RestaurantDetails() {
           text: `Check out ${restaurant.name}`,
           url: window.location.href,
         });
-      } catch (err) {
-        console.log("Share dismissed");
-      }
+      } catch {}
     } else {
       await navigator.clipboard.writeText(window.location.href);
       alert("Link copied to clipboard");
@@ -125,14 +132,16 @@ export default function RestaurantDetails() {
 
       const openDate = new Date();
       openDate.setHours(open.hour, open.m, 0);
+
       const closeDate = new Date();
       closeDate.setHours(close.hour, close.m, 0);
 
       if (now >= openDate && now <= closeDate) {
         return `Open now (closes at ${closeStr})`;
       }
+
       return `Closed (opens at ${openStr})`;
-    } catch (err) {
+    } catch {
       return isClosed ? "Closed" : "Open";
     }
   };
@@ -142,7 +151,7 @@ export default function RestaurantDetails() {
       {/* HEADER */}
       <div className="cd-header">
         <div className="cd-header-left">
-          <button className="cd-back" onClick={() => navigate("/restaurant")}>
+          <button className="cd-back" onClick={handleBack}>
             <FiArrowLeft size={20} />
           </button>
           <span className="cd-title">{restaurant.name}</span>
