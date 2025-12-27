@@ -19,12 +19,45 @@ export default function LocationPage({ setLocation, closePage }) {
     item.toLowerCase().includes(search.toLowerCase())
   );
 
+  // 🔹 Detect GPS location + convert to address
+  const detectLocation = () => {
+    if (!navigator.geolocation) {
+      alert("Location access not supported on this device");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        const { latitude, longitude } = pos.coords;
+
+        try {
+          const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`
+          );
+
+          const data = await res.json();
+
+          const address = data.display_name || "Unknown Location";
+
+          // ✅ Update Header
+          setLocation(address);
+
+          // ✅ Persist after refresh
+          localStorage.setItem("droppa_user_location", address);
+
+          closePage();
+        } catch (err) {
+          alert("Unable to fetch address");
+        }
+      },
+
+      () => alert("Location permission denied")
+    );
+  };
+
   const handleSelect = (address) => {
     setLocation(address);
-
-    // 🔥 Save location so it persists after refresh
     localStorage.setItem("droppa_user_location", address);
-
     closePage();
   };
 
@@ -45,7 +78,11 @@ export default function LocationPage({ setLocation, closePage }) {
             onChange={(e) => setSearch(e.target.value)}
           />
           {search.length > 0 && (
-            <FiX size={16} className="clear-icon" onClick={() => setSearch("")} />
+            <FiX
+              size={16}
+              className="clear-icon"
+              onClick={() => setSearch("")}
+            />
           )}
         </div>
       </div>
@@ -63,11 +100,9 @@ export default function LocationPage({ setLocation, closePage }) {
         ))}
       </div>
 
-      <div
-        className="use-location"
-        onClick={() => handleSelect("Using current location...")}
-      >
-        <FaLocationArrow className="arrow-icon" size={16} /> Use Current Location
+      <div className="use-location" onClick={detectLocation}>
+        <FaLocationArrow className="arrow-icon" size={16} />
+        Use Current Location
       </div>
     </div>
   );
