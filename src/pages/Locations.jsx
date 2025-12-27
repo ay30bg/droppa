@@ -7,7 +7,6 @@ import "../styles/location.css";
 export default function LocationPage({ setLocation, closePage }) {
   const [search, setSearch] = useState("");
 
-  // Dummy suggestions (Google style)
   const suggestions = [
     "Lekki Phase 1",
     "Victoria Island",
@@ -22,18 +21,20 @@ export default function LocationPage({ setLocation, closePage }) {
 
   const handleSelect = (address) => {
     setLocation(address);
+
+    // 🔥 Save location so it persists after refresh
+    localStorage.setItem("droppa_user_location", address);
+
     closePage();
   };
 
   return (
     <div className="location-page">
-      {/* Page Header */}
       <div className="location-header">
         <h3>Delivery Address</h3>
         <FiX size={24} onClick={closePage} className="close-btn" />
       </div>
 
-      {/* Search bar */}
       <div className="location-search">
         <div className="search-wrapper">
           <FiSearch className="search-icon" size={18} />
@@ -44,31 +45,29 @@ export default function LocationPage({ setLocation, closePage }) {
             onChange={(e) => setSearch(e.target.value)}
           />
           {search.length > 0 && (
-            <FiX
-              size={16}
-              className="clear-icon"
-              onClick={() => setSearch("")}
-            />
+            <FiX size={16} className="clear-icon" onClick={() => setSearch("")} />
           )}
         </div>
       </div>
 
-      {/* Suggestions */}
       <div className="suggestions-list">
         {filtered.map((item) => (
-          <div key={item} className="suggestion-item" onClick={() => handleSelect(item)}>
+          <div
+            key={item}
+            className="suggestion-item"
+            onClick={() => handleSelect(item)}
+          >
             <MapPin size={18} className="suggestion-icon" />
             <div className="suggestion-text">{item}</div>
           </div>
         ))}
       </div>
 
-      {/* Use Current Location */}
       <div
         className="use-location"
         onClick={() => handleSelect("Using current location...")}
       >
-       <FaLocationArrow className="arrow-icon" size={16}/>  Use Current Location
+        <FaLocationArrow className="arrow-icon" size={16} /> Use Current Location
       </div>
     </div>
   );
