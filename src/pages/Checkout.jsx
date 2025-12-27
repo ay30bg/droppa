@@ -145,7 +145,7 @@ export default function Checkout() {
 
               <button
                 className="ck-edit"
-                onClick={() => navigate("/location")}
+                onClick={() => navigate("/locations")}
               >
                 {deliveryAddress ? "Change" : "Add"}
               </button>
