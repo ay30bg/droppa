@@ -28,11 +28,14 @@ export default function ProfilePage() {
       <div className="profile-section">
         <h3 className="profile-section-title">Account</h3>
 
-        <div className="profile-item">
-          <span>Personal Information</span>
-          <FiChevronRight />
-        </div>
-
+        <div
+  className="profile-item"
+  onClick={() => navigate("/profile/personal-details")}
+>
+  <span>Personal Information</span>
+  <FiChevronRight />
+</div>
+        
         <div className="profile-item">
           <span>Saved Addresses</span>
           <FiChevronRight />
@@ -80,3 +83,4 @@ export default function ProfilePage() {
     </div>
   );
 }
+
