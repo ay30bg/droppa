@@ -13,18 +13,22 @@ export default function Checkout() {
   const [step, setStep] = useState(1);
   const [droppaBag, setDroppaBag] = useState(true);
 
-  // 🔹 delivery address shared with header / location page
+  // Delivery address
   const [deliveryAddress, setDeliveryAddress] = useState("");
 
-  // 🔹 load saved address when checkout opens
+  // Contact phone
+  const [contactPhone, setContactPhone] = useState("");
+
+  // Load saved data on mount
   useEffect(() => {
     const savedAddress = localStorage.getItem("droppa_user_location");
-    if (savedAddress) {
-      setDeliveryAddress(savedAddress);
-    }
+    if (savedAddress) setDeliveryAddress(savedAddress);
+
+    const savedUser = JSON.parse(localStorage.getItem("userData"));
+    if (savedUser?.phone) setContactPhone(savedUser.phone);
   }, []);
 
-  // 🔹 Add / remove Droppa bag
+  // Add or remove Droppa Bag dynamically
   useEffect(() => {
     if (droppaBag) {
       if (!cart.find((item) => item.id === "droppa-bag")) {
@@ -79,9 +83,9 @@ export default function Checkout() {
         </div>
       </div>
 
-      {/* STEP BODY */}
+      {/* STEP CONTENT */}
       <div className={`ck-step-content step-${step}`}>
-        {/* STEP 1 */}
+        {/* STEP 1: Order Summary */}
         <div className={`ck-step1 ${step === 1 ? "active" : ""}`}>
           <div className="ck-card">
             <div className="ck-restaurant">
@@ -99,6 +103,7 @@ export default function Checkout() {
 
             <div className="ck-divider" />
 
+            {/* Cart Items */}
             {cart.map((item) => (
               <div className="ck-item" key={item.id}>
                 <div className="ck-item-info">
@@ -116,6 +121,7 @@ export default function Checkout() {
               </div>
             ))}
 
+            {/* Droppa Bag */}
             <div className="ck-droppa-bag">
               <label>
                 <input
@@ -134,15 +140,14 @@ export default function Checkout() {
           </div>
         </div>
 
-        {/* STEP 2 */}
+        {/* STEP 2: Delivery & Payment */}
         <div className={`ck-step2 ${step === 2 ? "active" : ""}`}>
           <div className="ck-card">
             <h4 className="ck-section-title">Delivery details</h4>
 
-            {/* DELIVERY ADDRESS */}
+            {/* Delivery Address */}
             <div className="ck-info-row">
               <span>Delivery address</span>
-
               <button
                 className="ck-edit"
                 onClick={() => navigate("/locations")}
@@ -150,19 +155,26 @@ export default function Checkout() {
                 {deliveryAddress ? "Change" : "Add"}
               </button>
             </div>
-
-            {/* show selected address */}
             {deliveryAddress && (
               <p className="ck-address-text">{deliveryAddress}</p>
             )}
 
-            {/* CONTACT PHONE (placeholder for now) */}
+            {/* Contact Phone */}
             <div className="ck-info-row">
               <span>Contact phone</span>
-              <button className="ck-edit">Add</button>
+              <button
+                className="ck-edit"
+                onClick={() => navigate("/profile/personal-details")}
+              >
+                {contactPhone ? "Change" : "Add"}
+              </button>
             </div>
+            {contactPhone && (
+              <p className="ck-address-text">{contactPhone}</p>
+            )}
           </div>
 
+          {/* Payment Summary */}
           <div className="ck-card">
             <h4 className="ck-section-title">Payment summary</h4>
 
@@ -193,10 +205,7 @@ export default function Checkout() {
             Continue
           </button>
         ) : (
-          <button
-            className="ck-pay"
-            disabled={!deliveryAddress}
-          >
+          <button className="ck-pay" disabled={!deliveryAddress || !contactPhone}>
             Place Order · ₦{total}
           </button>
         )}
