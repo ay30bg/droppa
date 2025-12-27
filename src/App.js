@@ -8,6 +8,7 @@ import TrackOrder from "./pages/TrackOrder.jsx";
 import Restaurant from "./pages/Restaurant.jsx";
 import RestaurantDetails from "./pages/RestaurantDetails.jsx";
 import Profile from "./pages/Profile.jsx";
+import PersonalDetails from "./pages/PersonalDetails.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import Orders from "./pages/Orders.jsx";
 import Locations from "./pages/Locations.jsx";
@@ -55,6 +56,7 @@ function AppWrapper() {
         <Route path="/restaurant" element={<Restaurant />} />
         <Route path="/details/:id" element={<RestaurantDetails />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/personal-details" element={<PersonalDetails />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/locations" element={<Locations />} />
         <Route path="/login" element={<Login />} />
