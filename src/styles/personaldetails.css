@@ -1,9 +1,33 @@
+/* HEADER */
+.pi-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 4px 16px 4px;
+}
+
+.pi-back-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.pi-header-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* SECTION */
 .pi-section {
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
+/* CARD STYLE */
 .pi-card {
   background: #f3f3f3;
   border-radius: 14px;
@@ -30,6 +54,16 @@
   color: #222;
 }
 
+/* EDIT MODE INPUT */
+.pi-edit-input {
+  background: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+/* ACTION BUTTONS */
 .pi-card-right button {
   background: transparent;
   border: none;
@@ -37,20 +71,12 @@
   cursor: pointer;
 }
 
-.pi-edit-input {
-  border: none;
-  background: white;
-  padding: 8px 10px;
-  border-radius: 8px;
-  font-size: 14px;
-}
-
 .pi-save-btn,
 .pi-cancel-btn {
+  background: #ffffff;
+  border-radius: 8px;
   border: none;
-  background: white;
   padding: 6px 8px;
   margin-left: 6px;
-  border-radius: 8px;
   cursor: pointer;
 }
