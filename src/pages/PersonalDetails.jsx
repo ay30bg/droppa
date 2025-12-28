@@ -13,7 +13,7 @@ export default function PersonalInformationPage() {
     birthday: "",
   });
 
-  // which field is currently editable
+  // Which field is currently editable
   const [activeField, setActiveField] = useState(null);
 
   useEffect(() => {
@@ -43,23 +43,30 @@ export default function PersonalInformationPage() {
 
   const cancelEdit = () => setActiveField(null);
 
+  const formatBirthday = (date) => {
+    if (!date) return "";
+    return new Date(date).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+  };
+
   return (
     <div className="pi-container">
 
-      {/* Header */}
-      <div className="pi-header">
+      {/* HEADER — title beside back button */}
+      <div className="pi-header-row">
         <button className="pi-back-btn" onClick={() => navigate(-1)}>
           <FiArrowLeft size={20} />
         </button>
-        <h1 className="pi-title">Profile Details</h1>
+
+        <h1 className="pi-header-title">Profile Details</h1>
       </div>
 
 
       <div className="pi-section">
 
-        {/* FIELD CARD COMPONENT PATTERN */}
-
-        {/* NAME */}
+        {/* ********** NAME ********** */}
         <div className="pi-card">
           <div className="pi-card-left">
             <span className="pi-label">Account name</span>
@@ -68,7 +75,7 @@ export default function PersonalInformationPage() {
               <input
                 className="pi-edit-input"
                 value={userData.name}
-                onChange={(e) => handleChange("name", e.target.value)}
+                onChange={e => handleChange("name", e.target.value)}
                 autoFocus
               />
             ) : (
@@ -82,9 +89,7 @@ export default function PersonalInformationPage() {
                 <button className="pi-save-btn" onClick={handleSave}>
                   <FiSave />
                 </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>
-                  ✕
-                </button>
+                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
               </>
             ) : (
               <button onClick={() => setActiveField("name")}>
@@ -95,7 +100,7 @@ export default function PersonalInformationPage() {
         </div>
 
 
-        {/* PHONE */}
+        {/* ********** PHONE ********** */}
         <div className="pi-card">
           <div className="pi-card-left">
             <span className="pi-label">Phone number</span>
@@ -105,7 +110,7 @@ export default function PersonalInformationPage() {
                 className="pi-edit-input"
                 type="tel"
                 value={userData.phone}
-                onChange={(e) => handleChange("phone", e.target.value)}
+                onChange={e => handleChange("phone", e.target.value)}
                 autoFocus
               />
             ) : (
@@ -119,9 +124,7 @@ export default function PersonalInformationPage() {
                 <button className="pi-save-btn" onClick={handleSave}>
                   <FiSave />
                 </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>
-                  ✕
-                </button>
+                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
               </>
             ) : (
               <button onClick={() => setActiveField("phone")}>
@@ -132,7 +135,7 @@ export default function PersonalInformationPage() {
         </div>
 
 
-        {/* EMAIL */}
+        {/* ********** EMAIL ********** */}
         <div className="pi-card">
           <div className="pi-card-left">
             <span className="pi-label">Email</span>
@@ -142,7 +145,7 @@ export default function PersonalInformationPage() {
                 className="pi-edit-input"
                 type="email"
                 value={userData.email}
-                onChange={(e) => handleChange("email", e.target.value)}
+                onChange={e => handleChange("email", e.target.value)}
                 autoFocus
               />
             ) : (
@@ -156,9 +159,7 @@ export default function PersonalInformationPage() {
                 <button className="pi-save-btn" onClick={handleSave}>
                   <FiSave />
                 </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>
-                  ✕
-                </button>
+                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
               </>
             ) : (
               <button onClick={() => setActiveField("email")}>
@@ -169,7 +170,7 @@ export default function PersonalInformationPage() {
         </div>
 
 
-        {/* BIRTHDAY */}
+        {/* ********** BIRTHDAY ********** */}
         <div className="pi-card">
           <div className="pi-card-left">
             <span className="pi-label">Date of birth</span>
@@ -179,15 +180,12 @@ export default function PersonalInformationPage() {
                 className="pi-edit-input"
                 type="date"
                 value={userData.birthday}
-                onChange={(e) => handleChange("birthday", e.target.value)}
+                onChange={e => handleChange("birthday", e.target.value)}
                 autoFocus
               />
             ) : (
               <span className="pi-value">
-                {new Date(userData.birthday).toLocaleDateString("en-US", {
-                  month: "long",
-                  day: "numeric"
-                })}
+                {formatBirthday(userData.birthday)}
               </span>
             )}
           </div>
@@ -198,9 +196,7 @@ export default function PersonalInformationPage() {
                 <button className="pi-save-btn" onClick={handleSave}>
                   <FiSave />
                 </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>
-                  ✕
-                </button>
+                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
               </>
             ) : (
               <button onClick={() => setActiveField("birthday")}>
