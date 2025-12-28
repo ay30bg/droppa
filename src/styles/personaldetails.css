@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
+/* PERSONAL INFO PREFIX: pi- */
+
 .pi-container,
 .pi-container * {
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -7,134 +9,89 @@
 }
 
 .pi-container {
+  height: 100vh;
   width: 100%;
-  min-height: 100vh;
   background: #f5f5f5;
-  padding: 24px;
+  padding: 32px 24px;
   display: flex;
   flex-direction: column;
 }
 
 /* Header */
 .pi-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 12px;
+  margin-bottom: 18px;
 }
 
-.pi-back {
+.pi-back-btn {
   border: none;
-  background: #e8eeee;
-  border-radius: 50%;
-  padding: 8px;
+  background: none;
   cursor: pointer;
+  margin-bottom: 10px;
 }
 
 .pi-title {
-  font-size: 18px;
+  font-size: 26px;
   font-weight: 800;
   color: #014f50;
+  margin-bottom: 6px;
 }
 
-/* Card container */
-.pi-card {
-  background: #fff;
-  border-radius: 14px;
-  padding: 18px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
-}
-
-/* Avatar Section */
-.pi-avatar {
-  text-align: center;
-  margin-bottom: 12px;
-}
-
-.pi-avatar svg {
-  color: #cdd2d6;
-}
-
-.pi-avatar-text {
-  font-size: 12px;
-  color: #777;
+.pi-subtext {
+  font-size: 14px;
+  color: #555;
 }
 
 /* Form */
 .pi-form {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  margin-top: 6px;
+  margin-top: 12px;
 }
 
 .pi-input-group {
   display: flex;
   flex-direction: column;
+  margin-bottom: 22px;
 }
 
 .pi-label {
   font-size: 14px;
   font-weight: 600;
   color: #014f50;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
-/* Input Box */
 .pi-input {
   padding: 14px 16px;
   border: 2px solid #e0e0e0;
-  border-radius: 8px;
   height: 48px;
-  font-size: 15px;
+  border-radius: 6px;
+  font-size: 16px;
   outline: none;
-  transition: .3s;
-  background: #fbfbfb;
+  transition: 0.3s;
 }
 
 .pi-input:focus {
   border-color: #014f50;
-  background: #fff;
 }
 
-/* Hint text */
-.pi-hint {
-  margin-top: 4px;
-  font-size: 11px;
-  color: #666;
-}
-
-/* Validation */
-.pi-error {
-  border-color: #ff4d4d !important;
-  background: #fff3f3;
-}
-
-.pi-error-text {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #ff3333;
-}
-
-/* Save Button */
+/* Button */
 .pi-btn {
   width: 100%;
-  padding: 14px 0;
-  margin-top: 6px;
+  padding: 16px 0;
   border: none;
-  border-radius: 8px;
   background: #014f50;
   color: #fff;
-  font-size: 15px;
+  border-radius: 6px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   display: flex;
-  align-items: center;
   justify-content: center;
-  gap: 6px;
-  transition: .3s;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s ease;
+  margin-top: 10px;
 }
 
 .pi-btn:hover {
-  background: #013c3d;
+  background: #013b3c;
 }
