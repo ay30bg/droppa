@@ -1,97 +1,56 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-
-/* PERSONAL INFO PREFIX: pi- */
-
-.pi-container,
-.pi-container * {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  box-sizing: border-box;
-}
-
-.pi-container {
-  height: 100vh;
-  width: 100%;
-  background: #f5f5f5;
-  padding: 32px 24px;
+.pi-section {
   display: flex;
   flex-direction: column;
+  gap: 14px;
 }
 
-/* Header */
-.pi-header {
-  margin-bottom: 18px;
+.pi-card {
+  background: #f3f3f3;
+  border-radius: 14px;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.pi-back-btn {
-  border: none;
-  background: none;
-  cursor: pointer;
-  margin-bottom: 10px;
-}
-
-.pi-title {
-  font-size: 26px;
-  font-weight: 800;
-  color: #014f50;
-  margin-bottom: 6px;
-}
-
-.pi-subtext {
-  font-size: 14px;
-  color: #555;
-}
-
-/* Form */
-.pi-form {
-  margin-top: 12px;
-}
-
-.pi-input-group {
+.pi-card-left {
   display: flex;
   flex-direction: column;
-  margin-bottom: 22px;
+  gap: 4px;
 }
 
 .pi-label {
+  font-size: 13px;
+  color: #555;
+  font-weight: 600;
+}
+
+.pi-value {
   font-size: 14px;
-  font-weight: 600;
-  color: #014f50;
-  margin-bottom: 8px;
+  color: #222;
 }
 
-.pi-input {
-  padding: 14px 16px;
-  border: 2px solid #e0e0e0;
-  height: 48px;
-  border-radius: 6px;
-  font-size: 16px;
-  outline: none;
-  transition: 0.3s;
-}
-
-.pi-input:focus {
-  border-color: #014f50;
-}
-
-/* Button */
-.pi-btn {
-  width: 100%;
-  padding: 16px 0;
+.pi-card-right button {
+  background: transparent;
   border: none;
-  background: #014f50;
-  color: #fff;
-  border-radius: 6px;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 18px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  transition: 0.3s ease;
-  margin-top: 10px;
 }
 
-.pi-btn:hover {
-  background: #013b3c;
+.pi-edit-input {
+  border: none;
+  background: white;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.pi-save-btn,
+.pi-cancel-btn {
+  border: none;
+  background: white;
+  padding: 6px 8px;
+  margin-left: 6px;
+  border-radius: 8px;
+  cursor: pointer;
 }
