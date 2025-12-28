@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; 
 import "../styles/getStarted.css";
 import { FiArrowRight } from "react-icons/fi";
 
+// ---------- Phone Formatter ----------
+const formatNigerianPhone = (value = "") => {
+  let phone = value.replace(/\D/g, "");
+
+  if (phone.startsWith("234")) phone = "0" + phone.slice(3);
+  if (phone.length === 10 && !phone.startsWith("0")) phone = "0" + phone;
+
+  return phone.slice(0, 11);
+};
+
 export default function GetStarted() {
   const navigate = useNavigate();
 
-  // Form state
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -16,30 +25,58 @@ export default function GetStarted() {
   const [referralCode, setReferralCode] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // Day, Month, Year options
   const days = Array.from({ length: 31 }, (_, i) => i + 1);
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
   ];
   const currentYear = new Date().getFullYear();
   const years = Array.from({ length: currentYear - 1899 }, (_, i) => currentYear - i);
 
-  // Handle Sign Up button
+  // ---------- Prefill from saved profile ----------
+  useEffect(() => {
+    const saved = localStorage.getItem("userProfile");
+    if (!saved) return;
+
+    const p = JSON.parse(saved);
+
+    setFullName(p.name || "");
+    setEmail(p.email || "");
+    setPhone(p.phone || "");
+
+    if (p.dob) {
+      const [m, dRaw, y] = p.dob.split(" ");
+      setMonth(m || "");
+      setDay((dRaw || "").replace(/\D/g, ""));
+      setYear(y || "");
+    }
+  }, []);
+
   const handleSignUp = () => {
-    // Validate required fields (referral code is optional)
-    if (!fullName || !email || phone.length !== 11 || !day || !month || !year) {
+    const isValidPhone = phone.startsWith("0") && phone.length === 11;
+
+    if (!fullName || !email || !isValidPhone || !day || !month || !year) {
       alert("Please fill all required fields correctly.");
       return;
     }
 
+    const dob = `${month} ${day}, ${year}`;
+
+    const profileData = {
+      name: fullName,
+      email,
+      phone,
+      dob,
+      referralCode,
+    };
+
+    // ---------- Save profile globally ----------
+    localStorage.setItem("userProfile", JSON.stringify(profileData));
+
     setLoading(true);
 
-    // Simulate API call
     setTimeout(() => {
       setLoading(false);
-
-      // Navigate to OTP page for signup
       navigate("/verify", { state: { phone, mode: "signup" } });
     }, 1500);
   };
@@ -81,7 +118,7 @@ export default function GetStarted() {
           className="gs-input"
           placeholder="08123456789"
           value={phone}
-          onChange={(e) => setPhone(e.target.value)}
+          onChange={(e) => setPhone(formatNigerianPhone(e.target.value))}
         />
       </div>
 
@@ -104,7 +141,7 @@ export default function GetStarted() {
         </div>
       </div>
 
-      {/* Referral Code (Optional) */}
+      {/* Referral Code */}
       <div className="gs-input-group">
         <label className="gs-label">Referral Code (Optional)</label>
         <input
@@ -116,7 +153,6 @@ export default function GetStarted() {
         />
       </div>
 
-      {/* Sign Up Button */}
       <button className="gs-btn" onClick={handleSignUp} disabled={loading}>
         {loading ? <div className="loader"></div> : <>Get Started <FiArrowRight className="gs-arrow" /></>}
       </button>
