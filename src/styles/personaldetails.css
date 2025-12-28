@@ -26,6 +26,7 @@
 
 .pd-back {
   border: none;
+  color: #000;
   background: none;
   cursor: pointer;
 }
