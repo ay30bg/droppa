@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../styles/profile.css";
+import "../styles/personaldetails.css";
 
 export default function PersonalInformationPage() {
   const navigate = useNavigate();
