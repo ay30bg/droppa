@@ -42,7 +42,7 @@ function AppWrapper() {
   // Hide BottomNav on specific pages
   const hideBottomNav =
     path.startsWith("/details/") || // hide bottom nav on details page
-    ["/welcome", "/login", "/get-started", "/verify", "/checkout"].includes(path);
+    ["/welcome", "/login", "/get-started", "/verify", "/checkout", "/profile/personal-details"].includes(path);
 
   return (
     <>
