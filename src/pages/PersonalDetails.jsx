@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
-import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import "../styles/profile.css";
+import "../styles/personalInfo.css";
 
 export default function PersonalInformationPage() {
   const navigate = useNavigate();
@@ -13,125 +12,91 @@ export default function PersonalInformationPage() {
     phone: "",
   });
 
-  const [errors, setErrors] = useState({});
-  const [isDirty, setIsDirty] = useState(false);
-  const [saved, setSaved] = useState(false);
-
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem("userData"));
 
-    setUserData(
-      savedUser || {
+    if (savedUser) {
+      setUserData(savedUser);
+    } else {
+      setUserData({
         name: "John Doe",
         email: "john.doe@example.com",
         phone: "08012345678",
-      }
-    );
+      });
+    }
   }, []);
 
   const handleChange = (field, value) => {
-    setIsDirty(true);
-    setSaved(false);
-
-    setUserData((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-
-    setErrors((prev) => ({ ...prev, [field]: "" }));
-  };
-
-  const validateForm = () => {
-    let newErrors = {};
-
-    if (!userData.name.trim()) {
-      newErrors.name = "Full name is required";
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(userData.email)) {
-      newErrors.email = "Enter a valid email address";
-    }
-
-    if (!userData.phone || userData.phone.length < 8) {
-      newErrors.phone = "Enter a valid phone number";
-    }
-
-    setErrors(newErrors);
-
-    return Object.keys(newErrors).length === 0;
+    setUserData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSave = () => {
-    if (!validateForm()) return;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(userData.email)) {
+      alert("Please enter a valid email address");
+      return;
+    }
+
+    if (!userData.phone || userData.phone.length < 8) {
+      alert("Please enter a valid phone number");
+      return;
+    }
 
     localStorage.setItem("userData", JSON.stringify(userData));
-
-    setSaved(true);
-    setIsDirty(false);
-
-    setTimeout(() => navigate(-1), 600);
+    alert("Personal information updated successfully!");
+    navigate(-1);
   };
 
   return (
-    <div className="profile-wrapper">
-      <div className="profile-header">
-        <button className="back-btn" onClick={() => navigate(-1)}>
+    <div className="pi-container">
+      
+      {/* Header */}
+      <div className="pi-header">
+        <button className="pi-back-btn" onClick={() => navigate(-1)}>
           <FiArrowLeft size={20} />
         </button>
-        <h2>Personal Information</h2>
+
+        <h1 className="pi-title">Personal Information</h1>
+        <p className="pi-subtext">Update your account details</p>
       </div>
 
-      <div className="profile-card">
-        <div className="profile-avatar">
-          <FaUserCircle size={90} />
-          <p className="avatar-text">Profile photo upload coming soon</p>
+      {/* Form */}
+      <div className="pi-form">
+
+        <div className="pi-input-group">
+          <label className="pi-label">Full Name</label>
+          <input
+            type="text"
+            className="pi-input"
+            value={userData.name}
+            onChange={(e) => handleChange("name", e.target.value)}
+          />
         </div>
 
-        <div className="profile-form">
-          <div className="form-group">
-            <label>Full Name</label>
-            <input
-              type="text"
-              value={userData.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-              className={errors.name ? "error-input" : ""}
-            />
-            {errors.name && <span className="error-text">{errors.name}</span>}
-          </div>
-
-          <div className="form-group">
-            <label>Email Address</label>
-            <input
-              type="email"
-              value={userData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-              className={errors.email ? "error-input" : ""}
-            />
-            {errors.email && <span className="error-text">{errors.email}</span>}
-          </div>
-
-          <div className="form-group">
-            <label>Phone Number</label>
-            <input
-              type="tel"
-              value={userData.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-              className={errors.phone ? "error-input" : ""}
-            />
-            <small className="hint-text">Include country code if applicable</small>
-            {errors.phone && <span className="error-text">{errors.phone}</span>}
-          </div>
-
-          <button
-            className={`save-btn ${!isDirty ? "disabled" : ""}`}
-            onClick={handleSave}
-            disabled={!isDirty}
-          >
-            <FiSave size={18} />
-            {saved ? " Saved ✓" : " Save Changes"}
-          </button>
+        <div className="pi-input-group">
+          <label className="pi-label">Email Address</label>
+          <input
+            type="email"
+            className="pi-input"
+            value={userData.email}
+            onChange={(e) => handleChange("email", e.target.value)}
+          />
         </div>
+
+        <div className="pi-input-group">
+          <label className="pi-label">Phone Number</label>
+          <input
+            type="tel"
+            className="pi-input"
+            value={userData.phone}
+            onChange={(e) => handleChange("phone", e.target.value)}
+          />
+        </div>
+
+        <button className="pi-btn" onClick={handleSave}>
+          <FiSave /> Save Changes
+        </button>
       </div>
     </div>
   );
