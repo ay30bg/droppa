@@ -6,18 +6,23 @@ import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
-
   const [profile, setProfile] = useState({
     name: "John Doe",
-    email: "john.doe@example.com"
+    email: "john.doe@example.com",
   });
 
-  // Load saved user profile from localStorage
-  useEffect(() => {
+  // Load profile data from localStorage on mount
+  const loadProfile = () => {
     const saved = localStorage.getItem("userProfile");
-    if (saved) {
-      setProfile(JSON.parse(saved));
-    }
+    if (saved) setProfile(JSON.parse(saved));
+  };
+
+  useEffect(() => {
+    loadProfile();
+    // Listen for storage changes (if user edits in another tab)
+    const handleStorageChange = () => loadProfile();
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
   const handleLogout = () => {
@@ -27,24 +32,16 @@ export default function ProfilePage() {
 
   return (
     <div className="profile-page">
-
       {/* HEADER */}
       <div className="profile-header">
         <FaUserCircle className="profile-avatar" />
-
-        <h2 className="profile-name">
-          {profile.name || "Guest User"}
-        </h2>
-
-        <p className="profile-email">
-          {profile.email || "No email added"}
-        </p>
+        <h2 className="profile-name">{profile.name || "Guest User"}</h2>
+        <p className="profile-email">{profile.email || "No email added"}</p>
       </div>
 
       {/* Sections */}
       <div className="profile-section">
         <h3 className="profile-section-title">Account</h3>
-
         <div
           className="profile-item"
           onClick={() => navigate("/profile/personal-details")}
@@ -52,12 +49,10 @@ export default function ProfilePage() {
           <span>Personal Information</span>
           <FiChevronRight />
         </div>
-
         <div className="profile-item">
           <span>Saved Addresses</span>
           <FiChevronRight />
         </div>
-
         <div className="profile-item">
           <span>Payment Methods</span>
           <FiChevronRight />
@@ -66,12 +61,10 @@ export default function ProfilePage() {
 
       <div className="profile-section">
         <h3 className="profile-section-title">Preferences</h3>
-
         <div className="profile-item">
           <span>Notifications</span>
           <FiChevronRight />
         </div>
-
         <div className="profile-item">
           <span>Privacy & Security</span>
           <FiChevronRight />
@@ -80,12 +73,10 @@ export default function ProfilePage() {
 
       <div className="profile-section">
         <h3 className="profile-section-title">Support</h3>
-
         <div className="profile-item">
           <span>Help Center</span>
           <FiChevronRight />
         </div>
-
         <div className="profile-item">
           <span>About Us</span>
           <FiChevronRight />
