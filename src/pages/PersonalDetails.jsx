@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowLeft, FiSave } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
-import "../styles/personalInfo.css";
+import "../styles/personaldetails.css";
 
 export default function PersonalInformationPage() {
   const navigate = useNavigate();
