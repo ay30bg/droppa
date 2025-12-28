@@ -85,58 +85,123 @@
   transition: 0.25s ease;
 }
 
+.profile-wrapper {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.profile-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
 .back-btn {
-  background: none;
   border: none;
+  background: #f2f3f5;
+  padding: 8px;
+  border-radius: 50%;
   cursor: pointer;
-  margin-right: 10px;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+}
+
+.profile-avatar {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile-avatar svg {
+  color: #c9ccd2;
+}
+
+.avatar-text {
+  font-size: 12px;
+  color: #888;
 }
 
 .profile-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  padding: 20px;
+  gap: 12px;
+  margin-top: 10px;
 }
 
-.profile-form label {
+.form-group {
   display: flex;
   flex-direction: column;
-  font-weight: 500;
 }
 
-.profile-form input {
+label {
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+input {
   padding: 10px;
-  margin-top: 5px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #d5d7db;
+  background: #fafafa;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+input:focus {
+  border-color: #3e7bff;
+  background: #fff;
+}
+
+.error-input {
+  border-color: #ff4d4d;
+  background: #fff1f1;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #ff3b3b;
+  margin-top: 4px;
+}
+
+.hint-text {
+  font-size: 11px;
+  color: #777;
+  margin-top: 4px;
 }
 
 .save-btn {
-  margin-top: 20px;
-  padding: 12px;
-  background-color: #014f50;
-  color: white;
+  margin-top: 8px;
+  padding: 10px;
+  border-radius: 10px;
   border: none;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
   display: flex;
+  justify-content: center;
+  gap: 6px;
   align-items: center;
-  gap: 8px;
+  font-size: 14px;
+  background: #3e7bff;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity .2s, transform .1s;
 }
 
 .save-btn:hover {
-  background-color: #013e3e;
+  opacity: .9;
 }
 
-.profile-picture-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
+.save-btn.disabled {
+  background: #b7c3e6;
+  cursor: not-allowed;
 }
-
-
-
-
