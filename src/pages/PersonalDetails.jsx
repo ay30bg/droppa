@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { FiArrowLeft, FiEdit3, FiSave, FiCalendar } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiArrowLeft, FiEdit2, FiCheck } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import "../styles/personaldetails.css";
 
@@ -7,200 +7,127 @@ export default function PersonalInformationPage() {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    birthday: "",
+    name: "Ayomide Yekeen",
+    phone: "09034951446",
+    email: "yekeennolalekan123@gmail.com",
+    dob: "February 10th",
   });
 
-  // Which field is currently editable
-  const [activeField, setActiveField] = useState(null);
-
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("userData"));
-
-    if (saved) {
-      setUserData(saved);
-    } else {
-      setUserData({
-        name: "John Doe",
-        phone: "08012345678",
-        email: "john.doe@example.com",
-        birthday: "1995-02-10",
-      });
-    }
-  }, []);
+  const [editingField, setEditingField] = useState(null);
 
   const handleChange = (field, value) => {
     setUserData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = () => {
-    localStorage.setItem("userData", JSON.stringify(userData));
-    setActiveField(null);
-    alert("Profile updated successfully");
-  };
-
-  const cancelEdit = () => setActiveField(null);
-
-  const formatBirthday = (date) => {
-    if (!date) return "";
-    return new Date(date).toLocaleDateString("en-US", {
-      month: "long",
-      day: "numeric",
-    });
-  };
+  const saveField = () => setEditingField(null);
 
   return (
-    <div className="pi-container">
+    <div className="pd-page">
 
-      {/* HEADER — title beside back button */}
-      <div className="pi-header-row">
-        <button className="pi-back-btn" onClick={() => navigate(-1)}>
-          <FiArrowLeft size={20} />
-        </button>
+      {/* ======= HEADER ======= */}
+      <div className="pd-header">
+        <div className="pd-header-left">
+          <button className="pd-back" onClick={() => navigate(-1)}>
+            <FiArrowLeft size={20} />
+          </button>
 
-        <h1 className="pi-header-title">Profile Details</h1>
+          <span className="pd-title">Profile Details</span>
+        </div>
       </div>
 
+      <div className="pd-body">
 
-      <div className="pi-section">
+        {/* ======= NAME ======= */}
+        <div className="pd-card">
+          <label className="pd-label">Account name</label>
 
-        {/* ********** NAME ********** */}
-        <div className="pi-card">
-          <div className="pi-card-left">
-            <span className="pi-label">Account name</span>
+          <div className="pd-input-row">
+            <input
+              type="text"
+              value={userData.name}
+              disabled={editingField !== "name"}
+              onChange={e => handleChange("name", e.target.value)}
+            />
 
-            {activeField === "name" ? (
-              <input
-                className="pi-edit-input"
-                value={userData.name}
-                onChange={e => handleChange("name", e.target.value)}
-                autoFocus
-              />
+            {editingField === "name" ? (
+              <button className="pd-save" onClick={saveField}>
+                <FiCheck size={18} />
+              </button>
             ) : (
-              <span className="pi-value">{userData.name}</span>
-            )}
-          </div>
-
-          <div className="pi-card-right">
-            {activeField === "name" ? (
-              <>
-                <button className="pi-save-btn" onClick={handleSave}>
-                  <FiSave />
-                </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
-              </>
-            ) : (
-              <button onClick={() => setActiveField("name")}>
-                <FiEdit3 />
+              <button className="pd-edit" onClick={() => setEditingField("name")}>
+                <FiEdit2 size={18} />
               </button>
             )}
           </div>
         </div>
 
+        {/* ======= PHONE ======= */}
+        <div className="pd-card">
+          <label className="pd-label">Phone number</label>
 
-        {/* ********** PHONE ********** */}
-        <div className="pi-card">
-          <div className="pi-card-left">
-            <span className="pi-label">Phone number</span>
+          <div className="pd-input-row">
+            <input
+              type="text"
+              value={userData.phone}
+              disabled={editingField !== "phone"}
+              onChange={e => handleChange("phone", e.target.value)}
+            />
 
-            {activeField === "phone" ? (
-              <input
-                className="pi-edit-input"
-                type="tel"
-                value={userData.phone}
-                onChange={e => handleChange("phone", e.target.value)}
-                autoFocus
-              />
+            {editingField === "phone" ? (
+              <button className="pd-save" onClick={saveField}>
+                <FiCheck size={18} />
+              </button>
             ) : (
-              <span className="pi-value">{userData.phone}</span>
-            )}
-          </div>
-
-          <div className="pi-card-right">
-            {activeField === "phone" ? (
-              <>
-                <button className="pi-save-btn" onClick={handleSave}>
-                  <FiSave />
-                </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
-              </>
-            ) : (
-              <button onClick={() => setActiveField("phone")}>
-                <FiEdit3 />
+              <button className="pd-edit" onClick={() => setEditingField("phone")}>
+                <FiEdit2 size={18} />
               </button>
             )}
           </div>
         </div>
 
+        {/* ======= EMAIL ======= */}
+        <div className="pd-card">
+          <label className="pd-label">Email</label>
 
-        {/* ********** EMAIL ********** */}
-        <div className="pi-card">
-          <div className="pi-card-left">
-            <span className="pi-label">Email</span>
+          <div className="pd-input-row">
+            <input
+              type="email"
+              value={userData.email}
+              disabled={editingField !== "email"}
+              onChange={e => handleChange("email", e.target.value)}
+            />
 
-            {activeField === "email" ? (
-              <input
-                className="pi-edit-input"
-                type="email"
-                value={userData.email}
-                onChange={e => handleChange("email", e.target.value)}
-                autoFocus
-              />
+            {editingField === "email" ? (
+              <button className="pd-save" onClick={saveField}>
+                <FiCheck size={18} />
+              </button>
             ) : (
-              <span className="pi-value">{userData.email}</span>
-            )}
-          </div>
-
-          <div className="pi-card-right">
-            {activeField === "email" ? (
-              <>
-                <button className="pi-save-btn" onClick={handleSave}>
-                  <FiSave />
-                </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
-              </>
-            ) : (
-              <button onClick={() => setActiveField("email")}>
-                <FiEdit3 />
+              <button className="pd-edit" onClick={() => setEditingField("email")}>
+                <FiEdit2 size={18} />
               </button>
             )}
           </div>
         </div>
 
+        {/* ======= DOB ======= */}
+        <div className="pd-card">
+          <label className="pd-label">Date of birth</label>
 
-        {/* ********** BIRTHDAY ********** */}
-        <div className="pi-card">
-          <div className="pi-card-left">
-            <span className="pi-label">Date of birth</span>
+          <div className="pd-input-row">
+            <input
+              type="text"
+              value={userData.dob}
+              disabled={editingField !== "dob"}
+              onChange={e => handleChange("dob", e.target.value)}
+            />
 
-            {activeField === "birthday" ? (
-              <input
-                className="pi-edit-input"
-                type="date"
-                value={userData.birthday}
-                onChange={e => handleChange("birthday", e.target.value)}
-                autoFocus
-              />
+            {editingField === "dob" ? (
+              <button className="pd-save" onClick={saveField}>
+                <FiCheck size={18} />
+              </button>
             ) : (
-              <span className="pi-value">
-                {formatBirthday(userData.birthday)}
-              </span>
-            )}
-          </div>
-
-          <div className="pi-card-right">
-            {activeField === "birthday" ? (
-              <>
-                <button className="pi-save-btn" onClick={handleSave}>
-                  <FiSave />
-                </button>
-                <button className="pi-cancel-btn" onClick={cancelEdit}>✕</button>
-              </>
-            ) : (
-              <button onClick={() => setActiveField("birthday")}>
-                <FiCalendar />
+              <button className="pd-edit" onClick={() => setEditingField("dob")}>
+                <FiEdit2 size={18} />
               </button>
             )}
           </div>
