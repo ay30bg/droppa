@@ -79,6 +79,7 @@
 .pd-edit,
 .pd-save {
   border: none;
+  color: #014f50;
   background: none;
   cursor: pointer;
   padding-left: 8px;
