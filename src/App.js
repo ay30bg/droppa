@@ -35,7 +35,8 @@ function AppWrapper() {
       "/login",
       "/get-started",
       "/verify",
-      "/checkout"
+      "/checkout",
+      "/profile/personal-details"
     ].includes(path);
 
   // Hide BottomNav on specific pages
