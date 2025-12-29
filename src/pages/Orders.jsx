@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/orders.css";
 import OrdersHeader from "../components/OrdersHeader";
@@ -8,63 +8,55 @@ import { ReactComponent as TrackIcon } from "../assets/TrackIcon.svg";
 import { ReactComponent as HistoryIcon } from "../assets/HistoryIcon.svg";
 
 import { featuredRestaurants } from "../data/restaurants";
-import { AuthContext } from "../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export default function OrderPage() {
+  const { isLoggedIn, setRedirectPath } = useAuth();
+
   const [activeTab, setActiveTab] = useState("cart");
   const [allCarts, setAllCarts] = useState({});
   const navigate = useNavigate();
 
-  const { user, setRedirectPath } = useContext(AuthContext);
-
-  /* ==========================
-      LOGIN GATE
-  ===========================*/
-  const handleLoginRedirect = () => {
-    // Save redirect path so user returns after login
-    if (setRedirectPath) {
-      setRedirectPath("/orders");
-    } else {
-      localStorage.setItem("redirect_after_login", "/orders");
-    }
-
-    navigate("/login");
-  };
-
-  if (!user) {
-    return (
-      <div className="order-page locked-orders">
-        <div className="locked-box">
-          <h2>Login Required</h2>
-          <p>You need to log in to access My Cart, Track Orders & History.</p>
-
-          <button className="login-btn" onClick={handleLoginRedirect}>
-            Login to Continue
-          </button>
-
-          <button className="browse-btn" onClick={() => navigate("/restaurant")}>
-            Browse Restaurants
-          </button>
-        </div>
-      </div>
-    );
-  }
-
-  /* ==========================
-      LOAD CARTS WHEN LOGGED IN
-  ===========================*/
+  // Load carts on mount
   useEffect(() => {
     const saved = localStorage.getItem("restaurant_cart");
     const parsed = saved ? JSON.parse(saved) : {};
     setAllCarts(parsed);
   }, []);
 
+  // persist carts
   useEffect(() => {
     localStorage.setItem("restaurant_cart", JSON.stringify(allCarts));
   }, [allCarts]);
 
   const clearAllCarts = () => setAllCarts({});
 
+  /* =========================================================
+     🔒 LOGIN REQUIRED STATE
+  ========================================================== */
+  if (!isLoggedIn) {
+    // store redirect so login returns user here
+    setRedirectPath("/orders");
+
+    return (
+      <div className="order-page">
+        <div className="empty-state">
+          <CartIcon className="empty-icon" />
+
+          <h3>You’re not logged in</h3>
+          <p>Login to view My Cart, Track Orders and Order History.</p>
+
+          <button onClick={() => navigate("/login")}>
+            Login to Continue
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  /* =========================================================
+     🔓 LOGGED-IN EXPERIENCE
+  ========================================================== */
   return (
     <div className="order-page">
       <OrdersHeader
@@ -84,24 +76,28 @@ export default function OrderPage() {
         )}
 
         {activeTab === "track" && <EmptyTrack navigate={navigate} />}
+
         {activeTab === "history" && <EmptyHistory navigate={navigate} />}
       </div>
     </div>
   );
 }
 
-/* ================= CART TAB ================= */
+/* =========================================================
+   🛒 CART TAB
+========================================================== */
 
 function CartTab({ allCarts, setAllCarts, navigate }) {
   const restaurantIds = Object.keys(allCarts).filter(
     (rid) => allCarts[rid] && allCarts[rid].length > 0
   );
 
-  if (!restaurantIds.length) {
+  if (restaurantIds.length === 0) {
     return (
       <div className="empty-state">
         <CartIcon className="empty-icon" />
         <p>Add some meals and enjoy fast delivery.</p>
+
         <button onClick={() => navigate("/restaurant")}>
           Browse Restaurants
         </button>
@@ -121,7 +117,8 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
 
       const updated = { ...prev, [restaurantId]: updatedItems };
 
-      if (!updatedItems.length) delete updated[restaurantId];
+      if (updatedItems.length === 0) delete updated[restaurantId];
+
       return updated;
     });
   };
@@ -183,7 +180,9 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
                     </button>
                   </div>
 
-                  <span className="item-total">₦{item.price * item.qty}</span>
+                  <span className="item-total">
+                    ₦{item.price * item.qty}
+                  </span>
                 </div>
               ))}
             </div>
@@ -209,7 +208,10 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
               <button
                 onClick={() =>
                   navigate("/checkout", {
-                    state: { cart: cartItems, restaurant },
+                    state: {
+                      cart: cartItems,
+                      restaurant: restaurant,
+                    },
                   })
                 }
               >
@@ -223,24 +225,36 @@ function CartTab({ allCarts, setAllCarts, navigate }) {
   );
 }
 
-/* ================= EMPTY STATES ================= */
+/* =========================================================
+   🚚 EMPTY TRACK
+========================================================== */
 
 function EmptyTrack({ navigate }) {
   return (
     <div className="empty-state">
       <TrackIcon className="empty-icon" />
       <p>Place an order and track it in real time.</p>
-      <button onClick={() => navigate("/restaurant")}>Order Now</button>
+
+      <button onClick={() => navigate("/restaurant")}>
+        Order Now
+      </button>
     </div>
   );
 }
+
+/* =========================================================
+   📜 EMPTY HISTORY
+========================================================== */
 
 function EmptyHistory({ navigate }) {
   return (
     <div className="empty-state">
       <HistoryIcon className="empty-icon" />
-      <p>You haven’t ordered anything yet.</p>
-      <button onClick={() => navigate("/restaurant")}>Order Now</button>
+      <p>You haven't ordered anything yet.</p>
+
+      <button onClick={() => navigate("/restaurant")}>
+        Order Now
+      </button>
     </div>
   );
 }
