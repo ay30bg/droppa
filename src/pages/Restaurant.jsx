@@ -35,9 +35,8 @@ export default function Discover() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // ⏳ small delay to show skeleton smoothly
   useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 700);
+    const t = setTimeout(() => setLoading(false), 700); // simulate load
     return () => clearTimeout(t);
   }, []);
 
@@ -78,7 +77,13 @@ export default function Discover() {
 
       {/* All Restaurants */}
       <section className="section-wrapper">
-        <h2 className="section-title">All Restaurants</h2>
+
+        {/* Section Title Skeleton */}
+        {loading ? (
+          <div className="skeleton title-skeleton" />
+        ) : (
+          <h2 className="section-title">All Restaurants</h2>
+        )}
 
         <div className="recommended-list">
 
