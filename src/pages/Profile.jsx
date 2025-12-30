@@ -17,19 +17,16 @@ export default function ProfilePage() {
   const loadProfile = () => {
     const saved = localStorage.getItem("userProfile");
 
-    // simulate async fetch (API / DB / storage)
     setTimeout(() => {
       if (saved) setProfile(JSON.parse(saved));
       setLoading(false);
-    }, 800);
+    }, 800); // simulate async load
   };
 
   useEffect(() => {
     loadProfile();
-
     const handleStorageChange = () => loadProfile();
     window.addEventListener("storage", handleStorageChange);
-
     return () =>
       window.removeEventListener("storage", handleStorageChange);
   }, []);
@@ -39,12 +36,26 @@ export default function ProfilePage() {
     navigate("/welcome");
   };
 
+  const sections = [
+    {
+      title: "Account",
+      items: ["Personal Information", "Saved Addresses", "Payment Methods"],
+    },
+    {
+      title: "Preferences",
+      items: ["Notifications", "Privacy & Security"],
+    },
+    {
+      title: "Support",
+      items: ["Help Center", "About Us"],
+    },
+  ];
+
   return (
     <div className="profile-page">
 
       {/* HEADER */}
       <div className="profile-header">
-
         {loading ? (
           <>
             <div className="skeleton avatar-skeleton" />
@@ -64,77 +75,40 @@ export default function ProfilePage() {
         )}
       </div>
 
-      {/* ACCOUNT SECTION */}
-      <div className="profile-section">
-        <h3 className="profile-section-title">Account</h3>
+      {/* SECTIONS */}
+      {sections.map((section, idx) => (
+        <div className="profile-section" key={idx}>
+          <h3 className="profile-section-title">{section.title}</h3>
 
-        {loading ? (
-          <>
-            <div className="skeleton card-skeleton" />
-            <div className="skeleton card-skeleton" />
-            <div className="skeleton card-skeleton" />
-          </>
-        ) : (
-          <>
-            <div
-              className="profile-item"
-              onClick={() =>
-                navigate("/profile/personal-details")
-              }
-            >
-              <span>Personal Information</span>
-              <FiChevronRight />
-            </div>
+          {loading
+            ? section.items.map((_, i) => (
+                <div key={i} className="skeleton card-skeleton" />
+              ))
+            : section.items.map((item, i) => (
+                <div
+                  key={i}
+                  className="profile-item"
+                  onClick={() => {
+                    if (item === "Personal Information") {
+                      navigate("/profile/personal-details");
+                    }
+                  }}
+                >
+                  <span>{item}</span>
+                  <FiChevronRight />
+                </div>
+              ))}
+        </div>
+      ))}
 
-            <div className="profile-item">
-              <span>Saved Addresses</span>
-              <FiChevronRight />
-            </div>
-
-            <div className="profile-item">
-              <span>Payment Methods</span>
-              <FiChevronRight />
-            </div>
-          </>
-        )}
-      </div>
-
-      {/* PREFERENCES */}
-      {!loading && (
-        <>
-          <div className="profile-section">
-            <h3 className="profile-section-title">Preferences</h3>
-
-            <div className="profile-item">
-              <span>Notifications</span>
-              <FiChevronRight />
-            </div>
-
-            <div className="profile-item">
-              <span>Privacy & Security</span>
-              <FiChevronRight />
-            </div>
-          </div>
-
-          <div className="profile-section">
-            <h3 className="profile-section-title">Support</h3>
-
-            <div className="profile-item">
-              <span>Help Center</span>
-              <FiChevronRight />
-            </div>
-
-            <div className="profile-item">
-              <span>About Us</span>
-              <FiChevronRight />
-            </div>
-          </div>
-
-          <button className="logout-btn" onClick={handleLogout}>
-            <FiLogOut />
-            Logout
-          </button>
-        </>
+      {/* LOGOUT */}
+      {loading ? (
+        <div className="skeleton logout-skeleton" />
+      ) : (
+        <button className="logout-btn" onClick={handleLogout}>
+          <FiLogOut />
+          Logout
+        </button>
       )}
     </div>
   );
