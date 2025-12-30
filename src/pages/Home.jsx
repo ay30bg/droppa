@@ -77,25 +77,45 @@ function shuffleArray(array) {
   return arr;
 }
 
+// ⭐ Skeleton Card
+const RestaurantSkeleton = () => (
+  <div className="featured-card skeleton-card">
+    <div className="skeleton skeleton-img" />
+    <div className="skeleton skeleton-line title" />
+    <div className="skeleton skeleton-line" />
+    <div className="skeleton skeleton-line small" />
+  </div>
+);
+
 export default function Home() {
   const navigate = useNavigate();
+
   const [currentAd, setCurrentAd] = useState(0);
   const [featuredRandom, setFeaturedRandom] = useState([]);
 
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setFeaturedRandom(shuffleArray(featuredRestaurants));
+
     const interval = setInterval(
       () => setCurrentAd((prev) => (prev + 1) % ads.length),
       3500
     );
-    return () => clearInterval(interval);
+
+    // small artificial delay to show skeleton smoothly
+    const t = setTimeout(() => setLoading(false), 700);
+
+    return () => {
+      clearInterval(interval);
+      clearTimeout(t);
+    };
   }, []);
 
   const popularRestaurants = [...featuredRestaurants].sort(
     (a, b) => b.orders - a.orders
   );
 
-  // ✅ FIXED: now matches /details/:id
   const goToRestaurant = (restaurant, cart = []) => {
     navigate(`/details/${restaurant.id}`, {
       state: { restaurant, cart },
@@ -140,10 +160,7 @@ export default function Home() {
       <section className="section-wrapper ads-section">
         <div className="ads-slider">
           <a href={ads[currentAd].link}>
-            <img
-              src={ads[currentAd].image}
-              alt={`Ad ${currentAd + 1}`}
-            />
+            <img src={ads[currentAd].image} alt={`Ad ${currentAd + 1}`} />
           </a>
         </div>
       </section>
@@ -151,30 +168,45 @@ export default function Home() {
       {/* Featured */}
       <section className="section-wrapper">
         <h2 className="section-title">Featured</h2>
+
         <div className="featured-scroll">
-          {featuredRandom.map(renderRestaurantCard)}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <RestaurantSkeleton key={i} />
+              ))
+            : featuredRandom.map(renderRestaurantCard)}
         </div>
       </section>
 
-      <div className="divider"></div>
+      <div className="divider" />
 
       {/* Popular */}
       <section className="section-wrapper">
         <h2 className="section-title">Popular</h2>
+
         <div className="featured-scroll">
-          {popularRestaurants.map(renderRestaurantCard)}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <RestaurantSkeleton key={i} />
+              ))
+            : popularRestaurants.map(renderRestaurantCard)}
         </div>
       </section>
 
-      <div className="divider"></div>
+      <div className="divider" />
 
       {/* Recommended */}
       <section className="section-wrapper">
         <h2 className="section-title">Recommended</h2>
+
         <div className="recommended-list">
-          {[...featuredRestaurants]
-            .sort((a, b) => b.rating - a.rating)
-            .map(renderRestaurantCard)}
+          {loading
+            ? Array.from({ length: 4 }).map((_, i) => (
+                <RestaurantSkeleton key={i} />
+              ))
+            : [...featuredRestaurants]
+                .sort((a, b) => b.rating - a.rating)
+                .map(renderRestaurantCard)}
         </div>
       </section>
     </div>
