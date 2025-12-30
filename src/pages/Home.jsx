@@ -9,56 +9,15 @@ import "../styles/home.css";
 function getRestaurantTimeDisplay(time) {
   const now = new Date();
   const hour = now.getHours();
-
-  if (hour >= 0 && hour < 8) {
-    return "Closed";
-  }
-
+  if (hour >= 0 && hour < 8) return "Closed";
   return time;
 }
 
 const featuredRestaurants = [
-  {
-    id: 1,
-    name: "Chicken Republic",
-    image: image1,
-    rating: 4.8,
-    orders: 1200,
-    price: 650,
-    street: "Ogo Oluwa",
-    time: "25-30 min",
-  },
-  {
-    id: 2,
-    name: "The Place",
-    image:
-      "https://tse1.mm.bing.net/th/id/OIP.Ra2X_Mf5GWF2a6Ry1OY9vwHaFj?pid=Api&P=0&h=220",
-    rating: 4.9,
-    orders: 1500,
-    price: 700,
-    street: "Igbona",
-    time: "15-20 min",
-  },
-  {
-    id: 3,
-    name: "Chicken Republic",
-    image: image1,
-    rating: 4.5,
-    orders: 800,
-    price: 550,
-    street: "Igbona",
-    time: "20-25 min",
-  },
-  {
-    id: 4,
-    name: "Yakoyo",
-    image: image2,
-    rating: 4.7,
-    orders: 1100,
-    price: 600,
-    street: "Estate",
-    time: "20-25 min",
-  },
+  { id: 1, name: "Chicken Republic", image: image1, rating: 4.8, orders: 1200, price: 650, street: "Ogo Oluwa", time: "25-30 min" },
+  { id: 2, name: "The Place", image: "https://tse1.mm.bing.net/th/id/OIP.Ra2X_Mf5GWF2a6Ry1OY9vwHaFj?pid=Api&P=0&h=220", rating: 4.9, orders: 1500, price: 700, street: "Igbona", time: "15-20 min" },
+  { id: 3, name: "Chicken Republic", image: image1, rating: 4.5, orders: 800, price: 550, street: "Igbona", time: "20-25 min" },
+  { id: 4, name: "Yakoyo", image: image2, rating: 4.7, orders: 1100, price: 600, street: "Estate", time: "20-25 min" },
 ];
 
 const ads = [
@@ -87,12 +46,14 @@ const RestaurantSkeleton = () => (
   </div>
 );
 
+// ⭐ Skeleton for Section Title
+const SectionTitleSkeleton = () => <div className="skeleton title-skeleton" />;
+
 export default function Home() {
   const navigate = useNavigate();
 
   const [currentAd, setCurrentAd] = useState(0);
   const [featuredRandom, setFeaturedRandom] = useState([]);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -103,8 +64,7 @@ export default function Home() {
       3500
     );
 
-    // small artificial delay to show skeleton smoothly
-    const t = setTimeout(() => setLoading(false), 700);
+    const t = setTimeout(() => setLoading(false), 700); // show skeleton
 
     return () => {
       clearInterval(interval);
@@ -117,9 +77,7 @@ export default function Home() {
   );
 
   const goToRestaurant = (restaurant, cart = []) => {
-    navigate(`/details/${restaurant.id}`, {
-      state: { restaurant, cart },
-    });
+    navigate(`/details/${restaurant.id}`, { state: { restaurant, cart } });
   };
 
   const renderRestaurantCard = (res) => {
@@ -133,21 +91,16 @@ export default function Home() {
         style={{ cursor: "pointer" }}
       >
         <img src={res.image} alt={res.name} className="featured-img" />
-
         <div className="featured-info-under">
           <h3>
             {res.name} - {res.street}
           </h3>
-
           <div className="featured-info-row">
             <p className={timeText === "Closed" ? "closed" : ""}>
               <FiTruck style={{ marginRight: "4px" }} />
               From {res.price} NGN | {timeText}
             </p>
-
-            <p>
-              ⭐ {res.rating.toFixed(1)} ({res.orders})
-            </p>
+            <p>⭐ {res.rating.toFixed(1)} ({res.orders})</p>
           </div>
         </div>
       </div>
@@ -167,13 +120,10 @@ export default function Home() {
 
       {/* Featured */}
       <section className="section-wrapper">
-        <h2 className="section-title">Featured</h2>
-
+        {loading ? <SectionTitleSkeleton /> : <h2 className="section-title">Featured</h2>}
         <div className="featured-scroll">
           {loading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <RestaurantSkeleton key={i} />
-              ))
+            ? Array.from({ length: 4 }).map((_, i) => <RestaurantSkeleton key={i} />)
             : featuredRandom.map(renderRestaurantCard)}
         </div>
       </section>
@@ -182,13 +132,10 @@ export default function Home() {
 
       {/* Popular */}
       <section className="section-wrapper">
-        <h2 className="section-title">Popular</h2>
-
+        {loading ? <SectionTitleSkeleton /> : <h2 className="section-title">Popular</h2>}
         <div className="featured-scroll">
           {loading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <RestaurantSkeleton key={i} />
-              ))
+            ? Array.from({ length: 4 }).map((_, i) => <RestaurantSkeleton key={i} />)
             : popularRestaurants.map(renderRestaurantCard)}
         </div>
       </section>
@@ -197,16 +144,11 @@ export default function Home() {
 
       {/* Recommended */}
       <section className="section-wrapper">
-        <h2 className="section-title">Recommended</h2>
-
+        {loading ? <SectionTitleSkeleton /> : <h2 className="section-title">Recommended</h2>}
         <div className="recommended-list">
           {loading
-            ? Array.from({ length: 4 }).map((_, i) => (
-                <RestaurantSkeleton key={i} />
-              ))
-            : [...featuredRestaurants]
-                .sort((a, b) => b.rating - a.rating)
-                .map(renderRestaurantCard)}
+            ? Array.from({ length: 4 }).map((_, i) => <RestaurantSkeleton key={i} />)
+            : [...featuredRestaurants].sort((a, b) => b.rating - a.rating).map(renderRestaurantCard)}
         </div>
       </section>
     </div>
