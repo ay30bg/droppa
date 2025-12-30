@@ -225,6 +225,13 @@
   border-radius: 6px;
 }
 
+.title-skeleton {
+  width: 180px;
+  height: 20px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
 /* Match restaurant card image height */
 .skeleton-img {
   width: 100%;
@@ -253,3 +260,4 @@
     background-position: -200% 0;
   }
 }
+
