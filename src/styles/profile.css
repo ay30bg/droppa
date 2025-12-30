@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 * {
@@ -85,3 +84,43 @@
   transition: 0.25s ease;
 }
 
+/* Skeleton Base */
+.skeleton {
+  background: linear-gradient(90deg, #eeeeee 25%, #f5f5f5 37%, #eeeeee 63%);
+  background-size: 400% 100%;
+  border-radius: 10px;
+  animation: shimmer 1.4s ease infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+/* Avatar Skeleton */
+.avatar-skeleton {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+}
+
+/* Text Skeletons */
+.text-skeleton {
+  height: 16px;
+  margin: 10px auto;
+}
+
+.name-skeleton {
+  width: 140px;
+}
+
+.email-skeleton {
+  width: 180px;
+}
+
+/* Card / Row Skeletons */
+.card-skeleton {
+  height: 50px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
