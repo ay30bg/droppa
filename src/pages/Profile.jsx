@@ -78,8 +78,15 @@ export default function ProfilePage() {
       {/* SECTIONS */}
       {sections.map((section, idx) => (
         <div className="profile-section" key={idx}>
-          <h3 className="profile-section-title">{section.title}</h3>
 
+          {/* Section Title */}
+          {loading ? (
+            <div className="skeleton title-skeleton" />
+          ) : (
+            <h3 className="profile-section-title">{section.title}</h3>
+          )}
+
+          {/* Section Items */}
           {loading
             ? section.items.map((_, i) => (
                 <div key={i} className="skeleton card-skeleton" />
