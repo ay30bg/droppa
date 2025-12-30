@@ -194,6 +194,17 @@
   background: #f2f2f2;
 }
 
+/* Section Title Skeleton */
+.title-skeleton {
+  width: 180px;
+  height: 20px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  animation: shimmer 1.4s ease infinite;
+  background: linear-gradient(90deg, #eeeeee 25%, #f5f5f5 37%, #eeeeee 63%);
+  background-size: 400% 100%;
+}
+
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -230,6 +241,7 @@
     background-position: -200% 0;
   }
 }
+
 
 
 
