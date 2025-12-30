@@ -203,14 +203,16 @@
   color: #000;
 }
 
+/* 🔹 Skeleton Loader — Full Card Width */
 .skeleton-card {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  width: 180px;
-  border-radius: 12px;
+  border-radius: 6px;
   background: #f2f2f2;
 }
 
+/* Shimmer background */
 .skeleton {
   background: linear-gradient(
     90deg,
@@ -220,26 +222,30 @@
   );
   background-size: 200% 100%;
   animation: shimmer 1.3s infinite;
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
+/* Match restaurant card image height */
 .skeleton-img {
-  height: 120px;
-  border-radius: 12px;
+  width: 100%;
+  height: 155px;
+  border-radius: 6px;
 }
 
+/* Text placeholder lines */
 .skeleton-line {
   height: 14px;
   margin: 10px;
+  border-radius: 4px;
 }
 
 .skeleton-line.title {
-  width: 70%;
+  width: 65%;
   height: 16px;
 }
 
 .skeleton-line.small {
-  width: 50%;
+  width: 45%;
 }
 
 @keyframes shimmer {
@@ -247,5 +253,3 @@
     background-position: -200% 0;
   }
 }
-
-
