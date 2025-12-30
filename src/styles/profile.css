@@ -118,6 +118,14 @@
   width: 180px;
 }
 
+/* Section Title Skeleton */
+.title-skeleton {
+  width: 120px;
+  height: 16px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
 /* Card / Row Skeletons */
 .card-skeleton {
   height: 50px;
@@ -132,3 +140,4 @@
   border-radius: 10px;
   margin-top: 40px;
 }
+
