@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/restaurant.css";
 import image1 from "../assets/chicken republic.jpeg";
@@ -8,7 +8,7 @@ import { FiSearch, FiTruck } from "react-icons/fi";
 // TIME DISPLAY LOGIC (12am – 8am CLOSED)
 function getRestaurantTimeDisplay(time) {
   const now = new Date();
-  const hour = now.getHours(); // 0–23
+  const hour = now.getHours();
   if (hour >= 0 && hour < 8) return "Closed";
   return time;
 }
@@ -20,17 +20,33 @@ const featuredRestaurants = [
   { id: 4, name: "Yakoyo", image: image2, rating: 4.7, orders: 1100, price: 600, street: "Estate", time: "20-25 min" },
 ];
 
+// ⭐ Skeleton card for loading state
+const DiscoverSkeleton = () => (
+  <div className="recommended-card skeleton-card">
+    <div className="skeleton skeleton-img" />
+    <div className="skeleton skeleton-line title" />
+    <div className="skeleton skeleton-line" />
+    <div className="skeleton skeleton-line small" />
+  </div>
+);
+
 export default function Discover() {
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  // -------- SEARCH LOGIC ----------
+  // ⏳ small delay to show skeleton smoothly
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(t);
+  }, []);
+
   const normalize = (text) =>
     text?.toString().toLowerCase().replace(/\s+/g, "") || "";
 
   const filteredRestaurants = featuredRestaurants.filter((res) => {
     const query = normalize(search);
-    if (!query) return true; // show all when search is empty
+    if (!query) return true;
 
     return (
       normalize(res.name).includes(query) ||
@@ -40,13 +56,11 @@ export default function Discover() {
     );
   });
 
-  const handleCardClick = (id) => {
-    navigate(`/details/${id}`);
-  };
+  const handleCardClick = (id) => navigate(`/details/${id}`);
 
   return (
     <div className="discover-page">
-      
+
       {/* Search Bar */}
       <div className="discover-search">
         <span className="emoji-icon">
@@ -67,39 +81,50 @@ export default function Discover() {
         <h2 className="section-title">All Restaurants</h2>
 
         <div className="recommended-list">
-          {filteredRestaurants.length > 0 ? (
-            filteredRestaurants.map((res) => {
-              const timeText = getRestaurantTimeDisplay(res.time);
 
-              return (
-                <div
-                  key={res.id}
-                  className="recommended-card"
-                  onClick={() => handleCardClick(res.id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  <img src={res.image} alt={res.name} className="recommended-img" />
+          {/* Show skeletons while loading */}
+          {loading
+            ? Array.from({ length: 6 }).map((_, i) => (
+                <DiscoverSkeleton key={i} />
+              ))
+            : filteredRestaurants.length > 0 ? (
+                filteredRestaurants.map((res) => {
+                  const timeText = getRestaurantTimeDisplay(res.time);
 
-                  <div className="recommended-info-under">
-                    <h3>{res.name} - {res.street}</h3>
+                  return (
+                    <div
+                      key={res.id}
+                      className="recommended-card"
+                      onClick={() => handleCardClick(res.id)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <img
+                        src={res.image}
+                        alt={res.name}
+                        className="recommended-img"
+                      />
 
-                    <div className="info-row">
-                      <p className={timeText === "Closed" ? "closed" : ""}>
-                        <FiTruck style={{ marginRight: "4px" }} />
-                        From {res.price} NGN | {timeText}
-                      </p>
+                      <div className="recommended-info-under">
+                        <h3>{res.name} - {res.street}</h3>
 
-                      <p>
-                        ⭐ {res.rating.toFixed(1)} ({res.orders})
-                      </p>
+                        <div className="info-row">
+                          <p className={timeText === "Closed" ? "closed" : ""}>
+                            <FiTruck style={{ marginRight: "4px" }} />
+                            From {res.price} NGN | {timeText}
+                          </p>
+
+                          <p>
+                            ⭐ {res.rating.toFixed(1)} ({res.orders})
+                          </p>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <p style={{ marginTop: "20px" }}>No restaurants found.</p>
-          )}
+                  );
+                })
+              ) : (
+                <p style={{ marginTop: "20px" }}>No restaurants found.</p>
+              )}
+
         </div>
       </section>
     </div>
