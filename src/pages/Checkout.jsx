@@ -58,6 +58,17 @@ export default function Checkout() {
   const deliveryFee = 200;
   const total = subtotal + deliveryFee;
 
+  // Order object to send to payment page
+  const order = {
+    items: cart,
+    foodTotal: subtotal,
+    deliveryFee,
+    total,
+    deliveryAddress,
+    contactPhone,
+    restaurant,
+  };
+
   return (
     <div className="ck-page">
       {/* HEADER */}
@@ -205,7 +216,11 @@ export default function Checkout() {
             Continue
           </button>
         ) : (
-          <button className="ck-pay" disabled={!deliveryAddress || !contactPhone}>
+          <button
+            className="ck-pay"
+            disabled={!deliveryAddress || !contactPhone}
+            onClick={() => navigate("/payment", { state: { order } })}
+          >
             Place Order · ₦{total}
           </button>
         )}
