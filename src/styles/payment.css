@@ -2,9 +2,9 @@
 
 /* PAGE BACKGROUND */
 .payment-page {
-  padding: 0 16px 16px 16px;
+  padding: 0 0 16px 0; /* removed horizontal padding so header spans full width */
   font-family: 'Arial', sans-serif;
-  background-color: #f5f5f5;
+  background-color: #f9f9f9;
   min-height: 100vh;
 }
 
@@ -12,15 +12,17 @@
 .ck-header {
   display: flex;
   align-items: center;
+  padding: 16px 0; /* only vertical padding */
   background-color: #fff;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
+  width: 100%; /* full width */
 }
 
 .ck-header-left {
   display: flex;
   align-items: center;
   gap: 12px;
+  padding: 0 16px; /* spacing for content inside header */
 }
 
 .ck-back {
@@ -40,7 +42,7 @@
   background-color: #fff;
   border-radius: 12px;
   padding: 16px;
-  margin-bottom: 20px;
+  margin: 16px; /* space around card */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -93,7 +95,8 @@
 
 /* PAY BUTTON */
 .pay-btn {
-  width: 100%;
+  width: calc(100% - 32px); /* full width minus page padding */
+  margin: 16px;
   padding: 14px;
   background-color: #007bff;
   color: #fff;
@@ -103,7 +106,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: 10px;
 }
 
 .pay-btn:hover {
@@ -121,6 +123,7 @@
 /* RESPONSIVE ADJUSTMENTS */
 @media screen and (max-width: 480px) {
   .payment-card {
+    margin: 12px;
     padding: 14px;
   }
 
@@ -131,5 +134,6 @@
   .pay-btn {
     font-size: 15px;
     padding: 12px;
+    margin: 12px;
   }
 }
