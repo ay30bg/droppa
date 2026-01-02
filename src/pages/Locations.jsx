@@ -8,12 +8,15 @@ export default function LocationPage({ setLocation, closePage }) {
   const [search, setSearch] = useState("");
 
   const suggestions = [
-    "Lekki Phase 1",
-    "Victoria Island",
-    "Ikeja GRA",
-    "Yaba - Herbert Macaulay",
-    "Surulere - Adeniran Ogunsanya",
-  ];
+  "Oke-Fia",
+  "Ibikunle Area",
+  "Orisunmibare",
+  "Alekuwodo",
+  "Ayetoro",
+  "Ogooluwa",
+  "Ofatedo",
+  "Dada Estate",
+];
 
   const filtered = suggestions.filter((item) =>
     item.toLowerCase().includes(search.toLowerCase())
