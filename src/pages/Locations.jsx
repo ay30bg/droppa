@@ -10,11 +10,8 @@ export default function LocationPage({ setLocation, closePage }) {
   const suggestions = [
   "Oke-Fia",
   "Ibikunle Area",
-  "Orisunmibare",
-  "Alekuwodo",
   "Ayetoro",
   "Ogooluwa",
-  "Ofatedo",
   "Dada Estate",
 ];
 
