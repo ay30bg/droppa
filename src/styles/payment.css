@@ -1,69 +1,68 @@
-/* payment.css */
-
-/* PAGE BACKGROUND */
-.payment-page {
-  padding: 0 0 16px 0; /* removed horizontal padding so header spans full width */
-  font-family: 'Arial', sans-serif;
-  background-color: #f9f9f9;
+/* ================= BASE ================= */
+.payment-page-container {
   min-height: 100vh;
+  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  padding-bottom: 120px; /* space for sticky footer */
+  color: #000;
 }
 
-/* HEADER (like Checkout page) */
-.ck-header {
+/* ================= HEADER ================= */
+.payment-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
   display: flex;
   align-items: center;
-  padding: 16px 0; /* only vertical padding */
-  background-color: #fff;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-  width: 100%; /* full width */
+  padding: 14px 16px;
+  background: #f5f5f5;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 }
 
-.ck-header-left {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 0 16px; /* spacing for content inside header */
-}
-
-.ck-back {
-  background: none;
+.payment-back {
   border: none;
+  background: none;
+  color: #000;
   cursor: pointer;
-  padding: 4px;
+  font-size: 18px;
 }
 
-.ck-title {
-  font-size: 20px;
+.payment-title {
+  font-size: 15px;
   font-weight: 600;
+  margin-left: 10px;
 }
 
-/* CARDS */
+/* ================= CARD ================= */
 .payment-card {
-  background-color: #fff;
-  border-radius: 12px;
+  background: #fff;
+  margin: 12px 16px;
   padding: 16px;
-  margin: 16px; /* space around card */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 /* CARD HEADINGS */
-.payment-card h4 {
-  font-size: 16px;
+.payment-section-title {
+  font-size: 14px;
   font-weight: 600;
   margin-bottom: 12px;
 }
 
-/* ORDER SUMMARY ROWS */
-.row {
+/* SUMMARY ROWS */
+.payment-summary-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 8px;
   font-size: 14px;
 }
 
-.row.total {
-  font-weight: 700;
-  font-size: 16px;
+.payment-summary-row.total {
+  font-weight: 600;
+  font-size: 15px;
   margin-top: 12px;
   border-top: 1px solid #eee;
   padding-top: 8px;
@@ -85,7 +84,7 @@
 }
 
 .payment-option.active {
-  border-color: #007bff;
+  border-color: #014f50;
   background-color: #e6f0ff;
 }
 
@@ -93,27 +92,31 @@
   cursor: pointer;
 }
 
-/* PAY BUTTON */
-.pay-btn {
-  width: calc(100% - 32px); /* full width minus page padding */
-  margin: 16px;
+/* FOOTER / PAY BUTTON */
+.payment-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 16px;
+  background: #f5f5f5;
+  border-top: 1px solid #eee;
+}
+
+.payment-pay-btn {
+  width: 100%;
   padding: 14px;
-  background-color: #007bff;
+  background: #014f50;
   color: #fff;
   border: none;
-  border-radius: 12px;
+  border-radius: 7px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.pay-btn:hover {
-  background-color: #0056b3;
 }
 
 /* REFUND NOTE */
-.refund-note {
+.payment-refund-note {
   font-size: 12px;
   color: #555;
   text-align: center;
@@ -123,17 +126,16 @@
 /* RESPONSIVE ADJUSTMENTS */
 @media screen and (max-width: 480px) {
   .payment-card {
-    margin: 12px;
+    margin: 12px 12px;
     padding: 14px;
   }
 
-  .ck-title {
-    font-size: 18px;
+  .payment-title {
+    font-size: 14px;
   }
 
-  .pay-btn {
+  .payment-pay-btn {
     font-size: 15px;
     padding: 12px;
-    margin: 12px;
   }
 }
