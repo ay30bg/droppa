@@ -19,7 +19,7 @@ import Login from "./pages/Login.jsx";
 import Verify from "./pages/Verify.jsx";
 import Checkout from "./pages/Checkout.jsx";
 import GetStarted from "./pages/GetStarted.jsx";
-
+import Payment from "./pages/Payment.jsx";
 import { CartProvider } from "./context/CartContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
 
@@ -77,6 +77,7 @@ function AppWrapper() {
         <Route path="/login" element={<Login />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/welcome" element={<WelcomePage />} />
 
