@@ -1,28 +1,39 @@
 /* payment.css */
 
+/* PAGE BACKGROUND */
 .payment-page {
-  padding: 16px;
+  padding: 0 16px 16px 16px;
   font-family: 'Arial', sans-serif;
   background-color: #f9f9f9;
   min-height: 100vh;
 }
 
-/* HEADER */
-.payment-header {
+/* HEADER (like Checkout page) */
+.ck-header {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.ck-header-left {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
 }
 
-.payment-header h3 {
+.ck-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ck-title {
   font-size: 20px;
   font-weight: 600;
-  margin: 0;
-}
-
-.payment-header svg {
-  cursor: pointer;
 }
 
 /* CARDS */
@@ -34,6 +45,7 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+/* CARD HEADINGS */
 .payment-card h4 {
   font-size: 16px;
   font-weight: 600;
@@ -105,4 +117,20 @@
   color: #555;
   text-align: center;
   margin-top: 12px;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media screen and (max-width: 480px) {
+  .payment-card {
+    padding: 14px;
+  }
+
+  .ck-title {
+    font-size: 18px;
+  }
+
+  .pay-btn {
+    font-size: 15px;
+    padding: 12px;
+  }
 }
