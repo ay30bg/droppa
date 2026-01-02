@@ -23,9 +23,13 @@ export default function PaymentPage() {
   return (
     <div className="payment-page">
       {/* HEADER */}
-      <div className="payment-header">
-        <FiArrowLeft onClick={() => navigate(-1)} />
-        <h3>Complete Your Payment</h3>
+      <div className="ck-header">
+        <div className="ck-header-left">
+          <button className="ck-back" onClick={() => navigate(-1)}>
+            <FiArrowLeft size={20} />
+          </button>
+          <span className="ck-title">Payment</span>
+        </div>
       </div>
 
       {/* ORDER SUMMARY */}
