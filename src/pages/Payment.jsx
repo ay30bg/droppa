@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
 import "../styles/payment.css"; 
 
 export default function PaymentPage() {
@@ -40,7 +41,9 @@ export default function PaymentPage() {
     <div className="payment-page-container">
       {/* HEADER */}
       <div className="payment-header">
-        <button className="payment-back" onClick={() => navigate(-1)}>←</button>
+        <button className="payment-back" onClick={() => navigate(-1)}>
+        <FiArrowLeft size={20} />
+        </button>
         <span className="payment-title">Payment</span>
       </div>
 
