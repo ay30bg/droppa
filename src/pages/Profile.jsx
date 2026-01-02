@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import "../styles/profile.css";
-import { FiChevronRight, FiLogOut } from "react-icons/fi";
+import { FiChevronRight, FiLogOut, FiLogIn } from "react-icons/fi";
 import { FaUserCircle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
+  const { user, logout, isLoggedIn } = useAuth();
 
   const [profile, setProfile] = useState({
     name: "",
@@ -20,7 +22,7 @@ export default function ProfilePage() {
     setTimeout(() => {
       if (saved) setProfile(JSON.parse(saved));
       setLoading(false);
-    }, 800); // simulate async load
+    }, 800);
   };
 
   useEffect(() => {
@@ -31,9 +33,12 @@ export default function ProfilePage() {
       window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/welcome");
+  const handleAuthButton = () => {
+    if (isLoggedIn) {
+      logout();
+    } else {
+      navigate("/login");
+    }
   };
 
   const sections = [
@@ -66,32 +71,25 @@ export default function ProfilePage() {
           <>
             <FaUserCircle className="profile-avatar" />
             <h2 className="profile-name">
-              {profile.name || "Guest User"}
+              {isLoggedIn ? profile.name : "Guest User"}
             </h2>
             <p className="profile-email">
-              {profile.email || "No email added"}
+              {isLoggedIn
+                ? profile.email || "No email added"
+                : "You are not logged in"}
             </p>
           </>
         )}
       </div>
 
-      {/* SECTIONS */}
-      {sections.map((section, idx) => (
-        <div className="profile-section" key={idx}>
+      {/* ONLY SHOW SECTIONS IF LOGGED IN */}
+      {!loading && isLoggedIn && (
+        <>
+          {sections.map((section, idx) => (
+            <div className="profile-section" key={idx}>
+              <h3 className="profile-section-title">{section.title}</h3>
 
-          {/* Section Title */}
-          {loading ? (
-            <div className="skeleton title-skeleton" />
-          ) : (
-            <h3 className="profile-section-title">{section.title}</h3>
-          )}
-
-          {/* Section Items */}
-          {loading
-            ? section.items.map((_, i) => (
-                <div key={i} className="skeleton card-skeleton" />
-              ))
-            : section.items.map((item, i) => (
+              {section.items.map((item, i) => (
                 <div
                   key={i}
                   className="profile-item"
@@ -105,16 +103,23 @@ export default function ProfilePage() {
                   <FiChevronRight />
                 </div>
               ))}
-        </div>
-      ))}
+            </div>
+          ))}
+        </>
+      )}
 
-      {/* LOGOUT */}
-      {loading ? (
-        <div className="skeleton logout-skeleton" />
-      ) : (
-        <button className="logout-btn" onClick={handleLogout}>
-          <FiLogOut />
-          Logout
+      {/* AUTH BUTTON */}
+      {!loading && (
+        <button className="logout-btn" onClick={handleAuthButton}>
+          {isLoggedIn ? (
+            <>
+              <FiLogOut /> Logout
+            </>
+          ) : (
+            <>
+              <FiLogIn /> Login
+            </>
+          )}
         </button>
       )}
     </div>
