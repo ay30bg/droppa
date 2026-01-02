@@ -41,6 +41,7 @@ function AppWrapper() {
       "/get-started",
       "/verify",
       "/checkout",
+      "/payment",
       "/profile/personal-details"
     ].includes(path);
 
@@ -53,6 +54,7 @@ function AppWrapper() {
       "/get-started",
       "/verify",
       "/checkout",
+      "/payment",
       "/profile/personal-details"
     ].includes(path);
 
