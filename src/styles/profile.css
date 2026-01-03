@@ -35,7 +35,7 @@
 .profile-email {
   font-size: 14px;
   color: #777;
-  margin-top: 4px;
+  margin-top: -4px;
 }
 
 /* Section title */
@@ -140,4 +140,5 @@
   border-radius: 10px;
   margin-top: 40px;
 }
+
 
