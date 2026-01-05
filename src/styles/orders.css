@@ -120,7 +120,7 @@
   font-weight: 600;
   font-size: 16px;
   margin-bottom: 12px;
-  color: #014f50;
+  color: #000;
 }
 
 /* Cart Item */
@@ -267,6 +267,7 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
 
 
