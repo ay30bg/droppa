@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
 /* ================= BASE ================= */
 .order-page {
   padding: 20px;
@@ -5,7 +7,7 @@
   margin: auto;
   background: #f5f5f5;
   margin-bottom: 90px; /* space for bottom nav / checkout bar */
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  font-family: 'Plus Jakarta Sans', sans-serif; 
   color: #000;
   box-sizing: border-box;
 }
@@ -267,6 +269,7 @@
 .cart-checkout-bar button:hover {
   background: #013f43;
 }
+
 
 
 
